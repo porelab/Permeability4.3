@@ -127,8 +127,8 @@
                                     <String fx:value="col-gray70" />
                                  </styleClass>
                               </TextField>
-                              <Rectangle arcHeight="500.0" arcWidth="42.0" fill="#1f93ff00" height="38.0" layoutX="265.0" layoutY="392.0" opacity="0.61" stroke="#bfb9b9" strokeType="INSIDE" strokeWidth="2.0" width="82.0" />
-                              <TextField fx:id="pfc" layoutX="270.0" layoutY="393.0" maxHeight="35.0" minHeight="20.0" prefHeight="35.0" prefWidth="77.0">
+                              <Rectangle arcHeight="500.0" arcWidth="42.0" fill="#1f93ff00" height="38.0" layoutX="265.0" layoutY="392.0" opacity="0.61" stroke="#bfb9b9" strokeType="INSIDE" strokeWidth="2.0" visible="false" width="82.0" />
+                              <TextField fx:id="pfc" layoutX="270.0" layoutY="393.0" maxHeight="35.0" minHeight="20.0" prefHeight="35.0" prefWidth="77.0" visible="false">
                                  <styleClass>
                                     <String fx:value="uinputtextbox" />
                                     <String fx:value="col-gray70" />
@@ -139,7 +139,7 @@
                                     <Font size="25.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="33.0" layoutY="393.0" styleClass="col-gray70" text="Flow Controller" textFill="WHITE">
+                              <Label layoutX="33.0" layoutY="393.0" styleClass="col-gray70" text="Flow Controller" textFill="WHITE" visible="false">
                                  <font>
                                     <Font size="25.0" />
                                  </font>
@@ -192,7 +192,7 @@
                               <Line endX="423.0" layoutX="142.0" layoutY="302.0" startX="-100.0" stroke="#bfb9b9" strokeWidth="2.0" />
                               <Line layoutX="394.0" layoutY="277.0" rotate="90.0" startX="-50.0" stroke="#bfb9b9" strokeWidth="2.0" />
                               <Line endX="227.0" layoutX="141.0" layoutY="381.0" startX="-100.0" stroke="#bfb9b9" strokeWidth="2.0" AnchorPane.leftAnchor="40.0" />
-                              <Line endX="227.0" layoutX="142.0" layoutY="448.0" startX="-100.0" stroke="#bfb9b9" strokeWidth="2.0" />
+                              <Line endX="227.0" layoutX="142.0" layoutY="448.0" startX="-100.0" stroke="#bfb9b9" strokeWidth="2.0" visible="false" />
                            </children>
                         </AnchorPane>
                      </children>
@@ -260,20 +260,20 @@
                         </Label>
                         <Rectangle arcHeight="300.0" arcWidth="30.0" fill="#1f93ff00" height="28.0" layoutX="394.0" layoutY="205.0" stroke="#bfb9b9" strokeType="INSIDE" strokeWidth="2.0" style="-fx-fill: white;" width="46.0" />
                         <JFXToggleButton fx:id="valvecflow" alignment="BASELINE_CENTER" layoutX="385.0" layoutY="191.0" text=" " toggleColor="#0e3c87" toggleLineColor="WHITE" unToggleLineColor="#99999903" />
-                        <Label layoutX="789.0" layoutY="57.0" text="Set Thresold Value" textFill="#0e3c87">
+                        <Label layoutX="789.0" layoutY="57.0" text="Set Thresold Value" textFill="#0e3c87" visible="false">
                            <font>
                               <Font size="25.0" />
                            </font>
                         </Label>
-                        <Line endX="170.0" layoutX="889.0" layoutY="111.0" startX="-100.0" stroke="#bfb9b9" strokeWidth="2.0" />
-                        <Line layoutX="615.0" layoutY="207.0" rotate="90.0" startX="280.0" stroke="#bfb9b9" strokeWidth="2.0" AnchorPane.leftAnchor="614.0" AnchorPane.topAnchor="206.0" />
-                        <Label layoutX="790.0" layoutY="126.0" styleClass="col-gray70" text="First Bubble" textFill="WHITE" AnchorPane.leftAnchor="790.0" AnchorPane.topAnchor="126.0">
+                        <Line endX="170.0" layoutX="889.0" layoutY="111.0" startX="-100.0" stroke="#bfb9b9" strokeWidth="2.0" visible="false" />
+                        <Line layoutX="615.0" layoutY="207.0" rotate="90.0" startX="280.0" stroke="#bfb9b9" strokeWidth="2.0" visible="false" AnchorPane.leftAnchor="614.0" AnchorPane.topAnchor="206.0" />
+                        <Label layoutX="790.0" layoutY="126.0" styleClass="col-gray70" text="First Bubble" textFill="WHITE" visible="false" AnchorPane.leftAnchor="790.0" AnchorPane.topAnchor="126.0">
                            <font>
                               <Font size="25.0" />
                            </font>
                         </Label>
-                        <Rectangle arcHeight="500.0" arcWidth="42.0" fill="#1f93ff00" height="38.0" layoutX="974.0" layoutY="128.0" opacity="0.61" stroke="#bfb9b9" strokeType="INSIDE" strokeWidth="2.0" width="82.0" />
-                        <TextField fx:id="txtthfirst" layoutX="974.0" layoutY="128.0" maxHeight="35.0" minHeight="20.0" prefHeight="35.0" prefWidth="77.0">
+                        <Rectangle arcHeight="500.0" arcWidth="42.0" fill="#1f93ff00" height="38.0" layoutX="974.0" layoutY="128.0" opacity="0.61" stroke="#bfb9b9" strokeType="INSIDE" strokeWidth="2.0" visible="false" width="82.0" />
+                        <TextField fx:id="txtthfirst" layoutX="974.0" layoutY="128.0" maxHeight="35.0" minHeight="20.0" prefHeight="35.0" prefWidth="77.0" visible="false">
                            <font>
                               <Font size="8.0" />
                            </font>
@@ -282,14 +282,14 @@
                               <String fx:value="col-gray70" />
                            </styleClass>
                         </TextField>
-                        <Line endX="170.0" layoutX="891.0" layoutY="185.0" startX="-100.0" stroke="#bfb9b9" strokeWidth="2.0" AnchorPane.topAnchor="184.0" />
-                        <Label layoutX="790.0" layoutY="206.0" styleClass="col-gray70" text="Moderate" textFill="WHITE" AnchorPane.leftAnchor="790.0">
+                        <Line endX="170.0" layoutX="891.0" layoutY="185.0" startX="-100.0" stroke="#bfb9b9" strokeWidth="2.0" visible="false" AnchorPane.topAnchor="184.0" />
+                        <Label layoutX="790.0" layoutY="206.0" styleClass="col-gray70" text="Moderate" textFill="WHITE" visible="false" AnchorPane.leftAnchor="790.0">
                            <font>
                               <Font size="25.0" />
                            </font>
                         </Label>
-                        <Rectangle arcHeight="500.0" arcWidth="42.0" fill="#1f93ff00" height="38.0" layoutX="974.0" layoutY="212.0" opacity="0.61" stroke="#bfb9b9" strokeType="INSIDE" strokeWidth="2.0" width="82.0" />
-                        <TextField fx:id="txtthmoderate" layoutX="974.0" layoutY="212.0" maxHeight="35.0" minHeight="20.0" prefHeight="35.0" prefWidth="77.0">
+                        <Rectangle arcHeight="500.0" arcWidth="42.0" fill="#1f93ff00" height="38.0" layoutX="974.0" layoutY="212.0" opacity="0.61" stroke="#bfb9b9" strokeType="INSIDE" strokeWidth="2.0" visible="false" width="82.0" />
+                        <TextField fx:id="txtthmoderate" layoutX="974.0" layoutY="212.0" maxHeight="35.0" minHeight="20.0" prefHeight="35.0" prefWidth="77.0" visible="false">
                            <font>
                               <Font size="8.0" />
                            </font>
@@ -298,14 +298,14 @@
                               <String fx:value="col-gray70" />
                            </styleClass>
                         </TextField>
-                        <Line endX="170.0" layoutX="888.0" layoutY="269.0" startX="-100.0" stroke="#bfb9b9" strokeWidth="2.0" />
-                        <Label layoutX="793.0" layoutY="290.0" styleClass="col-gray70" text="Continous" textFill="WHITE">
+                        <Line endX="170.0" layoutX="888.0" layoutY="269.0" startX="-100.0" stroke="#bfb9b9" strokeWidth="2.0" visible="false" />
+                        <Label layoutX="793.0" layoutY="290.0" styleClass="col-gray70" text="Continous" textFill="WHITE" visible="false">
                            <font>
                               <Font size="25.0" />
                            </font>
                         </Label>
-                        <Rectangle arcHeight="500.0" arcWidth="42.0" fill="#1f93ff00" height="38.0" layoutX="976.0" layoutY="289.0" opacity="0.61" stroke="#bfb9b9" strokeType="INSIDE" strokeWidth="2.0" width="82.0" />
-                        <TextField fx:id="txtthcontinous" layoutX="976.0" layoutY="289.0" maxHeight="35.0" minHeight="20.0" prefHeight="35.0" prefWidth="77.0">
+                        <Rectangle arcHeight="500.0" arcWidth="42.0" fill="#1f93ff00" height="38.0" layoutX="976.0" layoutY="289.0" opacity="0.61" stroke="#bfb9b9" strokeType="INSIDE" strokeWidth="2.0" visible="false" width="82.0" />
+                        <TextField fx:id="txtthcontinous" layoutX="976.0" layoutY="289.0" maxHeight="35.0" minHeight="20.0" prefHeight="35.0" prefWidth="77.0" visible="false">
                            <font>
                               <Font size="8.0" />
                            </font>
@@ -314,7 +314,7 @@
                               <String fx:value="col-gray70" />
                            </styleClass>
                         </TextField>
-                        <Line endX="170.0" layoutX="891.0" layoutY="347.0" startX="-100.0" stroke="#bfb9b9" strokeWidth="2.0" />
+                        <Line endX="170.0" layoutX="891.0" layoutY="347.0" startX="-100.0" stroke="#bfb9b9" strokeWidth="2.0" visible="false" />
                         <Button fx:id="testconfig" mnemonicParsing="false" prefHeight="60.0" prefWidth="223.0" style="-fx-background-radius: 50;" styleClass="linear-grad-to-bottom-right" text="Apply" textFill="WHITE" AnchorPane.leftAnchor="567.0" AnchorPane.topAnchor="484.0">
                            <font>
                               <Font name="System Bold" size="20.0" />
