@@ -8,9 +8,12 @@ import java.util.Enumeration;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import org.apache.poi.hssf.util.HSSFColor.WHITE;
+
 import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -69,7 +72,7 @@ public class manualcontroller implements Initializable {
 
 
 	@FXML
-	Label  pg1value, labp1, labp2;
+	Label lblfm1,lblfm2, pg1value, labp1, labp2,lblfm1max,lblfm2max,lblpg1max,lblpg2max;
 
 	@FXML
 	Label lblanc, lblanc2, lblconnection,lblrealeas;
@@ -213,7 +216,46 @@ public class manualcontroller implements Initializable {
 				});
 			}
 		});
+		
+		DataStore.sfm1.addListener(new ChangeListener() {
 
+			@Override
+			public void changed(ObservableValue observable, Object oldValue,
+					Object newValue) {
+
+				javafx.application.Platform.runLater(new Runnable() {
+
+					@Override
+					public void run() {
+						// TODO Auto-generated method stub
+						int v=(int)DataStore.sfm1.get();
+						lblfm1.setText(""+v);
+
+					}
+				});
+			}
+		});
+		
+		DataStore.sfm2.addListener(new ChangeListener() {
+
+			@Override
+			public void changed(ObservableValue observable, Object oldValue,
+					Object newValue) {
+
+				javafx.application.Platform.runLater(new Runnable() {
+
+					@Override
+					public void run() {
+						// TODO Auto-generated method stub
+						int v1=(int)DataStore.sfm2.get();
+						lblfm2.setText(""+v1);
+
+					}
+				});
+			}
+		});
+		
+		
 		// valve1.selectedProperty().bind(DataStore.sv1);
 		// valve2.selectedProperty().bind(DataStore.sv2);
 		// valve3.selectedProperty().bind(DataStore.sv3);
@@ -391,7 +433,7 @@ public class manualcontroller implements Initializable {
 					Image image = new Image(this.getClass()
 							.getResourceAsStream("/userinput/valve ON.png"));
 					v4.setImage(image);
-
+					lblrealeas.setVisible(true);
 					imgv5.setVisible(true);
 
 					wrD = new writeFormat();
@@ -405,7 +447,7 @@ public class manualcontroller implements Initializable {
 					Image image = new Image(this.getClass()
 							.getResourceAsStream("/userinput/valve OFF.png"));
 					v4.setImage(image);
-
+					lblrealeas.setVisible(false);
 					imgv5.setVisible(false);
 
 					wrD = new writeFormat();
@@ -636,15 +678,16 @@ int fcval=Integer.parseInt(DataStore.getFc());
 				.foregroundBaseColor(Color.WHITE)
 				// Value Color
 				.maxValue(fcval)
+				
 				.sections(
-						new Section(0, da.get(0), "0", Color.web("#E7E7E8")),
-						new Section(da.get(0), da.get(1), "1", Color
+						new Section(0, dfc.get(0), "0", Color.web("#E7E7E8")),
+						new Section(dfc.get(0), dfc.get(1), "1", Color
 								.web("#C4D0E2")),
-						new Section(da.get(1), da.get(2), "2", Color.web("#A4BBDB")),
-						new Section(da.get(2), da.get(3), "3", Color.web("#83A9D6")),
-						new Section(da.get(3), da.get(4), "4", Color
+						new Section(dfc.get(1), dfc.get(2), "2", Color.web("#A4BBDB")),
+						new Section(dfc.get(2), dfc.get(3), "3", Color.web("#83A9D6")),
+						new Section(dfc.get(3), dfc.get(4), "4", Color
 								.web("#5F99D0")),
-						new Section(da.get(4), prval, "5", Color.web("#228CCC")))
+						new Section(dfc.get(4), fcval, "5", Color.web("#228CCC")))
 				
 						.animated(true).build();
 		gauge2.setPrefSize(ap2.getPrefWidth(), ap2.getPrefHeight());
@@ -656,11 +699,10 @@ int fcval=Integer.parseInt(DataStore.getFc());
 				.animated(true)
 				// .title("Pressure")
 				.barColor(Color.CRIMSON)
-				.valueColor(Color.GRAY)
+				.valueColor(Color.WHITE)
 				.titleColor(Color.GRAY)
 				.unitColor(Color.GRAY)
 				.thresholdVisible(false)
-
 				.shadowsEnabled(true)
 				.gradientBarEnabled(true)
 				.gradientBarStops(new Stop(0.00, Color.BLUE),
@@ -669,7 +711,7 @@ int fcval=Integer.parseInt(DataStore.getFc());
 				.build();
 
 		gauge3.setPrefSize(ap3.getPrefWidth(), ap3.getPrefHeight());
-
+		lblfm1max.setText("FM1 : "+Double.parseDouble(DataStore.getFm1())+" (sccm)");
 		gauge3.setMaxValue(Double.parseDouble(DataStore.getFm1()));
 		gauge3.valueProperty().bind(DataStore.sfm1);
 
@@ -683,19 +725,21 @@ int fcval=Integer.parseInt(DataStore.getFc());
 				.animated(true)
 				// .title("Pressure")
 				.barColor(Color.CRIMSON)
-				.valueColor(Color.GRAY)
+				.valueColor(Color.WHITE)
 				.titleColor(Color.GRAY)
 				.unitColor(Color.GRAY)
 				.thresholdVisible(false)
 				.threshold(35)
 				.shadowsEnabled(true)
 				.gradientBarEnabled(true)
+				
 				.gradientBarStops(new Stop(0.00, Color.BLUE),
 						new Stop(0.25, Color.CYAN), new Stop(0.50, Color.LIME),
 						new Stop(0.75, Color.YELLOW), new Stop(1.00, Color.RED))
 				.build();
 
 		gauge4.setMaxValue(Double.parseDouble(DataStore.getFm2()));
+		lblfm2max.setText("FM2 : "+Double.parseDouble(DataStore.getFm2())+" (sccm)");
 		gauge4.valueProperty().bind(DataStore.sfm2);
 		gauge4.setPrefSize(ap4.getPrefWidth(), ap4.getPrefHeight());
 		ap4.getChildren().add(gauge4);
@@ -710,7 +754,7 @@ int fcval=Integer.parseInt(DataStore.getFc());
 				// .value(0.50)
 				// .maxValue(40)
 				.barColor(Color.CRIMSON)
-				.valueColor(Color.GRAY)
+				.valueColor(Color.WHITE)
 				.titleColor(Color.GRAY)
 				.unitColor(Color.GRAY)
 				.thresholdVisible(false)
@@ -724,7 +768,8 @@ int fcval=Integer.parseInt(DataStore.getFc());
 
 		gauge5.setMaxValue(Integer.parseInt(DataStore.getPg2()));
 		gauge5.valueProperty().bind(DataStore.spg2);
-
+		lblpg2max.setText("PG2"+"\n"+Integer.parseInt(DataStore.getPg2())+" (psi)");
+		
 		gauge5.setPrefSize(ap6.getPrefWidth(), ap6.getPrefHeight());
 		ap6.getChildren().add(gauge5);
 
@@ -736,7 +781,7 @@ int fcval=Integer.parseInt(DataStore.getFc());
 				.animated(true)
 
 				.barColor(Color.CRIMSON)
-				.valueColor(Color.GRAY)
+				.valueColor(Color.WHITE)
 				.titleColor(Color.GRAY)
 				.unitColor(Color.GRAY)
 				.thresholdVisible(false)
@@ -749,6 +794,7 @@ int fcval=Integer.parseInt(DataStore.getFc());
 				.maxValue(Integer.parseInt(DataStore.getPg1())).build();
 
 		gauge6.setMaxValue(Integer.parseInt(DataStore.getPg1()));
+		lblpg1max.setText("PG1"+"\n"+Integer.parseInt(DataStore.getPg1())+" (psi)");
 		gauge6.setPrefSize(ap5.getPrefWidth(), ap5.getPrefHeight());
 		gauge6.valueProperty().bind(DataStore.spg1);
 		// pg2value.textProperty().bind(DataStore.sspg2);
