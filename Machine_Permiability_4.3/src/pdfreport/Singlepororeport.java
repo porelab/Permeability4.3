@@ -62,6 +62,9 @@ public class Singlepororeport {
 
 	Font unitlabrow = FontFactory.getFont(FontFactory.HELVETICA, 8,
 			Font.NORMAL, new BaseColor(255, 255, 255));
+	
+	Font unitlabrownew = FontFactory.getFont(FontFactory.HELVETICA, 6,
+			Font.NORMAL, new BaseColor(255, 255, 255));
 
 	public static final String FONT = "/OpenSansCondensed-Light.ttf";
 	public static final String FONTbb = "/OpenSansCondensed-Light.ttf";
@@ -676,7 +679,7 @@ public class Singlepororeport {
 		t3.setVerticalAlignment(Element.ALIGN_MIDDLE);
 
 		PdfPCell t4 = new PdfPCell(new Paragraph("" + d.data.get("duration")
-				+ " s/min", sampleinfoa));
+				+ " min", sampleinfoa));
 		t4.setBorder(1);
 		t4.setBorder(t4.RIGHT);
 		t4.setBorderColor(new BaseColor(130, 130, 130));
@@ -711,7 +714,7 @@ public class Singlepororeport {
 		f2.setVerticalAlignment(Element.ALIGN_MIDDLE);
 
 		PdfPCell f3 = new PdfPCell(
-				new Paragraph("Surface Tension", sampleinfoq));
+				new Paragraph("Gas Viscosity", sampleinfoq));
 		f3.setPaddingLeft(10);
 		f3.setPaddingTop(1);
 		f3.setBorder(1);
@@ -920,7 +923,7 @@ public class Singlepororeport {
 	
 	
 
-		PdfPCell u12 = new PdfPCell(new Paragraph("d(in)", unitlab));
+		PdfPCell u12 = new PdfPCell(new Paragraph("(s)", unitlab));
 		u12.setBorder(1);
 		u12.setBorder(u1.RIGHT);
 		u12.setBorderColor(resultborder);
@@ -970,7 +973,7 @@ public class Singlepororeport {
 	
 	
 
-		PdfPCell u13 = new PdfPCell(new Paragraph("d(ft)", unitlab));
+		PdfPCell u13 = new PdfPCell(new Paragraph("(Cubic feet/Square foot)", unitlab));
 		u13.setBorder(1);
 		u13.setBorder(u1.RIGHT);
 		u13.setBorderColor(resultborder);
@@ -1082,7 +1085,7 @@ public class Singlepororeport {
 			n2.setVerticalAlignment(Element.ALIGN_MIDDLE);
 
 			// PdfPCell n3 = new PdfPCell(new
-			// Paragraph("The following test Procedure is based on ASTM D6767 (Standard Test Method for Pore Size Characterization.)",notesdeslab));
+			// Paragraph("The following test Procedure is based on ASTM F726-94 (Standard Test Method for Pore Size Characterization.)",notesdeslab));
 			PdfPCell n3 = new PdfPCell(new Paragraph(notes, notesdeslab));
 
 			n3.setPaddingLeft(10);
@@ -1135,7 +1138,7 @@ public class Singlepororeport {
 			n2.setVerticalAlignment(Element.ALIGN_MIDDLE);
 
 			// PdfPCell n3 = new PdfPCell(new
-			// Paragraph("The following test Procedure is based on ASTM D6767 (Standard Test Method for Pore Size Characterization.)",notesdeslab));
+			// Paragraph("The following test Procedure is based on ASTM F726-94 (Standard Test Method for Pore Size Characterization.)",notesdeslab));
 			PdfPCell n3 = new PdfPCell(new Paragraph(notes, notesdeslab));
 
 			n3.setPaddingLeft(10);
@@ -1240,7 +1243,7 @@ public class Singlepororeport {
 
 			System.out.println("Image Name--------->" + imagefilename);
 
-			PdfPCell r1 = new PdfPCell(new Paragraph(imagefilename.substring(1,
+			PdfPCell r1 = new PdfPCell(new Paragraph(imagefilename.substring(0,
 					imagefilename.length()), headerdate));
 			r1.setBorder(0);
 			r1.setColspan(4);
@@ -1268,7 +1271,7 @@ public class Singlepororeport {
 	}
 
 	void addTableHeader(PdfPTable tablem) {
-		PdfPCell cell1 = new PdfPCell(new Paragraph("DryPressure", rowhed));
+		PdfPCell cell1 = new PdfPCell(new Paragraph("Differential Pressure", rowhed));
 		cell1.setBackgroundColor(backcellcoltable);
 		cell1.setBorder(1);
 		cell1.setBorder(cell1.LEFT);
@@ -1315,8 +1318,20 @@ public class Singlepororeport {
 		ucell1.setFixedHeight(15f);
 		ucell1.setHorizontalAlignment(Element.ALIGN_CENTER);
 		ucell1.setVerticalAlignment(Element.ALIGN_TOP);
+		
+		Chunk superscript =new Chunk("3");
+		superscript.setTextRise(3f);
+		superscript.setFont(unitlabrownew);
+		
+		Phrase phrase = new Phrase();
 
-		PdfPCell ucell2 = new PdfPCell(new Paragraph("(l/min)", unitlabrow));
+		phrase.add(new Chunk("cm", unitlabrow));
+		phrase.add( superscript ); 
+		phrase.add(new Chunk("/s", unitlabrow));
+		
+		
+
+		PdfPCell ucell2 = new PdfPCell(phrase);
 		ucell2.setBackgroundColor(backcellcoltable);
 		ucell2.setBorder(0);
 		// ucell2.setBorder(ucell2.TOP | ucell2.BOTTOM | ucell2.LEFT);
