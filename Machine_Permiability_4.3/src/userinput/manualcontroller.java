@@ -70,7 +70,8 @@ public class manualcontroller implements Initializable {
 	@FXML
 	AnchorPane root;
 
-
+	public static ObservableList<String> fm1count,fm2count,pg1count,pg2count;
+	
 	@FXML
 	Label lblfm1,lblfm2, pg1value, labp1, labp2,lblfm1max,lblfm2max,lblpg1max,lblpg2max;
 
@@ -130,6 +131,11 @@ public class manualcontroller implements Initializable {
 		fm2=FXCollections.observableArrayList();
 		pg1=FXCollections.observableArrayList();
 		pg2=FXCollections.observableArrayList();
+		fm1count=FXCollections.observableArrayList();
+		fm2count=FXCollections.observableArrayList();
+		pg1count=FXCollections.observableArrayList();
+		pg2count=FXCollections.observableArrayList();
+		
 		
 		
 		recordbtn.setOnAction(new EventHandler<ActionEvent>() {
@@ -1101,19 +1107,19 @@ int fcval=Integer.parseInt(DataStore.getFc());
 			dateCol.setPrefWidth(300);
 			dateCol.setCellValueFactory(new PropertyValueFactory<>("title"));
 
-			TableColumn<Data, Double> value1Col = new TableColumn<>("1");
+			TableColumn<Data, Double> value1Col = new TableColumn<>("value1");
 			value1Col.setPrefWidth(255);
 			value1Col.setCellValueFactory(new PropertyValueFactory<>("v1"));
 			
-			TableColumn<Data, Double> value2Col = new TableColumn<>("2");
+			TableColumn<Data, Double> value2Col = new TableColumn<>("Count1");
 			value2Col.setPrefWidth(255);
 			value2Col.setCellValueFactory(new PropertyValueFactory<>("v2"));
 
-			TableColumn<Data, Double> value3Col = new TableColumn<>("3");
+			TableColumn<Data, Double> value3Col = new TableColumn<>("Value2");
 			value3Col.setPrefWidth(255);
 			value3Col.setCellValueFactory(new PropertyValueFactory<>("v3"));
 
-			TableColumn<Data, Double> value4Col = new TableColumn<>("4");
+			TableColumn<Data, Double> value4Col = new TableColumn<>("Count2");
 			value4Col.setPrefWidth(255);
 			value4Col.setCellValueFactory(new PropertyValueFactory<>("v4"));
 
@@ -1210,18 +1216,30 @@ int fcval=Integer.parseInt(DataStore.getFc());
 			}
 			
 			int temp=0;
-			
+			int itemp=1;
 			for(int i=fm1.size()-1;i>=0;i--)
 			{
-				if(temp>=4)
+				if(temp>=2)
 				{
 					break;
 				}
 				System.out.println("fm1 : "+fm1.size()+" I : "+i);
-				alldata.get(0).setData(temp+1, fm1.get(i));
-				alldata.get(1).setData(temp+1, fm2.get(i));
-				alldata.get(2).setData(temp+1, pg1.get(i));
-				alldata.get(3).setData(temp+1, pg2.get(i));
+
+				System.out.println("fm1cout : "+fm1count.size()+" I : "+i);
+				alldata.get(0).setData(itemp, fm1.get(i));
+				alldata.get(1).setData(itemp, fm2.get(i));
+				alldata.get(2).setData(itemp, pg1.get(i));
+				alldata.get(3).setData(itemp, pg2.get(i));
+				
+				itemp++;
+				
+				alldata.get(0).setData(itemp, fm1count.get(i));
+				alldata.get(1).setData(itemp, fm2count.get(i));
+				alldata.get(2).setData(itemp, pg1count.get(i));
+				alldata.get(3).setData(itemp, pg2count.get(i));
+				
+				
+				itemp++;
 				temp++;
 			}
 			

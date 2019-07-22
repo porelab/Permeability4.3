@@ -8,11 +8,15 @@ import gnu.io.SerialPortEventListener;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import javafx.collections.FXCollections;
 import userinput.manualcontroller;
+import ConfigurationPart.SkadaController;
+import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 public class SerialCommunicator {
 
@@ -26,6 +30,7 @@ public class SerialCommunicator {
 		DataStore.listOfHeads.add('L');
 		DataStore.listOfHeads.add('S');
 		DataStore.listOfHeads.add('V');
+		
 		// listOfHeads.add('D');
 		// listOfHeads.add('C');
 		DataStore.intList.put("80", FXCollections.observableArrayList()); // for
@@ -164,7 +169,9 @@ public class SerialCommunicator {
 	   					Myapp.ftype.set(1);
 	   					DataStore.sfm1.set(b);
 	   					
-	   					manualcontroller.fm1.add(Myapp.getRound(b,3)+"( "+a+" )");
+	   					manualcontroller.fm1count.add(""+a);
+	   					
+	   					manualcontroller.fm1.add(Myapp.getRound(b,3));
 	   					
 	   					
 	   					if(a>62200)
@@ -192,7 +199,10 @@ public class SerialCommunicator {
 	   					Myapp.ftype.set(2);
 	   					DataStore.sfm2.set(b);
 
-	   					manualcontroller.fm2.add(Myapp.getRound(b,3)+"( "+a+" )");
+	   					manualcontroller.fm2count.add(""+a);
+		   				
+	   					manualcontroller.fm2.add(Myapp.getRound(b,3));
+	   					
 	        			//.... for pg1
 	   					
 	   					
@@ -210,8 +220,10 @@ public class SerialCommunicator {
 	    				  b=(double)a*Integer.parseInt(DataStore.getPg1())/65535;
 	   					System.out.println("Pressure Gauge 1 :  ... :"+b);
 	   					DataStore.spg1.set(b);
-
-	   					manualcontroller.pg1.add(Myapp.getRound(b,3)+"( "+a+" )");
+	   					manualcontroller.pg1count.add(""+a);
+		   				
+	   					manualcontroller.pg1.add(Myapp.getRound(b,3));
+	   					
 	   					
 	   					if(a>62200)
 	   					{
@@ -235,8 +247,10 @@ public class SerialCommunicator {
 	   					System.out.println("Pressure Gauge 2 :  original   reading  : "+a+"... :"+b);
 	   					DataStore.spg2.set(b);
 
-	   					manualcontroller.pg2.add(Myapp.getRound(b,3)+"( "+a+" )");
-	        			
+	   					manualcontroller.pg2count.add(""+a);
+		   				
+	   					manualcontroller.pg2.add(Myapp.getRound(b,3));
+	   					
 	        			i=i+16;
 	        			
 	        			}
