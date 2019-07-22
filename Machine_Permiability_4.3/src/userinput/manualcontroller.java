@@ -60,6 +60,7 @@ import gnu.io.CommPortIdentifier;
 public class manualcontroller implements Initializable {
 
 	
+	
 	ObservableList<Data> alldata;
 	
 	public static ObservableList<String> fm1,fm2,pg1,pg2;

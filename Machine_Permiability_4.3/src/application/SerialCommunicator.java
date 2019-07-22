@@ -23,6 +23,7 @@ public class SerialCommunicator {
 	int ind = 0;
 
 	public SerialCommunicator() {
+		
 		DataStore.listOfHeads.add('P');
 		DataStore.listOfHeads.add('T');
 		DataStore.listOfHeads.add('H');
