@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.paint.*?>
+<?import java.net.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="768.0" prefWidth="1368.0" styleClass="bgwhite" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="report.ReportController">
+   <children>
+      <Button fx:id="report" layoutX="1008.0" layoutY="573.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="79.0" text="Get Report" visible="false">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Button>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffffff1a" height="180.0" layoutX="384.0" layoutY="432.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" visible="false" width="733.0" AnchorPane.leftAnchor="384.0" />
+      <AnchorPane fx:id="root" layoutX="11.0" layoutY="79.4375" maxHeight="658.0" maxWidth="952.0" minHeight="422.0" minWidth="744.0" prefHeight="630.0" prefWidth="920.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="11.0">
+         <children>
+            <Pagination fx:id="pagination1" layoutX="7.0" maxHeight="624.0" maxWidth="864.0" minHeight="422.0" minWidth="737.0" prefHeight="574.0" prefWidth="846.0" AnchorPane.bottomAnchor="56.0" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+         </children></AnchorPane>
+      <AnchorPane fx:id="slides" layoutX="393.0" layoutY="450.0" prefHeight="151.0" prefWidth="715.0" visible="false" />
+      <ScrollPane fx:id="scrfilename" layoutX="964.0" layoutY="183.0" maxHeight="227.0" maxWidth="555.0" minHeight="208.0" minWidth="321.0" prefHeight="208.0" prefWidth="369.0" styleClass="scrl" stylesheets="@../application/application.css" />
+      <Line endX="490.0" layoutX="841.0" layoutY="120.0" startX="120.0" stroke="#2a91d8" />
+      <Line endX="490.0" layoutX="841.0" layoutY="181.0" startX="120.0" stroke="#2a91d8" />
+      <Line endX="490.0" layoutX="841.0" layoutY="394.0" startX="120.0" stroke="#2a91d8" />
+      <Label layoutX="960.0" layoutY="118.0" prefHeight="67.0" prefWidth="89.0" text="Sample Name" textFill="#646161" wrapText="true" AnchorPane.topAnchor="118.0">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </Label>
+      <Label alignment="CENTER" layoutX="1243.0" layoutY="118.0" prefHeight="67.0" prefWidth="89.0" text="Frazier" textFill="#646161" wrapText="true" AnchorPane.topAnchor="118.0">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="133.0" fitWidth="1404.0" layoutX="8.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <image>
+            <Image url="@cloud.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="87.0" layoutY="24.0" prefHeight="35.0" prefWidth="194.0" styleClass="font-montserrat-semiBold" text="Result" textFill="WHITE" wrapText="true" AnchorPane.leftAnchor="87.0" AnchorPane.topAnchor="24.0">
+         <font>
+            <Font name="System Bold" size="30.0" />
+         </font>
+      </Label>
+      <Line endX="600.0" layoutX="642.0" layoutY="421.0" rotate="90.0" stroke="#545252" />
+      <Line endX="490.0" layoutX="840.0" layoutY="723.0" startX="120.0" stroke="#2a91d8" />
+      <Label layoutX="978.0" layoutY="406.0" styleClass="col-gray70" text="Average Darcy Constant" textFill="#545151">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <Button fx:id="btnback" layoutX="1269.0" layoutY="18.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="60.0" styleClass="trsnpbtn" AnchorPane.rightAnchor="65.0" AnchorPane.topAnchor="18.0">
+         <graphic>
+            <ImageView fitHeight="54.0" fitWidth="57.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@back.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button fx:id="btnsavereport" layoutX="1196.0" layoutY="18.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="60.0" styleClass="trsnpbtn" AnchorPane.rightAnchor="138.0" AnchorPane.topAnchor="18.0">
+         <graphic>
+            <ImageView fitHeight="54.0" fitWidth="57.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@report.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button fx:id="btnhome" layoutX="1125.0" layoutY="18.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="60.0" styleClass="trsnpbtn" AnchorPane.rightAnchor="209.0" AnchorPane.topAnchor="18.0">
+         <graphic>
+            <ImageView fitHeight="54.0" fitWidth="57.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@home.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Line endX="700.0" layoutX="677.5" layoutY="102.0" AnchorPane.rightAnchor="0.0">
+         <stroke>
+            <LinearGradient endX="0.08095238095238094" endY="0.6761904761904762" startX="0.6619047619047619">
+               <stops>
+                  <Stop color="#656161" />
+                  <Stop color="WHITE" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </stroke>
+      </Line>
+      <Label fx:id="grlable" alignment="CENTER" layoutX="5.0" layoutY="93.0" prefHeight="37.0" prefWidth="814.0" text="Flow vs Pressure">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="lbldarcy" alignment="CENTER_RIGHT" layoutX="987.0" layoutY="439.0" prefHeight="59.0" prefWidth="173.0" textAlignment="RIGHT">
+         <font>
+            <Font name="System Bold" size="30.0" />
+         </font>
+      </Label>
+      <Label layoutX="1165.0" layoutY="439.0" prefHeight="52.0" prefWidth="72.0" text="dry">
+         <font>
+            <Font name="System Bold" size="30.0" />
+         </font>
+      </Label>
+      <Label layoutX="1083.0" layoutY="118.0" prefHeight="67.0" prefWidth="89.0" text="Darcy Constant" textFill="#646161" wrapText="true" AnchorPane.topAnchor="118.0">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="1164.0" layoutY="118.0" prefHeight="67.0" prefWidth="89.0" text="Gurley" textAlignment="CENTER" textFill="#646161" wrapText="true" AnchorPane.topAnchor="118.0">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="976.0" layoutY="512.0" styleClass="col-gray70" text="Average Gurley" textFill="#545151">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblgur" alignment="CENTER_RIGHT" layoutX="989.0" layoutY="543.0" prefHeight="59.0" prefWidth="173.0" textAlignment="RIGHT">
+         <font>
+            <Font name="System Bold" size="30.0" />
+         </font>
+      </Label>
+      <Label layoutX="1165.0" layoutY="543.0" prefHeight="52.0" prefWidth="136.0" text="d(in)">
+         <font>
+            <Font name="System Bold" size="30.0" />
+         </font>
+      </Label>
+      <Label layoutX="979.0" layoutY="610.0" styleClass="col-gray70" text="Average Gurley" textFill="#545151">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblfraz" alignment="CENTER_RIGHT" layoutX="994.0" layoutY="637.0" prefHeight="62.0" prefWidth="173.0" textAlignment="RIGHT">
+         <font>
+            <Font name="System Bold" size="30.0" />
+         </font>
+      </Label>
+      <Label layoutX="1170.0" layoutY="641.0" prefHeight="52.0" prefWidth="102.0" text="d(ft)">
+         <font>
+            <Font name="System Bold" size="30.0" />
+         </font>
+      </Label>
+      <Line endX="490.0" layoutX="849.0" layoutY="606.0" startX="120.0" stroke="#2a91d8" />
+      <Line endX="490.0" layoutX="843.0" layoutY="494.0" startX="120.0" stroke="#2a91d8" />
+   </children>
+   <stylesheets>
+      <URL value="@../application/application.css" />
+      <URL value="@../application/new_application.css" />
+   </stylesheets>
+</AnchorPane>
