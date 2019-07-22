@@ -350,7 +350,7 @@ public class NLivetestController implements Initializable {
 
 				if (!chamberonoff.isSelected()) {
 					writeFormat wrd = new writeFormat();
-					wrd.addStart();
+				
 					wrd.addChar('A');
 					wrd.addChar('C');
 					wrd.addChar('0');
@@ -362,7 +362,7 @@ public class NLivetestController implements Initializable {
 				} else {
 
 					writeFormat wrd = new writeFormat();
-					wrd.addStart();
+				
 					wrd.addChar('A');
 					wrd.addChar('C');
 					wrd.addChar('1');
@@ -579,6 +579,7 @@ public class NLivetestController implements Initializable {
 	}
 
 	void dryClick(int delay) {
+		t2test=System.currentTimeMillis();
 		lblcurranttest.setText("Flow vs Pressure");
 		stoptest.setDisable(false);
 		status.setText("Dry-test running..");
