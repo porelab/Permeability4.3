@@ -722,6 +722,9 @@ public class NLivetestController implements Initializable {
 			int hour = (s / 3600);
 			int min = (s / 60) % 60;
 			int remsec = (s % 60);
+			
+			
+			
 			String durr = hour + ":" + min + ":" + remsec;
 
 			cs.newLine("duration", durr);

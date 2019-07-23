@@ -54,6 +54,7 @@ import application.Myapp;
 import com.jfoenix.controls.JFXSpinner;
 import com.jfoenix.controls.JFXToggleButton;
 
+import data_read_write.DatareadN;
 import extrafont.Myfont;
 
 public class FirstController implements Initializable {
@@ -112,50 +113,6 @@ public class FirstController implements Initializable {
 
 	public SimpleBooleanProperty isSync = new SimpleBooleanProperty(false);
 
-	/*Check Max File*/
-	int setSelectedLab() {
-		List<String> s = new ArrayList<String>(selectedbox.keySet());
-		int cnt = 0;
-		for (int i = 0; i < s.size(); i++) {
-			List<String> templist = FirstController.selectedbox.get(s.get(i));
-
-			for (int j = 0; j < templist.size(); j++) {
-				cnt++;
-			}
-		}
-
-		filelab.setText(cnt + "/" + maxfile + "");
-
-		return cnt;
-	}
-
-	void setTimer() {
-		Timer timer = new Timer();
-		TimerTask task = new TimerTask() {
-			public void run() {
-				System.out.println("Connection : "
-						+ Myapp.isInternetConnected.get());
-				Platform.runLater(new Runnable() {
-
-					@Override
-					public void run() {
-						// TODO Auto-generated method stub
-						if (Myapp.isInternetConnected.get() == false) {
-							syncicon.setVisible(false);
-							Toast.makeText(Main.mainstage,
-									"Internet Connection Problem", 300, 100,
-									100);
-						}
-
-						System.out.println(" I M  CALLLLLLLLINNNNNGGGGGGG");
-					}
-				});
-			}
-
-		};
-		timer.schedule(task, 15000);
-	}
-
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
@@ -179,7 +136,7 @@ public class FirstController implements Initializable {
 					Boolean oldValue, Boolean newValue) {
 
 				if (newValue) {
-					System.out.println("hello");
+
 					Openscreen.open("/report/first.fxml");
 				}
 
@@ -195,7 +152,7 @@ public class FirstController implements Initializable {
 				if (newValue) {
 					isLogin.set(false);
 
-					System.out.println("hello");
+
 					Openscreen.open("/report/first.fxml");
 
 				}
@@ -240,7 +197,7 @@ public class FirstController implements Initializable {
 
 		}
 		getFolderList();
-
+		/*Open Cloud File Popup*/
 		btndownload.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
@@ -288,17 +245,19 @@ public class FirstController implements Initializable {
 				}
 			}
 		});
+
+		/*Back To Home Screen*/
 		btnback.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
 			public void handle(ActionEvent event) {
-				// TODO Auto-generated method stub
-				System.out.println("BacK To Home-------------->>>>");
+
 				Openscreen.open("/application/first.fxml");
 
 			}
 		});
 
+		/*Seleted Sample or File Delete*/
 		delbtn.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
@@ -315,6 +274,7 @@ public class FirstController implements Initializable {
 			}
 		});
 
+		/*Seleted Sample or File reset*/
 		filereset.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
@@ -325,6 +285,7 @@ public class FirstController implements Initializable {
 			}
 		});
 
+		/*All sample Sync in Cloud*/
 		autosync.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
@@ -349,6 +310,8 @@ public class FirstController implements Initializable {
 		});
 
 	}
+	
+	/* Show All Trials in Selected Sample*/
 
 	void showCheckBox(String foldername) {
 		VBox v = new VBox(20);
@@ -383,6 +346,7 @@ public class FirstController implements Initializable {
 
 	}
 
+	/* Show Selected All Trials in Selected Sample all*/
 	void setAllChecked(String name, boolean bol) {
 
 		List<CheckBox> list = listoffilecheckbox.get(name);
@@ -416,6 +380,7 @@ public class FirstController implements Initializable {
 
 	}
 
+	/*Clear All Selected Cheack box*/
 	void resetAll() {
 		List<String> folders = new ArrayList<String>(selectedbox.keySet());
 
@@ -461,7 +426,37 @@ public class FirstController implements Initializable {
 
 	}
 
+	/*Get Date wise Folders*/
 	String getDateofFile(File f) {
+		
+		
+		DatareadN dd=new DatareadN();
+		dd.fileRead(f);
+		
+		
+		String ss;
+		
+		if(dd.data!=null)
+		{
+		
+			if(dd.data.containsKey("testdate"))
+			{
+				ss=dd.data.get("testdate")+"";
+				
+			}
+			else
+			{
+				ss="";
+			}
+			
+		}
+		else
+		{
+			ss="";
+		}
+		
+		return ss;
+		/*
 		Path filePath = f.toPath();
 		String s = "Unknown";
 		BasicFileAttributes attributes = null;
@@ -482,8 +477,72 @@ public class FirstController implements Initializable {
 		}
 
 		return s;
+		*/
 	}
+	
+	
+	List<File> filterfile(File[] flist)
+	{
+		
+	
+		List<File> ff=new ArrayList<File>();
+		
+		for(int i=0;i<flist.length;i++)
+		{
+		DatareadN d=new DatareadN();
+		d.fileRead(flist[i]);
+		
+		if(d.data!=null)
+		{
+			try
+			{
+				String date=d.data.get("testdate").toString();
+				
+				ff.add(flist[i]);
+			}
+			catch(Exception e)
+			{
+				System.out.println("error22 : "+flist[i]);
+				File fm=new File(flist[i].getAbsolutePath());
+				if(fm.delete())
+				{
+					System.out.println("Deleted");
+				}
+				else
+				{
+					
+					flist[i].delete();
+					
+				}
+			}
+				
+		}
+		else
+		{
 
+			System.out.println("error22 null : "+flist[i]);
+			File fm=new File(flist[i].getAbsolutePath());
+			if(fm.delete())
+			{
+				System.out.println("Deleted");
+			}
+			else
+			{
+				
+				flist[i].delete();
+				
+			}
+
+		}
+		
+		
+		}
+		
+		
+		return ff;
+	}
+	
+	/*Get All Folder list*/
 	void getFolderList() {
 		removeEmptyFolder();
 		// File f=new File("CsvFolder");
@@ -519,13 +578,20 @@ Arrays.sort(listOfFiles, new Comparator<File>() {
 
 					File ftemp = listOfFiles[i];
 					if (ftemp.isDirectory()) {
-						File[] fftemp = ftemp.listFiles();
+						
+						File[] fftemp1 = ftemp.listFiles();
+						
+						List<File> fftemp=filterfile(fftemp1);
+						
 						List<CheckBox> ck = new ArrayList<CheckBox>();
 
 						List<Label> ck_lab = new ArrayList<Label>();
-						for (int j = 0; j < fftemp.length; j++) {
-							CheckBox chk = new CheckBox(fftemp[j].getName());
-							chk.setId(fftemp[j].getAbsolutePath());
+						
+						
+						
+						for (int j = 0; j < fftemp.size(); j++) {
+							CheckBox chk = new CheckBox(fftemp.get(j).getName());
+							chk.setId(fftemp.get(j).getAbsolutePath());
 							chk.setTooltip(new Tooltip(ftemp.getName()));
 							chk.prefWidth(500);
 							chk.minWidth(500);
@@ -535,7 +601,7 @@ Arrays.sort(listOfFiles, new Comparator<File>() {
 							chk.setFont(fontss.getM_M());
 
 							Label l = new Label();
-							l.setText(getDateofFile(fftemp[j]));
+							l.setText(getDateofFile(fftemp.get(j)));
 							l.setTextFill(Color.web("727376"));
 							l.setFont(fontss.getR_R());
 
@@ -629,7 +695,8 @@ Arrays.sort(listOfFiles, new Comparator<File>() {
 			}
 		}
 	}
-
+	
+	/*Remove Empty Folder*/
 	void removeEmptyFolder() {
 		File f = new File(filepath);
 
@@ -650,6 +717,7 @@ Arrays.sort(listOfFiles, new Comparator<File>() {
 		}
 	}
 
+	/*Set Sample with Name and Image(Folder img)*/
 	void setToggleButtonProperty(ToggleButton tb, String title, String img,
 			ToggleGroup group) {
 		Image image = new Image(this.getClass().getResourceAsStream(img));
@@ -670,6 +738,7 @@ Arrays.sort(listOfFiles, new Comparator<File>() {
 
 	}
 
+	/*Check  Login  */
 	public void verifyloginc() {
 
 		MyDialoug m = new MyDialoug(Main.mainstage,
@@ -678,6 +747,7 @@ Arrays.sort(listOfFiles, new Comparator<File>() {
 
 	}
 
+	/*Set Sample Details vertical Box*/
 	VBox getVBoxofFolder(String name) {
 		VBox v1 = new VBox(5);
 		v1.setMinWidth(120);
@@ -730,8 +800,8 @@ Arrays.sort(listOfFiles, new Comparator<File>() {
 		v1.getChildren().addAll(tb, chk);
 		return v1;
 	}
-
 	
+	/*Sample or File Delete after Sample Details Update*/
 	void folderUpdate(String nm)
 	{
 		try{
@@ -757,4 +827,48 @@ Arrays.sort(listOfFiles, new Comparator<File>() {
 		}
 	}
 	
+	/*Check Max File*/
+	int setSelectedLab() {
+		List<String> s = new ArrayList<String>(selectedbox.keySet());
+		int cnt = 0;
+		for (int i = 0; i < s.size(); i++) {
+			List<String> templist = FirstController.selectedbox.get(s.get(i));
+
+			for (int j = 0; j < templist.size(); j++) {
+				cnt++;
+			}
+		}
+
+		filelab.setText(cnt + "/" + maxfile + "");
+
+		return cnt;
+	}
+	
+	/*Check Internet Connection after Show and Hide Sync Icon */
+	void setTimer() {
+		Timer timer = new Timer();
+		TimerTask task = new TimerTask() {
+			public void run() {
+				System.out.println("Connection : "
+						+ Myapp.isInternetConnected.get());
+				Platform.runLater(new Runnable() {
+
+					@Override
+					public void run() {
+						// TODO Auto-generated method stub
+						if (Myapp.isInternetConnected.get() == false) {
+							syncicon.setVisible(false);
+							Toast.makeText(Main.mainstage,
+									"Internet Connection Problem", 300, 100,
+									100);
+						}
+
+						System.out.println(" I M  CALLLLLLLLINNNNNGGGGGGG");
+					}
+				});
+			}
+
+		};
+		timer.schedule(task, 15000);
+	}
 }
