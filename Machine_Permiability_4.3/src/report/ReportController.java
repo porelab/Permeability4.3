@@ -211,7 +211,7 @@ public class ReportController implements Initializable
     
        if(i==1)
        {
-    	   Pane p=c.drawLinechart(pagination1.getPrefWidth(),pagination1.getPrefHeight(),"Flow vs Pressure", "Pressure", "Flow",list_d,false,11,12,"(3) Incremental Filter-Flow % vs Diameter");
+    	   Pane p=c.drawLinechart(pagination1.getPrefWidth(),pagination1.getPrefHeight(),"Flow vs Pressure", "Pressure (psi)", "Flow (cm3/m)",list_d,false,11,12,"(3) Incremental Filter-Flow % vs Diameter");
     	   charts.put(p);
     	   listofchart.add(p);
     	 

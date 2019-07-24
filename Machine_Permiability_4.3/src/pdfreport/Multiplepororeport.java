@@ -301,7 +301,7 @@ public class Multiplepororeport {
 		date.setColor(BaseColor.BLACK);
 
 		PdfPCell r3 = new PdfPCell(
-				new Paragraph("PORE SIZE TEST REPORT", testt));
+				new Paragraph("PERMEABILITY TEST REPORT", testt));
 		r3.setBorder(0);
 		r3.setBackgroundColor(getColor(14));
 		r3.setFixedHeight(25f);
@@ -362,6 +362,7 @@ public class Multiplepororeport {
 		Font testname = FontFactory.getFont("./font/BebasNeue Book.ttf",
 				BaseFont.IDENTITY_H, BaseFont.EMBEDDED, 40);
 		testname.setColor(getColor(6));
+		testname.setColor(getColor(14));
 
 		PdfPCell t22 = new PdfPCell(new Paragraph(companyname, testname));
 		t22.setBorder(0);
@@ -563,7 +564,7 @@ public class Multiplepororeport {
 		c3.setHorizontalAlignment(Element.ALIGN_CENTER);
 		c3.setVerticalAlignment(Element.ALIGN_MIDDLE);
 
-		PdfPCell c4 = new PdfPCell(new Paragraph("Test Fluid", whitecol));
+		PdfPCell c4 = new PdfPCell(new Paragraph("Wetting Fluid", whitecol));
 		c4.setBackgroundColor(backcellcoltable);
 		c4.setBorder(0);
 		// c4.setBorder(c4.TOP | c4.BOTTOM | c4.LEFT);
@@ -640,7 +641,7 @@ public class Multiplepororeport {
 				String testdate = "" + dr1.data.get("testdate");
 
 				// second column
-				PdfPCell record2 = new PdfPCell(new Paragraph("" + sampledia,
+				PdfPCell record2 = new PdfPCell(new Paragraph(sampledia+" cm",
 						tabledata));
 				record2.setBorder(0);
 				// record2.setBorder(record2.LEFT);
@@ -652,7 +653,7 @@ public class Multiplepororeport {
 				infotable.addCell(record2);
 
 				// second column
-				PdfPCell record3 = new PdfPCell(new Paragraph("" + samplethik,
+				PdfPCell record3 = new PdfPCell(new Paragraph(samplethik+" cm",
 						tabledata));
 				record3.setBorder(0);
 				// record3.setBorder(record3.LEFT);
@@ -832,7 +833,7 @@ public class Multiplepororeport {
 
 	
 		PdfPCell cell5 = new PdfPCell(
-				new Paragraph("Darcy avg", whitecol));
+				new Paragraph("Darcy constant", whitecol));
 		cell5.setBackgroundColor(backcellcoltable);
 		cell5.setBorder(0);
 		// cell5.setBorder(cell5.TOP | cell5.BOTTOM | cell5.LEFT);
@@ -904,7 +905,7 @@ public class Multiplepororeport {
 						Double.parseDouble("" + dr.data.get("frazier")), 2);
 				
 				// second column
-				PdfPCell record5 = new PdfPCell(new Paragraph("" + mp,
+				PdfPCell record5 = new PdfPCell(new Paragraph(mp+" (darcy)",
 						tabledata));
 				record5.setBorder(1);
 			//	record5.setBorder(record5.RIGHT);
@@ -917,7 +918,7 @@ public class Multiplepororeport {
 				tablem.addCell(record5);
 
 				// second column
-				PdfPCell record6 = new PdfPCell(new Paragraph("" + gurl,
+				PdfPCell record6 = new PdfPCell(new Paragraph(gurl+" (S)",
 						tabledata));
 				record6.setBorder(1);
 			//	record6.setBorder(record5.RIGHT);
@@ -967,7 +968,7 @@ public class Multiplepororeport {
 
 				
 				
-				PdfPCell record5 = new PdfPCell(new Paragraph("" + mp,
+				PdfPCell record5 = new PdfPCell(new Paragraph(mp+" (darcy)",
 						tabledata));
 				record5.setBorder(0);
 	//			record5.setBorder(record5.RIGHT);
@@ -981,7 +982,7 @@ public class Multiplepororeport {
 
 				
 				// second column
-				PdfPCell record6 = new PdfPCell(new Paragraph("" + gurl,
+				PdfPCell record6 = new PdfPCell(new Paragraph(gurl+" (S)",
 						tabledata));
 				record6.setBorder(0);
 //				record6.setBorder(record6.RIGHT);
@@ -1149,7 +1150,6 @@ public class Multiplepororeport {
 			Paragraph pp5 = new Paragraph(35);
 			// pp5.add(new Chunk("\n"));
 			// document.add(pp5);
-
 			PdfPTable resulttable = new PdfPTable(4); // 4 columns.
 			resulttable.setWidthPercentage(100); // Width 100%
 
@@ -1158,7 +1158,7 @@ public class Multiplepororeport {
 			String imagefilename = f.getName().substring(0,
 					f.getName().indexOf('.'));
 
-			PdfPCell r1 = new PdfPCell(new Paragraph(f.getName().substring(1,
+			PdfPCell r1 = new PdfPCell(new Paragraph(f.getName().substring(0,
 					imagefilename.length()), graphtitle));
 			r1.setBorder(0);
 			r1.setColspan(4);
@@ -1200,7 +1200,7 @@ public class Multiplepororeport {
 					p.fill();
 
 					Image img = Image.getInstance(p);
-					System.out.println("Hello");
+				//	System.out.println("Hello");
 
 					PdfPCell l1 = new PdfPCell(img);
 					l1.setBorder(1);
@@ -1486,7 +1486,7 @@ public class Multiplepororeport {
 			Font headertestname = FontFactory.getFont(
 					"./font/BebasNeue Regular.ttf", BaseFont.IDENTITY_H,
 					BaseFont.EMBEDDED, 15);
-			headertestname.setColor(getColor(6));
+			headertestname.setColor(getColor(14));
 
 			try {
 
@@ -1819,7 +1819,7 @@ public class Multiplepororeport {
 				Font headertestname = FontFactory.getFont(
 						"./font/BebasNeue Regular.ttf", BaseFont.IDENTITY_H,
 						BaseFont.EMBEDDED, 15);
-				headertestname.setColor(getColor(6));
+				headertestname.setColor(getColor(14));
 
 				PdfPCell cell;
 				cell = new PdfPCell(new Phrase("ASTM D6767", headertestname));

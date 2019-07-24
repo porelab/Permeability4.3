@@ -328,7 +328,7 @@ public class Singlepororeport {
 		date.setColor(BaseColor.BLACK);
 
 		PdfPCell r3 = new PdfPCell(
-				new Paragraph("PORE SIZE TEST REPORT", testt));
+				new Paragraph("PERMEABILITY TEST REPORT", testt));
 		r3.setBorder(0);
 		r3.setBackgroundColor(getColor(14));
 		r3.setFixedHeight(25f);
@@ -389,7 +389,7 @@ public class Singlepororeport {
 
 		Font testname = FontFactory.getFont("./font/BebasNeue Book.ttf",
 				BaseFont.IDENTITY_H, BaseFont.EMBEDDED, 40);
-		testname.setColor(getColor(6));
+		testname.setColor(getColor(14));
 
 		PdfPCell t22 = new PdfPCell(new Paragraph(companyname, testname));
 		t22.setBorder(0);
@@ -874,7 +874,7 @@ public class Singlepororeport {
 	
 	
 
-		PdfPCell u1 = new PdfPCell(new Paragraph("darcy", unitlab));
+		PdfPCell u1 = new PdfPCell(new Paragraph("(darcy)", unitlab));
 		u1.setBorder(1);
 		u1.setBorder(u1.RIGHT);
 		u1.setBorderColor(resultborder);
@@ -1325,9 +1325,9 @@ public class Singlepororeport {
 		
 		Phrase phrase = new Phrase();
 
-		phrase.add(new Chunk("cm", unitlabrow));
+		phrase.add(new Chunk("(cm", unitlabrow));
 		phrase.add( superscript ); 
-		phrase.add(new Chunk("/s", unitlabrow));
+		phrase.add(new Chunk("/s)", unitlabrow));
 		
 		
 
@@ -1370,8 +1370,10 @@ public class Singlepororeport {
 		wpressur = d.getValuesOf("" + d.data.get("dpressure"));
 		wf = d.getValuesOf("" + d.data.get("dflow"));
 		df = d.getValuesOf("" + d.data.get("darcy"));
-	
 
+		//System.out.println("DF size : "+df.size());
+		//System.out.println("WF size : "+wf.size());
+		
 		Font tabledata = FontFactory.getFont("./font/Roboto-Light.ttf",
 				BaseFont.IDENTITY_H, BaseFont.EMBEDDED, 9);
 		tabledata.setColor(new BaseColor(98, 98, 98));
@@ -1396,15 +1398,15 @@ public class Singlepororeport {
 
 		addTableHeader(tablem);
 
-		for (int j = 0; j < wpressur.size(); j++) {
+		for (int j = 0; j < df.size(); j++) {
 
 			if (j % 45 == 0 && j != 0) {
 
 				j = j - 1;
 				tablem.getRows().remove(tablem.getRows().size() - 1);
 
-				System.out.println("ROWsize : " + tablem.getRows().size()
-						+ " : " + j);
+			/*	System.out.println("ROWsize : " + tablem.getRows().size()
+						+ " : " + j);*/
 				// second column
 				PdfPCell r11 = new PdfPCell(
 						new Paragraph(Myapp.getRound(
@@ -1434,7 +1436,7 @@ public class Singlepororeport {
 				tablem.addCell(r22);
 
 				PdfPCell r33 = new PdfPCell(new Paragraph(Myapp.getRound(
-						Double.parseDouble("" + wf.get(j)), 2), tabledata));
+						Double.parseDouble("" + df.get(j)), 2), tabledata));
 				r33.setBorder(1);
 				r33.setBorder(r33.RIGHT | r33.BOTTOM);
 				r33.setBorderColor(new BaseColor(130, 130, 130));
@@ -1504,7 +1506,7 @@ public class Singlepororeport {
 				tablem.addCell(r2);
 
 				PdfPCell r3 = new PdfPCell(new Paragraph(Myapp.getRound(
-						Double.parseDouble("" + wf.get(j)), 2), tabledata));
+						Double.parseDouble("" + df.get(j)), 2), tabledata));
 				r3.setBorder(1);
 				r3.setBorder(r1.RIGHT);
 				r3.setBorderColor(new BaseColor(130, 130, 130));
@@ -1549,7 +1551,7 @@ public class Singlepororeport {
 				tablem.addCell(r2);
 
 				PdfPCell r3 = new PdfPCell(new Paragraph(Myapp.getRound(
-						Double.parseDouble("" + wf.get(j)), 2), tabledata));
+						Double.parseDouble("" + df.get(j)), 2), tabledata));
 				r3.setBorder(0);
 				 r3.setBorder(r3.RIGHT);
 				 r3.setBorderColor(new BaseColor(130, 130, 130));
@@ -1599,7 +1601,7 @@ public class Singlepororeport {
 				tablem.addCell(r22);
 
 				PdfPCell r33 = new PdfPCell(new Paragraph(Myapp.getRound(
-						Double.parseDouble("" + wf.get(j)), 2), tabledata));
+						Double.parseDouble("" + df.get(j)), 2), tabledata));
 				r33.setBorder(1);
 				r33.setBorder(r33.BOTTOM | r33.RIGHT);
 				r33.setBorderColor(new BaseColor(130, 130, 130));
@@ -1660,12 +1662,12 @@ public class Singlepororeport {
 																		// Report
 																		// Title
 																		// name
-				titleFont.setColor(getColor(6));
+				titleFont.setColor(getColor(14));
 
 				Font headertestname = FontFactory.getFont(
 						"./font/BebasNeue Regular.ttf", BaseFont.IDENTITY_H,
 						BaseFont.EMBEDDED, 15);
-				headertestname.setColor(getColor(6));
+				headertestname.setColor(getColor(14));
 
 				PdfPCell cell;
 				cell = new PdfPCell(new Phrase("ASTM D6767", headertestname));
