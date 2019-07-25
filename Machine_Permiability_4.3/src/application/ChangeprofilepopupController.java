@@ -19,6 +19,9 @@ import toast.MyDialoug;
 import toast.Toast;
 
 import com.google.cloud.firestore.DocumentReference;
+import com.google.firebase.tasks.OnCompleteListener;
+import com.google.firebase.tasks.OnFailureListener;
+import com.google.firebase.tasks.Task;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXSpinner;
 
@@ -121,7 +124,7 @@ public class ChangeprofilepopupController implements Initializable {
 				{
 					MyDialoug.closeDialoug();
 					Myapp.oldpass=""+EditeprofileController.txtnewpassdup.getText();
-					Toast.makeText(Main.mainstage, "Succefully updated", 1500, 500, 500);
+					Toast.makeText(Main.mainstage, "Succefully updated password", 1500, 500, 500);
 					
 				}
 			   else 
@@ -230,7 +233,7 @@ public class ChangeprofilepopupController implements Initializable {
 			  if(d.Insert(updatequry))
 				{
 					MyDialoug.closeDialoug();
-					Toast.makeText(Main.mainstage, "Succefully updated", 1500, 500, 500);		
+					Toast.makeText(Main.mainstage, "Succefully updated email id", 1500, 500, 500);		
 					
 				}
 			   else 

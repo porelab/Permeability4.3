@@ -21,6 +21,9 @@ import toast.Systemtime;
 import toast.Toast;
 
 import com.google.cloud.firestore.DocumentReference;
+import com.google.firebase.tasks.OnCompleteListener;
+import com.google.firebase.tasks.OnFailureListener;
+import com.google.firebase.tasks.Task;
 
 import firebase.FirebaseConnect;
 
@@ -192,7 +195,7 @@ btnlogout.setOnAction(new EventHandler<ActionEvent>() {
 							  	System.out.println(" Updated inds");
 							    Myapp.industryname=txtindname.getText();
 									
-								Toast.makeText(Main.mainstage, "Indisty name successfully updated", 1000, 100, 100);
+								Toast.makeText(Main.mainstage, "Industry name successfully updated", 1000, 100, 100);
 							}
 						   else 
 						   {
@@ -236,7 +239,7 @@ btnlogout.setOnAction(new EventHandler<ActionEvent>() {
 							{
 							  txtuname.setText(txtuname1.getText());
 							  Myapp.username=txtuname1.getText();
-								Toast.makeText(Main.mainstage, "Indisty name successfully updated", 1000, 100, 100);
+								Toast.makeText(Main.mainstage, "User name successfully updated", 1000, 100, 100);
 								}
 						   else 
 						   {

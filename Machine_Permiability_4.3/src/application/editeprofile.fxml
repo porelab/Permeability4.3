@@ -23,7 +23,7 @@
       </TextField>
       <Rectangle arcHeight="15.0" arcWidth="15.0" fill="#1f93ff00" height="65.0" layoutX="780.0" layoutY="472.0" stroke="WHITE" strokeType="INSIDE" styleClass="recanglearc" width="484.0" />
       <Rectangle arcHeight="15.0" arcWidth="15.0" fill="#1f93ff00" height="65.0" layoutX="778.0" layoutY="281.0" stroke="WHITE" strokeType="INSIDE" styleClass="recanglearc" width="484.0" />
-      <TextField fx:id="txtuname1" layoutX="793.0" layoutY="281.0" prefHeight="65.0" prefWidth="484.0" styleClass="textboxlogin">
+      <TextField fx:id="txtuname1" layoutX="793.0" layoutY="281.0" prefHeight="65.0" prefWidth="484.0" promptText="User name" styleClass="textboxlogin">
          <font>
             <Font size="23.0" />
          </font>
@@ -32,7 +32,7 @@
          </opaqueInsets>
       </TextField>
       <Rectangle arcHeight="15.0" arcWidth="15.0" fill="#1f93ff00" height="65.0" layoutX="778.0" layoutY="376.0" stroke="WHITE" strokeType="INSIDE" styleClass="recanglearc" width="484.0" />
-      <TextField fx:id="txtemail" layoutX="793.0" layoutY="376.0" prefHeight="65.0" prefWidth="484.0" styleClass="textboxlogin">
+      <TextField fx:id="txtemail" layoutX="793.0" layoutY="376.0" prefHeight="65.0" prefWidth="484.0" promptText="Email id" styleClass="textboxlogin">
          <font>
             <Font size="23.0" />
          </font>
@@ -55,7 +55,7 @@
             <Font name="Calibri" size="24.0" />
          </font>
       </Label>
-      <Label layoutX="528.0" layoutY="488.0" prefHeight="31.0" prefWidth="180.0" styleClass="font-montserrat-medium" text="Password" textFill="#ffffffcc">
+      <Label layoutX="527.0" layoutY="488.0" prefHeight="31.0" prefWidth="180.0" styleClass="font-montserrat-medium" text="Password" textFill="#ffffffcc">
          <font>
             <Font name="Calibri" size="24.0" />
          </font>
@@ -106,7 +106,7 @@
             <Font name="System Bold" size="20.0" />
          </font>
       </Label>
-      <TextField fx:id="txtnewpass" layoutX="792.0" layoutY="471.0" prefHeight="65.0" prefWidth="412.0" styleClass="textboxlogin">
+      <TextField fx:id="txtnewpass" layoutX="792.0" layoutY="471.0" prefHeight="65.0" prefWidth="412.0" promptText="New Password" styleClass="textboxlogin">
          <font>
             <Font size="23.0" />
          </font>

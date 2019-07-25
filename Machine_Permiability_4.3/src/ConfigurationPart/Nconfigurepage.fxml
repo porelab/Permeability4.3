@@ -493,6 +493,30 @@
                         </Label>
                         <Rectangle arcHeight="300.0" arcWidth="30.0" fill="#1f93ff00" height="28.0" layoutX="219.0" layoutY="215.0" stroke="#bfb9b9" strokeType="INSIDE" strokeWidth="2.0" style="-fx-fill: white;" width="46.0" />
                         <JFXToggleButton fx:id="tgbkeyboard" alignment="BASELINE_CENTER" layoutX="209.0" layoutY="201.0" text=" " toggleColor="#0e3c87" toggleLineColor="WHITE" unToggleLineColor="#99999903" />
+                        <Button fx:id="btndefaultsetting" layoutX="359.0" layoutY="293.0" mnemonicParsing="false" prefHeight="57.0" prefWidth="54.0" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="20.0" />
+                           </font>
+                           <graphic>
+                              <ImageView fx:id="imgback1" fitHeight="57.0" fitWidth="54.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../../porometer4.3/Machine_Porometer_4.3/src/ConfigurationPart/defult.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <styleClass>
+                              <String fx:value="btnCss" />
+                              <String fx:value="cmbtrasperant" />
+                           </styleClass>
+                        </Button>
+                        <Label layoutX="112.0" layoutY="311.0" styleClass="col-gray70" text="Apply Default Setting" textFill="WHITE">
+                           <font>
+                              <Font size="22.0" />
+                           </font>
+                        </Label>
                      </children>
                   </AnchorPane>
                </content>

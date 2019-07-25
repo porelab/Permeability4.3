@@ -28,6 +28,7 @@ import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
+import toast.MyDialoug;
 import toast.Openscreen;
 import toast.Toast;
 import Notification.Notification;
@@ -58,7 +59,7 @@ public class NConfigurePageController implements Initializable {
     private TextField ppg1,ppg2,pfm1,pfm2,ppr,pfc,txtthfirst,txtthmoderate,txtthcontinous;
 
     @FXML
-    private Button applypro;
+    private Button applypro,btndefaultsetting;
 
     @FXML
     private JFXToggleButton tgb215,tgb2111;
@@ -85,7 +86,7 @@ public class NConfigurePageController implements Initializable {
 	@FXML
     RadioButton pressregulator,flowcalibr,presscalibra,leaktest,troubleshot,boardcali,manual,autometed;
 
-   
+	MyDialoug mydia;
     
 	void addShortCut() {
 		
@@ -109,6 +110,19 @@ public class NConfigurePageController implements Initializable {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
+		
+	btndefaultsetting.setOnAction(new EventHandler<ActionEvent>() {
+			
+			@Override
+			public void handle(ActionEvent arg0) {
+			
+				mydia = new MyDialoug(Main.mainstage,
+						"/ConfigurationPart/defaultsettingpopup.fxml");
+				mydia.showDialoug();
+			
+			}
+		});
+		
 			addShortCut();
 	     setMainBtns();
 	     setulastdata();

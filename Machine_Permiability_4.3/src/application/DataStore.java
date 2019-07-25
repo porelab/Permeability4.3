@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
+import toast.Toast;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleDoubleProperty;
@@ -425,6 +426,24 @@ public class DataStore
 		bp =(ll.get(0).get(0));
 
 		return bp;
+	}
+	
+	public static void defaultsetting()
+	{
+		Database db=new Database();
+		
+		String conficupdate = "update configdata set  pg1='5',pg2='100',fm1='10000',fm2='200000',pr='130',chambertype='Manual',curvefittgb='on',fc='30',thfirst='1500',thmoderate='2500',thcontinous='3000'"; 
+		
+		String admindata = "update admin_screen1 set  pc='1',fc='1',va='0',vb='1',vc='0',vd='1',ve='1',vf='0',vg='0',vh='0'";
+		
+		if(db.Insert(conficupdate) && db.Insert(admindata))
+		{
+			 Toast.makeText(Main.mainstage, "Successfully Set Default Setting..", 1000, 200, 200);
+
+		}
+		else {
+//			System.out.println("Configration Data save d Eroorr.....");
+		}
 	}
 	
 	
