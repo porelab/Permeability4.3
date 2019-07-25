@@ -840,7 +840,7 @@ public class ReportController implements Initializable
 		         	    setDataPointPopup(lineChart);
 		     	     
 		         	
-		         	       Zoom zoom =new Zoom(lineChart,ap);    	
+		         	    //   Zoom zoom =new Zoom(lineChart,ap);    	
 		         	
 		           pagination1.getChildren().setAll(ap);
 
