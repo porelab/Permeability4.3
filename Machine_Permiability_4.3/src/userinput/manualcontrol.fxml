@@ -153,7 +153,7 @@
                   <Font name="System Bold" size="20.0" />
                </font>
             </JFXButton>
-            <ToggleButton fx:id="valveonoff" alignment="CENTER_RIGHT" layoutX="14.0" layoutY="74.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="132.0" style="-fx-background-color: #0e3c87;" text="STAR" textFill="WHITE">
+            <ToggleButton fx:id="valveonoff" alignment="CENTER_RIGHT" layoutX="14.0" layoutY="74.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="132.0" style="-fx-background-color: #2A91D8;" text="STAR" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="17.0" />
                </font>
@@ -161,12 +161,12 @@
                   <Insets left="10.0" />
                </opaqueInsets>
             </ToggleButton>
-            <Label fx:id="lblconnection" layoutX="189.0" layoutY="83.0" prefHeight="28.0" prefWidth="323.0" text="Hardware Connected" textFill="GREEN" AnchorPane.leftAnchor="189.0" AnchorPane.topAnchor="83.0">
+            <Label fx:id="lblconnection" layoutX="189.0" layoutY="83.0" prefHeight="28.0" prefWidth="323.0" text="Hardware Connected" textFill="#2a91d8" AnchorPane.leftAnchor="189.0" AnchorPane.topAnchor="83.0">
                <font>
                   <Font size="15.0" />
                </font>
             </Label>
-            <Circle fx:id="concircle" fill="#006b00" layoutX="168.0" layoutY="97.0" radius="14.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="0.0" AnchorPane.leftAnchor="154.0" AnchorPane.topAnchor="83.0" />
+            <Circle fx:id="concircle" fill="#2a91d8" layoutX="168.0" layoutY="97.0" radius="14.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="0.0" AnchorPane.leftAnchor="154.0" AnchorPane.topAnchor="83.0" />
             <Label fx:id="lblfm1max" alignment="CENTER" layoutX="601.0" layoutY="359.0" prefHeight="17.0" prefWidth="132.0" text="FM1" AnchorPane.leftAnchor="601.0">
                <styleClass>
                   <String fx:value="col-gray70" />
@@ -192,14 +192,10 @@
                </styleClass>
             </Label>
             <Label fx:id="lblrealeas" layoutX="1199.0" layoutY="325.0" text="Vent to atmosphere" visible="false" />
-            <ToggleButton fx:id="recordbtn" layoutX="1252.0" layoutY="470.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" style="-fx-background-radius: 30;" styleClass="toggle-buttonm" text="Record" textFill="WHITE">
+            <ToggleButton fx:id="recordbtn" layoutX="1188.0" layoutY="470.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="99.0" styleClass="toggle-buttonm" text="Record" textFill="WHITE" AnchorPane.leftAnchor="1245.0" AnchorPane.topAnchor="483.0">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font></ToggleButton>
-            <Label fx:id="lblrealeas1" layoutX="1186.0" layoutY="492.0" text="Live Data">
-               <font>
-                  <Font name="System Bold" size="12.0" />
-               </font></Label>
             <Label fx:id="lblfm1" alignment="CENTER" layoutX="648.0" layoutY="322.0" prefHeight="17.0" prefWidth="44.0" text="0">
                <font>
                   <Font size="11.0" />

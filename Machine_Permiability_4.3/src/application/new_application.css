@@ -322,14 +322,14 @@ pagination{
 }
 /*Toggle Butto */
 .toggle-buttonm {
- -fx-background-color: rgba(248,80,50,1);
+ -fx-background-color:  #2A91D8;
     -fx-text-fill: white ;
     
 }
 .toggle-buttonm:selected {
-    -fx-background-color:  rgba(210,255,82,1);
+    -fx-background-color:  #939598;
        
 }
 .toggle-buttonm:selected:focused {
-    -fx-background-color:rgba(145,232,66,1);
+    -fx-background-color:#939598;
 }

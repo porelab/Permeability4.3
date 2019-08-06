@@ -170,7 +170,7 @@ public class manualcontroller implements Initializable {
 		
 		valveonoff.setText("START");
 		recordbtn.setText("Record");
-		valveonoff.setStyle("-fx-background-color: #0e3c87;");
+		valveonoff.setStyle("-fx-background-color: #2A91D8;");
 		Image image2 = new Image(this.getClass()
 				.getResourceAsStream("/userinput/starticon.png"));
 		valveonoff.setGraphic(new ImageView(image2));
@@ -269,13 +269,13 @@ public class manualcontroller implements Initializable {
 		// valve4.selectedProperty().bind(DataStore.sv4);
 		if (DataStore.connect_hardware.get()) {
 			lblconnection.setText("Connected with  : " + DataStore.getCom());
-			lblconnection.setTextFill(Paint.valueOf("#0e3c87"));
-			concircle.setStyle("-fx-fill: #00ff00;");
+			lblconnection.setTextFill(Paint.valueOf("#939598"));
+			concircle.setStyle("-fx-fill: #939598;");
 			
 		} else {
 			lblconnection.setText("Not Connected");
-			lblconnection.setTextFill(Paint.valueOf("#0e3c87"));
-			concircle.setStyle("-fx-fill: #ff0000;");
+			lblconnection.setTextFill(Paint.valueOf("#2A91D8"));
+			concircle.setStyle("-fx-fill: #2A91D8;");
 			
 		}
 
@@ -516,7 +516,7 @@ public class manualcontroller implements Initializable {
 				if (valveonoff.isSelected()) {
 					
 					valveonoff.setText("STOP");
-					valveonoff.setStyle("-fx-background-color: green;");
+					valveonoff.setStyle("-fx-background-color: #939598;");
 					Image image = new Image(this.getClass()
 							.getResourceAsStream("/userinput/stopicon.png"));
 					
@@ -534,7 +534,7 @@ public class manualcontroller implements Initializable {
 
 				} else {
 					valveonoff.setText("START");
-					valveonoff.setStyle("-fx-background-color: #0e3c87;");
+					valveonoff.setStyle("-fx-background-color: #2A91D8;");
 					Image image = new Image(this.getClass()
 							.getResourceAsStream("/userinput/starticon.png"));
 					valveonoff.setGraphic(new ImageView(image));
