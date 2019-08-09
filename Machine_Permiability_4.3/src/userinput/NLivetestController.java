@@ -1904,8 +1904,6 @@ public class NLivetestController implements Initializable {
 
 	}
 
-	
-
 	void showDryPopup() {
 		isDryStart.set(false);
 		mydia = new MyDialoug(Main.mainstage, "/userinput/Drypopup.fxml");
