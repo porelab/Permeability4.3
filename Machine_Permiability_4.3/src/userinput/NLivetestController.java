@@ -42,6 +42,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.media.AudioClip;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Stop;
 import javafx.scene.shape.Rectangle;
@@ -73,6 +74,8 @@ import gnu.io.SerialPortEventListener;
 
 public class NLivetestController implements Initializable {
 
+	 AudioClip tones ;
+	
 	static SimpleBooleanProperty isRestart;
 
 	static File savefile;
@@ -284,7 +287,7 @@ public class NLivetestController implements Initializable {
 	}
 
 	void addShortCut() {
-		KeyCombination backevent = new KeyCodeCombination(KeyCode.B,
+		KeyCombination backevent = new KeyCodeCombination(KeyCode.E,
 				KeyCombination.CONTROL_ANY);
 
 		mainroot.setOnKeyPressed(new EventHandler<KeyEvent>() {
@@ -293,6 +296,7 @@ public class NLivetestController implements Initializable {
 
 				if (backevent.match(ke)) {
 					testabourd();
+					
 				}
 
 			}
@@ -336,6 +340,10 @@ public class NLivetestController implements Initializable {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
+		
+		tones = 
+	            new AudioClip(NLivetestController.class.getResource("stoptone.mp3").toString());
+
 		if (DataStore.getchambertype().equals("Autometed")) {
 
 			chamberonoff.setVisible(true);
@@ -716,9 +724,15 @@ public class NLivetestController implements Initializable {
 			int min = (s / 60) % 60;
 			int remsec = (s % 60);
 			
-			
-			
-			String durr = hour + ":" + min + ":" + remsec;
+			String durr ="";
+			if(hour!=0)
+			{
+			durr= hour + " hr:" + min + " min:" + remsec+" sec";
+			}
+			else
+			{
+				durr=min + " min:" + remsec+" sec";	
+			}
 
 			cs.newLine("duration", durr);
 			cs.newLine("durationsecond", s + "");
@@ -1883,9 +1897,11 @@ public class NLivetestController implements Initializable {
 	}
 
 	void showResultPopup() {
+		tones.play();
 		mydia = new MyDialoug(Main.mainstage, "/userinput/popupresult.fxml");
 
 		mydia.showDialoug();
+
 	}
 
 	

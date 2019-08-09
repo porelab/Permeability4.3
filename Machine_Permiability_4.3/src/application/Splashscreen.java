@@ -12,6 +12,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
@@ -72,6 +73,9 @@ public class Splashscreen implements Initializable {
 						scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 					
 						Main.mainstage=primaryStage;
+						Image image = new Image(this.getClass().getResourceAsStream(
+								"/application/shorticon.png"));
+						primaryStage.getIcons().add(image);
 						primaryStage.setTitle("NewYork-Instruments");
 						primaryStage.setFullScreen(false);
 						primaryStage.setScene(scene);
