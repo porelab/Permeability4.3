@@ -300,7 +300,6 @@ public class DataStore
 		return cm;
 	}
 
-	
 	public static boolean hardReset()
 	{
 		try{
@@ -326,7 +325,29 @@ public class DataStore
 					
 					//wrd.setLatching('1', '0', '0', '1', '0', '1', '1', '1');
 					wrd.addLast();
-					sendData(wrd,4000);
+					sendData(wrd,2000);
+					
+					
+					
+					writeFormat	wrd1 = new writeFormat();
+					wrd1.addChar('C');
+					wrd1.addChar('O');
+					wrd1.addChar('P');
+					wrd1.addChar('1');
+					wrd1.addChar(getPressureCrossover().charAt(0));
+					wrd1.addLast();
+					sendData(wrd1,3000);
+					
+					
+					writeFormat	wrd2 = new writeFormat();
+					wrd2.addChar('C');
+					wrd2.addChar('O');
+					wrd2.addChar('F');
+					wrd2.addChar('1');
+					wrd2.addChar(getFlowCrossover().charAt(0));
+					wrd2.addLast();
+					sendData(wrd2,4000);
+					
 					
 				}
 			}).start();
@@ -342,6 +363,9 @@ public class DataStore
 		
 		
 	}
+	
+	
+	
 	static void sendData(writeFormat w, int slp) {
 		System.out.println("Sending Data......");
 		w.showData();
@@ -444,6 +468,24 @@ public class DataStore
 		else {
 //			System.out.println("Configration Data save d Eroorr.....");
 		}
+	}
+	
+	public static String getPressureCrossover()
+	{
+		int bp;
+		Database db=new Database();		
+		List<List<String>> ll=db.getData("select pc from admin_screen1");
+		bp =Integer.parseInt((ll.get(0).get(0)));
+		return bp+"";
+	}
+	
+	public static String getFlowCrossover()
+	{
+		int bp;
+		Database db=new Database();		
+		List<List<String>> ll=db.getData("select fc from admin_screen1");
+		bp =Integer.parseInt((ll.get(0).get(0)));
+		return bp+"";
 	}
 	
 	

@@ -399,7 +399,6 @@ public class NLivetestController implements Initializable {
 		setGraph();
 		setGraph12();
 
-		setCrossover();
 
 		isDryStart.addListener(new ChangeListener<Boolean>() {
 
@@ -617,13 +616,7 @@ public class NLivetestController implements Initializable {
 		}
 	}
 
-	void setCrossover() {
-		writeFormat wrd = new writeFormat();
-		wrd.setCrossOver();
-		wrd.addLast();
-		sendData(wrd, 1000);
-		System.out.println("Set Cross-----------");
-	}
+
 
 	
 	String getDarcy(double ddp, double ddf) {
