@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import userinput.manualcontroller;
-import ConfigurationPart.SkadaController;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

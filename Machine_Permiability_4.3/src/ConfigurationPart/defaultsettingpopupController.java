@@ -37,12 +37,19 @@ public class defaultsettingpopupController implements Initializable {
 
 	Myfont f = new Myfont(22);
 	
-	
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
+		
+		
+		/*
+		Default Popup Screen. 
+		Default Setting Apply Button Event Yes or No.
+		Set Label cssclass.
+		*/
 	
+		/*Default Popup close*/
 		btncancel.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
@@ -60,6 +67,7 @@ public class defaultsettingpopupController implements Initializable {
 			}
 		});
 
+		/*Set Default Setting*/
 		btnyes.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
@@ -78,6 +86,8 @@ public class defaultsettingpopupController implements Initializable {
 
 	}
 
+	/*Set Label css class*/
+	
 	void setLabelFont() {
 		btncancel.setFont(f.getM_M());
 		btnyes.setFont(f.getM_M());

@@ -45,6 +45,9 @@ public class SignupController implements Initializable {
     @Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
+    
+    	/*Create Account with localDatabase*/    	
+    	
     	Image image;
     	
     	lbltime.textProperty().bind(Systemtime.currenttime);

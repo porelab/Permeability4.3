@@ -38,7 +38,6 @@ public class ChangeprofilepopupController implements Initializable {
 	    
 	    @FXML
 	    Label lblerror;
-
 	    
 	    @FXML
 	    private JFXSpinner loadicon;
@@ -52,7 +51,11 @@ public class ChangeprofilepopupController implements Initializable {
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
 		
-		
+		/* Set label Font
+		 * button event save and cancel
+		 * Update Password
+		 * Update online Email -id
+		 */
 		
 		//setLabelFont();
 		
