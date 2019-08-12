@@ -28,6 +28,8 @@ public class SkiptestpopupControll implements Initializable {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
+		
+		/*Skip Test Popup*/
 
 		btncancel.setOnAction(new EventHandler<ActionEvent>() {
 

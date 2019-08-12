@@ -24,51 +24,50 @@ import application.writeFormat;
 import extrafont.Myfont;
 
 public class NabourdpopupController implements Initializable {
-	
+
 	@FXML
 	AnchorPane root;
-	
+
 	@FXML
-	    private Button btnyes;
+	private Button btnyes;
 
-	    @FXML
-	    private Button btncancel;
-	    
-	    
-	    Myfont f=new Myfont(22);
-	    void addShortCut() {
-			
-					root.setOnKeyPressed(new EventHandler<KeyEvent>() {
-						@Override
-						public void handle(KeyEvent ke) {
-							
-							if(ke.getCode()==KeyCode.ENTER)
-							{
+	@FXML
+	private Button btncancel;
 
-								 Toast.makeText(Main.mainstage, "Test Aborting...", 1000, 200, 200);
-								 MyDialoug.closeDialoug();
-									Openscreen.open("/application/first.fxml");
-									
-									
-							}
-							
-						}
-					});
+	Myfont f = new Myfont(22);
 
-					
+	void addShortCut() {
+
+		root.setOnKeyPressed(new EventHandler<KeyEvent>() {
+			@Override
+			public void handle(KeyEvent ke) {
+
+				if (ke.getCode() == KeyCode.ENTER) {
+
+					Toast.makeText(Main.mainstage, "Test Aborting...", 1000,
+							200, 200);
+					MyDialoug.closeDialoug();
+					Openscreen.open("/application/first.fxml");
+
+				}
 
 			}
+		});
+
+	}
+
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
+
+		/*AboardTest Popup.*/
 		
 		
-		
-		//setLabelFont();
+		// setLabelFont();
 		addShortCut();
-		
+
 		btncancel.setOnAction(new EventHandler<ActionEvent>() {
-			
+
 			@Override
 			public void handle(ActionEvent arg0) {
 				// TODO Auto-generated method stub
@@ -76,90 +75,67 @@ public class NabourdpopupController implements Initializable {
 				System.out.println("canclelll NTNTN");
 			}
 		});
-		
+
 		btnyes.setOnAction(new EventHandler<ActionEvent>() {
-			
+
 			@Override
 			public void handle(ActionEvent arg0) {
 				// TODO Auto-generated method stub
-				
+
 				MyDialoug.closeDialoug();
 				Openscreen.open("/application/first.fxml");
-				
-				
-				/*
-				 * 	writeFormat	wrd=new writeFormat();
-			
-					wrd.addStop();
-					wrd.addChar('T');
-					wrd.addBlank(4);
-					wrd.addChkSm();
-					wrd.addLast();
-					sendData(wrd);
-					
-					try{
-						MyDialoug.closeDialoug();
-						
-						File f=new File("CsvFolder/"+"N0073"+"/"+"New folder");
-						File[] ff=f.listFiles();
-						if(ff.length>0)
-						{
 
-							Openscreen.open("/userinput/Nresult.fxml");
-						}
-						else
-						{
-							Openscreen.open("/application/Nfirst.fxml");
-							
-						}
-						
-					}
-					catch(Exception e)
-					{
-						e.printStackTrace();
-						Openscreen.open("/application/Nfirst.fxml");
-					}
-					
-					*/
-					
+				/*
+				 * writeFormat wrd=new writeFormat();
+				 * 
+				 * wrd.addStop(); wrd.addChar('T'); wrd.addBlank(4);
+				 * wrd.addChkSm(); wrd.addLast(); sendData(wrd);
+				 * 
+				 * try{ MyDialoug.closeDialoug();
+				 * 
+				 * File f=new File("CsvFolder/"+"N0073"+"/"+"New folder");
+				 * File[] ff=f.listFiles(); if(ff.length>0) {
+				 * 
+				 * Openscreen.open("/userinput/Nresult.fxml"); } else {
+				 * Openscreen.open("/application/Nfirst.fxml");
+				 * 
+				 * }
+				 * 
+				 * } catch(Exception e) { e.printStackTrace();
+				 * Openscreen.open("/application/Nfirst.fxml"); }
+				 */
+
 			}
 		});
-				
+
 	}
 
-	void setLabelFont()
-	{
+	void setLabelFont() {
 		btncancel.setFont(f.getM_M());
 		btnyes.setFont(f.getM_M());
 
 	}
-	void gotohome()
-	{
-		
 
-		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/application/first.fxml"));
+	void gotohome() {
+
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(
+				"/application/first.fxml"));
 		try {
-		Pane cmdPane = (Pane) fxmlLoader.load();
- 		
-		MainancController.mainanc1.getChildren().clear();
-		MainancController.mainanc1.getChildren().add(cmdPane);
-		} 
-		catch (Exception e)
-		{
-		 	e.printStackTrace();
+			Pane cmdPane = (Pane) fxmlLoader.load();
+
+			MainancController.mainanc1.getChildren().clear();
+			MainancController.mainanc1.getChildren().add(cmdPane);
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
-	public void sendData(writeFormat w)
-	{
+
+	public void sendData(writeFormat w) {
 		System.out.println("Sending Data......");
 		w.showData();
-		Thread t=new Thread(new SerialWriter(DataStore.out, w));
+		Thread t = new Thread(new SerialWriter(DataStore.out, w));
 		t.start();
-	
+
 	}
-	
-	
-	
-	
-	
+
 }

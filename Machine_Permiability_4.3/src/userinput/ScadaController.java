@@ -60,6 +60,7 @@ public class ScadaController implements Initializable{
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		
+		/*Scada to operate system*/
 		
 		 Image image1 = new Image(this.getClass().getResourceAsStream("/userinput/btnimg.png"));
 		 setpr.setGraphic(new ImageView(image1));

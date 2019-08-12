@@ -33,6 +33,8 @@ public class RetestpopupControll implements Initializable {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
+		
+		/*Retest Popup*/
 	
 		btncancel.setOnAction(new EventHandler<ActionEvent>() {
 
