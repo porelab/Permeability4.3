@@ -28,6 +28,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import firebase.FirebaseConnect;
 
+//save some data while page change // data flow 
 public class Myapp {
 
 

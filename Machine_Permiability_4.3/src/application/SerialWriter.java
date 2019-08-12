@@ -1,7 +1,7 @@
 package application;
 
 import java.io.OutputStream;
-
+// for sending data from pc to mcu
 public class SerialWriter implements Runnable {
 	OutputStream out;
 	writeFormat wrt;
