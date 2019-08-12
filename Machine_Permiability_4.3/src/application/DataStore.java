@@ -22,6 +22,7 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.stage.Stage;
 
+//this class is for data flow and data storing while page changes
 public class DataStore 
 {
 	

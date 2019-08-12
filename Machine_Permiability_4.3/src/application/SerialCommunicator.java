@@ -17,6 +17,7 @@ import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+//for communication of PC and MCU
 public class SerialCommunicator {
 
 	int ind = 0;

@@ -13,6 +13,7 @@ import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableMap;
 
+//this class is for accessing local database 
 public class Database {
 	
 	 String sDriverName = "org.sqlite.JDBC";

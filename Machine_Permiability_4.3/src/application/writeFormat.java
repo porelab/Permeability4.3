@@ -3,6 +3,7 @@ package application;
 import java.util.ArrayList;
 import java.util.List;
 
+//for package creation for sending data from PC to MCU
 public class writeFormat {
 
 
