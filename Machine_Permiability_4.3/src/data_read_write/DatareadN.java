@@ -15,6 +15,7 @@ import org.apache.commons.math3.util.MathUtils;
 
 import application.Myapp;
 
+//for read csv file
 public class DatareadN {
 
 	public Map<String, Object> data;

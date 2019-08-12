@@ -7,6 +7,8 @@ import java.util.Map;
 
 import application.Myapp;
 
+// calculate data and curve smoothing
+
 public class CalculatePorometerData {
 
 	public List<String> getDiameter(List<String> wetpressure, String surt) {
