@@ -6,6 +6,7 @@ import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
 import com.google.firebase.auth.FirebaseCredentials;
 import com.google.firebase.database.FirebaseDatabase;
+//for connection with online cloud..
 
 public class FirebaseConnect {
 	public static FirebaseDatabase db1;
