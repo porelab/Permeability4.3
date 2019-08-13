@@ -9,6 +9,8 @@ import javafx.animation.Timeline;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.util.Duration;
 
+// for printing date in all page
+
 public class Systemtime {
 
 	public static SimpleStringProperty currenttime=new SimpleStringProperty();
