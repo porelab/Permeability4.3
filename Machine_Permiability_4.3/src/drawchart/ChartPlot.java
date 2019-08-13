@@ -37,6 +37,7 @@ import data_read_write.DatareadN;
 import de.tesis.dynaware.javafx.fancychart.zoom.Zoom;
 import drawchart.SmoothedChart.ChartType;
 
+//create chart for report section and on result popup.
 public class ChartPlot {
 
 	List<String> grpclr;
