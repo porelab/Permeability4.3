@@ -14,6 +14,7 @@ public class Orders {
 
 	Map<String, OrderData> olist;
 	
+	/*Get order status*/
 
 	public Map<String, OrderData> getOrders(String status) {
 		try {

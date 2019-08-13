@@ -12,7 +12,7 @@ import firebase.FirebaseConnect;
 
 public class Users {
 
-	
+	/*Get All User*/
 	
 	 public Map<String,UserData> getUsers() {
 		 

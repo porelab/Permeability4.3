@@ -58,7 +58,7 @@ public class First_userController implements Initializable {
 		});
 	
 		setTimer();
-		
+		/*Search register user*/
 		txtnameserche.textProperty().addListener(((observable, oldValue, newValue) -> {
 			//   search((String) oldValue, (String) newValue);
 		
@@ -121,7 +121,7 @@ public class First_userController implements Initializable {
 		timer.schedule(task, 2000);
 	}
 
-	
+	/*Selected order basic information set in table*/
 	void setUsersData(UserData u)
 	{
 		

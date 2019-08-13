@@ -35,6 +35,7 @@ public class First_mainController implements Initializable {
 		setBtnClicks();
 	}
 
+	/*set image in button*/
 	void setMainBtns()
 	{
 		
@@ -63,6 +64,7 @@ public class First_mainController implements Initializable {
       
 	}
 
+	/*All button click event*/
 	void setBtnClicks()
 	{
 		btnmainback.setOnAction(new EventHandler<ActionEvent>() {

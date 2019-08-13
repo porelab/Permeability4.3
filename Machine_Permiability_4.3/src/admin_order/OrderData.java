@@ -11,6 +11,8 @@ import com.google.cloud.firestore.WriteResult;
 
 import firebase.FirebaseConnect;
 
+/*Get all order data in Cloud*/
+
 public class OrderData {
 DocumentSnapshot d;
 public Map<String,Object> data,sampledata;

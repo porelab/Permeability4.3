@@ -91,6 +91,7 @@ public class First_orderController implements Initializable {
 			}
 		});
 		
+		/*Search order*/
 		txtnameserche.textProperty().addListener(((observable, oldValue, newValue) -> {
 			//   search((String) oldValue, (String) newValue);
 		
@@ -115,6 +116,7 @@ public class First_orderController implements Initializable {
 	    }
 	 
 	 
+	 /*Selected order Order information set in table*/
 	void addItemToTable(String no,String test,String sample,String material,String factore)
 	{
 		HBox h = new HBox(0);
@@ -154,6 +156,7 @@ public class First_orderController implements Initializable {
 
 	}
 
+	/*Get All completed , pending and running Order*/
 	void getOrders(String sta)
 	{
 		Platform.runLater(new Runnable() {
@@ -238,6 +241,7 @@ void setTimer() {
 		timer.schedule(task, 2000);
 	}
 
+/*Selected order set basic information*/
 void setUsersData(OrderData o)
 {
 	v.getChildren().clear();
@@ -281,8 +285,10 @@ void setUsersData(OrderData o)
 	}
 }
 	
+/*All Button event in status change*/
 	void setBtnclick()
 	{
+		/*Status change in order completed*/
 		btnscom.setOnAction(new EventHandler<ActionEvent>() {
 			
 			@Override
@@ -327,7 +333,7 @@ void setUsersData(OrderData o)
 				
 			
 		});
-
+		/*Status change in order running */
 		btnsrun.setOnAction(new EventHandler<ActionEvent>() {
 			
 			@Override
@@ -369,7 +375,7 @@ void setUsersData(OrderData o)
 						
 			}
 		});
-
+		/*Status change in order Received*/
 		btnsrec.setOnAction(new EventHandler<ActionEvent>() {
 			
 			@Override

@@ -13,6 +13,8 @@ import firebase.FirebaseConnect;
 
 public class UserData {
 	
+	/*Get All User Data*/
+	
 	DocumentSnapshot d;
 	Map<String,Object> alldata=null,orderdata=null,files=null;
 
