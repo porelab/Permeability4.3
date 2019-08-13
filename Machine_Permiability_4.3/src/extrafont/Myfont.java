@@ -1,6 +1,9 @@
 package extrafont;
 
+//for setting software fonts
 
+import javafx.scene.Node;
+import javafx.scene.control.TextField;
 import javafx.scene.text.Font;
 
 public class Myfont{
