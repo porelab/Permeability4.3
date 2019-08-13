@@ -1,5 +1,7 @@
 package toast;
 
+import com.jfoenix.controls.JFXSpinner;
+
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
@@ -13,7 +15,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
-import com.jfoenix.controls.JFXSpinner;
+// for customized notification
 
 public class Customtoast 
 {
