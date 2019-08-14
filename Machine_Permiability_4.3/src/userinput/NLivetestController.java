@@ -1137,7 +1137,7 @@ public class NLivetestController implements Initializable {
 
 		return data;
 	}
-
+ 
 	//set Step size of pressure
 	List<Integer> getStepSize() {
 		int fl = Integer.parseInt(Myapp.accstep);
