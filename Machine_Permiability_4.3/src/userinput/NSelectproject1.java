@@ -293,7 +293,6 @@ public class NSelectproject1 implements Initializable {
 		setTestConfiguration2();
 
 		LoadProject();
-		
 
 		cmboproject.valueProperty().addListener(new ChangeListener<String>() {
 
@@ -338,7 +337,7 @@ public class NSelectproject1 implements Initializable {
 			}
 		});
 
-		/*Test Setup Complete After Start Test*/
+		/* Test Setup Complete After Start Test */
 		start.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
@@ -380,7 +379,7 @@ public class NSelectproject1 implements Initializable {
 
 	}
 
-	/*set image in button*/
+	/* set image in button */
 	void setMainbtns() {
 		image = new Image(this.getClass().getResourceAsStream(
 				"/userinput/tfact-6.png"));
@@ -419,8 +418,7 @@ public class NSelectproject1 implements Initializable {
 		imgheader.setImage(image);
 	}
 
-	void setButtonclickevent()
-	{
+	void setButtonclickevent() {
 		btnaddfluid.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
@@ -462,7 +460,7 @@ public class NSelectproject1 implements Initializable {
 			}
 		});
 	}
-	
+
 	void setAllThings() {
 
 		slaccuracy.setValue(0f);
@@ -519,7 +517,7 @@ public class NSelectproject1 implements Initializable {
 				"5", "6", "7", "8", "9", "10"));
 		cmbtestt.getSelectionModel().select(0);
 
-		/*Fluid Selection and Add new fluid Option*/
+		/* Fluid Selection and Add new fluid Option */
 		cmbselectflui.valueProperty().addListener(new ChangeListener<String>() {
 
 			@Override
@@ -561,8 +559,8 @@ public class NSelectproject1 implements Initializable {
 		});
 
 		getFluiddata();
-		
-		/*select industry with change industry type*/
+
+		/* select industry with change industry type */
 		cmbselectind.valueProperty().addListener(new ChangeListener<String>() {
 
 			@Override
@@ -665,7 +663,7 @@ public class NSelectproject1 implements Initializable {
 		});
 	}
 
-	/*Get Fluid in Databse*/
+	/* Get Fluid in Databse */
 	void getFluiddata() {
 		Database d = new Database();
 		List<List<String>> info = d.getData("select * from fluiddata");
@@ -684,7 +682,7 @@ public class NSelectproject1 implements Initializable {
 
 	}
 
-	/*Add new Fluid ame and value*/
+	/* Add new Fluid ame and value */
 	void setNewfluiddata() {
 
 		Database d1 = new Database();
@@ -703,7 +701,7 @@ public class NSelectproject1 implements Initializable {
 
 	}
 
-	/*Fluid delete*/
+	/* Fluid delete */
 	void Deletefluid() {
 		String ss = cmbselectflui.getSelectionModel().getSelectedItem();
 		String del = "delete from fluiddata where name='"
@@ -715,7 +713,8 @@ public class NSelectproject1 implements Initializable {
 
 		}
 	}
-/*set css class in Label*/
+
+	/* set css class in Label */
 	void setLabels() {
 		lblproject.setFont(f.getM_M());
 		lblsampleid.setFont(f.getM_M());
@@ -758,7 +757,7 @@ public class NSelectproject1 implements Initializable {
 
 			@Override
 			public void handle(ActionEvent arg0) {
-				/*Main Test Setup Next Button*/
+				/* Main Test Setup Next Button */
 				nextClick();
 
 			}
@@ -769,14 +768,14 @@ public class NSelectproject1 implements Initializable {
 			@Override
 			public void handle(ActionEvent arg0) {
 				// TODO Auto-generated method stub
-				/*Main Test Setup Back Button*/
+				/* Main Test Setup Back Button */
 				backClick();
 			}
 		});
 
 	}
 
-	/*Main Test Setup Next Button*/
+	/* Main Test Setup Next Button */
 	void nextClick() {
 		boolean isvalid = true;
 		// TODO Auto-generated method stub
@@ -1030,7 +1029,8 @@ public class NSelectproject1 implements Initializable {
 		}
 
 	}
-/*tortuosity set*/
+
+		/* tortuosity set */
 	void setTfactor() {
 		btnplus.setOnAction(new EventHandler<ActionEvent>() {
 
@@ -1189,7 +1189,7 @@ public class NSelectproject1 implements Initializable {
 
 	}
 
-	/*Tortuosity Value Set*/
+	/* Tortuosity Value Set */
 	void setDefaultValue() {
 		try {
 
@@ -1214,7 +1214,7 @@ public class NSelectproject1 implements Initializable {
 		}
 	}
 
-	/*Sample Plate Selection*/
+	/* Sample Plate Selection */
 	void setTestConfiguration1() {
 
 		t1group.selectedToggleProperty().addListener(
@@ -1265,7 +1265,7 @@ public class NSelectproject1 implements Initializable {
 
 	}
 
-	/*Material Type Selection*/
+	/* Material Type Selection */
 	void setMaterialType() {
 
 		tgb5 = new ToggleGroup();
@@ -1310,7 +1310,7 @@ public class NSelectproject1 implements Initializable {
 
 	}
 
-	/*Select Test Type.*/
+	/* Select Test Type. */
 	void setTestSequence() {
 
 		tgb6 = new ToggleGroup();
@@ -1351,7 +1351,7 @@ public class NSelectproject1 implements Initializable {
 
 	}
 
-	/*Data Stability Selection*/
+	/* Data Stability Selection */
 	void setDataStability() {
 
 		tgb7 = new ToggleGroup();
@@ -1389,7 +1389,7 @@ public class NSelectproject1 implements Initializable {
 
 	}
 
-	/*Load All Saved Project List*/
+	/* Load All Saved Project List */
 	void LoadProject() {
 
 		Database d = new Database();
@@ -1410,7 +1410,7 @@ public class NSelectproject1 implements Initializable {
 
 	}
 
-	/*Selected Project Id to Load Test Setup Data in database*/
+	/* Selected Project Id to Load Test Setup Data in database */
 	void LoadProjectData(String projectname) {
 		Database d = new Database();
 		isproject = true;
@@ -1604,7 +1604,7 @@ public class NSelectproject1 implements Initializable {
 
 	}
 
-	/*Check Selected project or Not*/
+	/* Check Selected project or Not */
 	void startClick() {
 
 		System.out.println("is : " + isproject);
@@ -1622,7 +1622,7 @@ public class NSelectproject1 implements Initializable {
 
 	}
 
-	/*Selected Project in update data*/
+	/* Selected Project in update data */
 	void setupdatedProjectData() {
 		Database d1 = new Database();
 
@@ -1650,7 +1650,7 @@ public class NSelectproject1 implements Initializable {
 		}
 	}
 
-	/*Load Last test Data*/
+	/* Load Last test Data */
 	void lastproject() {
 		Database d1 = new Database();
 		try {
@@ -1724,7 +1724,7 @@ public class NSelectproject1 implements Initializable {
 
 	}
 
-	/*Delete Selected Project*/
+	/* Delete Selected Project */
 	void setDeleteProject() {
 
 		Database d = new Database();
@@ -1743,7 +1743,7 @@ public class NSelectproject1 implements Initializable {
 		}
 	}
 
-	/*Keyboard Mode Checking*/
+	/* Keyboard Mode Checking */
 	void setkeyboardmode() {
 
 		Database db = new Database();
@@ -1810,7 +1810,7 @@ public class NSelectproject1 implements Initializable {
 
 	}
 
-	/*Open Keyboard Scren stage.*/
+	/* Open Keyboard Scren stage. */
 	public static void setVitual(TextField tf, TextField nextTf, String lbl,
 			String nextlbl) {
 		try {
@@ -1835,7 +1835,7 @@ public class NSelectproject1 implements Initializable {
 
 	}
 
-	/*Virtual Keyboard Textbox Click Event.*/
+	/* Virtual Keyboard Textbox Click Event. */
 	void setClickkeyboard() {
 		txtsampleid.setOnMouseClicked(new EventHandler<Event>() {
 

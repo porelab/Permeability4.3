@@ -122,7 +122,7 @@ public class Multiplepororeport {
 		clr.add("#00FF00");
 		clr.add("#FF00FF");
 	}
-
+	/* Main Function Create Report */
 	public void Report(String path, List<DatareadN> d, String notes, String comname,
 			List<String> graphs, Boolean btabledata) {
 		allfiles = d;
@@ -183,7 +183,7 @@ public class Multiplepororeport {
 		}
 
 	}
-
+	/* RGB Color Code */
 	BaseColor getColor(int i) {
 		List<BaseColor> clrs = new ArrayList<>();
 		clrs.add(new BaseColor(219, 186, 79));
@@ -205,7 +205,7 @@ public class Multiplepororeport {
 		return clrs.get(i);
 
 	}
-
+	/* Cover Page */
 	void coverpage() {
 
 		try {
@@ -395,7 +395,7 @@ public class Multiplepororeport {
 		}
 
 	}
-
+	/* current Date */
 	String getCurrentData() {
 		String[] suffixes =
 		// 0 1 2 3 4 5 6 7 8 9
@@ -420,7 +420,7 @@ public class Multiplepororeport {
 		return dayStr + dateFormat.format(cal.getTime());
 
 	}
-
+	/* Set Result Data in Table */
 	void resulttable(List<DatareadN> d) {
 
 		BaseColor backcellcol = new BaseColor(230, 230, 230);
@@ -1138,7 +1138,7 @@ public class Multiplepororeport {
 		}
 
 	}
-
+	/* Display Graph */
 	void resultgraph(File f) {
 		try {
 
@@ -1378,7 +1378,7 @@ public class Multiplepororeport {
 		// document.newPage();
 
 	}
-
+	/* Row Data Table Header in Title name and unite */
 	void addTableHeader(PdfPTable tablem) {
 
 		Font unitlab = FontFactory.getFont(FontFactory.HELVETICA, 8, Font.BOLD,
@@ -1467,7 +1467,7 @@ public class Multiplepororeport {
 		
 		tablem.addCell(ucell9);
 	}
-
+	/* Set Test Data in Table */
 	void rowData(List<DatareadN> d) {
 
 		for (int k = 0; k < d.size(); k++) {
@@ -1776,7 +1776,7 @@ public class Multiplepororeport {
 
 		return sqmean;
 	}
-
+	/* Header and Footer */
 	class HeaderFooterPageEvent extends PdfPageEventHelper {
 		Font titleFont = FontFactory.getFont(FontFactory.HELVETICA, 15,
 				Font.BOLD, new CMYKColor(92, 17, 0, 15));
