@@ -1,4 +1,3 @@
-
 package userinput;
 
 import java.io.File;
@@ -74,8 +73,8 @@ import gnu.io.SerialPortEventListener;
 
 public class NLivetestController implements Initializable {
 
-	 AudioClip tones ;
-	
+	AudioClip tones;
+
 	static SimpleBooleanProperty isRestart;
 
 	static File savefile;
@@ -100,7 +99,6 @@ public class NLivetestController implements Initializable {
 	// for start popup
 	static SimpleBooleanProperty stprop = new SimpleBooleanProperty(false);
 	static SimpleBooleanProperty stpropcan = new SimpleBooleanProperty(false);
-
 
 	static SimpleBooleanProperty isDryStart;
 
@@ -197,58 +195,8 @@ public class NLivetestController implements Initializable {
 	@FXML
 	Label lblresult, lbltesttype;
 
-	void setThresoldval() {
-		System.out.println("TH type : "+Myapp.thresold);
-		if (Myapp.thresold.equals("First Bubble")) {
-
-			try{
-				System.out.println("first data : "+DataStore.getthfirstbp());
-				thval=Integer.parseInt(DataStore.getthfirstbp());
-			}
-			catch(Exception e)
-			{
-
-				thval = 1000;	
-			}
-
-		} else if (Myapp.thresold.equals("Moderate")) {
-		
-			try{
-				thval=Integer.parseInt(DataStore.getthmoderat());
-			}
-			catch(Exception e)
-			{
-				thval = 3000;
-				
-			}
-			
-		} else if (Myapp.thresold.equals("Continous")) {
-		
-			
-			try{
-				thval=Integer.parseInt(DataStore.getthcontinous());
-			}
-			catch(Exception e)
-			{
-				thval = 5000;
-				
-			}
-
-		
-		}
-
-	}
-
-
-	void setTestSeq() {
-
-		// System.out.println("--------------->" + Myapp.testsequence);
-		lbltesttype.setText("Permiability Test");
-
-		
-
-	}
-
+	// stop test function it is used when test is completed or in while
+	// running...
 	void stopTest() {
 
 		starttest.setDisable(false);
@@ -274,6 +222,7 @@ public class NLivetestController implements Initializable {
 		flowlist.clear();
 	}
 
+	// setting plate value ..
 	void setPlateval() {
 		if (Myapp.splate.equals("Small")) {
 			calculationdia = 1;
@@ -286,6 +235,7 @@ public class NLivetestController implements Initializable {
 		}
 	}
 
+	// set all shortcut
 	void addShortCut() {
 		KeyCombination backevent = new KeyCodeCombination(KeyCode.E,
 				KeyCombination.CONTROL_ANY);
@@ -296,7 +246,7 @@ public class NLivetestController implements Initializable {
 
 				if (backevent.match(ke)) {
 					testabourd();
-					
+
 				}
 
 			}
@@ -304,6 +254,8 @@ public class NLivetestController implements Initializable {
 
 	}
 
+	// set hardware connection status.. and if it connected then create
+	// communication bridge with it.
 	void connectHardware() {
 		Myapp.testtrial = "4";
 		in = new SerialReader(DataStore.in);
@@ -337,12 +289,13 @@ public class NLivetestController implements Initializable {
 
 	}
 
+	// setting all functionality and sequence.
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
-		
-		tones = 
-	            new AudioClip(NLivetestController.class.getResource("stoptone.mp3").toString());
+
+		tones = new AudioClip(NLivetestController.class.getResource(
+				"stoptone.mp3").toString());
 
 		if (DataStore.getchambertype().equals("Autometed")) {
 
@@ -358,7 +311,7 @@ public class NLivetestController implements Initializable {
 
 				if (!chamberonoff.isSelected()) {
 					writeFormat wrd = new writeFormat();
-				
+
 					wrd.addChar('A');
 					wrd.addChar('C');
 					wrd.addChar('0');
@@ -370,7 +323,7 @@ public class NLivetestController implements Initializable {
 				} else {
 
 					writeFormat wrd = new writeFormat();
-				
+
 					wrd.addChar('A');
 					wrd.addChar('C');
 					wrd.addChar('1');
@@ -396,17 +349,14 @@ public class NLivetestController implements Initializable {
 		isDryStart = new SimpleBooleanProperty(false);
 		lblfilename.setText(Myapp.sampleid);
 
-		setThresoldval();
 		setPlateval();
-
-		setTestSeq();
+		lbltesttype.setText("Permiability Test");
 
 		connectHardware();
 		setButtons();
 		setGauges();
 		setGraph();
 		setGraph12();
-
 
 		isDryStart.addListener(new ChangeListener<Boolean>() {
 
@@ -420,7 +370,6 @@ public class NLivetestController implements Initializable {
 
 			}
 		});
-	
 
 		autotest.setOnAction(new EventHandler<ActionEvent>() {
 
@@ -455,7 +404,6 @@ public class NLivetestController implements Initializable {
 			}
 		});
 
-	
 		stoptest.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
@@ -514,6 +462,8 @@ public class NLivetestController implements Initializable {
 
 	}
 
+	
+	//restart test
 	void restartTest() {
 		Platform.runLater(new Runnable() {
 
@@ -535,58 +485,12 @@ public class NLivetestController implements Initializable {
 		});
 	}
 
+	
+	
 
-
-	void calculateDry() {
-
-		flowserires.getData().clear();
-		pressureserires.getData().clear();
-		dryplist.clear();
-		dryflist.clear();
-		darcylist.clear();
-		skip = 1;
-		darcyavg = 0;
-
-		yAxis.setLabel("Flow");
-
-		xAxis.setLabel("Pressure");
-
-		series2.getData().clear();
-
-		dryplist.add(0, "0.0");
-		dryflist.add(0, "0.0");
-
-		dryplist.add(wetplist.get(wetplist.size() - 1));
-		dryflist.add(wetflist.get(wetflist.size() - 1));
-
-		ind = 0;
-
-		CalculatePorometerData c = new CalculatePorometerData();
-
-		List<String> dryftemp = c
-				.getNewDryFlow(dryplist, dryflist, wetplist, 1);
-
-		dryplist.clear();
-		dryflist.clear();
-
-		dryplist.add(0, "0.0");
-		dryflist.add(0, "0.0");
-
-		dryplist.addAll(wetplist);
-		dryflist.addAll(dryftemp);
-
-		for (int i = 0; i < dryplist.size(); i++) {
-			series2.getData().add(
-					new XYChart.Data(Double.parseDouble(dryplist.get(i)),
-							Double.parseDouble(dryflist.get(i))));
-		}
-		darcyavg = 0;
-		darcylist.add("0");
-
-	}
-
+	// set dry test click event
 	void dryClick(int delay) {
-		t2test=System.currentTimeMillis();
+		t2test = System.currentTimeMillis();
 		lblcurranttest.setText("Flow vs Pressure");
 		stoptest.setDisable(false);
 		status.setText("Dry-test running..");
@@ -624,9 +528,8 @@ public class NLivetestController implements Initializable {
 		}
 	}
 
-
-
 	
+	//find darcy value
 	String getDarcy(double ddp, double ddf) {
 
 		double k = 0;
@@ -646,6 +549,7 @@ public class NLivetestController implements Initializable {
 		return "" + k;
 	}
 
+	// get darcy value avg
 	double getDarcyAvg() {
 		double ans;
 
@@ -656,17 +560,23 @@ public class NLivetestController implements Initializable {
 		return ans;
 	}
 
+	
+	//get differiencial time
 	double getTime() {
 		double an = (double) ((System.currentTimeMillis() - tempt1) / 1000);
 		return an;
 	}
 
+	
+	// set font style
 	void setLabelFont() {
 		lbltestdurationm.setFont(f.getM_M());
 		lbltestnom.setFont(f.getM_M());
 
 	}
 
+	
+	// create test csv file
 	void createCsvTable() {
 
 		try {
@@ -699,11 +609,8 @@ public class NLivetestController implements Initializable {
 			cs.wtirefile(f.getPath() + "/" + Myapp.sampleid + "_" + date1 + "_"
 					+ findInt(ff) + ".csv");
 
+			savefile = new File(cs.filename);
 
-			savefile=new File(cs.filename);
-			
-			
-			
 			cs.firstLine("permeability");
 			cs.newLine("testname", "permeability");
 			cs.newLine("sample", Myapp.sampleid);
@@ -723,15 +630,12 @@ public class NLivetestController implements Initializable {
 			int hour = (s / 3600);
 			int min = (s / 60) % 60;
 			int remsec = (s % 60);
-			
-			String durr ="";
-			if(hour!=0)
-			{
-			durr= hour + " hr:" + min + " min:" + remsec+" sec";
-			}
-			else
-			{
-				durr=min + " min:" + remsec+" sec";	
+
+			String durr = "";
+			if (hour != 0) {
+				durr = hour + " hr:" + min + " min:" + remsec + " sec";
+			} else {
+				durr = min + " min:" + remsec + " sec";
 			}
 
 			cs.newLine("duration", durr);
@@ -746,10 +650,11 @@ public class NLivetestController implements Initializable {
 			cs.newLine("splate", Myapp.splate);
 
 			double dar = getDarcyAvg();
-			cs.newLine("darcy avg", "" + Myapp.getRound(dar,2));
-			
-			//cs.newLine("dflow", c.getNewDryFlow(dryplist, dryflist,dryplist, 3));			
-			
+			cs.newLine("darcy avg", "" + Myapp.getRound(dar, 2));
+
+			// cs.newLine("dflow", c.getNewDryFlow(dryplist, dryflist,dryplist,
+			// 3));
+
 			if (DataStore.isCurveFit) {
 				if (dryflist.size() > 20) {
 					c.getWetFlowSmooth(dryplist, dryflist, 1000, 15);
@@ -757,16 +662,13 @@ public class NLivetestController implements Initializable {
 					c.getWetFlowSmooth(dryplist, dryflist, 1000, 7);
 				}
 			}
-			
-			
-			cs.newLine("dflow", dryflist);			
-			
+
+			cs.newLine("dflow", dryflist);
+
 			cs.newLine("dpressure", dryplist);
 			cs.newLine("dfloworiginal", dryflist);
 			cs.newLine("darcy", darcylist);
 
-
-			
 			cs.newLine("pg1value", DataStore.getPg1());
 			cs.newLine("pg2value", DataStore.getPg2());
 			cs.newLine("pg1offset", Myapp.pg1offset.get() + "");
@@ -781,10 +683,9 @@ public class NLivetestController implements Initializable {
 			double frazierflow = c.getFlowPointOn(dryplist, dryflist, 500, 18,
 					0.0182);
 			String frazier = getDarcyFrazier(0.0182, frazierflow);
-			cs.newLine("gurley",""+ Myapp.getRound(gurley,2));
-			cs.newLine("frazier",""+ Myapp.getRound( frazier,2));
+			cs.newLine("gurley", "" + Myapp.getRound(gurley, 2));
+			cs.newLine("frazier", "" + Myapp.getRound(frazier, 2));
 
-		
 			p1list.clear();
 			p2list.clear();
 			daltaplist.clear();
@@ -800,7 +701,7 @@ public class NLivetestController implements Initializable {
 
 			cs.closefile();
 			Platform.runLater(new Runnable() {
-				
+
 				@Override
 				public void run() {
 					// TODO Auto-generated method stub
@@ -817,6 +718,9 @@ public class NLivetestController implements Initializable {
 		}
 
 	}
+
+	
+	//calculate darcy gurley value
 	String getDarcyGurley(double ddp, double ddf) {
 
 		double k = 0;
@@ -832,6 +736,8 @@ public class NLivetestController implements Initializable {
 		return "" + k;
 	}
 
+
+	//calculate darcy frazier value
 	String getDarcyFrazier(double ddp, double ddf) {
 
 		double k = 0;
@@ -845,6 +751,8 @@ public class NLivetestController implements Initializable {
 		}
 		return "" + k;
 	}
+
+	// find last index of saving file 
 	int findInt(String[] s) {
 		try {
 
@@ -881,39 +789,8 @@ public class NLivetestController implements Initializable {
 		}
 	}
 
-	int findInt1(String[] s) {
-		try {
-			Date d1 = new Date();
-			SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("ddMMyy");
-			String date1 = DATE_FORMAT.format(d1);
-
-			List<String> s1 = Arrays.asList(s);
-			ArrayList<String> ss = new ArrayList<String>(s1);
-
-			ArrayList<Integer> ll = new ArrayList<Integer>();
-			for (int i = 0; i < ss.size(); i++) {
-				if (ss.get(i).contains(date1)) {
-					// System.out.println(ss.get(i));
-
-					String temp = ss.get(i).toString()
-							.substring(0, ss.get(i).indexOf("."));
-					String[] data = temp.split("_");
-					System.out.println(temp);
-
-					ll.add(Integer.parseInt(data[2]));
-
-				} else {
-					ss.remove(i);
-				}
-			}
-
-			// return 0;
-			return Collections.max(ll) + 1;
-		} catch (Exception e) {
-			return 1;
-		}
-	}
-
+	
+	// roundoff all values
 	public String getRound(Double r, int round) {
 
 		/*
@@ -930,32 +807,8 @@ public class NLivetestController implements Initializable {
 
 	}
 
-	public String getBubbledia(double bp) {
-		double st = Double.parseDouble(Myapp.fluidvalue);
-
-		// double d1=(double)0.415 * st/bp;
-		double d1 = (double) (4 * st * 10000 * Double
-				.parseDouble(Myapp.tfactore)) / (bp * 68947.6);
-
-		if (Myapp.crossection.equals("Eliptical")) {
-			d1 = d1 * 0.72;
-		} else if (Myapp.crossection.equals("Slit")) {
-			d1 = d1 * 0.71;
-		} else if (Myapp.crossection.equals("Rectangular")) {
-			d1 = d1 * 0.75;
-		}
-
-		String d = getRound(d1, 4);
-
-		String sst = "surface : " + st + "\nbpressure: " + bp + "\nDiameter : "
-				+ d + "\nCrosssection : " + Myapp.crossection + "\nTfactor :"
-				+ Myapp.tfactore;
-		System.out.println(sst);
-		// para.setText(sst);
-
-		return "" + d;
-	}
-
+	
+	//set main graph
 	void setGraph() {
 		root.getChildren().add(sc);
 		DataStore.pressure_max = Integer.parseInt(Myapp.endpress);
@@ -984,6 +837,7 @@ public class NLivetestController implements Initializable {
 
 	}
 
+	// set flow and pressure graph
 	void setGraph12() {
 		root1.getChildren().add(sc1);
 		sc1.setAxisSortingPolicy(SortingPolicy.Y_AXIS.NONE);
@@ -1023,6 +877,8 @@ public class NLivetestController implements Initializable {
 		Zoom zoom1 = new Zoom(sc1, root1);
 	}
 
+	
+	//set flow pressure gauges
 	void setGauges() {
 		HBox v = new HBox(10);
 
@@ -1175,6 +1031,8 @@ public class NLivetestController implements Initializable {
 
 	}
 
+	
+	// set timer for test start popup
 	void setTimer() {
 		Timer timer = new Timer();
 		TimerTask task = new TimerTask() {
@@ -1193,6 +1051,8 @@ public class NLivetestController implements Initializable {
 		timer.schedule(task, 2000);
 	}
 
+	
+	//set button clicks
 	void setButtons() {
 
 		btnabr.getStyleClass().add("transperant_comm");
@@ -1210,6 +1070,8 @@ public class NLivetestController implements Initializable {
 
 	}
 
+	
+	//set test stop popup
 	void testabourd() {
 
 		mydia = new MyDialoug(Main.mainstage, "/userinput/Nabourdpopup.fxml");
@@ -1219,132 +1081,9 @@ public class NLivetestController implements Initializable {
 
 	}
 
-	private void setDataPointPopup(XYChart<Number, Number> sc) {
-		final Popup popup = new Popup();
-		popup.setHeight(20);
-		popup.setWidth(60);
 
-		for (int i = 0; i < sc.getData().size(); i++) {
-			final int dataSeriesIndex = i;
-			final XYChart.Series<Number, Number> series = sc.getData().get(i);
-			for (final Data<Number, Number> data : series.getData()) {
-				final Node node = data.getNode();
-				node.addEventHandler(MouseEvent.MOUSE_ENTERED_TARGET,
-						new EventHandler<MouseEvent>() {
 
-							private static final int X_OFFSET = 15;
-							private static final int Y_OFFSET = -5;
-							Label label = new Label();
-
-							@Override
-							public void handle(final MouseEvent event) {
-								// System.out.println("MOuse Event");
-								final String colorString = "#cfecf0";
-								label.setFont(new Font(20));
-								popup.getContent().setAll(label);
-								label.setStyle("-fx-background-color: "
-										+ colorString + "; -fx-border-color: "
-										+ colorString + ";");
-								label.setText("x=" + data.getXValue() + ", y="
-										+ data.getYValue());
-								popup.show(data.getNode().getScene()
-										.getWindow(), event.getScreenX()
-										+ X_OFFSET, event.getScreenY()
-										+ Y_OFFSET);
-								event.consume();
-							}
-
-							public EventHandler<MouseEvent> init() {
-								label.getStyleClass().add("chart-popup-label");
-								return this;
-							}
-
-						}.init());
-
-				node.addEventHandler(MouseEvent.MOUSE_EXITED_TARGET,
-						new EventHandler<MouseEvent>() {
-
-							@Override
-							public void handle(final MouseEvent event) {
-								popup.hide();
-								event.consume();
-							}
-						});
-
-				// this handler selects the corresponding table item when a data
-				// item in the chart was clicked.
-
-			}
-		}
-
-	}
-
-	private void setDataPointPopup() {
-		final Popup popup = new Popup();
-		popup.setHeight(DATA_POINT_POPUP_HEIGHT);
-		popup.setWidth(DATA_POINT_POPUP_WIDTH);
-
-		for (int i = 0; i < sc.getData().size(); i++) {
-			final int dataSeriesIndex = i;
-			final XYChart.Series<Number, Number> series = sc.getData().get(i);
-			for (final Data<Number, Number> data : series.getData()) {
-				final Node node = data.getNode();
-				node.addEventHandler(MouseEvent.MOUSE_ENTERED_TARGET,
-						new EventHandler<MouseEvent>() {
-
-							private static final int X_OFFSET = 15;
-							private static final int Y_OFFSET = -5;
-							final Label label = new Label();
-
-							@Override
-							public void handle(final MouseEvent event) {
-								// System.out.println("MOuse Event");
-								final String colorString = "#cfecf0";
-								popup.getContent().setAll(label);
-								label.setStyle("-fx-background-color: "
-										+ colorString + "; -fx-border-color: "
-										+ colorString + ";");
-								String xdata = data.getXValue() + "";
-								String ydata = data.getYValue() + "";
-
-								label.setText("x="
-										+ xdata.substring(0,
-												xdata.indexOf(".") + 3)
-										+ ",\ny="
-										+ ydata.substring(0,
-												ydata.indexOf(".") + 3));
-								popup.show(data.getNode().getScene()
-										.getWindow(), event.getScreenX()
-										+ X_OFFSET, event.getScreenY()
-										+ Y_OFFSET);
-								event.consume();
-							}
-
-							public EventHandler<MouseEvent> init() {
-								label.getStyleClass().add("chart-popup-label");
-								return this;
-							}
-
-						}.init());
-
-				node.addEventHandler(MouseEvent.MOUSE_EXITED_TARGET,
-						new EventHandler<MouseEvent>() {
-
-							@Override
-							public void handle(final MouseEvent event) {
-								popup.hide();
-								event.consume();
-							}
-						});
-
-				// this handler selects the corresponding table item when a data
-				// item in the chart was clicked.
-
-			}
-		}
-
-	}
-
+	//send data to mcu
 	public void sendData(writeFormat w) {
 		System.out.println("Sending Data......");
 		w.showData();
@@ -1353,6 +1092,7 @@ public class NLivetestController implements Initializable {
 
 	}
 
+	//send data to mcu after delay
 	void sendData(writeFormat w, int slp) {
 		System.out.println("Sending Data......");
 		w.showData();
@@ -1366,6 +1106,8 @@ public class NLivetestController implements Initializable {
 
 	}
 
+	
+	//get packet value from int
 	public static List<Integer> getValueList(int val) {
 		String pad = "000000";
 		String st = "" + Integer.toHexString(val);
@@ -1382,6 +1124,7 @@ public class NLivetestController implements Initializable {
 		return ls;
 	}
 
+	//set flow accurecy
 	List<Integer> getFlowAccuricy() {
 		int fl = Integer.parseInt(Myapp.accbpt);
 		fl = fl - 100;
@@ -1395,6 +1138,7 @@ public class NLivetestController implements Initializable {
 		return data;
 	}
 
+	//set Step size of pressure
 	List<Integer> getStepSize() {
 		int fl = Integer.parseInt(Myapp.accstep);
 		int pr = Integer.parseInt(DataStore.getPr());
@@ -1425,6 +1169,7 @@ public class NLivetestController implements Initializable {
 		return data;
 	}
 
+	//setting send to MCU
 	void sendSetting(int delay) {
 		System.out.println("Sending settings");
 		writeFormat wrD = new writeFormat();
@@ -1486,6 +1231,7 @@ public class NLivetestController implements Initializable {
 		sendData(ww, 500);
 	}
 
+	//setting all incooming packet event
 	public class SerialReader implements SerialPortEventListener {
 
 		InputStream in;
@@ -1641,7 +1387,7 @@ public class NLivetestController implements Initializable {
 
 						DataStore.livepressure.set(pr);
 
-						 if (testtype == 2) {
+						if (testtype == 2) {
 
 							setPermiabilityPoints(pr, fl);
 						}
@@ -1752,7 +1498,7 @@ public class NLivetestController implements Initializable {
 						pr = b1;
 						DataStore.livepressure.set(b1);
 
-					if (testtype == 2) {
+						if (testtype == 2) {
 
 							setPermiabilityPoints(pr, fl);
 						}
@@ -1773,63 +1519,7 @@ public class NLivetestController implements Initializable {
 	}
 
 
-
-	void filterAndRemovePoints() {
-		/*
-		 * List<Double> wpl=new ArrayList<Double>(); List<Double> dpl=new
-		 * ArrayList<Double>();
-		 * 
-		 * for(int i=0;i<wetplist.size();i++) {
-		 * wpl.add(Double.parseDouble(wetplist.get(i)));
-		 * 
-		 * } for(int i=0;i<dryplist.size();i++) {
-		 * dpl.add(Double.parseDouble(dryplist.get(i)));
-		 * 
-		 * }
-		 */
-
-		double wmax = Double.parseDouble(wetplist.get(wetplist.size() - 1));// Collections.max(wpl);
-		double dmax = Double.parseDouble(dryplist.get(dryplist.size() - 1));// Collections.max(dpl);
-
-		if (wmax >= dmax) {
-			// remove wet points
-			int index = 0;
-			for (int i = 0; i < wetplist.size(); i++) {
-				if (Double.parseDouble(wetplist.get(i)) >= dmax) {
-					index = i;
-					break;
-				}
-			}
-
-			if (index > 0 && index < wetplist.size()) {
-				wetplist.subList(index, wetplist.size()).clear();
-				wetflist.subList(index, wetflist.size()).clear();
-
-			}
-
-		} else {
-
-			// remove dry points
-			// remove wet points
-			int index = 0;
-			for (int i = 0; i < dryplist.size(); i++) {
-				if (Double.parseDouble(dryplist.get(i)) >= dmax) {
-					index = i;
-					break;
-				}
-			}
-
-			if (index > 0 && index < dryplist.size()) {
-				dryplist.subList(index, dryplist.size()).clear();
-				dryflist.subList(index, dryflist.size()).clear();
-
-			}
-
-		}
-
-	}
-
-
+	//set dry points on graph and check conditions
 	void setPermiabilityPoints(double pr, double fl) {
 
 		curflow = fl;
@@ -1857,8 +1547,6 @@ public class NLivetestController implements Initializable {
 			});
 		} else {
 
-			
-
 			isSkiptest = false;
 			System.out.println("Stop is tirgger ");
 
@@ -1874,16 +1562,15 @@ public class NLivetestController implements Initializable {
 					@Override
 					public void run() {
 
-							status.setText("Test is Completed");
-							starttest.setDisable(false);
-							if (dryflist.size() > 0) {
-								createCsvTable();
-							} else {
-								System.out.println("NO file created");
+						status.setText("Test is Completed");
+						starttest.setDisable(false);
+						if (dryflist.size() > 0) {
+							createCsvTable();
+						} else {
+							System.out.println("NO file created");
 
-							}
-							sendStop();
-						
+						}
+						sendStop();
 
 					}
 				});
@@ -1896,6 +1583,7 @@ public class NLivetestController implements Initializable {
 
 	}
 
+	// showing result popup
 	void showResultPopup() {
 		tones.play();
 		mydia = new MyDialoug(Main.mainstage, "/userinput/popupresult.fxml");
@@ -1904,12 +1592,15 @@ public class NLivetestController implements Initializable {
 
 	}
 
+	
+	// showing start test popup
 	void showDryPopup() {
 		isDryStart.set(false);
 		mydia = new MyDialoug(Main.mainstage, "/userinput/Drypopup.fxml");
 		mydia.showDialoug();
 	}
 
+	//stop protocol for test
 	void sendStop() {
 		writeFormat wrD = new writeFormat();
 		wrD.stopTN();
