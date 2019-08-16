@@ -55,7 +55,7 @@ public static StackPane maincontent1;
 	JFXDialogLayout dll;
 
 @FXML
-Button livetest,report,btncloud,btnsetting,txtuname,qtest,btnscada,btnrefresh,btnhelp;
+Button livetest,report,btncloud,btnsetting,txtuname,qtest,btnscada,btnrefresh,btnhelp,btnclose;
 
 @FXML
 Rectangle recmain;
@@ -458,15 +458,24 @@ Openscreen.open("/ConfigurationPart/Nconfigurepage.fxml");
 
 }
 });
-
+btnclose.setOnAction(new EventHandler<ActionEvent>() {
+	
+	@Override
+	public void handle(ActionEvent event) {
+		// TODO Auto-generated method stub
+		exitpopup();
+	}
+});
 
 btnhelp.setOnAction(new EventHandler<ActionEvent>() {
 
 @Override
 public void handle(ActionEvent event) {
 // TODO Auto-generated method stub
+	mydia = new MyDialoug(Main.mainstage, "/application/info.fxml");
 
-	exitpopup();
+	mydia.showDialoug();
+
 	/*	
 try
 {
@@ -688,10 +697,10 @@ imageView5.setFitHeight(100);
      btnsetting.setGraphic(imageView5);
      
      
-     Image image6 = new Image(this.getClass().getResourceAsStream("/application/exiticon.png"));
+     Image image6 = new Image(this.getClass().getResourceAsStream("/application/about.png"));
 ImageView imageView6 = new ImageView(image6);
 imageView6.setFitWidth(100);
-imageView6.setFitHeight(100);
+imageView6.setFitHeight(120);
     btnhelp.setGraphic(imageView6);
     
        
