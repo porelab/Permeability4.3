@@ -2,6 +2,8 @@ package toast;
 
 import com.google.firebase.database.core.Platform;
 
+import errorcodes.ErrorInfo;
+import errorcodes.ErrorList;
 import application.Main;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -54,7 +56,6 @@ public class MyDialoug {
 				// dialog.setX(centerXPosition - dialog.getWidth());
 				// dialog.setY(centerYPosition - dialog.getHeight()/2d);
 				// dialog.show();
-
 				enableBlur();
 				dialog.show();
 			} catch (Exception e) {
@@ -99,6 +100,68 @@ public class MyDialoug {
 		this.mainstage = mainstage;
 		setBase(page);
 	}
+	
+	
+	
+	public static void showError(String errname,String errcode,String errdes)
+	{
+	
+		if (dialog == null) {
+			dialog = new Stage();
+			dialog.initStyle(StageStyle.UNDECORATED);
+			dialog.initModality(Modality.WINDOW_MODAL);
+			dialog.initOwner(Main.mainstage);
+		}
+
+		mainstage = Main.mainstage;
+		
+		infoController.errname=errname;
+		infoController.errcode="Error code : "+errcode;
+		infoController.errdes=errdes;
+
+
+		setBase("/toast/info.fxml");
+		MyDialoug.showDialoug();
+
+	}
+	public static void showError(int error)
+	{
+	javafx.application.Platform.runLater(new Runnable() {
+		
+		@Override
+		public void run() {
+			// TODO Auto-generated method stub
+		
+		if (dialog == null) {
+			dialog = new Stage();
+			dialog.initStyle(StageStyle.UNDECORATED);
+			dialog.initModality(Modality.WINDOW_MODAL);
+			dialog.initOwner(Main.mainstage);
+		}
+
+		mainstage = Main.mainstage;
+		
+		
+		if(ErrorList.list.containsKey(""+error))
+		{
+		ErrorInfo e=ErrorList.list.get(""+error);
+		infoController.errname=e.name;
+		infoController.errcode="Error code : #"+error;
+		infoController.errdes=e.des;
+
+
+		setBase("/toast/info.fxml");
+		MyDialoug.showDialoug();
+		}
+		else
+		{
+			System.out.println("NO ERROR FOUND IN LIST : "+error);
+		}
+		
+		}
+	});
+	}
+
 
 	public MyDialoug(Stage mainstage, String page) {
 
@@ -138,18 +201,17 @@ public class MyDialoug {
 		});
 	}
 
-	void setBase(String page) {
+	static void setBase(String page) {
 
 		
 
 				try {
-					Parent root = FXMLLoader.load(getClass().getResource(page));
+					Parent root = FXMLLoader.load(Main.clsObj.getResource(page));
 					Scene dialogScene = new Scene(root);
 					dialog.setScene(dialogScene);
-					bol = true;
-					setShortCut();
+				
 				} catch (Exception e) {
-					bol = false;
+					
 					e.printStackTrace();
 				}
 			}

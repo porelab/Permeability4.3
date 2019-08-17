@@ -265,11 +265,13 @@ public class NLivetestController implements Initializable {
 			DataStore.serialPort.addEventListener(in);
 			DataStore.serialPort.notifyOnDataAvailable(true);
 
+
+			setTimer();
 			status.setText("Hardware Connected");
 
 		} catch (TooManyListenersException e) {
-			Toast.makeText(Main.mainstage, "Hardware Problem", 1000, 100, 100);
-
+			MyDialoug.showError(102);
+			
 			status.setText("Hardware Problem");
 		} catch (Exception e) {
 			Platform.runLater(new Runnable() {
@@ -277,10 +279,9 @@ public class NLivetestController implements Initializable {
 				@Override
 				public void run() {
 					// TODO Auto-generated method stub
-
+					MyDialoug.showError(102);
+					
 					status.setText("Hardware Problem");
-					Toast.makeText(Main.mainstage, "Hardware Problem", 1000,
-							100, 100);
 
 				}
 			});
@@ -446,8 +447,6 @@ public class NLivetestController implements Initializable {
 
 			}
 		});
-
-		setTimer();
 
 		sendSetting(100);
 

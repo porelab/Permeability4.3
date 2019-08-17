@@ -19,6 +19,7 @@ import toast.Systemtime;
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.cloud.firestore.FirestoreOptions;
 
+import errorcodes.ErrorList;
 import firebase.FirebaseConnect;
 
 
@@ -29,7 +30,8 @@ public class Main extends Application {
 	public void start(Stage primaryStage) {
 		try {
 			try {	
-				
+
+				ErrorList.setErrorList();
 				FirebaseConnect f=new FirebaseConnect();
 				FirestoreOptions options;
 				Systemtime.StartTime();

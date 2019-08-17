@@ -47,6 +47,7 @@ import javafx.scene.paint.Stop;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.TextAlignment;
 import javafx.util.Callback;
+import toast.MyDialoug;
 import toast.Openscreen;
 import application.DataStore;
 import application.Myapp;
@@ -276,6 +277,7 @@ public class manualcontroller implements Initializable {
 			lblconnection.setText("Not Connected");
 			lblconnection.setTextFill(Paint.valueOf("#2A91D8"));
 			concircle.setStyle("-fx-fill: #2A91D8;");
+			MyDialoug.showError(102);
 			
 		}
 
