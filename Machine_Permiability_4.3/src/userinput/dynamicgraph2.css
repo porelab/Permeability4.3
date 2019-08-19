@@ -61,8 +61,8 @@
 .chart-line-symbol {
     -fx-background-color: #f9d900, white;
     -fx-background-insets: 0, 5;
-    -fx-background-radius: 5px;
-    -fx-padding: 4px;
+    -fx-background-radius: 3px;
+    -fx-padding: 2px;
 }
 .chart-series-line {
     -fx-stroke: #f9d900;
