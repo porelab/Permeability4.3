@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
+import application.SerialCommunicator.SerialReader;
 import toast.Toast;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -30,7 +31,9 @@ public class DataStore
 	public static SimpleBooleanProperty isconfigure=new SimpleBooleanProperty(false);
 	public static SerialPort serialPort;
 
-	public static InputStream in;
+	public static InputStream in=null;
+	public static SerialReader sr;
+	
 	
 	
 	//for scada
