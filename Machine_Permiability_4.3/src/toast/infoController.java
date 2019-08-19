@@ -20,13 +20,14 @@ public class infoController implements Initializable {
 	
 	static String errname,errdes,errcode;
 
+	static boolean isHome=false;
+	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
-
 		
-		btnclose.getStyleClass().add("transperant_comm");
-		
+			btnclose.getStyleClass().add("transperant_comm");
+			
 			errorname.setText(errname);
 			errordescri.setText(errdes);
 			errorcode.setText(errcode);
@@ -36,6 +37,13 @@ public class infoController implements Initializable {
 			@Override
 			public void handle(ActionEvent event) {
 				// TODO Auto-generated method stub
+
+				if(isHome)
+				{
+
+					Openscreen.open("/application/first.fxml");	
+				}
+
 				MyDialoug.closeDialoug();
 			}
 		});
@@ -45,6 +53,14 @@ public class infoController implements Initializable {
 			@Override
 			public void handle(ActionEvent event) {
 				// TODO Auto-generated method stub
+				
+				
+				if(isHome)
+				{
+
+					Openscreen.open("/application/first.fxml");	
+				}
+
 				MyDialoug.closeDialoug();
 			}
 		});
