@@ -1510,6 +1510,18 @@ public class NLivetestController implements Initializable {
 				}
 
 			} catch (IOException e) {
+				DataStore.serialPort.removeEventListener();
+				MyDialoug.showErrorHome(103);
+
+				Platform.runLater(new Runnable() {
+					
+					@Override
+					public void run() {
+						// TODO Auto-generated method stub
+						status.setText("Connection has been lost");
+					}
+				});
+				System.out.println("Live screen error :"+e.getMessage());
 				e.printStackTrace();
 			}
 
