@@ -12,18 +12,19 @@ import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import toast.MyDialoug;
 import userinput.manualcontroller;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-//for communication of PC and MCU
+// for communication of PC and MCU
+
 public class SerialCommunicator {
 
 	int ind = 0;
 
 	public SerialCommunicator() {
-		
 		DataStore.listOfHeads.add('P');
 		DataStore.listOfHeads.add('T');
 		DataStore.listOfHeads.add('H');
@@ -50,30 +51,9 @@ public class SerialCommunicator {
 				.getPortIdentifier(portName);
 		if (portIdentifier.isCurrentlyOwned()) {
 			System.out.println("Error: Port is currently in use1");
-			/*
-			 * portIdentifier.removePortOwnershipListener((CommPortOwnershipListener
-			 * ) this);
-			 * 
-			 * CommPort commPort =
-			 * portIdentifier.open(this.getClass().getName(),10000);
-			 * 
-			 * if ( commPort instanceof SerialPort ) { SerialPort serialPort =
-			 * (SerialPort) commPort;
-			 * serialPort.setSerialPortParams(115200,SerialPort
-			 * .DATABITS_8,SerialPort.STOPBITS_1,SerialPort.PARITY_NONE);
-			 * 
-			 * InputStream in = serialPort.getInputStream(); DataStore.out =
-			 * serialPort.getOutputStream();
-			 * 
-			 * 
-			 * serialPort.addEventListener(new SerialReader(in));
-			 * serialPort.notifyOnDataAvailable(true);
-			 * 
-			 * 
-			 * } else { System.out.println(
-			 * "Error: Only serial ports are handled by this example."); }
-			 * System.out.println("Error: Port is currently in use2");
-			 */
+			
+			
+			
 		} else {
 
 			CommPort commPort = portIdentifier.open(this.getClass().getName(),
@@ -83,13 +63,14 @@ public class SerialCommunicator {
 				DataStore.serialPort = (SerialPort) commPort;
 				DataStore.serialPort.setSerialPortParams(9600, SerialPort.DATABITS_8,
 						SerialPort.STOPBITS_1, SerialPort.PARITY_NONE);
-
-			
-				DataStore.in = DataStore.serialPort.getInputStream();
+				
+			DataStore.in = DataStore.serialPort.getInputStream();
 				DataStore.out = DataStore.serialPort.getOutputStream();
-
-				DataStore.serialPort.addEventListener(new SerialReader(DataStore.in));
+				DataStore.sr=new SerialReader(DataStore.in);
+			
+				DataStore.serialPort.addEventListener(DataStore.sr);
 				DataStore.serialPort.notifyOnDataAvailable(true);
+				
 				DataStore.hardReset();
 
 			} else {
@@ -557,9 +538,19 @@ public class SerialCommunicator {
 	            }
 	            catch ( IOException e )
 	            {
-	                e.printStackTrace();
-	                System.exit(-1);
-	            }             
+					DataStore.serialPort.removeEventListener();
+					DataStore.serialPort.close();
+					MyDialoug.showError(103);
+					Platform.runLater(new Runnable() {
+						
+						@Override
+						public void run() {
+							// TODO Auto-generated method stub
+
+							DataStore.connect_hardware.set(false);
+						}
+					});
+			    }             
 	
 	}
 
