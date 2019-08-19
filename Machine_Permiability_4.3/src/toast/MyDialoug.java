@@ -118,6 +118,7 @@ public class MyDialoug {
 		infoController.errname=errname;
 		infoController.errcode="Error code : "+errcode;
 		infoController.errdes=errdes;
+		infoController.isHome=false;
 
 
 		setBase("/toast/info.fxml");
@@ -148,7 +149,7 @@ public class MyDialoug {
 		infoController.errname=e.name;
 		infoController.errcode="Error code : #"+error;
 		infoController.errdes=e.des;
-
+		infoController.isHome=false;
 
 		setBase("/toast/info.fxml");
 		MyDialoug.showDialoug();
@@ -162,6 +163,43 @@ public class MyDialoug {
 	});
 	}
 
+	public static void showErrorHome(int error)
+	{
+	javafx.application.Platform.runLater(new Runnable() {
+		
+		@Override
+		public void run() {
+			// TODO Auto-generated method stub
+		
+		if (dialog == null) {
+			dialog = new Stage();
+			dialog.initStyle(StageStyle.UNDECORATED);
+			dialog.initModality(Modality.WINDOW_MODAL);
+			dialog.initOwner(Main.mainstage);
+		}
+
+		mainstage = Main.mainstage;
+		
+		
+		if(ErrorList.list.containsKey(""+error))
+		{
+		ErrorInfo e=ErrorList.list.get(""+error);
+		infoController.errname=e.name;
+		infoController.errcode="Error code : #"+error;
+		infoController.errdes=e.des;
+		infoController.isHome=true;
+
+		setBase("/toast/info.fxml");
+		MyDialoug.showDialoug();
+		}
+		else
+		{
+			System.out.println("NO ERROR FOUND IN LIST : "+error);
+		}
+		
+		}
+	});
+	}
 
 	public MyDialoug(Stage mainstage, String page) {
 
