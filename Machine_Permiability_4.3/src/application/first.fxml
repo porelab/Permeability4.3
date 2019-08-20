@@ -174,11 +174,20 @@
                   <Font name="Calibri" size="15.0" />
                </font>
             </Label>
-            <Rectangle arcHeight="10.0" arcWidth="2.0" fill="#1f93ff00" height="32.0" layoutX="1310.0" layoutY="4.0" stroke="WHITE" strokeMiterLimit="0.0" strokeType="INSIDE" width="32.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0" />
-            <Button fx:id="btnclose" layoutX="1311.0" layoutY="5.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" styleClass="btnCss" text="X" textFill="WHITE" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+            <Rectangle arcHeight="12.0" arcWidth="12.0" fill="#1f93ff00" height="32.0" layoutX="1325.0" layoutY="5.0" stroke="WHITE" strokeMiterLimit="0.0" strokeType="INSIDE" width="32.0" AnchorPane.rightAnchor="9.0" AnchorPane.topAnchor="5.0" />
+            <Button fx:id="btnclose" layoutX="1327.0" layoutY="5.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" styleClass="btnCss" text="X" textFill="WHITE" AnchorPane.rightAnchor="9.0" AnchorPane.topAnchor="5.0">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
+            </Button>
+            <Button fx:id="btnport" layoutX="1322.0" layoutY="114.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="30.0" styleClass="cmbtrasperant" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="124.0">
+               <graphic>
+                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@refreshimgl.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
             </Button>
     
          
