@@ -43,6 +43,7 @@ public class NConfigurePageController implements Initializable {
 	@FXML
 	AnchorPane root;
 
+	
 	@FXML
 	JFXToggleButton pg1, pg2, fm1, fm2, ab1, ab2, re1, re2, tgbkeyboard,
 			curvefittgb, valvecpre, valvecflow;
