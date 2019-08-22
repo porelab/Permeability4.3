@@ -1,14 +1,17 @@
 package application;
 	
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
+import java.io.RandomAccessFile;
 import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.nio.channels.FileLock;
 import java.util.UUID;
 import java.util.concurrent.CountDownLatch;
 
@@ -18,6 +21,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
@@ -38,20 +42,53 @@ public class Main extends Application {
 	public static Stage mainstage;
 	public static Class<? extends Main> clsObj;
 	
+
+	private static boolean lockInstance(final String lockFile) {
+	    try {
+	        final File file = new File(lockFile);
+	        final RandomAccessFile randomAccessFile = new RandomAccessFile(file, "rw");
+	        final FileLock fileLock = randomAccessFile.getChannel().tryLock();
+	        if (fileLock != null) {
+	            Runtime.getRuntime().addShutdownHook(new Thread() {
+	                public void run() {
+	                    try {
+	                        fileLock.release();
+	                        randomAccessFile.close();
+	                        file.delete();
+	                    } catch (Exception e) {
+	                        System.out.println("Error : "+e.getMessage());
+
+	                    	e.printStackTrace();
+	                    }
+	                }
+	            });
+	            return true;
+	        }
+	    } catch (Exception e) { 
+	    	System.out.println("Error1 : "+e.getMessage());
+
+    	e.printStackTrace();
+	    }
+	    return false;
+	}
 	
 	
 	@Override
 	public void start(Stage primaryStage) {
 		try {
-			try {	
+			mainstage=primaryStage;
+			ErrorList.setErrorList();
 
-				ErrorList.setErrorList();
-				FirebaseConnect f=new FirebaseConnect();
+			clsObj=getClass();
+			if(lockInstance("temp.log"))
+			{
+			
+			try {	
+			
+			    FirebaseConnect f=new FirebaseConnect();
 				FirestoreOptions options;
 				Systemtime.StartTime();
-				mainstage=primaryStage;
 				
-				clsObj=getClass();
 				InputStream ii=(InputStream) this.getClass().getResourceAsStream("/application/serviceAccountKey.json");
 				InputStream ii1=(InputStream) this.getClass().getResourceAsStream("/firebase/serviceAccountKey.json");
 				
@@ -85,7 +122,19 @@ public class Main extends Application {
 			primaryStage.setScene(scene);
 			primaryStage.setTitle("NewYork-Instruments");
 			primaryStage.show(); 
-		
+			}
+			else
+			{
+				Parent root = FXMLLoader.load(getClass().getResource("/newstageerror/splashscreen.fxml"));
+				 Scene scene = new Scene(root,600,400);
+				 primaryStage.initStyle(StageStyle.UNDECORATED);
+				 Image image = new Image(this.getClass().getResourceAsStream(
+							"/application/shorticon.png"));
+					primaryStage.getIcons().add(image);
+				primaryStage.setScene(scene);
+				primaryStage.setTitle("NewYork-Instruments");
+				primaryStage.show(); 
+			}
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
