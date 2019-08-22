@@ -21,54 +21,54 @@
                      <children>
                         <AnchorPane prefHeight="615.0" prefWidth="1374.0" stylesheets="@../application/new_application.css" AnchorPane.bottomAnchor="0.0">
                            <children>
-                              <Rectangle arcHeight="300.0" arcWidth="30.0" fill="#1f93ff00" height="28.0" layoutX="444.0" layoutY="185.0" stroke="#bfb9b9" strokeType="INSIDE" strokeWidth="2.0" style="-fx-fill: white;" width="46.0" />
-                              <JFXToggleButton fx:id="fm1" alignment="BASELINE_CENTER" layoutX="435.0" layoutY="171.0" text=" " toggleColor="#0e3c87" toggleLineColor="WHITE" unToggleLineColor="#99999903" />
-                              <Rectangle arcHeight="300.0" arcWidth="30.0" fill="TRANSPARENT" height="28.0" layoutX="444.0" layoutY="256.0" stroke="#bfb9b9" strokeType="INSIDE" strokeWidth="2.0" style="-fx-fill: white;" width="46.0" />
-                              <JFXToggleButton fx:id="fm2" alignment="BASELINE_CENTER" layoutX="435.0" layoutY="242.0" text=" " toggleColor="#0f3c85" toggleLineColor="WHITE" unToggleLineColor="#99999903" />
-                              <Label layoutX="385.0" layoutY="180.0" styleClass="col-gray70" text="Low" textFill="WHITE">
+                              <Rectangle arcHeight="300.0" arcWidth="30.0" fill="#1f93ff00" height="28.0" layoutX="444.0" layoutY="185.0" stroke="#bfb9b9" strokeType="INSIDE" strokeWidth="2.0" style="-fx-fill: white;" visible="false" width="46.0" />
+                              <JFXToggleButton fx:id="fm1" alignment="BASELINE_CENTER" layoutX="435.0" layoutY="171.0" text=" " toggleColor="#0e3c87" toggleLineColor="WHITE" unToggleLineColor="#99999903" visible="false" />
+                              <Rectangle arcHeight="300.0" arcWidth="30.0" fill="TRANSPARENT" height="28.0" layoutX="444.0" layoutY="256.0" stroke="#bfb9b9" strokeType="INSIDE" strokeWidth="2.0" style="-fx-fill: white;" visible="false" width="46.0" />
+                              <JFXToggleButton fx:id="fm2" alignment="BASELINE_CENTER" layoutX="435.0" layoutY="242.0" text=" " toggleColor="#0f3c85" toggleLineColor="WHITE" unToggleLineColor="#99999903" visible="false" />
+                              <Label layoutX="385.0" layoutY="180.0" styleClass="col-gray70" text="Low" textFill="WHITE" visible="false">
                                  <font>
                                     <Font size="24.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="491.0" layoutY="180.0" styleClass="col-gray70" text="High" textFill="WHITE">
+                              <Label layoutX="491.0" layoutY="180.0" styleClass="col-gray70" text="High" textFill="WHITE" visible="false">
                                  <font>
                                     <Font size="24.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="385.0" layoutY="251.0" styleClass="col-gray70" text="Low" textFill="WHITE">
+                              <Label layoutX="385.0" layoutY="251.0" styleClass="col-gray70" text="Low" textFill="WHITE" visible="false">
                                  <font>
                                     <Font size="24.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="491.0" layoutY="251.0" styleClass="col-gray70" text="High" textFill="WHITE">
+                              <Label layoutX="491.0" layoutY="251.0" styleClass="col-gray70" text="High" textFill="WHITE" visible="false">
                                  <font>
                                     <Font size="24.0" />
                                  </font>
                               </Label>
-                              <Rectangle arcHeight="300.0" arcWidth="30.0" fill="#1f93ff00" height="28.0" layoutX="444.0" layoutY="114.0" stroke="#bfb9b9" strokeType="INSIDE" strokeWidth="2.0" style="-fx-fill: white;" width="46.0" />
-                              <JFXToggleButton fx:id="pg2" alignment="BASELINE_CENTER" layoutX="435.0" layoutY="100.0" text=" " toggleColor="#0e3c87" toggleLineColor="WHITE" unToggleLineColor="#99999903" />
-                              <Label layoutX="385.0" layoutY="109.0" styleClass="col-gray70" text="Low" textFill="WHITE">
+                              <Rectangle arcHeight="300.0" arcWidth="30.0" fill="#1f93ff00" height="28.0" layoutX="444.0" layoutY="114.0" stroke="#bfb9b9" strokeType="INSIDE" strokeWidth="2.0" style="-fx-fill: white;" visible="false" width="46.0" />
+                              <JFXToggleButton fx:id="pg2" alignment="BASELINE_CENTER" layoutX="435.0" layoutY="100.0" text=" " toggleColor="#0e3c87" toggleLineColor="WHITE" unToggleLineColor="#99999903" visible="false" />
+                              <Label layoutX="385.0" layoutY="109.0" styleClass="col-gray70" text="Low" textFill="WHITE" visible="false">
                                  <font>
                                     <Font size="24.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="491.0" layoutY="109.0" styleClass="col-gray70" text="High" textFill="WHITE">
+                              <Label layoutX="491.0" layoutY="109.0" styleClass="col-gray70" text="High" textFill="WHITE" visible="false">
                                  <font>
                                     <Font size="24.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="384.0" layoutY="38.0" styleClass="col-gray70" text="Low" textFill="WHITE">
+                              <Label layoutX="384.0" layoutY="38.0" styleClass="col-gray70" text="Low" textFill="WHITE" visible="false">
                                  <font>
                                     <Font size="24.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="490.0" layoutY="38.0" styleClass="col-gray70" text="High" textFill="WHITE">
+                              <Label layoutX="490.0" layoutY="38.0" styleClass="col-gray70" text="High" textFill="WHITE" visible="false">
                                  <font>
                                     <Font size="24.0" />
                                  </font>
                               </Label>
-                              <Rectangle arcHeight="300.0" arcWidth="30.0" fill="#1f93ff00" height="28.0" layoutX="444.0" layoutY="42.0" stroke="#bfb9b9" strokeType="INSIDE" strokeWidth="2.0" style="-fx-fill: white;" width="46.0" />
-                              <JFXToggleButton fx:id="pg1" alignment="BASELINE_CENTER" layoutX="435.0" layoutY="28.0" text=" " toggleColor="#0e3c87" toggleLineColor="WHITE" unToggleLineColor="#99999903" />
+                              <Rectangle arcHeight="300.0" arcWidth="30.0" fill="#1f93ff00" height="28.0" layoutX="444.0" layoutY="42.0" stroke="#bfb9b9" strokeType="INSIDE" strokeWidth="2.0" style="-fx-fill: white;" visible="false" width="46.0" />
+                              <JFXToggleButton fx:id="pg1" alignment="BASELINE_CENTER" layoutX="435.0" layoutY="28.0" text=" " toggleColor="#0e3c87" toggleLineColor="WHITE" unToggleLineColor="#99999903" visible="false" />
                               <Label layoutX="35.0" layoutY="38.0" styleClass="col-gray70" text="Pressure Guage1" textFill="WHITE" AnchorPane.leftAnchor="35.0" AnchorPane.topAnchor="38.0">
                                  <font>
                                     <Font size="25.0" />
@@ -157,40 +157,40 @@
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Label>
-                              <Rectangle arcHeight="300.0" arcWidth="30.0" fill="#1f93ff00" height="28.0" layoutX="696.0" layoutY="115.0" stroke="#bfb9b9" strokeType="INSIDE" strokeWidth="2.0" style="-fx-fill: white;" width="46.0" />
-                              <JFXToggleButton fx:id="ab2" alignment="BASELINE_CENTER" layoutX="687.0" layoutY="101.0" text=" " toggleColor="#0e3c87" toggleLineColor="WHITE" unToggleLineColor="#99999903" />
-                              <Label layoutX="575.0" layoutY="110.0" styleClass="col-gray70" text="Absolute" textFill="WHITE">
+                              <Rectangle arcHeight="300.0" arcWidth="30.0" fill="#1f93ff00" height="28.0" layoutX="696.0" layoutY="115.0" stroke="#bfb9b9" strokeType="INSIDE" strokeWidth="2.0" style="-fx-fill: white;" visible="false" width="46.0" />
+                              <JFXToggleButton fx:id="ab2" alignment="BASELINE_CENTER" layoutX="687.0" layoutY="101.0" text=" " toggleColor="#0e3c87" toggleLineColor="WHITE" unToggleLineColor="#99999903" visible="false" />
+                              <Label layoutX="575.0" layoutY="110.0" styleClass="col-gray70" text="Absolute" textFill="WHITE" visible="false">
                                  <font>
                                     <Font size="24.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="753.0" layoutY="110.0" styleClass="col-gray70" text="Relative" textFill="WHITE">
+                              <Label layoutX="753.0" layoutY="110.0" styleClass="col-gray70" text="Relative" textFill="WHITE" visible="false">
                                  <font>
                                     <Font size="24.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="574.0" layoutY="39.0" styleClass="col-gray70" text="Absolute" textFill="WHITE">
+                              <Label layoutX="574.0" layoutY="39.0" styleClass="col-gray70" text="Absolute" textFill="WHITE" visible="false">
                                  <font>
                                     <Font size="24.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="753.0" layoutY="39.0" styleClass="col-gray70" text="Relative" textFill="WHITE">
+                              <Label layoutX="753.0" layoutY="39.0" styleClass="col-gray70" text="Relative" textFill="WHITE" visible="false">
                                  <font>
                                     <Font size="24.0" />
                                  </font>
                               </Label>
-                              <Rectangle arcHeight="300.0" arcWidth="30.0" fill="#1f93ff00" height="28.0" layoutX="693.0" layoutY="43.0" stroke="#bfb9b9" strokeType="INSIDE" strokeWidth="2.0" style="-fx-fill: white;" width="46.0" />
-                              <JFXToggleButton fx:id="ab1" alignment="BASELINE_CENTER" layoutX="684.0" layoutY="29.0" text=" " toggleColor="#0e3c87" toggleLineColor="WHITE" unToggleLineColor="#99999903" />
-                              <Line endX="720.0" layoutX="129.0" layoutY="88.0" startX="-100.0" stroke="#bfb9b9" strokeWidth="2.0" />
-                              <Line layoutX="394.0" layoutY="63.0" rotate="90.0" startX="-50.0" stroke="#bfb9b9" strokeWidth="2.0" />
-                              <Line layoutX="590.0" layoutY="63.0" rotate="90.0" startX="-50.0" stroke="#bfb9b9" strokeWidth="2.0" />
-                              <Line endX="720.0" layoutX="142.0" layoutY="160.0" startX="-100.0" stroke="#bfb9b9" strokeWidth="2.0" />
-                              <Line layoutX="394.0" layoutY="135.0" rotate="90.0" startX="-50.0" stroke="#bfb9b9" strokeWidth="2.0" />
-                              <Line layoutX="590.0" layoutY="135.0" rotate="90.0" startX="-50.0" stroke="#bfb9b9" strokeWidth="2.0" />
-                              <Line endX="423.0" layoutX="143.0" layoutY="233.0" startX="-100.0" stroke="#bfb9b9" strokeWidth="2.0" />
-                              <Line layoutX="395.0" layoutY="208.0" rotate="90.0" startX="-50.0" stroke="#bfb9b9" strokeWidth="2.0" />
-                              <Line endX="423.0" layoutX="142.0" layoutY="302.0" startX="-100.0" stroke="#bfb9b9" strokeWidth="2.0" />
-                              <Line layoutX="394.0" layoutY="277.0" rotate="90.0" startX="-50.0" stroke="#bfb9b9" strokeWidth="2.0" />
+                              <Rectangle arcHeight="300.0" arcWidth="30.0" fill="#1f93ff00" height="28.0" layoutX="693.0" layoutY="43.0" stroke="#bfb9b9" strokeType="INSIDE" strokeWidth="2.0" style="-fx-fill: white;" visible="false" width="46.0" />
+                              <JFXToggleButton fx:id="ab1" alignment="BASELINE_CENTER" layoutX="684.0" layoutY="29.0" text=" " toggleColor="#0e3c87" toggleLineColor="WHITE" unToggleLineColor="#99999903" visible="false" />
+                              <Line endX="227.0" layoutX="129.0" layoutY="88.0" startX="-100.0" stroke="#bfb9b9" strokeWidth="2.0" />
+                              <Line layoutX="394.0" layoutY="63.0" rotate="90.0" startX="-50.0" stroke="#bfb9b9" strokeWidth="2.0" visible="false" />
+                              <Line layoutX="590.0" layoutY="63.0" rotate="90.0" startX="-50.0" stroke="#bfb9b9" strokeWidth="2.0" visible="false" />
+                              <Line endX="227.0" layoutX="142.0" layoutY="160.0" startX="-100.0" stroke="#bfb9b9" strokeWidth="2.0" />
+                              <Line layoutX="394.0" layoutY="135.0" rotate="90.0" startX="-50.0" stroke="#bfb9b9" strokeWidth="2.0" visible="false" />
+                              <Line layoutX="590.0" layoutY="135.0" rotate="90.0" startX="-50.0" stroke="#bfb9b9" strokeWidth="2.0" visible="false" />
+                              <Line endX="227.0" layoutX="143.0" layoutY="233.0" startX="-100.0" stroke="#bfb9b9" strokeWidth="2.0" />
+                              <Line layoutX="395.0" layoutY="208.0" rotate="90.0" startX="-50.0" stroke="#bfb9b9" strokeWidth="2.0" visible="false" />
+                              <Line endX="227.0" layoutX="142.0" layoutY="302.0" startX="-100.0" stroke="#bfb9b9" strokeWidth="2.0" />
+                              <Line layoutX="394.0" layoutY="277.0" rotate="90.0" startX="-50.0" stroke="#bfb9b9" strokeWidth="2.0" visible="false" />
                               <Line endX="227.0" layoutX="141.0" layoutY="381.0" startX="-100.0" stroke="#bfb9b9" strokeWidth="2.0" AnchorPane.leftAnchor="40.0" />
                               <Line endX="227.0" layoutX="142.0" layoutY="448.0" startX="-100.0" stroke="#bfb9b9" strokeWidth="2.0" visible="false" />
                            </children>

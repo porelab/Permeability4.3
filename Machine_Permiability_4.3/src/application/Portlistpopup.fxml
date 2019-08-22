@@ -22,7 +22,7 @@
             <Font name="System Bold" size="21.0" />
          </font>
       </Label>
-      <Button fx:id="btncancel" layoutX="635.0" layoutY="17.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="30.0" styleClass="cmbtrasperant" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="12.0">
+      <Button fx:id="btncancel" layoutX="635.0" layoutY="17.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="30.0" styleClass="btnCss" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="12.0">
          <graphic>
             <ImageView fitHeight="21.0" fitWidth="19.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -50,7 +50,7 @@
             <Cursor fx:constant="HAND" />
          </cursor></Button>
       <Label fx:id="lblcmb" layoutX="72.0" layoutY="137.0" prefHeight="31.0" prefWidth="159.0" />
-      <Button fx:id="btnrefrace" layoutX="332.0" layoutY="67.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="30.0" styleClass="cmbtrasperant">
+      <Button fx:id="btnrefrace" layoutX="332.0" layoutY="67.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="30.0" styleClass="btnCss">
          <graphic>
             <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                <image>
