@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:id="root" prefHeight="328.0" prefWidth="576.0" styleClass="firstpagebk" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="newstageerror.Splashscreen">
+<AnchorPane fx:id="root" prefHeight="328.0" prefWidth="576.0" styleClass="firstpagebk" stylesheets="@../application/new_application.css" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="newstageerror.Splashscreen">
    <children>
       <ImageView fitHeight="74.0" fitWidth="258.0" layoutX="164.0" layoutY="46.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -22,8 +22,4 @@
       </Label>
       <Button fx:id="btnclose" layoutX="241.0" layoutY="221.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="95.0" text="Close" />
    </children>
-   <stylesheets>
-      <URL value="@application.css" />
-      <URL value="@../application/new_application.css" />
-   </stylesheets>
 </AnchorPane>
