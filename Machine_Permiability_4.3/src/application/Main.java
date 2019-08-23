@@ -126,7 +126,7 @@ public class Main extends Application {
 			else
 			{
 				Parent root = FXMLLoader.load(getClass().getResource("/newstageerror/splashscreen.fxml"));
-				 Scene scene = new Scene(root,600,400);
+				 Scene scene = new Scene(root,576,328);
 				 primaryStage.initStyle(StageStyle.UNDECORATED);
 				 Image image = new Image(this.getClass().getResourceAsStream(
 							"/application/shorticon.png"));
