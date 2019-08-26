@@ -227,7 +227,12 @@ pagination{
 	-fx-font-size: 17px;
 	
 }
-
+.uinputtextbox1
+{
+	-fx-background-color: transparent;
+	-fx-font-size: 13px;
+	
+}
 .font-roboto-normal
 {
     -fx-font-family: 'Roboto';	

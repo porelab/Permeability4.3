@@ -2,29 +2,25 @@ package report;
 
 import java.io.File;
 import java.io.FileWriter;
-import java.io.IOException;
 import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.attribute.BasicFileAttributes;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
-import java.util.Date;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.concurrent.TimeUnit;
+import java.util.regex.Pattern;
 
 import javafx.application.Platform;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -33,6 +29,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
@@ -109,16 +106,26 @@ public class FirstController implements Initializable {
 	JFXToggleButton autosync;
 
 	@FXML
+	TextField searchsample;
+	
+	@FXML
 	JFXSpinner syncicon;
+	
+	LinkedHashMap<String,VBox> allsamplebox;
+	
+	LinkedHashMap<String,ToggleButton> alltoggle;
+	
 
 	public SimpleBooleanProperty isSync = new SimpleBooleanProperty(false);
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		// TODO Auto-generated method stub
-
+	
+		allsamplebox=new LinkedHashMap<String, VBox>();
+		alltoggle=new LinkedHashMap<String, ToggleButton>();
 		tgb = new ToggleGroup();
 
+		
 		syncicon.visibleProperty().bind(isSync);
 
 		scroll.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
@@ -143,6 +150,7 @@ public class FirstController implements Initializable {
 			}
 		});
 
+		/*File Delete Button Click Event*/
 		isDelete.addListener(new ChangeListener<Boolean>() {
 
 			@Override
@@ -214,7 +222,6 @@ public class FirstController implements Initializable {
 							public void run() {
 								// TODO Auto-generated method stub
 								System.out.println("Open Online File......");
-					
 								
 							
 
@@ -310,6 +317,84 @@ public class FirstController implements Initializable {
 			}
 		});
 
+		
+		searchsample.setOnKeyReleased(new EventHandler<Event>() {
+
+			@Override
+			public void handle(Event arg0) {
+				
+				
+					filterSample(searchsample.getText());
+				
+				
+			}
+		});
+		
+	}
+	
+	
+	void filterSample(String st)
+	{
+		if(st.isEmpty())
+		{
+			   List<String> snames=new ArrayList<>(allsamplebox.keySet());
+				VBox v = new VBox(20);
+				HBox h = new HBox(20);
+				int tempind=0;
+				for(int i=0;i<allsamplebox.size();i++)
+				{
+					int num = tempind % 5;
+						if (num == 0) {
+							h = new HBox(30);
+							v.getChildren().add(h);
+
+						}
+						h.getChildren().add(allsamplebox.get(snames.get(i)));
+						
+						
+						tempind++;
+					
+				}
+				
+				
+			scroll.setPadding(new Insets(10, 30, 10, 30));
+			scroll.setContent(v);
+		}
+		else
+		{
+			System.out.println("search String : "+st);
+		   List<String> snames=new ArrayList<>(allsamplebox.keySet());
+			VBox v = new VBox(20);
+			HBox h = new HBox(20);
+			int tempind=0;
+			boolean isFirst=true;
+			for(int i=0;i<allsamplebox.size();i++)
+			{
+				
+				if(Pattern.compile(Pattern.quote(st), Pattern.CASE_INSENSITIVE).matcher(snames.get(i)).find())
+				{
+					int num = tempind % 5;
+					if (num == 0) {
+						h = new HBox(30);
+						v.getChildren().add(h);
+
+					}
+					h.getChildren().add(allsamplebox.get(snames.get(i)));
+					if(isFirst)
+					{
+					alltoggle.get(snames.get(i)).setSelected(true);
+					isFirst=false;
+					}
+					tempind++;
+				}
+			}
+			
+			
+		scroll.setPadding(new Insets(10, 30, 10, 30));
+		scroll.setContent(v);
+		
+		}
+		
 	}
 	
 	/* Show All Trials in Selected Sample*/
@@ -546,6 +631,8 @@ public class FirstController implements Initializable {
 	/*Get All Folder list*/
 	void getFolderList() {
 		removeEmptyFolder();
+		allsamplebox.clear();
+		alltoggle.clear();
 		// File f=new File("CsvFolder");
 		File f = new File(filepath);
 
@@ -689,12 +776,16 @@ Arrays.sort(listOfFiles, new Comparator<File>() {
 					}
 					listoffiles.put(ftemp.getName(), ftemp);
 					VBox vtemp = getVBoxofFolder(ftemp.getName());
+					allsamplebox.put(ftemp.getName(), vtemp);
 					h.getChildren().add(vtemp);
 				}
 				scroll.setPadding(new Insets(10, 30, 10, 30));
 				scroll.setContent(v);
+				
 			}
 		}
+		
+		System.out.println("All Sample Box : "+allsamplebox.size());
 	}
 	
 	/*Remove Empty Folder*/
@@ -761,6 +852,8 @@ Arrays.sort(listOfFiles, new Comparator<File>() {
 
 		ToggleButton tb = new ToggleButton();
 		tb.setPrefSize(100, 100);
+		tb.setId(name);
+		alltoggle.put(name, tb);
 		setToggleButtonProperty(tb, name, "/report/fl.png", tgb);
 
 		im1.setOnMouseClicked(new EventHandler<MouseEvent>() {

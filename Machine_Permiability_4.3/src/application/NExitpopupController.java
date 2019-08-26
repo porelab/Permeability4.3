@@ -74,8 +74,12 @@ public class NExitpopupController implements Initializable {
 			public void handle(ActionEvent arg0) {
 				// TODO Auto-generated method stub
 
-				 Main.mainstage.close();
-				 MyDialoug.closeDialoug();
+				MyDialoug.closeDialoug();
+				System.exit(0);
+				Platform.exit();
+				
+	
+	Main.mainstage.close();
 				
 			}
 		});
