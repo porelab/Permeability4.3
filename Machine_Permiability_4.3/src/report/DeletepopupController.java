@@ -16,6 +16,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressIndicator;
 import toast.MyDialoug;
+import toast.Openscreen;
 import toast.Toast;
 import application.Main;
 import data_read_write.DatareadN;
@@ -110,8 +111,10 @@ public class DeletepopupController implements Initializable {
 			delind.setVisible(false);
 			lab.setText("Try again later"+e.getMessage());
 			btnstart.setDisable(true);
-			e.printStackTrace();
+			//e.printStackTrace();
+	        MyDialoug.closeDialoug();
 			
+			Openscreen.open("/report/first.fxml");
 		}
 		
 	}

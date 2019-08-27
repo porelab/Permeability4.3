@@ -64,7 +64,7 @@ public class FirstController implements Initializable {
 	private Button filereset, btndownload;
 
 	@FXML
-	private Label filelab;
+	private Label filelab,labtotfiles;
 
 	@FXML
 	Label sname;
@@ -161,8 +161,10 @@ public class FirstController implements Initializable {
 					isLogin.set(false);
 
 
-					Openscreen.open("/report/first.fxml");
+					//Openscreen.open("/report/first.fxml");
 
+					getFolderList();
+					
 				}
 
 			}
@@ -589,10 +591,11 @@ public class FirstController implements Initializable {
 			catch(Exception e)
 			{
 				System.out.println("error22 : "+flist[i]);
-				File fm=new File(flist[i].getAbsolutePath());
-				if(fm.delete())
+				if(flist[i].delete())
 				{
 					System.out.println("Deleted");
+
+					
 				}
 				else
 				{
@@ -656,6 +659,8 @@ Arrays.sort(listOfFiles, new Comparator<File>() {
 });
 				VBox v = new VBox(20);
 				HBox h = new HBox(20);
+				int totfiles=0;
+				
 				for (int i = 0; i < listOfFiles.length; i++) {
 					int num = i % 5;
 					if (num == 0) {
@@ -772,13 +777,14 @@ Arrays.sort(listOfFiles, new Comparator<File>() {
 						}
 						listoffilecheckbox.put(ftemp.getName(), ck);
 						listoffilecheckbox_datelab.put(ftemp.getName(), ck_lab);
-
+						totfiles=totfiles+ck_lab.size();
 					}
 					listoffiles.put(ftemp.getName(), ftemp);
 					VBox vtemp = getVBoxofFolder(ftemp.getName());
 					allsamplebox.put(ftemp.getName(), vtemp);
 					h.getChildren().add(vtemp);
 				}
+				labtotfiles.setText(allsamplebox.size()+" sample / "+totfiles+" files");
 				scroll.setPadding(new Insets(10, 30, 10, 30));
 				scroll.setContent(v);
 				

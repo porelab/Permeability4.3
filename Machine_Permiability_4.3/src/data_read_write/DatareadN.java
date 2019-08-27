@@ -2,7 +2,9 @@ package data_read_write;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -79,9 +81,11 @@ public class DatareadN {
 		String line = "";
 
 		int ln = 0;
-
+		BufferedReader br = null;
+		FileReader fis=null;
 		try {
-			BufferedReader br = new BufferedReader(new FileReader(file));
+			fis=new FileReader(file);
+			br = new BufferedReader(fis);
 			while ((line = br.readLine()) != null) {
 
 				if (ln > 0) {
@@ -101,9 +105,18 @@ public class DatareadN {
 				ln++;
 
 			}
-
+			br.close();
+			fis.close();
+			
 		} catch (Exception e) {
+			try {
+				br.close();
 
+				fis.close();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 			System.out.println("datareadN : error 22"+filename);
 			data=null;
 		}

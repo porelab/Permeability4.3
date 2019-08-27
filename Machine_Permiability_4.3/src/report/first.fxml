@@ -53,7 +53,7 @@
       <Line endX="430.0" layoutX="882.0" layoutY="609.0" stroke="#2a91d8" />
       <Line endX="750.0" layoutX="64.0" layoutY="169.0" stroke="#2a91d8" />
       <Line endX="750.0" layoutX="70.0" layoutY="707.0" stroke="#2a91d8" />
-      <Label layoutX="53.0" layoutY="22.0" prefHeight="35.0" prefWidth="194.0" styleClass="font-montserrat-semiBold" text="My Cloud" textFill="WHITE" wrapText="true">
+      <Label layoutX="48.0" layoutY="12.0" prefHeight="35.0" prefWidth="194.0" styleClass="font-montserrat-semiBold" text="My Cloud" textFill="WHITE" wrapText="true">
          <font>
             <Font name="System Bold" size="30.0" />
          </font>
@@ -130,6 +130,11 @@
          </graphic></Button>
       <Rectangle arcHeight="500.0" arcWidth="30.0" fill="#2197ff00" height="35.0" layoutX="61.0" layoutY="126.0" stroke="#bfb9b9" strokeType="INSIDE" strokeWidth="2.0" width="235.0" />
       <TextField fx:id="searchsample" layoutX="71.0" layoutY="128.0" prefHeight="32.0" prefWidth="217.0" promptText="search sample.." styleClass="uinputtextbox1" />
+      <Label fx:id="labtotfiles" layoutX="48.0" layoutY="51.0" prefHeight="26.0" prefWidth="170.0" text="0 sample / 0 files" textFill="WHITE">
+         <font>
+            <Font name="Calibri Bold" size="14.0" />
+         </font>
+      </Label>
    </children>
    <stylesheets>
       <URL value="@../application/application.css" />
