@@ -54,7 +54,7 @@ public class NFirstController implements Initializable {
 
 	@FXML
 	Button livetest, report, btncloud, btnsetting, txtuname, qtest, btnscada,
-			btnrefresh, btnhelp, btnclose,btnport;
+			btnrefresh, btnhelp, btnclose, btnport;
 
 	@FXML
 	Rectangle recmain;
@@ -104,13 +104,12 @@ public class NFirstController implements Initializable {
 					} else {
 						connectHardware(DataStore.getCom());
 
-
 						if (DataStore.connect_hardware.get()) {
 							sendStop();
-							Toast.makeText(Main.mainstage, "Refresing...", 1000,
-									200, 200);
+							Toast.makeText(Main.mainstage, "Refresing...",
+									1000, 200, 200);
 						} else {
-							
+
 							MyDialoug.showError(102);
 
 						}
@@ -128,11 +127,11 @@ public class NFirstController implements Initializable {
 
 					} else {
 						connectHardware(DataStore.getCom());
-				
+
 						if (DataStore.connect_hardware.get()) {
 							DataStore.hardReset();
-							Toast.makeText(Main.mainstage, "Hard reset...", 1000,
-									200, 200);
+							Toast.makeText(Main.mainstage, "Hard reset...",
+									1000, 200, 200);
 						} else {
 
 							MyDialoug.showError(102);
@@ -173,18 +172,27 @@ public class NFirstController implements Initializable {
 		DataStore.sc = new SerialCommunicator();
 
 		addShortCut();
-		lblconnection.setText("Not Connected");
+		if (DataStore.connect_hardware.get()) {
+
+			lblconnection.setText("Connected(" + DataStore.getCom() + ")");
+			btnport.setVisible(false);
+		} else {
+			lblconnection.setText("Not Connected");
+			btnport.setVisible(true);
+		}
+
 		DataStore.connect_hardware.addListener(new ChangeListener<Boolean>() {
 
 			@Override
 			public void changed(ObservableValue<? extends Boolean> arg0,
 					Boolean arg1, Boolean arg2) {
 				// TODO Auto-generated method stub
-				System.out.println("Connection listener : "+arg2);
-				
+				System.out.println("Connection listener : " + arg2);
+
 				if (arg2) {
 
-					lblconnection.setText("Connected(" + DataStore.getCom() + ")");
+					lblconnection.setText("Connected(" + DataStore.getCom()
+							+ ")");
 					btnport.setVisible(false);
 				} else {
 					lblconnection.setText("Not Connected");
@@ -192,7 +200,7 @@ public class NFirstController implements Initializable {
 				}
 			}
 		});
-		
+
 		connectHardware(DataStore.getCom());
 
 		txtuname.setText("Welcome, " + Myapp.username);
@@ -260,8 +268,6 @@ public class NFirstController implements Initializable {
 		});
 	}
 
-	
-
 	public void verifyloginc() {
 
 		AnchorPane popanc = new AnchorPane();
@@ -286,16 +292,17 @@ public class NFirstController implements Initializable {
 	}
 
 	void setBtnClicks() {
-		
-	btnport.setOnAction(new EventHandler<ActionEvent>() {
-			
+
+		btnport.setOnAction(new EventHandler<ActionEvent>() {
+
 			@Override
 			public void handle(ActionEvent event) {
 				// TODO Auto-generated method stub
-				
-				mydia = new MyDialoug(Main.mainstage, "/application/Portlistpopup.fxml");
+
+				mydia = new MyDialoug(Main.mainstage,
+						"/application/Portlistpopup.fxml");
 				mydia.showDialoug();
-				
+
 			}
 		});
 
