@@ -48,7 +48,7 @@
                   <Image url="@profileimg.png" />
                </image>
             </ImageView>
-            <Label layoutX="336.0" layoutY="276.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="80.0" prefWidth="85.0" styleClass="font-montserrat-semiBold" text="QUICK TESTss" textFill="WHITE" wrapText="true" AnchorPane.leftAnchor="320.0" AnchorPane.topAnchor="278.0">
+            <Label layoutX="336.0" layoutY="276.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="80.0" prefWidth="85.0" styleClass="font-montserrat-semiBold" text="QUICK TEST" textFill="WHITE" wrapText="true" AnchorPane.leftAnchor="320.0" AnchorPane.topAnchor="278.0">
                <font>
                   <Font name="Tahoma" size="20.0" />
                </font>
