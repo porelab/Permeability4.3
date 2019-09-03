@@ -1,5 +1,7 @@
 package userinput;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import java.text.Format;
 import java.time.LocalDate;
@@ -7,9 +9,11 @@ import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.TooManyListenersException;
 
 import org.apache.poi.hssf.util.HSSFColor.WHITE;
 
+import javafx.application.Platform;
 import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -49,6 +53,7 @@ import javafx.scene.text.TextAlignment;
 import javafx.util.Callback;
 import toast.MyDialoug;
 import toast.Openscreen;
+import userinput.NLivetestController.SerialReader;
 import application.DataStore;
 import application.Myapp;
 import application.SerialWriter;
@@ -58,27 +63,28 @@ import eu.hansolo.medusa.Gauge.SkinType;
 import eu.hansolo.medusa.GaugeBuilder;
 import eu.hansolo.medusa.Section;
 import gnu.io.CommPortIdentifier;
+import gnu.io.SerialPortEvent;
+import gnu.io.SerialPortEventListener;
+
 public class manualcontroller implements Initializable {
 
-	
-	
-	ObservableList<Data> alldata;
-	
-	public static ObservableList<String> fm1,fm2,pg1,pg2;
-	
+	public static SimpleStringProperty fm1, fm2, pg1, pg2;
+	public static SimpleStringProperty fm1count, fm2count, pg1count, pg2count;
+
+	int a = 0;
+	double b ;
 	@FXML
 	ToggleButton recordbtn;
-	
+
 	@FXML
 	AnchorPane root;
 
-	public static ObservableList<String> fm1count,fm2count,pg1count,pg2count;
-	
 	@FXML
-	Label lblfm1,lblfm2, pg1value, labp1, labp2,lblfm1max,lblfm2max,lblpg1max,lblpg2max;
+	Label lblfm1, lblfm2, pg1value, labp1, labp2, lblfm1max, lblfm2max,
+			lblpg1max, lblpg2max;
 
 	@FXML
-	Label lblanc, lblanc2, lblconnection,lblrealeas;
+	Label lblanc, lblanc2, lblconnection, lblrealeas;
 
 	@FXML
 	AnchorPane ap, ap1, ap2, ap3, ap4, ap5, ap6, ap7;
@@ -89,13 +95,9 @@ public class manualcontroller implements Initializable {
 	@FXML
 	TextField pr, fc;
 
-	
-	@FXML
-	TableView datatable;
-	
 	@FXML
 	ImageView v1, v2, v3, v4, v5new, liveimg, imgreg1, imgv1, imgreg2, imgv2,
-			imgv3, imgv4, imgv5,onoffimg;
+			imgv3, imgv4, imgv5, onoffimg;
 
 	@FXML
 	ToggleButton valve1, valve2, valve3, valve4, valve5new, valveonoff;
@@ -105,10 +107,14 @@ public class manualcontroller implements Initializable {
 	public Gauge gauge23, gauge23c, gauge20, gauge12, gauge12c, gauge12c1,
 			gauge12c2;
 	writeFormat wrD;
-	
-	 @FXML
-	 Circle concircle;
-	 
+
+	@FXML
+	Circle concircle;
+
+	SerialReader in;
+	@FXML
+	private Label lblpg1c, lblpg2c, lblfm1c, lblfm2c, lblpg1o, lblpg2o,
+			lblfm1o, lblfm2o;
 
 	final BooleanProperty spacePressed = new SimpleBooleanProperty(false);
 	final BooleanProperty rightPressed = new SimpleBooleanProperty(false);
@@ -124,43 +130,83 @@ public class manualcontroller implements Initializable {
 		return (double) tmp / factor;
 	}
 
+	void connectHardware() {
+		if (DataStore.connect_hardware.get()) {
+			lblconnection.setText("Connected with  : " + DataStore.getCom());
+			lblconnection.setTextFill(Paint.valueOf("#939598"));
+			concircle.setStyle("-fx-fill: #939598;");
+
+			try {
+				in = new SerialReader(DataStore.in);
+
+				DataStore.serialPort.removeEventListener();
+				DataStore.serialPort.addEventListener(in);
+				DataStore.serialPort.notifyOnDataAvailable(true);
+
+			} catch (TooManyListenersException e) {
+
+				MyDialoug.showError(102);
+
+			} catch (Exception e) {
+				Platform.runLater(new Runnable() {
+
+					@Override
+					public void run() {
+						// TODO Auto-generated method stub
+
+						MyDialoug.showError(102);
+
+					}
+				});
+
+			}
+
+		} else {
+			lblconnection.setText("Not Connected");
+			lblconnection.setTextFill(Paint.valueOf("#2A91D8"));
+			concircle.setStyle("-fx-fill: #2A91D8;");
+
+			MyDialoug.showError(102);
+
+		}
+
+	}
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		
+
+		/* Manual Controller */
+
 		addShortCut();
 
-		fm1=FXCollections.observableArrayList();
-		fm2=FXCollections.observableArrayList();
-		pg1=FXCollections.observableArrayList();
-		pg2=FXCollections.observableArrayList();
-		fm1count=FXCollections.observableArrayList();
-		fm2count=FXCollections.observableArrayList();
-		pg1count=FXCollections.observableArrayList();
-		pg2count=FXCollections.observableArrayList();
-		
-		
+		fm1 = new SimpleStringProperty("0");
+		fm2 = new SimpleStringProperty("0");
+		pg1 = new SimpleStringProperty("0");
+		pg2 = new SimpleStringProperty("0");
+		fm1count = new SimpleStringProperty("0");
+		fm2count = new SimpleStringProperty("0");
+		pg1count = new SimpleStringProperty("0");
+		pg2count = new SimpleStringProperty("0");
+
 		
 		recordbtn.setOnAction(new EventHandler<ActionEvent>() {
-			
+
 			@Override
 			public void handle(ActionEvent arg0) {
-			
-			if(recordbtn.isSelected())
-			{
-				recordbtn.setText("Pause");
-			}
-			else
-			{
 
-				recordbtn.setText("Record");
-			}
-				
+				if (recordbtn.isSelected()) {
+					recordbtn.setText("Pause");
+				} else {
+
+					recordbtn.setText("Record");
+				}
+
 			}
 		});
-		
-		alldata=FXCollections.observableArrayList();
-		setupMainTableColumns();
-		//addDataToTable();
+
+		connectHardware();
+
+		// addDataToTable();
 		Image image1 = new Image(this.getClass().getResourceAsStream(
 				"/userinput/btnimg.png"));
 		setpr.setGraphic(new ImageView(image1));
@@ -168,15 +214,14 @@ public class manualcontroller implements Initializable {
 
 		Image image = new Image(this.getClass().getResourceAsStream(
 				"/userinput/valve OFF.png"));
-		
+
 		valveonoff.setText("START");
 		recordbtn.setText("Record");
-		valveonoff.setStyle("-fx-background-color: #2A91D8;");
-		Image image2 = new Image(this.getClass()
-				.getResourceAsStream("/userinput/starticon.png"));
+		valveonoff.setStyle("-fx-background-color:  #2A91D8;");
+		Image image2 = new Image(this.getClass().getResourceAsStream(
+				"/userinput/starticon.png"));
 		valveonoff.setGraphic(new ImageView(image2));
-		
-		
+
 		v1.setImage(image);
 		v2.setImage(image);
 		v3.setImage(image);
@@ -190,6 +235,72 @@ public class manualcontroller implements Initializable {
 		valve3s = valve3;
 		valve4s = valve4;
 
+		pg1count.addListener(new ChangeListener() {
+
+			@Override
+			public void changed(ObservableValue observable, Object oldValue,
+					Object newValue) {
+
+				javafx.application.Platform.runLater(new Runnable() {
+
+					@Override
+					public void run() {
+						lblpg1c.setText(pg1count.get());
+					
+					}
+				});
+			}
+		});
+		pg2count.addListener(new ChangeListener() {
+
+			@Override
+			public void changed(ObservableValue observable, Object oldValue,
+					Object newValue) {
+
+				javafx.application.Platform.runLater(new Runnable() {
+
+					@Override
+					public void run() {
+						lblpg2c.setText(pg2count.get());
+					
+					
+					}
+				});
+			}
+		});
+		fm1count.addListener(new ChangeListener() {
+
+			@Override
+			public void changed(ObservableValue observable, Object oldValue,
+					Object newValue) {
+
+				javafx.application.Platform.runLater(new Runnable() {
+
+					@Override
+					public void run() {
+						lblfm1c.setText(fm1count.get());
+					
+					}
+				});
+			}
+		});
+		fm2count.addListener(new ChangeListener() {
+
+			@Override
+			public void changed(ObservableValue observable, Object oldValue,
+					Object newValue) {
+
+				javafx.application.Platform.runLater(new Runnable() {
+
+					@Override
+					public void run() {
+					lblfm2c.setText(fm2count.get());
+						
+					
+					}
+				});
+			}
+		});
 		DataStore.spg2.addListener(new ChangeListener() {
 
 			@Override
@@ -202,7 +313,7 @@ public class manualcontroller implements Initializable {
 					public void run() {
 						// TODO Auto-generated method stub
 						labp2.setText("" + round(DataStore.spg2.get(), 2));
-
+						lblpg2o.setText("" + round(DataStore.spg2.get(), 2));
 					}
 				});
 			}
@@ -219,12 +330,13 @@ public class manualcontroller implements Initializable {
 					public void run() {
 						// TODO Auto-generated method stub
 						labp1.setText("" + round(DataStore.spg1.get(), 2));
+						lblpg1o.setText("" + round(DataStore.spg1.get(), 2));
 
 					}
 				});
 			}
 		});
-		
+
 		DataStore.sfm1.addListener(new ChangeListener() {
 
 			@Override
@@ -236,14 +348,15 @@ public class manualcontroller implements Initializable {
 					@Override
 					public void run() {
 						// TODO Auto-generated method stub
-						int v=(int)DataStore.sfm1.get();
-						lblfm1.setText(""+v);
+						int v = (int) DataStore.sfm1.get();
+						lblfm1.setText("" + v);
 
+						lblfm1o.setText("" + v);
 					}
 				});
 			}
 		});
-		
+
 		DataStore.sfm2.addListener(new ChangeListener() {
 
 			@Override
@@ -255,31 +368,19 @@ public class manualcontroller implements Initializable {
 					@Override
 					public void run() {
 						// TODO Auto-generated method stub
-						int v1=(int)DataStore.sfm2.get();
-						lblfm2.setText(""+v1);
-
+						int v1 = (int) DataStore.sfm2.get();
+						lblfm2.setText("" + v1);
+						lblfm2o.setText("" + v1);
+						
 					}
 				});
 			}
 		});
-		
-		
+
 		// valve1.selectedProperty().bind(DataStore.sv1);
 		// valve2.selectedProperty().bind(DataStore.sv2);
 		// valve3.selectedProperty().bind(DataStore.sv3);
 		// valve4.selectedProperty().bind(DataStore.sv4);
-		if (DataStore.connect_hardware.get()) {
-			lblconnection.setText("Connected with  : " + DataStore.getCom());
-			lblconnection.setTextFill(Paint.valueOf("#939598"));
-			concircle.setStyle("-fx-fill: #939598;");
-			
-		} else {
-			lblconnection.setText("Not Connected");
-			lblconnection.setTextFill(Paint.valueOf("#2A91D8"));
-			concircle.setStyle("-fx-fill: #2A91D8;");
-			MyDialoug.showError(102);
-			
-		}
 
 		DataStore.connect_hardware.addListener(new ChangeListener<Boolean>() {
 
@@ -295,6 +396,7 @@ public class manualcontroller implements Initializable {
 				} else {
 					lblconnection.setText("Not Connected");
 					lblconnection.setTextFill(Paint.valueOf("#ff0000"));
+					MyDialoug.showError(102);
 				}
 
 			}
@@ -516,16 +618,14 @@ public class manualcontroller implements Initializable {
 			public void handle(ActionEvent arg0) {
 
 				if (valveonoff.isSelected()) {
-					
+
 					valveonoff.setText("STOP");
-					valveonoff.setStyle("-fx-background-color: #939598;");
+					valveonoff.setStyle("-fx-background-color: #939598");
 					Image image = new Image(this.getClass()
 							.getResourceAsStream("/userinput/stopicon.png"));
-					
-					
 
 					valveonoff.setGraphic(new ImageView(image));
-					
+
 					liveimg.setVisible(true);
 					wrD = new writeFormat();
 					wrD.addChar('S');
@@ -540,8 +640,7 @@ public class manualcontroller implements Initializable {
 					Image image = new Image(this.getClass()
 							.getResourceAsStream("/userinput/starticon.png"));
 					valveonoff.setGraphic(new ImageView(image));
-					
-					
+
 					liveimg.setVisible(false);
 					imgreg1.setVisible(false);
 					imgreg2.setVisible(false);
@@ -551,14 +650,11 @@ public class manualcontroller implements Initializable {
 					imgv4.setVisible(false);
 					imgv5.setVisible(false);
 
-					
-					
-					
 					wrD = new writeFormat();
 					wrD.addChar('X');
 					wrD.addChar('M');
 					wrD.addBlank(3);
-					//wrD.stopTN();
+					// wrD.stopTN();
 					wrD.addLast();
 					sendData(wrD);
 
@@ -567,78 +663,14 @@ public class manualcontroller implements Initializable {
 			}
 		});
 
-	
-		
-	/*
-		 * 
-		 * //pressure regulator gauge23 = GaugeBuilder.create()
-		 * .skinType(SkinType.SIMPLE_DIGITAL).maxSize(100, 100)
-		 * 
-		 * .foregroundBaseColor(Color.rgb(0,0,0)) .barColor(Color.rgb(0,0, 0))
-		 * .maxValue(Integer.parseInt(DataStore.getPr())) .animated(true)
-		 * .build(); ap.getChildren().add(gauge23);
-		 * 
-		 * gauge20 = GaugeBuilder.create() .skinType(SkinType.LEVEL)
-		 * .title("Capacity") .titleColor(Color.WHITE) .animated(true)
-		 * .maxValue(Integer.parseInt(DataStore.getFc()))
-		 * .gradientBarEnabled(true) .maxSize(140, 200) .gradientBarStops(new
-		 * Stop(0.0, Color.RED), new Stop(0.25, Color.ORANGE), new Stop(0.5,
-		 * Color.YELLOW), new Stop(0.75, Color.YELLOWGREEN), new Stop(1.0,
-		 * Color.LIME)) .build();
-		 * 
-		 * ap1.getChildren().add(gauge20); // gauge23c = GaugeBuilder.create()
-		 * .skinType(SkinType.SIMPLE_DIGITAL).maxSize(100, 100)
-		 * .maxValue(Integer.parseInt(DataStore.getFc()))
-		 * .foregroundBaseColor(Color.rgb(0,0,0)) .barColor(Color.rgb(0,0, 0))
-		 * .unit("KPH") .animated(true) .build();
-		 * ap2.getChildren().add(gauge23c);
-		 * 
-		 * //...... gauge12 = GaugeBuilder.create() .skinType(SkinType.KPI)
-		 * .foregroundBaseColor(Color.BLACK) .needleColor(Color.BLACK)
-		 * .barBackgroundColor(Color.GREEN)
-		 * .maxValue(Integer.parseInt(DataStore.getFm1())) .animated(true)
-		 * //.threshold(75) .maxSize(100, 100) .build();
-		 * ap3.getChildren().add(gauge12);
-		 * gauge12.valueProperty().bind(DataStore.sfm1);
-		 * fm1value.textProperty().bind(DataStore.ssfm1);
-		 * 
-		 * 
-		 * gauge12c = GaugeBuilder.create() .skinType(SkinType.KPI)
-		 * .foregroundBaseColor(Color.BLACK) .needleColor(Color.BLACK)
-		 * .animated(true) .maxValue(Integer.parseInt(DataStore.getFm2())) //
-		 * .threshold(75) .maxSize(100, 100) .build();
-		 * ap4.getChildren().add(gauge12c);
-		 * gauge12c.valueProperty().bind(DataStore.sfm2);
-		 * fm2value.textProperty().bind(DataStore.ssfm2);
-		 * 
-		 * gauge12c1 = GaugeBuilder.create() .skinType(SkinType.KPI)
-		 * .foregroundBaseColor(Color.BLACK) .needleColor(Color.BLACK)
-		 * .animated(true) //.threshold(75)
-		 * 
-		 * .maxValue(Integer.parseInt(DataStore.getPg2())) .maxSize(100, 100)
-		 * .build(); gauge12c1.valueProperty().bind(DataStore.spg2);
-		 * pg1value.textProperty().bind(DataStore.sspg1);
-		 * ap5.getChildren().add(gauge12c1);
-		 * 
-		 * gauge12c2 = GaugeBuilder.create() .skinType(SkinType.KPI)
-		 * .foregroundBaseColor(Color.BLACK) .needleColor(Color.BLACK)
-		 * .animated(true) .maxValue(Integer.parseInt(DataStore.getPg1())) //
-		 * .threshold(75) .maxSize(100, 100) .build();
-		 * ap6.getChildren().add(gauge12c2);
-		 */
+		int prval = Integer.parseInt(DataStore.getPr());
 
-		// NEW Gauge
-
-		int prval=Integer.parseInt(DataStore.getPr());
-		
-		List<Double> da=new ArrayList<>();
-		for(int j=1;j<=6;j++)
-		{
-			double d=prval/6;
-			da.add(d*j);
+		List<Double> da = new ArrayList<>();
+		for (int j = 1; j <= 6; j++) {
+			double d = prval / 6;
+			da.add(d * j);
 		}
 
-		
 		Gauge gauge1 = GaugeBuilder
 				.create()
 				.skinType(SkinType.SIMPLE)
@@ -652,33 +684,28 @@ public class manualcontroller implements Initializable {
 						new Section(0, da.get(0), "0", Color.web("#E7E7E8")),
 						new Section(da.get(0), da.get(1), "1", Color
 								.web("#C4D0E2")),
-						new Section(da.get(1), da.get(2), "2", Color.web("#A4BBDB")),
-						new Section(da.get(2), da.get(3), "3", Color.web("#83A9D6")),
+						new Section(da.get(1), da.get(2), "2", Color
+								.web("#A4BBDB")),
+						new Section(da.get(2), da.get(3), "3", Color
+								.web("#83A9D6")),
 						new Section(da.get(3), da.get(4), "4", Color
 								.web("#5F99D0")),
 						new Section(da.get(4), prval, "5", Color.web("#228CCC")))
 				// .title("700")
 				// .value(20)
-						.maxValue(prval)
-				.animated(true).build();
-		
-					
-		
-			
-		
-int fcval=Integer.parseInt(DataStore.getFc());
-		
-		List<Double> dfc=new ArrayList<>();
-		for(int j=1;j<=6;j++)
-		{
-			double d=fcval/6;
-			dfc.add(d*j);
+				.maxValue(prval).animated(true).build();
+
+		int fcval = Integer.parseInt(DataStore.getFc());
+
+		List<Double> dfc = new ArrayList<>();
+		for (int j = 1; j <= 6; j++) {
+			double d = fcval / 6;
+			dfc.add(d * j);
 		}
 		gauge1.setPrefSize(ap.getPrefWidth(), ap.getPrefHeight());
 		ap.getChildren().add(gauge1);
 
-		Gauge gauge2 = GaugeBuilder.create()
-				.skinType(SkinType.SIMPLE)
+		Gauge gauge2 = GaugeBuilder.create().skinType(SkinType.SIMPLE)
 				.skinType(SkinType.SIMPLE)
 				.needleColor(Color.WHITE)
 				// Dial Color
@@ -687,18 +714,21 @@ int fcval=Integer.parseInt(DataStore.getFc());
 				.foregroundBaseColor(Color.WHITE)
 				// Value Color
 				.maxValue(fcval)
-				
+
 				.sections(
 						new Section(0, dfc.get(0), "0", Color.web("#E7E7E8")),
 						new Section(dfc.get(0), dfc.get(1), "1", Color
 								.web("#C4D0E2")),
-						new Section(dfc.get(1), dfc.get(2), "2", Color.web("#A4BBDB")),
-						new Section(dfc.get(2), dfc.get(3), "3", Color.web("#83A9D6")),
+						new Section(dfc.get(1), dfc.get(2), "2", Color
+								.web("#A4BBDB")),
+						new Section(dfc.get(2), dfc.get(3), "3", Color
+								.web("#83A9D6")),
 						new Section(dfc.get(3), dfc.get(4), "4", Color
 								.web("#5F99D0")),
-						new Section(dfc.get(4), fcval, "5", Color.web("#228CCC")))
-				
-						.animated(true).build();
+						new Section(dfc.get(4), fcval, "5", Color
+								.web("#228CCC")))
+
+				.animated(true).build();
 		gauge2.setPrefSize(ap2.getPrefWidth(), ap2.getPrefHeight());
 		ap2.getChildren().add(gauge2);
 
@@ -720,7 +750,8 @@ int fcval=Integer.parseInt(DataStore.getFc());
 				.build();
 
 		gauge3.setPrefSize(ap3.getPrefWidth(), ap3.getPrefHeight());
-		lblfm1max.setText("FM1 : "+Double.parseDouble(DataStore.getFm1())+" (sccm)");
+		lblfm1max.setText("FM1 : " + Double.parseDouble(DataStore.getFm1())
+				+ " (sccm)");
 		gauge3.setMaxValue(Double.parseDouble(DataStore.getFm1()));
 		gauge3.valueProperty().bind(DataStore.sfm1);
 
@@ -741,14 +772,15 @@ int fcval=Integer.parseInt(DataStore.getFc());
 				.threshold(35)
 				.shadowsEnabled(true)
 				.gradientBarEnabled(true)
-				
+
 				.gradientBarStops(new Stop(0.00, Color.BLUE),
 						new Stop(0.25, Color.CYAN), new Stop(0.50, Color.LIME),
 						new Stop(0.75, Color.YELLOW), new Stop(1.00, Color.RED))
 				.build();
 
 		gauge4.setMaxValue(Double.parseDouble(DataStore.getFm2()));
-		lblfm2max.setText("FM2 : "+Double.parseDouble(DataStore.getFm2())+" (sccm)");
+		lblfm2max.setText("FM2 : " + Double.parseDouble(DataStore.getFm2())
+				+ " (sccm)");
 		gauge4.valueProperty().bind(DataStore.sfm2);
 		gauge4.setPrefSize(ap4.getPrefWidth(), ap4.getPrefHeight());
 		ap4.getChildren().add(gauge4);
@@ -777,8 +809,9 @@ int fcval=Integer.parseInt(DataStore.getFc());
 
 		gauge5.setMaxValue(Integer.parseInt(DataStore.getPg2()));
 		gauge5.valueProperty().bind(DataStore.spg2);
-		lblpg2max.setText("PG2"+"\n"+Integer.parseInt(DataStore.getPg2())+" (psi)");
-		
+		lblpg2max.setText("PG2" + "\n" + Integer.parseInt(DataStore.getPg2())
+				+ " (psi)");
+
 		gauge5.setPrefSize(ap6.getPrefWidth(), ap6.getPrefHeight());
 		ap6.getChildren().add(gauge5);
 
@@ -803,7 +836,8 @@ int fcval=Integer.parseInt(DataStore.getFc());
 				.maxValue(Integer.parseInt(DataStore.getPg1())).build();
 
 		gauge6.setMaxValue(Integer.parseInt(DataStore.getPg1()));
-		lblpg1max.setText("PG1"+"\n"+Integer.parseInt(DataStore.getPg1())+" (psi)");
+		lblpg1max.setText("PG1" + "\n" + Integer.parseInt(DataStore.getPg1())
+				+ " (psi)");
 		gauge6.setPrefSize(ap5.getPrefWidth(), ap5.getPrefHeight());
 		gauge6.valueProperty().bind(DataStore.spg1);
 		// pg2value.textProperty().bind(DataStore.sspg2);
@@ -851,26 +885,22 @@ int fcval=Integer.parseInt(DataStore.getFc());
 			}
 		});
 	}
-	
 
 	void addShortCut() {
-		 KeyCombination backevent = new KeyCodeCombination(KeyCode.B, KeyCombination.CONTROL_ANY);
-			
-			root.setOnKeyPressed(new EventHandler<KeyEvent>() {
-				@Override
-				public void handle(KeyEvent ke) {
-					
-					if(backevent.match(ke))
-					{
+		KeyCombination backevent = new KeyCodeCombination(KeyCode.B,
+				KeyCombination.CONTROL_ANY);
 
-						
-						Openscreen.open("/application/first.fxml");
-					}
-					
+		root.setOnKeyPressed(new EventHandler<KeyEvent>() {
+			@Override
+			public void handle(KeyEvent ke) {
+
+				if (backevent.match(ke)) {
+
+					Openscreen.open("/application/first.fxml");
 				}
-			});
 
-			
+			}
+		});
 
 	}
 
@@ -879,8 +909,9 @@ int fcval=Integer.parseInt(DataStore.getFc());
 		try {
 			imgreg1.setVisible(true);
 			double d1 = Double.parseDouble(pr.getText());
-			double d=(double)65535*d1 / Integer.parseInt(DataStore.getPr());
-			System.out.println("Sending  : "+(int)d);
+			double d = (double) 65535 * d1
+					/ Integer.parseInt(DataStore.getPr());
+			System.out.println("Sending  : " + (int) d);
 			List<Integer> ss = getValueList((int) d);
 			wrD = new writeFormat();
 			wrD.addChar('P');
@@ -904,8 +935,9 @@ int fcval=Integer.parseInt(DataStore.getFc());
 			double d1 = Double.parseDouble(fc.getText());
 			// double d=Double.parseDouble(pr.getText());
 
-			double d=(double)65535*d1 / Integer.parseInt(DataStore.getFc());
-			System.out.println("Sending  : "+(int)d);
+			double d = (double) 65535 * d1
+					/ Integer.parseInt(DataStore.getFc());
+			System.out.println("Sending  : " + (int) d);
 
 			List<Integer> ss = getValueList((int) d);
 			wrD = new writeFormat();
@@ -999,254 +1031,167 @@ int fcval=Integer.parseInt(DataStore.getFc());
 
 		return ls;
 	}
-    public static class Data {
-    	 
-        private  SimpleStringProperty title;
-        private  SimpleStringProperty v1,v2,v3,v4;
-        
-        public Data(String title, String v1, String v2, String v3,String v4) {
-        	
-            this.title = new SimpleStringProperty(title);
 
-        	this.v1 = new SimpleStringProperty( v1);
-        	this.v2 = new SimpleStringProperty( v2);
-        	this.v3 = new SimpleStringProperty( v3);
-        	this.v4 = new SimpleStringProperty( v4);
-        	
-        }
-        
-        public void setData(int i,String data)
-        {
-        	if(i==1)
-        	{
-        		v1.set(data);
-        	}
-        	else if(i==2)
-        	{
+	public class SerialReader implements SerialPortEventListener {
 
-        		v2.set(data);
-        	}
-        	else if(i==3)
-        	{
+		InputStream in;
+		int ind = 0;
+		List<Integer> readData = new ArrayList<Integer>();
 
-        		v3.set(data);
-        	}
-        	else if(i==4)
-        	{
+		public SerialReader(InputStream in) {
+			this.in = in;
+			DataStore.getconfigdata();
+		}
 
-        		v4.set(data);
-        	}        		
-        }
-        
-        public Data()
-        {
-        	this.title = new SimpleStringProperty();
+		public void serialEvent(SerialPortEvent arg0) {
+			int data;
+			try {
+				int len = 0;
+				char prev = '\0';
+				// System.out.println("Reading Started:");
 
-        	this.v1 = new SimpleStringProperty();
-        	this.v2 = new SimpleStringProperty();
-        	this.v3 = new SimpleStringProperty();
-        	this.v4 = new SimpleStringProperty();
-            
-        }
-        
-        public final String getTitle()
-        {
-        	return title.get();
-        }
-        public final void setTitle(final String title)
-        {
-        	this.title.set(title);
-        }
-        
-		public final String getV3() {
-			return this.v3.get();
-		}
-		public final void setV3(final String v3) {
-			this.v3.set(v3);
-		}
- 
-		public final String getV4() {
-			return this.v4.get();
-		}
-		public final void setV4(final String v4) {
-			this.v4.set(v4);
-		}
-		
-		public final String getV1() {
-			return this.v1.get();
-		}
-		public final void setV1(final String V1) {
-			this.v1.set(V1);
-		}
-		public final String getV2() {
-			return this.v2.get();
-		}
-		public final void setV2(final String v2) {
-			this.v2.set(v2);
-		}
- 
-    }
-    
-    
- 
-	  private void setupMainTableColumns() {
-	    	
-			pg2.addListener(new ListChangeListener<String>() {
+				while ((data = in.read()) > -1) {
 
-				@Override
-				public void onChanged(
-						javafx.collections.ListChangeListener.Change<? extends String> arg0) {
-				
-					if(recordbtn.isSelected())
-					{
-						
-					addDataToTable();
+					if (data == '\n' && prev == 'E') {
+						break;
 					}
-				}
-			});
+					if (len > 0 || (data == '\r' && prev == '\n')) {
+						readData.add(data);
 
-	        
-			TableColumn<Data, LocalDate> dateCol = new TableColumn<>("Title");
-			dateCol.setPrefWidth(300);
-			dateCol.setCellValueFactory(new PropertyValueFactory<>("title"));
-
-			TableColumn<Data, Double> value1Col = new TableColumn<>("value1");
-			value1Col.setPrefWidth(255);
-			value1Col.setCellValueFactory(new PropertyValueFactory<>("v1"));
-			
-			TableColumn<Data, Double> value2Col = new TableColumn<>("Count1");
-			value2Col.setPrefWidth(255);
-			value2Col.setCellValueFactory(new PropertyValueFactory<>("v2"));
-
-			TableColumn<Data, Double> value3Col = new TableColumn<>("Value2");
-			value3Col.setPrefWidth(255);
-			value3Col.setCellValueFactory(new PropertyValueFactory<>("v3"));
-
-			TableColumn<Data, Double> value4Col = new TableColumn<>("Count2");
-			value4Col.setPrefWidth(255);
-			value4Col.setCellValueFactory(new PropertyValueFactory<>("v4"));
-
-			datatable.setStyle("-fx-cell-size: 50px;");
-			datatable.getColumns().addAll( dateCol, value1Col, value2Col, value3Col, value4Col);
-			datatable.setItems(alldata);
-
-	    }
-
-		public static class FormattedTableCellFactory<S, T> implements Callback<TableColumn<S, T>, TableCell<S, T>> {
-			
-			private TextAlignment alignment = TextAlignment.LEFT;
-			private Format format;
-
-			public FormattedTableCellFactory() {
-			}
-
-			public FormattedTableCellFactory( TextAlignment alignment) {
-			}
-			
-			public TextAlignment getAlignment() {
-				return alignment;
-			}
-
-			public void setAlignment(TextAlignment alignment) {
-				this.alignment = alignment;
-			}
-
-			public Format getFormat() {
-				return format;
-			}
-
-			public void setFormat(Format format) {
-				this.format = format;
-			}
-
-			@Override
-			@SuppressWarnings("unchecked")
-			public TableCell<S, T> call(TableColumn<S, T> p) {
-				TableCell<S, T> cell = new TableCell<S, T>() {
-					@Override
-					public void updateItem(Object item, boolean empty) {
-						if (item == getItem()) {
-							return;
-						}
-						super.updateItem((T) item, empty);
-						if (item == null) {
-							super.setText(null);
-							super.setGraphic(null);
-						} else if (format != null) {
-							super.setText(format.format(item));
-						} else if (item instanceof Node) {
-							super.setText(null);
-							super.setGraphic((Node) item);
-						} else {
-							super.setText(item.toString());
-							super.setGraphic(null);
-						}
+						len++;
 					}
-				};
-				cell.setTextAlignment(alignment);
-				switch (alignment) {
-				case CENTER:
-					cell.setAlignment(Pos.CENTER);
-					break;
-				case RIGHT:
-					cell.setAlignment(Pos.CENTER_RIGHT);
-					break;
-				default:
-					cell.setAlignment(Pos.CENTER_LEFT);
-					break;
-				}
-				return cell;
-			}
-		}
-	
-		
-		void addDataToTable()
-		{
-			alldata.clear();
-			
-			List<String> lab=new ArrayList<String>();
-			lab.add("Flow meter 1");
-			lab.add("Flow meter 2");
-			lab.add("Pressure Gauge 1");
-			lab.add("Pressure Gauge 2");
-			int in=0;
-		
-			for(int i=0;i<4;i++)
-			{
-				Data d=new Data();
-				d.setTitle(lab.get(i));	
-				alldata.add(d);
-			}
-			
-			int temp=0;
-			int itemp=1;
-			for(int i=fm1.size()-1;i>=0;i--)
-			{
-				if(temp>=2)
-				{
-					break;
-				}
-				System.out.println("fm1 : "+fm1.size()+" I : "+i);
+					prev = (char) data;
+					System.out.print(prev);
 
-				System.out.println("fm1cout : "+fm1count.size()+" I : "+i);
-				alldata.get(0).setData(itemp, fm1.get(i));
-				alldata.get(1).setData(itemp, fm2.get(i));
-				alldata.get(2).setData(itemp, pg1.get(i));
-				alldata.get(3).setData(itemp, pg2.get(i));
+					// System.out.print(new String(buffer,0,len));
+				}
+
+				for (int i = 1; i < readData.size(); i++) {
 				
-				itemp++;
-				
-				alldata.get(0).setData(itemp, fm1count.get(i));
-				alldata.get(1).setData(itemp, fm2count.get(i));
-				alldata.get(2).setData(itemp, pg1count.get(i));
-				alldata.get(3).setData(itemp, pg2count.get(i));
-				
-				
-				itemp++;
-				temp++;
+					if (readData.get(i) == 83
+							&& readData.get(i + 1) == (int) 'C') {
+						// .. for fm1
+
+						System.out.println("DDDDAAAAAAAA");
+						System.out.println("In");
+						int a1, a2, a3;
+						a1 = readData.get(i + 2);
+						a2 = readData.get(i + 3);
+						a3 = readData.get(i + 4);
+						System.out.println("\nFlow Meter 1 - >  bits  : " + a1
+								+ " : " + a2 + " : " + a3);
+
+						a = a1 << 16;
+						a2 = a2 << 8;
+						a = a | a2;
+						a = a | a3;
+
+						// System.out.println("Flow Meter 1 :  ... :"+DataStore.getFm1());
+						b= (double) a
+								* Integer.parseInt(DataStore.getFm1()) / 65535;
+						System.out.println("Flow Meter 1 :  ... :" + b);
+						DataStore.sfm1.set(b);
+					
+						fm1count.set("" + a);
+
+							
+						if (a > 62200) {
+							// SkadaController.valve1s.selectedProperty().bind(DataStore.sv1);
+							System.out.println("Max flow reach to fm1");
+						}
+						// .... for fm2
+
+						a = 0;
+						a1 = readData.get(i + 5);
+						a2 = readData.get(i + 6);
+						a3 = readData.get(i + 7);
+
+						System.out.println("\nFlow Meter 2 - >  bits  : " + a1
+								+ " : " + a2 + " : " + a3);
+
+						a = a1 << 16;
+						a2 = a2 << 8;
+						a = a | a2;
+						a = a | a3;
+
+						b = (double) a * Integer.parseInt(DataStore.getFm2())
+								/ 65535;
+						System.out.println("Flow Meter 2 :  ... :" + b);
+						DataStore.sfm2.set(b);
+					
+						fm2count.set("" + a);
+
+					
+
+						// .... for pg1
+
+						a = 0;
+						a1 = readData.get(i + 8);
+						a2 = readData.get(i + 9);
+						a3 = readData.get(i + 10);
+						System.out.println("\nPressure G1  -> Bit : " + a1
+								+ " : " + a2 + " : " + a3);
+
+						a = a1 << 16;
+						a2 = a2 << 8;
+						a = a | a2;
+						a = a | a3;
+
+						b = (double) a * Integer.parseInt(DataStore.getPg1())
+								/ 65535;
+						System.out.println("Pressure Gauge 1 :  ... :" + b);
+						DataStore.spg1.set(b);
+					    pg1count.set("" + a);
+
+								
+						if (a > 62200) {
+							// SkadaController.valve3s.selectedProperty().bind(DataStore.sv3);
+							System.out.println("Max pressure reach to PG1");
+						}
+
+						// .... for pg2
+
+						a = 0;
+						a1 = readData.get(i + 11);
+						a2 = readData.get(i + 12);
+						a3 = readData.get(i + 13);
+						System.out.println("\nPressure G2  -> Bit : " + a1
+								+ " : " + a2 + " : " + a3);
+
+						a = a1 << 16;
+						a2 = a2 << 8;
+						a = a | a2;
+						a = a | a3;
+						b = (double) a * Integer.parseInt(DataStore.getPg2())
+								/ 65535;
+						System.out
+								.println("Pressure Gauge 2 :  original   reading  : "
+										+ a + "... :" + b);
+						DataStore.spg2.set(b);
+
+						pg2count.set("" + a);
+
+							
+						i = i + 16;
+
+					}
+
+					readData.clear();
+					break;
+
+				}
+
+			} catch (IOException e) {
+
+				DataStore.serialPort.removeEventListener();
+				MyDialoug.showErrorHome(103);
+
+				System.out.println("Live screen error :" + e.getMessage());
+				e.printStackTrace();
 			}
-			
-			
+
 		}
+
+	}
 
 }
