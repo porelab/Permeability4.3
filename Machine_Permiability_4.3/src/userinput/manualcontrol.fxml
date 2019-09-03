@@ -192,7 +192,7 @@
                </styleClass>
             </Label>
             <Label fx:id="lblrealeas" layoutX="1199.0" layoutY="325.0" text="Vent to atmosphere" visible="false" />
-            <ToggleButton fx:id="recordbtn" layoutX="1188.0" layoutY="470.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="99.0" styleClass="toggle-buttonm" text="Record" textFill="WHITE" AnchorPane.leftAnchor="1245.0" AnchorPane.topAnchor="483.0">
+            <ToggleButton fx:id="recordbtn" layoutX="1188.0" layoutY="470.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="99.0" styleClass="toggle-buttonm" text="Record" textFill="WHITE" visible="false" AnchorPane.leftAnchor="1245.0" AnchorPane.topAnchor="483.0">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font></ToggleButton>
@@ -309,5 +309,6 @@
          </children>
       </AnchorPane>
       <Line endX="1375.0" layoutX="10.0" layoutY="10.0" stroke="#5280c6" strokeWidth="2.0" AnchorPane.topAnchor="560.0" />
+      <Rectangle fx:id="rectmain" arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="430.0" layoutX="10.0" layoutY="10.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1387.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="130.0" />
    </children>
 </AnchorPane>
