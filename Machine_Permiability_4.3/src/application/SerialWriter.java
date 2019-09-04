@@ -1,7 +1,8 @@
 package application;
 
 import java.io.OutputStream;
-// for sending data from pc to mcu
+
+//for sending data from pc to mcu
 public class SerialWriter implements Runnable {
 	OutputStream out;
 	writeFormat wrt;
@@ -21,6 +22,10 @@ public class SerialWriter implements Runnable {
 
 	public void run() {
 		try {
+
+			long time=System.currentTimeMillis();
+			
+			System.out.println("\n Preparing  : "+ wrt.showDataGet());
 			Thread.sleep(sleep);
 			try {
 			for (Integer dout : wrt.wData) {
@@ -34,6 +39,7 @@ public class SerialWriter implements Runnable {
 				
 
 			}
+			System.out.println("\n Now sending  : "+ wrt.showDataGet()+" after  :"+(System.currentTimeMillis()-time));
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

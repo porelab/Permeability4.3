@@ -316,7 +316,7 @@ public class DataStore
 
 					
 					DataStore.serialPort.setDTR(true);
-					try{Thread.sleep(1000);}
+					try{Thread.sleep(200);}
 					catch(Exception e)
 					{
 						e.printStackTrace();
@@ -329,7 +329,7 @@ public class DataStore
 					
 					//wrd.setLatching('1', '0', '0', '1', '0', '1', '1', '1');
 					wrd.addLast();
-					sendData(wrd,2000);
+					sendData(wrd,500);
 					
 					
 					
@@ -340,7 +340,7 @@ public class DataStore
 					wrd1.addChar('1');
 					wrd1.addChar(getPressureCrossover().charAt(0));
 					wrd1.addLast();
-					sendData(wrd1,3000);
+					sendData(wrd1,700);
 					
 					
 					writeFormat	wrd2 = new writeFormat();
@@ -350,7 +350,7 @@ public class DataStore
 					wrd2.addChar('1');
 					wrd2.addChar(getFlowCrossover().charAt(0));
 					wrd2.addLast();
-					sendData(wrd2,4000);
+					sendData(wrd2,900);
 					
 					
 				}

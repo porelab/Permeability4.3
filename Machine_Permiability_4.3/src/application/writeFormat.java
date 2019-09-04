@@ -1,12 +1,26 @@
 package application;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
-//for package creation for sending data from PC to MCU
+
+// for package creation for sending data from PC to MCU
+
 public class writeFormat {
 
-
+	public String showDataGet()
+	{
+		String dd="";
+		for(int i=0;i<wData.size();i++)
+		{
+			int j=wData.get(i);
+			char c=(char)j;
+			dd=dd+c;
+		}
+		
+		return dd;
+	}
 	public List<Integer> wData = new ArrayList<Integer>();
 	
 	public writeFormat()
