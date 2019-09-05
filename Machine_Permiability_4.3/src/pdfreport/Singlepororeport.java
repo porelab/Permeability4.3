@@ -42,7 +42,7 @@ public class Singlepororeport {
 
 	String notes;
 	String companyname;
-	String imgpath;
+	String imgpath,imgpath1;
 	List<String> graphs;
 	DatareadN d;
 
@@ -148,11 +148,12 @@ public class Singlepororeport {
 	}
 	/* Main Function Create Report */
 	public void Report(String path, DatareadN d, String notes, String comname,
-			String imgpath, List<String> graphs, Boolean btabledata) {
+			String imgpath, List<String> graphs, Boolean btabledata, Boolean bcoverpage,String imgpath1) {
 
 		this.companyname = comname;
 		this.notes = notes;
 		this.imgpath = imgpath;
+		this.imgpath1 = imgpath1;
 		this.graphs = graphs;
 		this.d = d;
 
@@ -164,7 +165,10 @@ public class Singlepororeport {
 			// write to document
 			document.open();
 
-			coverpage(d);
+			if (bcoverpage == true) {
+				coverpage(d);
+			}
+		
 
 			document.newPage();
 			HeaderFooterPageEvent event = new HeaderFooterPageEvent();
@@ -236,6 +240,7 @@ public class Singlepororeport {
 		try {
 
 			Image img = Image.getInstance("dddd (2).jpg");
+			
 			img.scaleAbsolute(800, 10);
 			img.setAbsolutePosition(0f, 832f);
 			document.add(img);
@@ -256,7 +261,15 @@ public class Singlepororeport {
 
 		try {
 
-			Image img1 = Image.getInstance("f1.jpg");
+			//Image img1 = Image.getInstance("f1.jpg");
+			Image img1;
+			if (!imgpath1.equals("")) {
+			 img1 = Image.getInstance(imgpath1);
+			}
+			else
+			{
+				img1 = Image.getInstance("f1.jpg");
+			}
 			img1.scaleAbsolute(595, 500);
 			img1.setAbsolutePosition(0f, 200f);
 			document.add(img1);

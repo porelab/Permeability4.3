@@ -18,6 +18,8 @@ import pdfreport.Multiplepororeport;
 import pdfreport.Singlepororeport;
 import toast.MyDialoug;
 import toast.Toast;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -35,108 +37,135 @@ import javafx.stage.Stage;
 public class PdfselectionController implements Initializable {
 
 	@FXML
-	Button btncancel,pdfsave,btnbrows,excelsave;
-	
-	@FXML 
+	Button btncancel, pdfsave, btnbrows, excelsave, btnbrows1;
+
+	@FXML
 	TextField txtcomname;
-	
+
 	@FXML
 	TextArea txtnotes;
-	
-	@FXML
-	CheckBox chkrow,flowvspre;
 
-	 @FXML
-	 ImageView pic;
-	
-	 String imgpath="";
-	 
-	 @FXML
-	 javafx.scene.control.Label lblbrowse;
-	 
-	 List<String> graphs;
-	 
-	 
+	@FXML
+	CheckBox chkrow, flowvspre, chkcoverpage;
+
+	@FXML
+	ImageView pic, pic1;
+
+	String imgpath = "", imgpath1 = "";
+
+	@FXML
+	javafx.scene.control.Label lblbrowse;
+
+	List<String> graphs;
+	boolean bchkcoverpage, bchkrowdata, bflowvspre;
+
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
 		
-		graphs=new ArrayList<String>();
-		
-if(ReportController.list_d.size()>1)
-{
-	
-	lblbrowse.setVisible(false);
-	btnbrows.setVisible(false);
-	excelsave.setVisible(false);
-}
-		
-		
+		bchkcoverpage = true;
+		chkcoverpage.selectedProperty().addListener(
+				new ChangeListener<Boolean>() {
+
+					@Override
+					public void changed(
+							ObservableValue<? extends Boolean> arg0,
+							Boolean arg1, Boolean arg2) {
+						if (arg2) {
+							bchkcoverpage = true;
+							pic1.setVisible(true);
+							btnbrows1.setVisible(true);
+							
+						} else {
+							bchkcoverpage = false;
+							btnbrows1.setVisible(false);
+							pic1.setVisible(false);
+
+						}
+
+					}
+				});
+
+		graphs = new ArrayList<String>();
+
+		if (ReportController.list_d.size() > 1) {
+
+			lblbrowse.setVisible(false);
+			btnbrows.setVisible(false);
+			excelsave.setVisible(false);
+		}
+
 		txtnotes.setText("The following test Procedure is based on ASTM D737-96 (Standard Test Method for Pore Size Characterization.)");
-		
+
 		btncancel.setOnAction(new EventHandler<ActionEvent>() {
-			
+
 			@Override
 			public void handle(ActionEvent event) {
 				// TODO Auto-generated method stub
 				MyDialoug.closeDialoug();
 			}
 		});
-		
-	excelsave.setOnAction(new EventHandler<ActionEvent>() {
-			
+
+		excelsave.setOnAction(new EventHandler<ActionEvent>() {
+
 			@Override
 			public void handle(ActionEvent arg0) {
 				// TODO Auto-generated method stub
-				if(!txtcomname.getText().equals(""))
-				{
-				MyDialoug.closeDialoug();
-				try {
-					ExcelReport e=new ExcelReport();
-					e.exportToExcel(ReportController.pdffilepath.getPath()+".xlsx", ReportController.list_d.get(0), txtnotes.getText(),txtcomname.getText());
-				
-					Runtime.getRuntime().exec("rundll32 url.dll,FileProtocolHandler " + ReportController.pdffilepath.getAbsolutePath()+".xlsx");
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				}
-				else {
-					Toast.makeText(Main.mainstage, "Please enter companyname", 1500, 500, 500);
+				if (!txtcomname.getText().equals("")) {
+					MyDialoug.closeDialoug();
+					try {
+						ExcelReport e = new ExcelReport();
+						e.exportToExcel(ReportController.pdffilepath.getPath()
+								+ ".xlsx", ReportController.list_d.get(0),
+								txtnotes.getText(), txtcomname.getText());
+
+						Runtime.getRuntime().exec(
+								"rundll32 url.dll,FileProtocolHandler "
+										+ ReportController.pdffilepath
+												.getAbsolutePath() + ".xlsx");
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				} else {
+					Toast.makeText(Main.mainstage, "Please enter companyname",
+							1500, 500, 500);
 
 				}
 
 			}
 		});
-			
+
 		pdfsave.setOnAction(new EventHandler<ActionEvent>() {
-			
+
 			@Override
 			public void handle(ActionEvent event) {
 				// TODO Auto-generated method stub
-			
-				if(!txtcomname.getText().equals(""))
-				{
-				MyDialoug.closeDialoug();
-			     saveReport(ReportController.pdffilepath.getPath()+".pdf");
-	             
-	         	try {
-					Runtime.getRuntime().exec("rundll32 url.dll,FileProtocolHandler " + ReportController.pdffilepath.getAbsolutePath()+".pdf");
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				}
-				else {
-					Toast.makeText(Main.mainstage, "Please enter companyname", 1500, 500, 500);
+
+				if (!txtcomname.getText().equals("")) {
+					MyDialoug.closeDialoug();
+					saveReport(ReportController.pdffilepath.getPath() + ".pdf");
+
+					try {
+						Runtime.getRuntime().exec(
+								"rundll32 url.dll,FileProtocolHandler "
+										+ ReportController.pdffilepath
+												.getAbsolutePath() + ".pdf");
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				} else {
+					Toast.makeText(Main.mainstage, "Please enter companyname",
+							1500, 500, 500);
 
 				}
 
 			}
 		});
-		
+
 		btnbrows.setOnAction(new EventHandler<ActionEvent>() {
-			
+
 			@Override
 			public void handle(ActionEvent event) {
 				// TODO Auto-generated method stub
@@ -144,74 +173,83 @@ if(ReportController.list_d.size()>1)
 			}
 		});
 
-	}
-	
+		btnbrows1.setOnAction(new EventHandler<ActionEvent>() {
 
-	
-	void saveReport(String path)
-	{
-		
-		 if(flowvspre.isSelected())
-		  {
-			 graphs.add("1");
-		  }
-		  else
-		  {
-			 graphs.add("0");			  
-		  }
-		 
-	
-			boolean bchkrowdata,bflowvspre;
-			
-			 if(chkrow.isSelected())
-			  {
-				 bchkrowdata=true;
-			  }
-			  else
-			  {
-				  bchkrowdata=false;
-			  }
-		if(ReportController.list_d.size()==1)
-		{
-		
-		
-			 
-			 
-			
-			Singlepororeport sp=new Singlepororeport();
-			sp.Report(path,ReportController.list_d.get(0),txtnotes.getText(),txtcomname.getText(),imgpath,graphs,bchkrowdata);
-			 
+			@Override
+			public void handle(ActionEvent event) {
+				// TODO Auto-generated method stub
+				handleUpload1();
+			}
+		});
+
+	}
+
+	void saveReport(String path) {
+
+		if (flowvspre.isSelected()) {
+			graphs.add("1");
+		} else {
+			graphs.add("0");
 		}
-		else
-		{
+
+		if (chkrow.isSelected()) {
+			bchkrowdata = true;
+		} else {
+			bchkrowdata = false;
+		}
+
+		if (ReportController.list_d.size() == 1) {
+
+			Singlepororeport sp = new Singlepororeport();
+			sp.Report(path, ReportController.list_d.get(0), txtnotes.getText(),
+					txtcomname.getText(), imgpath, graphs, bchkrowdata,
+					bchkcoverpage, imgpath1);
+
+		} else {
 			Multiplepororeport mp = new Multiplepororeport();
-			mp.Report(path, ReportController.list_d, txtnotes.getText(), txtcomname.getText(),
-					graphs, bchkrowdata);
-			
+			mp.Report(path, ReportController.list_d, txtnotes.getText(),
+					txtcomname.getText(), graphs, bchkrowdata);
+
 		}
 	}
-	
+
 	@FXML
 	public void handleUpload() {
-	    FileChooser fileChooser = new FileChooser();
+		FileChooser fileChooser = new FileChooser();
 
-	    //Set extension filter
+		// Set extension filter
 
+		// Show open file dialog
+		File file = fileChooser.showOpenDialog(MyDialoug.dialog);
 
-	    //Show open file dialog
-	    File file = fileChooser.showOpenDialog(MyDialoug.dialog);
-	    
+		try {
 
-	    try {
-	    	
-	        BufferedImage bufferedImage = ImageIO.read(file);
-	        Image image = SwingFXUtils.toFXImage(bufferedImage, null);
-	        pic.setImage(image);
-	        imgpath=file.getPath();
-	    } catch (IOException ex) {
-	        System.out.println(ex);
-	    }
+			BufferedImage bufferedImage = ImageIO.read(file);
+			Image image = SwingFXUtils.toFXImage(bufferedImage, null);
+			pic.setImage(image);
+			imgpath = file.getPath();
+		} catch (IOException ex) {
+			System.out.println(ex);
+		}
 	}
 
-	
+	public void handleUpload1() {
+		FileChooser fileChooser = new FileChooser();
+
+		// Set extension filter
+
+		// Show open file dialog
+		File file = fileChooser.showOpenDialog(MyDialoug.dialog);
+
+		try {
+
+			BufferedImage bufferedImage = ImageIO.read(file);
+			Image image = SwingFXUtils.toFXImage(bufferedImage, null);
+			pic1.setImage(image);
+			imgpath1 = file.getPath();
+		} catch (IOException ex) {
+			System.out.println(ex);
+		}
+	}
+
 }
