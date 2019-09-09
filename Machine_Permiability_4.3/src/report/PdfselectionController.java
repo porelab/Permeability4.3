@@ -62,7 +62,7 @@ public class PdfselectionController implements Initializable {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
-		
+
 		bchkcoverpage = true;
 		chkcoverpage.selectedProperty().addListener(
 				new ChangeListener<Boolean>() {
@@ -75,7 +75,7 @@ public class PdfselectionController implements Initializable {
 							bchkcoverpage = true;
 							pic1.setVisible(true);
 							btnbrows1.setVisible(true);
-							
+
 						} else {
 							bchkcoverpage = false;
 							btnbrows1.setVisible(false);
@@ -144,17 +144,10 @@ public class PdfselectionController implements Initializable {
 
 				if (!txtcomname.getText().equals("")) {
 					MyDialoug.closeDialoug();
+					
 					saveReport(ReportController.pdffilepath.getPath() + ".pdf");
 
-					try {
-						Runtime.getRuntime().exec(
-								"rundll32 url.dll,FileProtocolHandler "
-										+ ReportController.pdffilepath
-												.getAbsolutePath() + ".pdf");
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
+				
 				} else {
 					Toast.makeText(Main.mainstage, "Please enter companyname",
 							1500, 500, 500);
@@ -186,6 +179,9 @@ public class PdfselectionController implements Initializable {
 
 	void saveReport(String path) {
 
+		Toast.makeText(Main.mainstage, "Please wait...",
+				1500, 500, 500);
+		
 		if (flowvspre.isSelected()) {
 			graphs.add("1");
 		} else {
@@ -198,19 +194,38 @@ public class PdfselectionController implements Initializable {
 			bchkrowdata = false;
 		}
 
-		if (ReportController.list_d.size() == 1) {
+		new Thread(new Runnable() {
 
-			Singlepororeport sp = new Singlepororeport();
-			sp.Report(path, ReportController.list_d.get(0), txtnotes.getText(),
-					txtcomname.getText(), imgpath, graphs, bchkrowdata,
-					bchkcoverpage, imgpath1);
+			@Override
+			public void run() {
+				
+				// TODO Auto-generated method stub
 
-		} else {
-			Multiplepororeport mp = new Multiplepororeport();
-			mp.Report(path, ReportController.list_d, txtnotes.getText(),
-					txtcomname.getText(), graphs, bchkrowdata);
+				if (ReportController.list_d.size() == 1) {
 
-		}
+					Singlepororeport sp = new Singlepororeport();
+					sp.Report(path, ReportController.list_d.get(0),
+							txtnotes.getText(), txtcomname.getText(), imgpath,
+							graphs, bchkrowdata, bchkcoverpage, imgpath1);
+
+				} else {
+					Multiplepororeport mp = new Multiplepororeport();
+					mp.Report(path, ReportController.list_d,
+							txtnotes.getText(), txtcomname.getText(), graphs,
+							bchkrowdata);
+
+				}
+				try {
+					Runtime.getRuntime().exec(
+							"rundll32 url.dll,FileProtocolHandler "
+									+ ReportController.pdffilepath
+											.getAbsolutePath() + ".pdf");
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}).start();
 	}
 
 	@FXML
