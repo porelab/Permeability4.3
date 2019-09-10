@@ -144,10 +144,9 @@ public class PdfselectionController implements Initializable {
 
 				if (!txtcomname.getText().equals("")) {
 					MyDialoug.closeDialoug();
-					
+
 					saveReport(ReportController.pdffilepath.getPath() + ".pdf");
 
-				
 				} else {
 					Toast.makeText(Main.mainstage, "Please enter companyname",
 							1500, 500, 500);
@@ -179,9 +178,8 @@ public class PdfselectionController implements Initializable {
 
 	void saveReport(String path) {
 
-		Toast.makeText(Main.mainstage, "Please wait...",
-				1500, 500, 500);
-		
+		Toast.makeText(Main.mainstage, "Please wait...", 1500, 500, 500);
+
 		if (flowvspre.isSelected()) {
 			graphs.add("1");
 		} else {
@@ -198,7 +196,7 @@ public class PdfselectionController implements Initializable {
 
 			@Override
 			public void run() {
-				
+
 				// TODO Auto-generated method stub
 
 				if (ReportController.list_d.size() == 1) {

@@ -179,6 +179,9 @@
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </Button>
             <Button fx:id="btnport" layoutX="1322.0" layoutY="114.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="30.0" styleClass="cmbtrasperant" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="124.0">
                <graphic>
@@ -188,6 +191,9 @@
                      </image>
                   </ImageView>
                </graphic>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </Button>
     
          

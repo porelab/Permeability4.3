@@ -533,6 +533,9 @@ public class NSelectproject1 implements Initializable {
 
 						ancaddfluid.setVisible(false);
 
+						try {
+							
+						
 						String deld = "select flag from fluiddata where name='"
 								+ newValue.substring(0, newValue.indexOf(":"))
 								+ "'";
@@ -548,7 +551,9 @@ public class NSelectproject1 implements Initializable {
 							btnfluiddelete.setVisible(false);
 
 						}
-
+						} catch (Exception e) {
+							// TODO: handle exception
+						}
 					}
 				} catch (Exception e) {
 
