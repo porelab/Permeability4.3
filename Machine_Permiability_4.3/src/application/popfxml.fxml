@@ -480,5 +480,24 @@
             <String fx:value="font-montserrat-semiBold" />
          </styleClass>
       </Label>
+      <Label layoutX="29.0" layoutY="415.0" prefHeight="25.0" prefWidth="150.0" text="Thickness" textFill="#707070bf">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+         <styleClass>
+            <String fx:value="col-gray70" />
+            <String fx:value="font-montserrat-semiBold" />
+         </styleClass>
+      </Label>
+      <Rectangle arcHeight="60.0" arcWidth="40.0" fill="#1f93ff00" height="40.0" layoutX="186.0" layoutY="409.0" stroke="#968f8f" strokeType="INSIDE" width="230.0" />
+      <TextField fx:id="thincness" layoutX="194.0" layoutY="408.0" prefHeight="40.0" prefWidth="210.0">
+         <font>
+            <Font size="18.0" />
+         </font>
+         <styleClass>
+            <String fx:value="cmbtrasperant" />
+            <String fx:value="col-gray70" />
+         </styleClass>
+      </TextField>
    </children>
 </AnchorPane>

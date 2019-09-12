@@ -47,7 +47,7 @@ public class PopfxmlController implements Initializable {
 	Label  pendp,pthresold, pfluid;
 
 	@FXML
-	TextField psid,lotno,ptfact,pbptacc,txtdatastability,pporoacc;
+	TextField psid,lotno,ptfact,pbptacc,txtdatastability,pporoacc,thincness;
 	
 	@FXML
 	ComboBox<String> cmbtesttrial,cmbfluid,cmbbptthresold;
@@ -152,6 +152,7 @@ public class PopfxmlController implements Initializable {
 		pporoacc.setText(alldata.get(0).get(16));
 		lotno.setText(alldata.get(0).get(17));
 		pendp2.setText(alldata.get(0).get(18));
+		thincness.setText(alldata.get(0).get(12));
 		
 			/*New Chnages 01-07-2019*/
 		
@@ -512,6 +513,8 @@ public class PopfxmlController implements Initializable {
 		lotno.setText(alldata.get(0).get(17));
 		pendp2.setText(alldata.get(0).get(18));
 		
+		thincness.setText(alldata.get(0).get(12));
+		
 		
 		/*New changes 01-07-2019*/
 		
@@ -606,7 +609,8 @@ public class PopfxmlController implements Initializable {
 		 Myapp.accstability = txtdatastability.getText();
 		 Myapp.sampleid = psid.getText();
 		 Myapp.thresold=cmbbptthresold.getSelectionModel().getSelectedItem();
-			
+		Myapp.thikness=thincness.getText();
+
 		 
 		MyDialoug.closeDialoug();
 		Openscreen.open("/userinput/Nlivetest.fxml");
@@ -726,6 +730,16 @@ public class PopfxmlController implements Initializable {
 			public void handle(Event event) {
 				// TODO Auto-generated method stub
 				setVitual(lotno, null, "Lot Number", null);
+
+			}
+		});
+		
+		thincness.setOnMouseClicked(new EventHandler<Event>() {
+
+			@Override
+			public void handle(Event event) {
+				// TODO Auto-generated method stub
+				setVitual(thincness, null, "Thincness", null);
 
 			}
 		});
