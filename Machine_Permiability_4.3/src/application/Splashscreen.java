@@ -1,8 +1,17 @@
 package application;
 
+import java.io.InputStream;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.Timer;
+import java.util.TimerTask;
 
+import toast.Systemtime;
+
+import com.google.auth.oauth2.GoogleCredentials;
+import com.google.cloud.firestore.FirestoreOptions;
+
+import firebase.FirebaseConnect;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -29,8 +38,7 @@ public class Splashscreen implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
 		System.out.println("SpashScreen");
-		
-		new SplashSleep().start();
+		setTimer();
 		DataStore.isconfigure.addListener(new ChangeListener<Boolean>() {
 
 			@Override
@@ -50,7 +58,65 @@ public class Splashscreen implements Initializable {
 			}
 		});
 	}
+	void setTimer() {
+		Timer timer = new Timer();
+		TimerTask task = new TimerTask() {
+			public void run() {
 
+				Platform.runLater(new Runnable() {
+
+					@Override
+					public void run() {
+
+						getFirebaseConnect();
+					
+					}
+				});
+			}
+
+		};
+		timer.schedule(task, 1000);
+	}
+
+	void getFirebaseConnect()
+	{
+
+		new Thread(new Runnable() {
+			
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				try {	
+					FirebaseConnect f=new FirebaseConnect();
+					FirestoreOptions options;
+					Systemtime.StartTime();
+					
+					InputStream ii=(InputStream) this.getClass().getResourceAsStream("/application/serviceAccountKey.json");
+					InputStream ii1=(InputStream) this.getClass().getResourceAsStream("/firebase/serviceAccountKey.json");
+					
+					 
+				 
+		/*				FileInputStream serviceAccount =
+							  new FileInputStream("src/firebase/serviceAccountKey.json");*/
+					options =
+						    FirestoreOptions.getDefaultInstance().toBuilder()
+						        .setProjectId("nyiapp-3a612")
+						        .setCredentials(GoogleCredentials.fromStream(ii))
+						        .setTimestampsInSnapshotsEnabled(true)
+						        .setDatabaseId("(default)")
+						        .build();	
+					
+								FirebaseConnect.InitApp(options,ii1);
+							
+				} catch (Exception e) {
+					// TODO: handle exception
+					e.printStackTrace();
+				}
+				new SplashSleep().start();
+			}
+		}).start();
+		
+	}
 	
 	class SplashSleep extends Thread
 	{

@@ -1,5 +1,8 @@
 package application;
 
+import java.io.IOException;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -80,6 +83,17 @@ public class Myapp {
 		
 	}
 	
+	public static boolean netIsAvailable() {
+	    try {
+	        final URL url = new URL("http://www.google.com");
+	        final URLConnection conn = url.openConnection();
+	        conn.connect();
+	        conn.getInputStream().close();
+	        return true;
+	    } catch (IOException e) {
+	        return false;
+	    }
+	}
 	
 	
 	public static void updateInDatabaseAutosync(boolean bol)
