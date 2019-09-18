@@ -1,17 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane fx:id="root" prefHeight="400.0" prefWidth="600.0" styleClass="firstpagebk" stylesheets="@application.css" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Splashscreen">
+<AnchorPane fx:id="root" prefHeight="350.0" prefWidth="575.0" styleClass="bgwhite" stylesheets="@new_application.css" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Splashscreen">
    <children>
-      <ImageView fitHeight="116.0" fitWidth="382.0" layoutX="123.0" layoutY="142.0" pickOnBounds="true" preserveRatio="true">
+      <Rectangle fill="#00000005" height="350.0" layoutY="2.0" stroke="#b59c9cbf" strokeType="INSIDE" strokeWidth="2.0" width="576.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <AnchorPane layoutX="1.0" layoutY="103.0" prefHeight="146.0" prefWidth="575.0" AnchorPane.leftAnchor="1.0" AnchorPane.topAnchor="103.0">
+         <children>
+            <ImageView fitHeight="89.0" fitWidth="325.0" layoutX="152.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@1.%20NYI.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <Label layoutX="21.0" layoutY="208.0" prefHeight="99.0" prefWidth="463.0" text="(c) Copyright NewYork Instruments contributors 2019.  All rights reserved. NewYork Instruments.We test the performance of your product Our advanced lab technology and hands on support help clients make product breakthrough." textFill="#000000c9" wrapText="true" />
+      <ImageView fitHeight="34.0" fitWidth="72.0" layoutX="528.0" layoutY="290.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@1.%20NYI.png" />
+            <Image url="@gif2.gif" />
          </image>
       </ImageView>
+      <Label layoutX="453.0" layoutY="296.0" prefHeight="17.0" prefWidth="78.0" text="Initializing..." textFill="#363434" />
    </children>
 </AnchorPane>

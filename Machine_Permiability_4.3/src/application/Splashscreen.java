@@ -60,7 +60,7 @@ public class Splashscreen implements Initializable {
 		{
 			System.out.println("here");
 			try {
-				//Thread.sleep(5000);
+				Thread.sleep(3000);
 				System.out.println("i m here");
 				Platform.runLater(new Runnable() {
 					
