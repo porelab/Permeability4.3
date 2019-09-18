@@ -114,7 +114,7 @@ public class Main extends Application {
 		    Myapp.initNotifier();
 		    Myapp.setColor();
 			Parent root = FXMLLoader.load(getClass().getResource("/application/splashscreen.fxml"));
-			 Scene scene = new Scene(root,600,400);
+			Scene scene = new Scene(root, 575, 350);
 			 primaryStage.initStyle(StageStyle.UNDECORATED);
 			scene.getStylesheets().add(getClass().getResource("new_application.css").toExternalForm());
 			fontload();
