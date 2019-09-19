@@ -26,7 +26,6 @@ public class MainancController implements Initializable {
 		
 		
 		Checklogin();
-		Myapp.setInternetWatch();
 		
 	}
 	 void Checklogin()

@@ -39,24 +39,7 @@ public class Splashscreen implements Initializable {
 		// TODO Auto-generated method stub
 		System.out.println("SpashScreen");
 		setTimer();
-		DataStore.isconfigure.addListener(new ChangeListener<Boolean>() {
-
-			@Override
-			public void changed(
-					ObservableValue<? extends Boolean> arg0,
-					Boolean arg1, Boolean arg2) {
-			
-				System.out.println("Chaangedd ------->"+arg2+" : "+arg1);
-				if(arg2==true)
-				{
-					
-					root.getScene().getWindow().hide();
-					primaryStage.show();
-					
-				}
-				
-			}
-		});
+		DataStore.setLoadListener();
 	}
 	void setTimer() {
 		Timer timer = new Timer();
@@ -126,20 +109,19 @@ public class Splashscreen implements Initializable {
 		{
 			System.out.println("here");
 			try {
-				Thread.sleep(3000);
 				System.out.println("i m here");
 				Platform.runLater(new Runnable() {
 					
 					@Override
 					public void run() {
 						// TODO Auto-generated method stub
+						Main.mainstage=primaryStage;
 						
 						try{Parent root1 = FXMLLoader.load(getClass().getResource("mainanc.fxml"));
 					    Scene scene = new Scene(root1,1366,768);
 						scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 					
-						Main.mainstage=primaryStage;
-						Image image = new Image(this.getClass().getResourceAsStream(
+					Image image = new Image(this.getClass().getResourceAsStream(
 								"/application/shorticon.png"));
 						primaryStage.getIcons().add(image);
 						primaryStage.setTitle("NewYork-Instruments");

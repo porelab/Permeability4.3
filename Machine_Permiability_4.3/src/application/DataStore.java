@@ -17,6 +17,8 @@ import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Tab;
@@ -172,7 +174,26 @@ public class DataStore
     static String type,pg1,pg2,fm1,fm2,chemb;
     
     public static boolean isCurveFit=false;
-	
+    public static  void setLoadListener()
+    {
+    	DataStore.isconfigure.addListener(new ChangeListener<Boolean>() {
+
+    		@Override
+    		public void changed(
+    				ObservableValue<? extends Boolean> arg0,
+    				Boolean arg1, Boolean arg2) {
+    		
+    			System.out.println("Chaangedd ------->"+arg2);
+    			if(arg2==true)
+    			{
+    				Main.splashstage.hide();
+    				Main.mainstage.show();
+    				
+    			}
+    			
+    		}
+    	});
+    }
 	public static void Refresh()
 	{
 

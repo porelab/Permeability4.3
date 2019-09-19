@@ -41,13 +41,15 @@ import firebase.FirebaseConnect;
 public class Main extends Application {
 	public static Stage mainstage;
 	public static Class<? extends Main> clsObj;
-	
+	public static FileLock fileLock;
+	public static RandomAccessFile randomAccessFile;
+	public static Stage splashstage;
 
 	private static boolean lockInstance(final String lockFile) {
 	    try {
 	        final File file = new File(lockFile);
-	        final RandomAccessFile randomAccessFile = new RandomAccessFile(file, "rw");
-	        final FileLock fileLock = randomAccessFile.getChannel().tryLock();
+	         randomAccessFile = new RandomAccessFile(file, "rw");
+	         fileLock = randomAccessFile.getChannel().tryLock();
 	        if (fileLock != null) {
 	            Runtime.getRuntime().addShutdownHook(new Thread() {
 	                public void run() {
@@ -75,7 +77,14 @@ public class Main extends Application {
 	
 	@Override
 	public void start(Stage primaryStage) {
+		reopen(primaryStage);
+	}
+	
+	void reopen(Stage primaryStage)
+	{
 		try {
+
+			splashstage=primaryStage;
 			mainstage=primaryStage;
 			ErrorList.setErrorList();
 
