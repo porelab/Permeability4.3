@@ -69,7 +69,7 @@ public class Zoom {
 	 * The info label shows a short info text that tells the user how to unreset the zoom level.
 	 */
 	private void addInfoLabel() {
-		infoLabel = new Label("Click ESC to reset the zoom level.");
+		infoLabel = new Label("Click BACK SPACE. to reset the zoom level.");
 		infoLabel.setId(INFO_LABEL_ID);
 		pane.getChildren().add(infoLabel);
 		StackPane.setAlignment(infoLabel, Pos.TOP_RIGHT);
@@ -349,7 +349,7 @@ public class Zoom {
 		public void handle(KeyEvent event) {
 
 			// the ESCAPE key lets the user reset the zoom level
-			if (KeyCode.ESCAPE.equals(event.getCode())) {
+			if (KeyCode.BACK_SPACE.equals(event.getCode())) {
 				resetAxisBounds();
 				hideInfo();
 			}
