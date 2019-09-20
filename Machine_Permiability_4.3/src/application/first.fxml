@@ -205,11 +205,11 @@
                </cursor>
             </Button>
             <Button fx:id="btnport" layoutX="1205.0" layoutY="126.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="116.0" style="-fx-border-width: 0.5px; -fx-border-color: white;" styleClass="btnCss" text="Set Port" textFill="WHITE" />
-            <Button fx:id="btnrestart" layoutX="1239.0" layoutY="3.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="30.0" styleClass="cmbtrasperant">
+            <Button fx:id="btnrestart" layoutX="1239.0" layoutY="3.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="30.0" styleClass="cmbtrasperant" AnchorPane.topAnchor="5.0">
                <graphic>
-                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../../bubblepoint4.3/Machine_BubblePoint_4.3/src/application/refreshimgl.png" />
+                        <Image url="@refreshimgl1.png" />
                      </image>
                   </ImageView>
                </graphic>
