@@ -54,7 +54,7 @@ public class NFirstController implements Initializable {
 
 	@FXML
 	Button livetest, report, btncloud, btnsetting, txtuname, qtest, btnscada,
-			btnrefresh, btnhelp, btnclose, btnport,btnzoom;
+			btnrefresh, btnhelp, btnclose, btnport, btnzoom, btnrestart;
 
 	@FXML
 	Rectangle recmain;
@@ -177,7 +177,7 @@ public class NFirstController implements Initializable {
 			lblconnection.setText("Connected(" + DataStore.getCom() + ")");
 			btnport.setVisible(false);
 		} else {
-			lblconnection.setText("Not Connected");
+			lblconnection.setText("");
 			btnport.setVisible(true);
 		}
 
@@ -195,7 +195,7 @@ public class NFirstController implements Initializable {
 							+ ")");
 					btnport.setVisible(false);
 				} else {
-					lblconnection.setText("Not Connected");
+					lblconnection.setText("");
 					btnport.setVisible(true);
 				}
 			}
@@ -216,7 +216,7 @@ public class NFirstController implements Initializable {
 		DataStore.isconfigure.set(true);
 		setOffset();
 		if (DataStore.connect_hardware.get()) {
-			
+
 			DataStore.hardReset();
 			sendStop(1500);
 
@@ -307,7 +307,18 @@ public class NFirstController implements Initializable {
 
 			}
 		});
-		
+
+		btnrestart.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent event) {
+				// TODO Auto-generated method stub
+				mydia = new MyDialoug(Main.mainstage,
+						"/application/restartapplication.fxml");
+				mydia.showDialoug();
+			}
+		});
+
 		btnzoom.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
@@ -546,12 +557,13 @@ public class NFirstController implements Initializable {
 
 		sendData(wrD);
 	}
+
 	void sendStop(int delay) {
 		writeFormat wrD = new writeFormat();
 		wrD.stopTN();
 		wrD.addLast();
 
-		sendData(wrD,delay);
+		sendData(wrD, delay);
 	}
 
 	void sendData(writeFormat w, int slp) {
