@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.TooManyListenersException;
 
+import communicationProtocol.Mycommand;
+
 import javafx.application.Platform;
 import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.BooleanProperty;
@@ -428,13 +430,8 @@ public class manualcontroller implements Initializable {
 
 					imgv2.setVisible(true);
 
-					wrD = new writeFormat();
-					wrD.addChar('V');
-					wrD.addChar('6');
-					wrD.addChar('1');
-					wrD.addBlank(2);
-					wrD.addLast();
-					sendData(wrD);
+					
+					Mycommand.valveOn('6', 0);
 
 				} else {
 					imgv2.setVisible(false);
@@ -442,13 +439,8 @@ public class manualcontroller implements Initializable {
 					Image image = new Image(this.getClass()
 							.getResourceAsStream("/userinput/valve OFF.png"));
 					v1.setImage(image);
-					wrD = new writeFormat();
-					wrD.addChar('V');
-					wrD.addChar('6');
-					wrD.addChar('0');
-					wrD.addBlank(2);
-					wrD.addLast();
-					sendData(wrD);
+
+					Mycommand.valveOff('6', 0);
 				}
 
 			}
@@ -466,26 +458,18 @@ public class manualcontroller implements Initializable {
 					v2.setImage(image);
 
 					imgv3.setVisible(true);
-					wrD = new writeFormat();
-					wrD.addChar('V');
-					wrD.addChar('3');
-					wrD.addChar('1');
-					wrD.addBlank(2);
-					wrD.addLast();
-					sendData(wrD);
+					
+
+					Mycommand.valveOn('3', 0);
+				
 				} else {
 					imgv3.setVisible(false);
 
 					Image image = new Image(this.getClass()
 							.getResourceAsStream("/userinput/valve OFF.png"));
 					v2.setImage(image);
-					wrD = new writeFormat();
-					wrD.addChar('V');
-					wrD.addChar('3');
-					wrD.addChar('0');
-					wrD.addBlank(2);
-					wrD.addLast();
-					sendData(wrD);
+
+					Mycommand.valveOff('3', 0);
 				}
 
 			}
@@ -503,13 +487,8 @@ public class manualcontroller implements Initializable {
 
 					imgv4.setVisible(true);
 
-					wrD = new writeFormat();
-					wrD.addChar('V');
-					wrD.addChar('4');
-					wrD.addChar('1');
-					wrD.addBlank(2);
-					wrD.addLast();
-					sendData(wrD);
+
+					Mycommand.valveOn('4', 0);
 				} else {
 					Image image = new Image(this.getClass()
 							.getResourceAsStream("/userinput/valve OFF.png"));
@@ -517,13 +496,8 @@ public class manualcontroller implements Initializable {
 
 					imgv4.setVisible(false);
 
-					wrD = new writeFormat();
-					wrD.addChar('V');
-					wrD.addChar('4');
-					wrD.addChar('0');
-					wrD.addBlank(2);
-					wrD.addLast();
-					sendData(wrD);
+
+					Mycommand.valveOff('4', 0);
 				}
 
 			}
@@ -540,13 +514,8 @@ public class manualcontroller implements Initializable {
 					lblrealeas.setVisible(true);
 					imgv5.setVisible(true);
 
-					wrD = new writeFormat();
-					wrD.addChar('V');
-					wrD.addChar('5');
-					wrD.addChar('1');
-					wrD.addBlank(2);
-					wrD.addLast();
-					sendData(wrD);
+
+					Mycommand.valveOn('5', 0);
 				} else {
 					Image image = new Image(this.getClass()
 							.getResourceAsStream("/userinput/valve OFF.png"));
@@ -554,13 +523,8 @@ public class manualcontroller implements Initializable {
 					lblrealeas.setVisible(false);
 					imgv5.setVisible(false);
 
-					wrD = new writeFormat();
-					wrD.addChar('V');
-					wrD.addChar('5');
-					wrD.addChar('0');
-					wrD.addBlank(2);
-					wrD.addLast();
-					sendData(wrD);
+
+					Mycommand.valveOff('5', 0);
 				}
 
 			}
@@ -573,13 +537,8 @@ public class manualcontroller implements Initializable {
 
 				if (valve5new.isSelected()) {
 					imgv1.setVisible(true);
-					wrD = new writeFormat();
-					wrD.addChar('V');
-					wrD.addChar('2');
-					wrD.addChar('1');
-					wrD.addBlank(2);
-					wrD.addLast();
-					sendData(wrD);
+
+					Mycommand.valveOn('2', 0);
 
 					Image image = new Image(this.getClass()
 							.getResourceAsStream("/userinput/valve ON.png"));
@@ -589,13 +548,8 @@ public class manualcontroller implements Initializable {
 					imgv1.setVisible(false);
 					imgreg2.setVisible(false);
 
-					wrD = new writeFormat();
-					wrD.addChar('V');
-					wrD.addChar('2');
-					wrD.addChar('0');
-					wrD.addBlank(2);
-					wrD.addLast();
-					sendData(wrD);
+
+					Mycommand.valveOff('2', 0);
 					Image image = new Image(this.getClass()
 							.getResourceAsStream("/userinput/valve OFF.png"));
 					v5new.setImage(image);
