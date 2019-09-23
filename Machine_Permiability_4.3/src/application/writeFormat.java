@@ -39,6 +39,10 @@ public class writeFormat {
 			System.out.print(c);
 		}
 	}
+	public void addInt(int c)
+	{
+		wData.add(c);
+	}
 	public void stopTN()
 	{
 		
