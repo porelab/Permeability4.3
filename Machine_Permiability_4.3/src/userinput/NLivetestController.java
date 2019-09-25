@@ -684,6 +684,11 @@ public class NLivetestController implements Initializable {
 			double frazierflow = c.getFlowPointOn(dryplist, dryflist, 500, 18,
 					0.0182);
 			String frazier = getDarcyFrazier(0.0182, frazierflow);
+			
+			cs.newLine("gurleyflow", "" + Myapp.getRound(gurleyflow, 2));
+			cs.newLine("frazierflow", "" + Myapp.getRound(frazierflow, 2));
+			
+			
 			cs.newLine("gurley", "" + Myapp.getRound(gurley, 2));
 			cs.newLine("frazier", "" + Myapp.getRound(frazier, 2));
 
