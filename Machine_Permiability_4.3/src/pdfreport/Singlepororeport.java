@@ -1110,7 +1110,7 @@ public class Singlepororeport {
 		if (!imgpath.equals("")) {
 			PdfPTable notestable = new PdfPTable(2); // 4 columns.
 			notestable.setWidthPercentage(100); // Width 100%
-			notestable.setSpacingBefore(5f); // Space before table
+			notestable.setSpacingBefore(15f); // Space before table
 			notestable.setSpacingAfter(0f); // Space after table
 
 			// Set Column widths
@@ -1141,9 +1141,10 @@ public class Singlepororeport {
 			}
 			// img.scalePercent(15);
 			// img.scaleToFit(100, 50);
-			img.scaleToFit(400, 160);
+			img.scaleToFit(250, 100);
 
 			n11.setBorder(0);
+			n11.setPaddingLeft(20);
 			n11.setHorizontalAlignment(Element.ALIGN_CENTER);
 			n11.setVerticalAlignment(Element.ALIGN_TOP);
 			n11.addElement(new Chunk(img, 0, 2, true));
@@ -1153,7 +1154,7 @@ public class Singlepororeport {
 			n2.setPaddingTop(0);
 			n2.setBorder(0);
 			// n2.setBorder(n2.LEFT | n2.RIGHT);
-			n2.setFixedHeight(20f);
+			n2.setFixedHeight(15f);
 			// n2.setBackgroundColor(backcellcoltable1);
 			n2.setBorderColor(new BaseColor(130, 130, 130));
 			n2.setHorizontalAlignment(Element.ALIGN_CENTER);
@@ -1163,12 +1164,13 @@ public class Singlepororeport {
 			// Paragraph("The following test Procedure is based on ASTM F726-94 (Standard Test Method for Pore Size Characterization.)",notesdeslab));
 			PdfPCell n3 = new PdfPCell(new Paragraph(notes, notesdeslab));
 
-			n3.setPaddingLeft(10);
+			n3.setPaddingLeft(0);
+			n3.setPaddingRight(20);
 			n3.setPaddingTop(1);
 			n3.setBorder(0);
 
 			// n3.setBorder(n3.BOTTOM);
-			n3.setFixedHeight(160f);
+			n3.setFixedHeight(120f);
 			// n3.setBackgroundColor(backcellcoltable1);
 			n3.setBorderColor(new BaseColor(130, 130, 130));
 			n3.setHorizontalAlignment(Element.ALIGN_TOP);
@@ -1176,7 +1178,6 @@ public class Singlepororeport {
 
 			n11.setRowspan(2);
 			notestable.addCell(n11);
-
 			notestable.addCell(n2);
 			notestable.addCell(n3);
 
@@ -1221,7 +1222,7 @@ public class Singlepororeport {
 			n3.setBorder(0);
 
 			// n3.setBorder(n3.BOTTOM);
-			n3.setFixedHeight(130f);
+			n3.setFixedHeight(120f);
 			// n3.setBackgroundColor(backcellcoltable1);
 			n3.setBorderColor(new BaseColor(130, 130, 130));
 			n3.setHorizontalAlignment(Element.ALIGN_TOP);
