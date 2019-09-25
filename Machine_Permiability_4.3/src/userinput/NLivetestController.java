@@ -228,7 +228,7 @@ public class NLivetestController implements Initializable {
 			calculationdia = 1;
 		} else if (Myapp.splate.equals("Large")) {
 
-			calculationdia = 9.3;
+			calculationdia = 4.3;
 		} else {
 
 			calculationdia = 2.3;
@@ -676,7 +676,7 @@ public class NLivetestController implements Initializable {
 			System.out.println("Gurley Point : ");
 			double gurleyflow = c.getFlowPointOn(dryplist, dryflist, 500, 18,
 					0.178);
-			String gurley = getDarcyFrazier(0.178, gurleyflow);
+			String gurley = getDarcyGurley(0.178, gurleyflow);
 
 			System.out.println("frazier Point : ");
 			double frazierflow = c.getFlowPointOn(dryplist, dryflist, 500, 18,

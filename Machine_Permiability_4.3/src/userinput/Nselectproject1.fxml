@@ -317,7 +317,7 @@
                               </ImageView>
                            </graphic>
                         </Button>
-                        <Label layoutX="1212.0" layoutY="206.0" styleClass="col-gray70" text="mm">
+                        <Label layoutX="1212.0" layoutY="206.0" styleClass="col-gray70" text="cm">
                            <font>
                               <Font size="22.0" />
                            </font>
