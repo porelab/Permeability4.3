@@ -11,6 +11,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import application.DataStore;
 import application.Myapp;
 
 import com.itextpdf.text.BadElementException;
@@ -137,6 +138,8 @@ public class Singlepororeport {
 			Font.NORMAL, new BaseColor(81, 81, 83));
 
 	List<String> clr = new ArrayList<String>();
+	
+	DatareadN dr1;
 
 	public Singlepororeport() {
 		clr.add("#000080");
@@ -692,7 +695,7 @@ public class Singlepororeport {
 		t3.setVerticalAlignment(Element.ALIGN_MIDDLE);
 
 		PdfPCell t4 = new PdfPCell(new Paragraph("" + d.data.get("duration")
-				+ " min", sampleinfoa));
+				+ " ", sampleinfoa));
 		t4.setBorder(1);
 		t4.setBorder(t4.RIGHT);
 		t4.setBorderColor(new BaseColor(130, 130, 130));
@@ -1284,6 +1287,25 @@ public class Singlepororeport {
 	}
 	/* Row Data Table Header in Title name and unite */
 	void addTableHeader(PdfPTable tablem) {
+		tablem.setSpacingBefore(10f);
+		String st = ""+ d.data.get("sample");
+		
+		Font headertestname = FontFactory.getFont(
+				"./font/BebasNeue Regular.ttf", BaseFont.IDENTITY_H,
+				BaseFont.EMBEDDED, 15);
+		headertestname.setColor(getColor(14));
+		
+		try {
+
+			Chunk redText = new Chunk("Raw Data : " + st, headertestname);
+
+			Paragraph p1 = new Paragraph(redText);
+			
+			document.add(p1);
+		} catch (DocumentException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
 		PdfPCell cell1 = new PdfPCell(new Paragraph("Differential Pressure", rowhed));
 		cell1.setBackgroundColor(backcellcoltable);
 		cell1.setBorder(1);
@@ -1521,7 +1543,7 @@ public class Singlepororeport {
 				PdfPCell r3 = new PdfPCell(new Paragraph(Myapp.getRound(
 						Double.parseDouble("" + df.get(j)), 2), tabledata));
 				r3.setBorder(1);
-				r3.setBorder(r1.RIGHT);
+				r3.setBorder(r3.RIGHT);
 				r3.setBorderColor(new BaseColor(130, 130, 130));
 				// r3.setBackgroundColor(backcellcol);
 				r3.setPaddingTop(0);
@@ -1579,7 +1601,7 @@ public class Singlepororeport {
 
 			}
 
-			if (j == wpressur.size() - 1) {
+			if (j == wpressur.size() - 2) {
 
 				tablem.getRows().remove(tablem.getRows().size() - 1);
 
@@ -1613,17 +1635,20 @@ public class Singlepororeport {
 				r22.setVerticalAlignment(Element.ALIGN_MIDDLE);
 				tablem.addCell(r22);
 
-				PdfPCell r33 = new PdfPCell(new Paragraph(Myapp.getRound(
+				
+				
+				PdfPCell r99 = new PdfPCell(new Paragraph(Myapp.getRound(
 						Double.parseDouble("" + df.get(j)), 2), tabledata));
-				r33.setBorder(1);
-				r33.setBorder(r33.BOTTOM | r33.RIGHT);
-				r33.setBorderColor(new BaseColor(130, 130, 130));
-				// r33.setBackgroundColor(backcellcol);
-				r33.setPaddingTop(0);
-				r33.setFixedHeight(14f);
-				r33.setHorizontalAlignment(Element.ALIGN_CENTER);
-				r33.setVerticalAlignment(Element.ALIGN_MIDDLE);
-				tablem.addCell(r33);
+				r99.setBorder(1);
+				r99.setBorder(1);
+				r99.setBorder(r99.RIGHT | r99.BOTTOM);
+				r99.setBorderColor(new BaseColor(130, 130, 130));
+				// r99.setBackgroundColor(backcellcol);
+				r99.setPaddingTop(0);
+				r99.setFixedHeight(14f);
+				r99.setHorizontalAlignment(Element.ALIGN_CENTER);
+				r99.setVerticalAlignment(Element.ALIGN_MIDDLE);
+				tablem.addCell(r99);
 
 			
 			}

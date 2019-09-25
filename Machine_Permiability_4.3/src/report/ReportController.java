@@ -217,7 +217,7 @@ public class ReportController implements Initializable {
 							.drawLinechart(pagination1.getPrefWidth(),
 									pagination1.getPrefHeight(),
 									"Flow vs Pressure", "Pressure (psi)",
-									"Flow (cm3/m)", list_d, false, 11, 12,
+									"Flow (cm3/min)", list_d, false, 11, 12,
 									"(3) Incremental Filter-Flow % vs Diameter");
 					charts.put(p);
 					listofchart.add(p);
