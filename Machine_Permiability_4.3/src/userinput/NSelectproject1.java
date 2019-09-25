@@ -1236,10 +1236,10 @@ public class NSelectproject1 implements Initializable {
 					}
 				});
 
-		setToggleButtonProperty(tc_11, "Small", "/userinput/small.png", t1group);
-		setToggleButtonProperty(tc_12, "Medium", "/userinput/medium.png",
+		setToggleButtonProperty(tc_11, "small", "/userinput/small.png", t1group);
+		setToggleButtonProperty(tc_12, "medium", "/userinput/medium.png",
 				t1group);
-		setToggleButtonProperty(tc_13, "Large", "/userinput/large.png", t1group);
+		setToggleButtonProperty(tc_13, "large", "/userinput/large.png", t1group);
 		t1group.selectToggle(tc_11);
 
 	}
@@ -1454,6 +1454,7 @@ public class NSelectproject1 implements Initializable {
 		String crossection = "" + alldata.get(0).get(4);
 		String thresold = "" + alldata.get(0).get(5);
 		String splate = "" + alldata.get(0).get(11);
+		System.out.println("Splate : "+splate);
 		String materialtype = "" + alldata.get(0).get(13);
 		String testsequance = "" + alldata.get(0).get(19);
 		String stabilitytype = "" + alldata.get(0).get(20);

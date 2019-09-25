@@ -706,7 +706,7 @@ public class Singlepororeport {
 		t4.setHorizontalAlignment(Element.ALIGN_LEFT);
 		t4.setVerticalAlignment(Element.ALIGN_MIDDLE);
 
-		PdfPCell f1 = new PdfPCell(new Paragraph("Sample Thikess", sampleinfoq));
+		PdfPCell f1 = new PdfPCell(new Paragraph("Sample Thickess", sampleinfoq));
 		f1.setPaddingLeft(10);
 		f1.setPaddingTop(1);
 		f1.setBorder(1);
@@ -1306,7 +1306,7 @@ public class Singlepororeport {
 			// TODO Auto-generated catch block
 			e2.printStackTrace();
 		}
-		PdfPCell cell1 = new PdfPCell(new Paragraph("Differential Pressure", rowhed));
+		PdfPCell cell1 = new PdfPCell(new Paragraph("Pressure Differential", rowhed));
 		cell1.setBackgroundColor(backcellcoltable);
 		cell1.setBorder(1);
 		cell1.setBorder(cell1.LEFT);
@@ -1317,7 +1317,7 @@ public class Singlepororeport {
 		cell1.setHorizontalAlignment(Element.ALIGN_CENTER);
 		cell1.setVerticalAlignment(Element.ALIGN_MIDDLE);
 
-		PdfPCell cell2 = new PdfPCell(new Paragraph("DryFlow", rowhed));
+		PdfPCell cell2 = new PdfPCell(new Paragraph("Flow Rate", rowhed));
 		cell2.setBackgroundColor(backcellcoltable);
 		cell2.setBorder(0);
 		// cell2.setBorder(cell2.TOP | cell2.BOTTOM | cell2.LEFT);
@@ -1328,7 +1328,7 @@ public class Singlepororeport {
 		cell2.setHorizontalAlignment(Element.ALIGN_CENTER);
 		cell2.setVerticalAlignment(Element.ALIGN_MIDDLE);
 
-		PdfPCell cell3 = new PdfPCell(new Paragraph("Darcy Constant", rowhed));
+		PdfPCell cell3 = new PdfPCell(new Paragraph("Average Darcy", rowhed));
 		cell3.setBackgroundColor(backcellcoltable);
 		cell3.setBorder(0);
 		// cell3.setBorder(cell3.TOP | cell3.BOTTOM | cell3.LEFT);
@@ -1362,7 +1362,7 @@ public class Singlepororeport {
 
 		phrase.add(new Chunk("(cm", unitlabrow));
 		phrase.add( superscript ); 
-		phrase.add(new Chunk("/s)", unitlabrow));
+		phrase.add(new Chunk("/min)", unitlabrow));
 		
 		
 
@@ -1377,7 +1377,7 @@ public class Singlepororeport {
 		ucell2.setHorizontalAlignment(Element.ALIGN_CENTER);
 		ucell2.setVerticalAlignment(Element.ALIGN_TOP);
 
-		PdfPCell ucell3 = new PdfPCell(new Paragraph("(darcy)", unitlabrow));
+		PdfPCell ucell3 = new PdfPCell(new Paragraph("", unitlabrow));
 		ucell3.setBackgroundColor(backcellcoltable);
 		ucell3.setBorder(0);
 		// ucell3.setBorder(ucell3.TOP | ucell3.BOTTOM | ucell3.LEFT);
@@ -1708,7 +1708,7 @@ public class Singlepororeport {
 				headertestname.setColor(getColor(14));
 
 				PdfPCell cell;
-				cell = new PdfPCell(new Phrase("ASTM D6767", headertestname));
+				cell = new PdfPCell(new Phrase("ASTM D737-96", headertestname));
 				cell.setBorder(1);
 				cell.setBorder(cell.BOTTOM);
 				cell.setHorizontalAlignment(Element.ALIGN_CENTER);
