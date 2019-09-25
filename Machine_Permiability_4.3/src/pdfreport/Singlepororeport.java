@@ -783,14 +783,14 @@ public class Singlepororeport {
 		f33.setPaddingBottom(8);
 		f33.setBackgroundColor(backcellcoltable1);
 		f33.setFixedHeight(25f);
-		f33.setBorder(f33.BOTTOM | f33.RIGHT | f33.LEFT);
+		f33.setBorder(f33.RIGHT | f33.LEFT);
 		f33.setBorderColor(new BaseColor(130, 130, 130));
 		f33.setHorizontalAlignment(Element.ALIGN_LEFT);
 		f33.setVerticalAlignment(Element.ALIGN_MIDDLE);
 
 		PdfPCell f44 = new PdfPCell(new Paragraph("Swasti dey", sampleinfoa));
 		f44.setBorder(1);
-		f44.setBorder(f44.BOTTOM | f44.RIGHT);
+		f44.setBorder(f44.RIGHT);
 		f44.setBorderColor(new BaseColor(130, 130, 130));
 		f44.setPaddingLeft(10);
 		f44.setPaddingTop(1);
@@ -800,8 +800,62 @@ public class Singlepororeport {
 		f44.setHorizontalAlignment(Element.ALIGN_LEFT);
 		f44.setVerticalAlignment(Element.ALIGN_MIDDLE);
 
-		tablem.addCell(cell1h);
+		
+		/*Gurly Flow rate and Frazier*/
+		
+		PdfPCell f331 = new PdfPCell(new Paragraph("Gurley Flow rate (0.178 psi)", sampleinfoq));
+		f331.setPaddingLeft(10);
+		f331.setPaddingTop(1);
+		f331.setBorder(1);
+		f331.setPaddingBottom(8);
+		//f331.setBackgroundColor(backcellcoltable1);
+		f331.setFixedHeight(25f);
+		f331.setBorder(f331.RIGHT | f331.LEFT);
+		f331.setBorderColor(new BaseColor(130, 130, 130));
+		f331.setHorizontalAlignment(Element.ALIGN_LEFT);
+		f331.setVerticalAlignment(Element.ALIGN_MIDDLE);
 
+			PdfPCell f441 = new PdfPCell(new Paragraph(d.data.get("gurleyflow")+" Flow Rate", sampleinfoa));
+			f441.setBorder(1);
+			f441.setBorder(f441.RIGHT);
+			f441.setBorderColor(new BaseColor(130, 130, 130));
+			f441.setPaddingLeft(10);
+			f441.setPaddingTop(1);
+		//	f441.setBackgroundColor(backcellcoltable1);
+			f441.setFixedHeight(25f);
+			f441.setPaddingBottom(8);
+			f441.setHorizontalAlignment(Element.ALIGN_LEFT);
+			f441.setVerticalAlignment(Element.ALIGN_MIDDLE);
+		
+	
+		
+		PdfPCell f332 = new PdfPCell(new Paragraph("Frazier Flow rate (0.0182 psi)", sampleinfoq));
+		f332.setPaddingLeft(10);
+		f332.setPaddingTop(1);
+		f332.setBorder(1);
+		f332.setPaddingBottom(8);
+		f332.setBackgroundColor(backcellcoltable1);
+		f332.setFixedHeight(25f);
+		f332.setBorder(f332.BOTTOM | f332.RIGHT | f332.LEFT);
+		f332.setBorderColor(new BaseColor(130, 130, 130));
+		f332.setHorizontalAlignment(Element.ALIGN_LEFT);
+		f332.setVerticalAlignment(Element.ALIGN_MIDDLE);
+
+		PdfPCell f414 = new PdfPCell(new Paragraph(d.data.get("frazierflow")+" Flow Rate", sampleinfoa));
+		f414.setBorder(1);
+		f414.setBorder(f414.BOTTOM | f414.RIGHT);
+		f414.setBorderColor(new BaseColor(130, 130, 130));
+		f414.setPaddingLeft(10);
+		f414.setPaddingTop(1);
+		f414.setBackgroundColor(backcellcoltable1);
+		f414.setFixedHeight(25f);
+		f414.setPaddingBottom(8);
+		f414.setHorizontalAlignment(Element.ALIGN_LEFT);
+		f414.setVerticalAlignment(Element.ALIGN_MIDDLE);
+
+		
+		
+		tablem.addCell(cell1h);
 		tablem.addCell(cell1);
 		tablem.addCell(cell2);
 		tablem.addCell(cell3);
@@ -822,6 +876,11 @@ public class Singlepororeport {
 		tablem.addCell(f22);
 		tablem.addCell(f33);
 		tablem.addCell(f44);
+		
+		tablem.addCell(f331);
+		tablem.addCell(f441);
+		tablem.addCell(f332);
+		tablem.addCell(f414);
 
 		try {
 			document.add(tablem);
@@ -989,7 +1048,7 @@ public class Singlepororeport {
 	
 	
 
-		PdfPCell u13 = new PdfPCell(new Paragraph("(Cubic feet/Square foot)", unitlab));
+		PdfPCell u13 = new PdfPCell(new Paragraph("(Cubic feet of air / Sq. foot of sample)", unitlab));
 		u13.setBorder(1);
 		u13.setBorder(u1.RIGHT);
 		u13.setBorderColor(resultborder);
@@ -1037,14 +1096,14 @@ public class Singlepororeport {
 			e.printStackTrace();
 		}
 
-		Paragraph p88 = new Paragraph();
+		/*Paragraph p88 = new Paragraph();
 		p88.add(new Chunk("\n"));
 		try {
 			document.add(p88);
 		} catch (DocumentException e2) {
 			// TODO Auto-generated catch block
 			e2.printStackTrace();
-		}
+		}*/
 
 		// Notes and Image Table.
 
@@ -1147,7 +1206,7 @@ public class Singlepororeport {
 			n2.setPaddingTop(0);
 			n2.setBorder(0);
 			// n2.setBorder(n2.LEFT | n2.RIGHT);
-			n2.setFixedHeight(20f);
+			n2.setFixedHeight(16f);
 			// n2.setBackgroundColor(backcellcoltable1);
 			n2.setBorderColor(new BaseColor(130, 130, 130));
 			n2.setHorizontalAlignment(Element.ALIGN_CENTER);
@@ -1162,7 +1221,7 @@ public class Singlepororeport {
 			n3.setBorder(0);
 
 			// n3.setBorder(n3.BOTTOM);
-			n3.setFixedHeight(160f);
+			n3.setFixedHeight(130f);
 			// n3.setBackgroundColor(backcellcoltable1);
 			n3.setBorderColor(new BaseColor(130, 130, 130));
 			n3.setHorizontalAlignment(Element.ALIGN_TOP);

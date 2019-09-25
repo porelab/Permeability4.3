@@ -381,7 +381,7 @@ public class Multiplepororeport {
 		t2.setFixedHeight(15f);
 		t2.setHorizontalAlignment(Element.ALIGN_LEFT);
 		t2.setVerticalAlignment(Element.ALIGN_CENTER);
-		testnametab.addCell(t2);
+//		testnametab.addCell(t2);
 
 		Font compname = FontFactory.getFont("./font/Roboto-Regular.ttf",
 				BaseFont.IDENTITY_H, BaseFont.EMBEDDED, 14);
@@ -553,7 +553,7 @@ public class Multiplepororeport {
 		c2.setHorizontalAlignment(Element.ALIGN_CENTER);
 		c2.setVerticalAlignment(Element.ALIGN_MIDDLE);
 
-		PdfPCell c3 = new PdfPCell(new Paragraph("Thikess", whitecol));
+		PdfPCell c3 = new PdfPCell(new Paragraph("Sample Thickess", whitecol));
 		c3.setBackgroundColor(backcellcoltable);
 		c3.setBorder(0);
 		// c3.setBorder(c3.TOP | c3.BOTTOM | c3.LEFT);
@@ -1822,7 +1822,7 @@ public class Multiplepororeport {
 				headertestname.setColor(getColor(14));
 
 				PdfPCell cell;
-				cell = new PdfPCell(new Phrase("ASTM D6767", headertestname));
+				cell = new PdfPCell(new Phrase("ASTM D737-96", headertestname));
 				cell.setBorder(1);
 				cell.setBorder(cell.BOTTOM);
 				cell.setHorizontalAlignment(Element.ALIGN_CENTER);
