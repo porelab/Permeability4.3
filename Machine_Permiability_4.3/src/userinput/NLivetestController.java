@@ -653,19 +653,19 @@ public class NLivetestController implements Initializable {
 
 			// cs.newLine("dflow", c.getNewDryFlow(dryplist, dryflist,dryplist,
 			// 3));
-
+			cs.newLine("dfloworiginal", dryflist);
+			
 			if (DataStore.isCurveFit) {
 				if (dryflist.size() > 20) {
-					c.getWetFlowSmooth(dryplist, dryflist, 1000, 15);
+					c.getWetFlowSmooth(dryplist, dryflist, 1000, 3);
 				} else if (dryplist.size() >= 10) {
-					c.getWetFlowSmooth(dryplist, dryflist, 1000, 7);
+					c.getWetFlowSmooth(dryplist, dryflist, 1000, 3);
 				}
 			}
 
 			cs.newLine("dflow", dryflist);
 
 			cs.newLine("dpressure", dryplist);
-			cs.newLine("dfloworiginal", dryflist);
 			cs.newLine("darcy", darcylist);
 
 			cs.newLine("pg1value", DataStore.getPg1());
