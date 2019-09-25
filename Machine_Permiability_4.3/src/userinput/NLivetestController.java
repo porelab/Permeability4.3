@@ -195,6 +195,8 @@ public class NLivetestController implements Initializable {
 	@FXML
 	Label lblresult, lbltesttype;
 
+	
+	double priPress=0;
 	// stop test function it is used when test is completed or in while
 	// running...
 	void stopTest() {
@@ -1388,7 +1390,16 @@ public class NLivetestController implements Initializable {
 
 						if (testtype == 2) {
 
-							setPermiabilityPoints(pr, fl);
+							if(pr>priPress)
+							{
+								priPress=pr;
+								setPermiabilityPoints(pr, fl);
+										
+							}
+							else
+							{
+								System.out.println("Ignore : "+pr+" , "+fl);
+							}
 						}
 
 					}
