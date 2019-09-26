@@ -125,8 +125,8 @@
          </font>
       </Label>
       <Line endX="130.0" layoutX="1115.0" layoutY="626.0" rotate="90.0" startX="-100.0" stroke="#545252" visible="false" AnchorPane.topAnchor="608.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f1f1f1" height="84.0" layoutX="880.0" layoutY="569.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="483.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#b5b0b0" height="62.0" layoutX="879.0" layoutY="508.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="483.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f0f0f0d9" height="84.0" layoutX="880.0" layoutY="569.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="490.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#a8a8a8" height="62.0" layoutX="879.0" layoutY="508.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="490.0" />
       <Line endX="50.0" layoutX="1066.0" layoutY="579.0" rotate="90.0" startX="-100.0" stroke="WHITE" strokeWidth="4.0" />
       <Line endX="50.0" layoutX="1227.0" layoutY="579.0" rotate="90.0" startX="-100.0" stroke="WHITE" strokeWidth="4.0" />
       <Label layoutX="904.0" layoutY="526.0" text="Darcy Constant" textFill="WHITE" AnchorPane.topAnchor="526.0">
@@ -169,7 +169,17 @@
             <Font size="13.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" layoutX="1204.0" layoutY="605.0" prefHeight="30.0" prefWidth="161.0" text="Cubic feet / Square foot" textFill="#898585" wrapText="true" />
+      <Label alignment="CENTER" layoutX="1204.0" layoutY="608.0" prefHeight="37.0" prefWidth="171.0" text="Cubic feet of air / Square foot of sample" textFill="#898585" wrapText="true" />
+      <Label layoutX="1174.0" layoutY="162.0" text="( 0.178 psi )">
+         <font>
+            <Font size="10.0" />
+         </font>
+      </Label>
+      <Label layoutX="1278.0" layoutY="162.0" text="( 0.0182 psi )">
+         <font>
+            <Font size="10.0" />
+         </font>
+      </Label>
    </children>
    <stylesheets>
       <URL value="@../application/application.css" />
