@@ -982,7 +982,7 @@ public class Multiplepororeport {
 		
 		/*Unite>>>>>>>>>>*/
 		
-		PdfPCell cell11 = new PdfPCell(new Paragraph("", whitecolun));
+		PdfPCell cell11 = new PdfPCell(new Paragraph("( Trail )", whitecolun));
 		cell11.setBackgroundColor(backcellcoltable);
 		cell11.setBorder(0);
 		// cell11.setBorder(cell11.TOP | cell11.BOTTOM);
@@ -1052,9 +1052,8 @@ public class Multiplepororeport {
 			tablehed.setColor(new BaseColor(98, 98, 98));
 
 			DatareadN dr = d.get(j);
-			// first column
-			String st = "" + dr.data.get("sample");
-			// st = st.substring(0, st.indexOf('.'));
+			String st = "" + dr.filename;
+			 //st = st.substring(0, st.indexOf('.'));
 
 			if (j % 2 == 0) {
 
