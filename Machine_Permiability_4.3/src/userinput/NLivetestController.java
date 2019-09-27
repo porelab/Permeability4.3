@@ -789,6 +789,7 @@ public class NLivetestController implements Initializable {
 
 	
 		
+		
 		double k = 0;
 		try {
 
