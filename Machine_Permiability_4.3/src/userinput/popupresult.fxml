@@ -57,17 +57,12 @@
             <Font name="System Bold" size="25.0" />
          </font>
       </Label>
-      <Label graphicTextGap="0.0" layoutX="425.0" layoutY="198.0" prefHeight="20.0" prefWidth="25.0" styleClass="font-montserrat-semiBold" text="( s )" textAlignment="CENTER" textFill="#646464" AnchorPane.topAnchor="198.0">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-      </Label>
       <Label fx:id="lblmeanp" alignment="CENTER" layoutX="574.0" layoutY="162.0" prefWidth="180.0" styleClass="font-montserrat-semiBold" text="0.24" textFill="#646464">
          <font>
             <Font name="System Bold" size="25.0" />
          </font>
       </Label>
-      <Label graphicTextGap="0.0" layoutX="557.0" layoutY="187.0" prefHeight="50.0" prefWidth="211.0" styleClass="font-montserrat-semiBold" text="( Cubic feet of air / Square foot of sample )" textAlignment="CENTER" textFill="#646464" wrapText="true" AnchorPane.topAnchor="187.0">
+      <Label alignment="CENTER" graphicTextGap="0.0" layoutX="557.0" layoutY="187.0" prefHeight="50.0" prefWidth="211.0" styleClass="font-montserrat-semiBold" text="( S )" textAlignment="CENTER" textFill="#646464" wrapText="true" AnchorPane.topAnchor="187.0">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
@@ -97,5 +92,10 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
+      <Label graphicTextGap="0.0" layoutX="341.0" layoutY="188.0" prefHeight="50.0" prefWidth="211.0" styleClass="font-montserrat-semiBold" text="( Cubic feet of air / Square foot of sample )" textAlignment="CENTER" textFill="#646464" wrapText="true">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

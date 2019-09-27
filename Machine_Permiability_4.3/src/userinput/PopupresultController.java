@@ -85,7 +85,7 @@ public class PopupresultController implements Initializable {
 		lblsamplename.setText(""+dr.data.get("sample"));
 		lblbpp.setText(""+Myapp.getRound(Double.parseDouble(""+dr.data.get("darcy avg")), 2));
 		lblbpdiamter.setText(""+Myapp.getRound(Double.parseDouble(""+dr.data.get("frazier")), 2));
-	     lblmeanp.setText(""+Myapp.getRound(Double.parseDouble(""+dr.data.get("gurley")), 2));
+	     lblmeanp.setText(""+Double.parseDouble(""+dr.data.get("gurley")));
 
 	}
 }
