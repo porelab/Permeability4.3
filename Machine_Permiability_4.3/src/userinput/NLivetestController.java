@@ -607,7 +607,7 @@ public class NLivetestController implements Initializable {
 
 			CalculatePorometerData c = new CalculatePorometerData();
 
-			cs.wtirefile(f.getPath() + "/" + Myapp.sampleid + "_" + date1 + "_"
+			cs.wtirefile(f.getPath() + "/" + Myapp.sampleid + "_"
 					+ findInt(ff) + ".csv");
 
 			savefile = new File(cs.filename);
@@ -788,6 +788,7 @@ public class NLivetestController implements Initializable {
 	String getDarcyFrazier(double ddp, double ddf) {
 
 	
+		
 		
 		double k = 0;
 		try {
