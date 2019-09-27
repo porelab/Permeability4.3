@@ -511,7 +511,7 @@ public class Singlepororeport {
 		a2.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		a2.setVerticalAlignment(Element.ALIGN_MIDDLE);
 
-		PdfPCell a3 = new PdfPCell(new Paragraph("info@m19.io", addresslab));
+		PdfPCell a3 = new PdfPCell(new Paragraph("support@m19.io", addresslab));
 		a3.setPaddingLeft(10);
 		a3.setPaddingTop(1);
 		a3.setBorder(0);
@@ -522,9 +522,21 @@ public class Singlepororeport {
 		a3.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		a3.setVerticalAlignment(Element.ALIGN_MIDDLE);
 
+		PdfPCell a4 = new PdfPCell(new Paragraph("+91 8140308833", addresslab));
+		a4.setPaddingLeft(10);
+		a4.setPaddingTop(1);
+		a4.setBorder(0);
+		// a3.setBorder(a3.LEFT | a3.RIGHT);
+		a4.setFixedHeight(15f);
+		// a3.setBackgroundColor(backcellcoltable1);
+		a4.setBorderColor(new BaseColor(130, 130, 130));
+		a4.setHorizontalAlignment(Element.ALIGN_RIGHT);
+		a4.setVerticalAlignment(Element.ALIGN_MIDDLE);
+
 		addresstable.addCell(a1);
 		addresstable.addCell(a2);
 		addresstable.addCell(a3);
+		addresstable.addCell(a4);
 
 		try {
 			document.add(addresstable);
@@ -1048,7 +1060,7 @@ public class Singlepororeport {
 	
 	
 
-		PdfPCell u13 = new PdfPCell(new Paragraph("(Cubic feet of air / Sq. foot of sample)", unitlab));
+		PdfPCell u13 = new PdfPCell(new Paragraph("( Cubic feet / Square foot - min )", unitlab));
 		u13.setBorder(1);
 		u13.setBorder(u1.RIGHT);
 		u13.setBorderColor(resultborder);
@@ -1273,7 +1285,7 @@ public class Singlepororeport {
 
 		PdfPCell d2 = new PdfPCell(
 				new Paragraph(
-						"Sample specimen are not drawn by M19 Lab. Result relates to the sample tested. The report shall not be reproduced except in full, without the written approval of the laboratory. The report is strically confidential and technical inforamtion of client only. Not for advertisement, promotion, publicity or Litigation.",
+						"Sample specimen are not drawn by M19 Lab. Result relates to the sample tested. The report shall not be reproduced except in full, without the written approval of the laboratory. The report is strically confidential and technical inforamtion of client only. Not for advertisement, promotion, publicity or litigation.",
 						addresslab));
 		d2.setPaddingLeft(0);
 		d2.setPaddingTop(1);
@@ -1357,7 +1369,7 @@ public class Singlepororeport {
 		
 		try {
 
-			Chunk redText = new Chunk("Raw Data : " + st, headertestname);
+			Chunk redText = new Chunk("Sample ID : " + st, headertestname);
 
 			Paragraph p1 = new Paragraph(redText);
 			
@@ -1422,7 +1434,7 @@ public class Singlepororeport {
 
 		phrase.add(new Chunk("(cm", unitlabrow));
 		phrase.add( superscript ); 
-		phrase.add(new Chunk("/min)", unitlabrow));
+		phrase.add(new Chunk("/s)", unitlabrow));
 		
 		
 
