@@ -42,7 +42,7 @@ public class CsvWriter
 	
 		try
 		{
-			writer.newLine();
+		writer.newLine();
 		writer.write(st);
 		writer.write(COMMA_DELIMITER);
 		writer.write(data);

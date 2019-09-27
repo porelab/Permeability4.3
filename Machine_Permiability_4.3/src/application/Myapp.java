@@ -168,8 +168,13 @@ public class Myapp {
 		} else if (round == 3) {
 			r = (double) Math.round(r * 1000) / 1000;
 
-		} else {
+		} else  if (round == 3) {
 			r = (double) Math.round(r * 10000) / 10000;
+
+		}
+		else
+		{
+			r = (double) Math.round(r * 100000) / 100000;
 
 		}
 
