@@ -217,7 +217,7 @@ public class ReportController implements Initializable {
 							.drawLinechart(pagination1.getPrefWidth(),
 									pagination1.getPrefHeight(),
 									"Flow vs Pressure", "Pressure (psi)",
-									"Flow (cm3/min)", list_d, false, 11, 12,
+									"Flow (cm3/s)", list_d, false, 11, 12,
 									"(3) Incremental Filter-Flow % vs Diameter");
 					charts.put(p);
 					listofchart.add(p);
@@ -558,23 +558,22 @@ public class ReportController implements Initializable {
 
 			v.getChildren().add(
 					getVBox(fff, Myapp.getRound(Double.parseDouble(wff), 2),
-							Myapp.getRound(Double.parseDouble(gurff), 2),
-							Myapp.getRound(Double.parseDouble(fraff), 2),
+							""+Double.parseDouble(gurff),
+							""+Double.parseDouble(fraff),
 							clrs.get(i)));
-
 		}
 
 		BigDecimal b = BigDecimal.valueOf(avgbp / list_d.size());
 
-		b = b.setScale(2, BigDecimal.ROUND_HALF_UP);
+		//b = b.setScale(2, BigDecimal.ROUND_HALF_UP);
 
 		BigDecimal b1 = BigDecimal.valueOf(avggur / list_d.size());
 
-		b1 = b1.setScale(2, BigDecimal.ROUND_HALF_UP);
+		//b1 = b1.setScale(2, BigDecimal.ROUND_HALF_UP);
 
 		BigDecimal b2 = BigDecimal.valueOf(avgfra / list_d.size());
 
-		b2 = b2.setScale(2, BigDecimal.ROUND_HALF_UP);
+	//	b2 = b2.setScale(2, BigDecimal.ROUND_HALF_UP);
 
 		lblgurl.setText("" + b1);
 		lblfraz.setText("" + b2);
