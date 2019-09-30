@@ -210,7 +210,7 @@ public class PdfselectionController implements Initializable {
 					Multiplepororeport mp = new Multiplepororeport();
 					mp.Report(path, ReportController.list_d,
 							txtnotes.getText(), txtcomname.getText(), graphs,
-							bchkrowdata);
+							bchkrowdata, bchkcoverpage, imgpath1);
 
 				}
 				try {

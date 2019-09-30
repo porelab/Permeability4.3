@@ -58,6 +58,7 @@ public class Multiplepororeport {
 
 	String companyname;
 	String notes;
+	String imgpath,imgpath1;
 
 	Font blueFont = FontFactory.getFont(FontFactory.TIMES_ROMAN, 9,
 			Font.NORMAL, new CMYKColor(0, 0, 0, 0));
@@ -128,11 +129,12 @@ public class Multiplepororeport {
 	}
 	/* Main Function Create Report */
 	public void Report(String path, List<DatareadN> d, String notes, String comname,
-			List<String> graphs, Boolean btabledata) {
+			List<String> graphs, Boolean btabledata, Boolean bcoverpage,String imgpath1) {
 		allfiles = d;
 
 		this.companyname = comname;
 		this.notes = notes;
+		this.imgpath1 = imgpath1;
 
 		try {
 			writer = PdfWriter
@@ -143,8 +145,11 @@ public class Multiplepororeport {
 			// write to document
 			document.open();
 
-			//coverpage();
-
+			if (bcoverpage == true) {
+				coverpage();
+			}
+		
+		
 			document.newPage();
 			HeaderFooterPageEvent event = new HeaderFooterPageEvent();
 			writer.setPageEvent(event);
@@ -233,9 +238,18 @@ public class Multiplepororeport {
 			// TODO: handle exception
 		}
 
+
 		try {
 
-			Image img1 = Image.getInstance("f1.jpg");
+			//Image img1 = Image.getInstance("f1.jpg");
+			Image img1;
+			if (!imgpath1.equals("")) {
+			 img1 = Image.getInstance(imgpath1);
+			}
+			else
+			{
+				img1 = Image.getInstance("f1.jpg");
+			}
 			img1.scaleAbsolute(595, 500);
 			img1.setAbsolutePosition(0f, 200f);
 			document.add(img1);
@@ -542,7 +556,7 @@ public class Multiplepororeport {
 		infotable.setSpacingAfter(0f); // Space after table
 
 		// Set Column widths
-		float[] infotablewidth = { 15, 15, 16, 20, 18, 15 };
+		float[] infotablewidth = { 15, 15, 16, 20, 16, 17 };
 
 		try {
 			infotable.setWidths(infotablewidth);
@@ -573,7 +587,7 @@ public class Multiplepororeport {
 		c2.setHorizontalAlignment(Element.ALIGN_CENTER);
 		c2.setVerticalAlignment(Element.ALIGN_BOTTOM);
 
-		PdfPCell c3 = new PdfPCell(new Paragraph("Sample Thickess", whitecol));
+		PdfPCell c3 = new PdfPCell(new Paragraph("Sample Thickness", whitecol));
 		c3.setBackgroundColor(backcellcoltable);
 		c3.setBorder(0);
 		// c3.setBorder(c3.TOP | c3.BOTTOM | c3.LEFT);
@@ -584,7 +598,7 @@ public class Multiplepororeport {
 		c3.setHorizontalAlignment(Element.ALIGN_CENTER);
 		c3.setVerticalAlignment(Element.ALIGN_BOTTOM);
 
-		PdfPCell c4 = new PdfPCell(new Paragraph("Wetting Fluid", whitecol));
+		PdfPCell c4 = new PdfPCell(new Paragraph("Test Gas", whitecol));
 		c4.setBackgroundColor(backcellcoltable);
 		c4.setBorder(0);
 		// c4.setBorder(c4.TOP | c4.BOTTOM | c4.LEFT);
@@ -1678,7 +1692,8 @@ public class Multiplepororeport {
 
 			DatareadN dr1 = d.get(k);
 			// first column
-			String st = "" + dr1.data.get("sample");
+			//String st = "" + dr1.data.get("sample");
+			String st = "" + dr1.filename;
 
 			document.newPage();
 
@@ -1689,7 +1704,7 @@ public class Multiplepororeport {
 
 			try {
 
-				Chunk redText = new Chunk("Sample ID : " + st, headertestname);
+				Chunk redText = new Chunk("Raw Data : " + st, headertestname);
 
 				Paragraph p1 = new Paragraph(redText);
 				document.add(p1);
