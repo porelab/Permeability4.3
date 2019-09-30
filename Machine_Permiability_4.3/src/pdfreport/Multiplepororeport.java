@@ -609,7 +609,7 @@ public class Multiplepororeport {
 		c4.setHorizontalAlignment(Element.ALIGN_CENTER);
 		c4.setVerticalAlignment(Element.ALIGN_BOTTOM);
 
-		PdfPCell c5 = new PdfPCell(new Paragraph("Surface Tension", whitecol));
+		PdfPCell c5 = new PdfPCell(new Paragraph("Gas Viscosity", whitecol));
 		c5.setBackgroundColor(backcellcoltable);
 		c5.setBorder(1);
 		c5.setBorder(c5.RIGHT);
@@ -759,15 +759,10 @@ public class Multiplepororeport {
 				record1.setVerticalAlignment(Element.ALIGN_MIDDLE);
 				infotable.addCell(record1);
 
-				String sampledia = Myapp
-						.getRound(
-								Double.parseDouble(""
-										+ dr1.data.get("samplediameter")), 2);
-				String samplethik = Myapp.getRound(
-						Double.parseDouble("" + dr1.data.get("thikness")), 2);
+				String sampledia =""+ dr1.data.get("samplediameter");
+				String samplethik = "" + dr1.data.get("thikness");
 				String testfluid = "" + dr1.data.get("fluidname");
-				String surfacet = Myapp.getRound(
-						Double.parseDouble("" + dr1.data.get("fluidvalue")), 2);
+				String surfacet = "" + dr1.data.get("fluidvalue");
 				
 
 				
@@ -1738,7 +1733,7 @@ public class Multiplepororeport {
 
 			addTableHeader(tablem);
 
-			for (int j = 0; j < darcy.size(); j++) {
+			for (int j = 1; j < darcy.size(); j++) {
 
 				if (j % 44 == 0 && j != 0) {
 
