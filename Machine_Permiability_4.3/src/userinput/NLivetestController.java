@@ -226,9 +226,9 @@ public class NLivetestController implements Initializable {
 
 	// setting plate value ..
 	void setPlateval() {
-		if (Myapp.splate.equals("Small")) {
+		if (Myapp.splate.equals("small")) {
 			calculationdia = 1;
-		} else if (Myapp.splate.equals("Large")) {
+		} else if (Myapp.splate.equals("large")) {
 
 			calculationdia = 4.3;
 		} else {
@@ -346,7 +346,7 @@ public class NLivetestController implements Initializable {
 		trails = Integer.parseInt(Myapp.testtrial);
 
 		DataStore.getconfigdata();
-		conditionflow = (double) Double.parseDouble(DataStore.getFm2()) * 0.80;
+		conditionflow = (double) Double.parseDouble(DataStore.getFm2()) * 0.90;
 		conditionpressure = Double.parseDouble(Myapp.endpress);
 
 		isDryStart = new SimpleBooleanProperty(false);
@@ -1449,6 +1449,7 @@ public class NLivetestController implements Initializable {
 
 						//	setPermiabilityPoints(pr, fl);
 							
+							
 							if(pr>priPress && fl>priFlow)
 							{
 								priPress=pr;
@@ -1616,9 +1617,9 @@ public class NLivetestController implements Initializable {
 				public void run() {
 
 					series2.getData().add(new XYChart.Data(curpre, curflow));
-					dryplist.add("" + curpre);
-					dryflist.add("" + curflow);
-					darcylist.add("" + getDarcy(curpre, curflow));
+					dryplist.add("" + curpre );
+					dryflist.add("" + (curflow/60));
+					darcylist.add("" + getDarcy(curpre, curflow/60));
 					ind++;
 					flowserires.getData().add(
 							new XYChart.Data(getTime(), curflow));

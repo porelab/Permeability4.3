@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.text.DateFormat;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -142,7 +143,7 @@ public class Multiplepororeport {
 			// write to document
 			document.open();
 
-			coverpage();
+			//coverpage();
 
 			document.newPage();
 			HeaderFooterPageEvent event = new HeaderFooterPageEvent();
@@ -982,7 +983,7 @@ public class Multiplepororeport {
 		
 		/*Unite>>>>>>>>>>*/
 		
-		PdfPCell cell11 = new PdfPCell(new Paragraph("( Trail )", whitecolun));
+		PdfPCell cell11 = new PdfPCell(new Paragraph("( Trial )", whitecolun));
 		cell11.setBackgroundColor(backcellcoltable);
 		cell11.setBorder(0);
 		// cell11.setBorder(cell11.TOP | cell11.BOTTOM);
@@ -1067,13 +1068,23 @@ public class Multiplepororeport {
 				record1.setVerticalAlignment(Element.ALIGN_MIDDLE);
 				tablem.addCell(record1);
 
+				/*
 				String mp = Myapp.getRound(
-						Double.parseDouble("" + dr.data.get("darcy avg")), 2);
+						Double.parseDouble("" + dr.data.get("darcy avg")), 5);
 				String gurl = Myapp.getRound(
-						Double.parseDouble("" + dr.data.get("gurley")), 2);
+						Double.parseDouble("" + dr.data.get("gurley")), 5);
 				String fraz = Myapp.getRound(
-						Double.parseDouble("" + dr.data.get("frazier")), 2);
+						Double.parseDouble("" + dr.data.get("frazier")),5);
+				*/
 				
+				String mp = dr.data.get("darcy avg")+"";
+			 double d1=Double.parseDouble("" + dr.data.get("gurley"));
+				
+
+				 DecimalFormat formatter = new DecimalFormat("0.00000");
+					String gurl=formatter .format(d1);
+				
+				String fraz = Myapp.getRound(Double.parseDouble("" + dr.data.get("frazier")),2);
 				// second column
 				PdfPCell record5 = new PdfPCell(new Paragraph(mp+"",
 						tabledata));
@@ -1088,7 +1099,7 @@ public class Multiplepororeport {
 				tablem.addCell(record5);
 
 				// second column
-				PdfPCell record6 = new PdfPCell(new Paragraph(gurl+"",
+				PdfPCell record6 = new PdfPCell(new Paragraph(gurl,
 						tabledata));
 				record6.setBorder(0);
 			//	record6.setBorder(record5.RIGHT);
@@ -1129,12 +1140,14 @@ public class Multiplepororeport {
 				tablem.addCell(record1);
 				
 				
-				String mp = Myapp.getRound(
-						Double.parseDouble("" + dr.data.get("darcy avg")), 2);
-				String gurl = Myapp.getRound(
-						Double.parseDouble("" + dr.data.get("gurley")), 2);
-				String fraz = Myapp.getRound(
-						Double.parseDouble("" + dr.data.get("frazier")), 2);
+				String mp = dr.data.get("darcy avg")+"";
+				 double d1=Double.parseDouble("" + dr.data.get("gurley"));
+					
+
+					 DecimalFormat formatter = new DecimalFormat("0.00000");
+						String gurl=formatter .format(d1);
+					
+					String fraz = Myapp.getRound(Double.parseDouble("" + dr.data.get("frazier")),2);
 
 				
 				

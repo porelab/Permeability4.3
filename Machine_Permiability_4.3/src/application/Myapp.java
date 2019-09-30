@@ -152,8 +152,13 @@ public class Myapp {
 		} else if (round == 3) {
 			r = (double) Math.round(r * 1000) / 1000;
 
-		} else {
+		} else  if (round == 4) {
 			r = (double) Math.round(r * 10000) / 10000;
+
+		}
+		else
+		{
+			r = (double) Math.round(r * 100000) / 100000;
 
 		}
 
@@ -168,13 +173,18 @@ public class Myapp {
 		} else if (round == 3) {
 			r = (double) Math.round(r * 1000) / 1000;
 
-		} else  if (round == 3) {
+		} else  if (round == 4) {
 			r = (double) Math.round(r * 10000) / 10000;
+
+		}
+		else if (round == 5)
+		{
+			r = (double) Math.round(r * 100000) / 100000;
 
 		}
 		else
 		{
-			r = (double) Math.round(r * 100000) / 100000;
+			r = (double) Math.round(r * 1000000) / 1000000;
 
 		}
 
