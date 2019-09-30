@@ -536,7 +536,7 @@ public class Singlepororeport {
 		addresstable.addCell(a1);
 		addresstable.addCell(a2);
 		addresstable.addCell(a3);
-		addresstable.addCell(a4);
+		//addresstable.addCell(a4);
 
 		try {
 			document.add(addresstable);
@@ -1123,7 +1123,7 @@ public class Singlepororeport {
 		if (!imgpath.equals("")) {
 			PdfPTable notestable = new PdfPTable(2); // 4 columns.
 			notestable.setWidthPercentage(100); // Width 100%
-			notestable.setSpacingBefore(15f); // Space before table
+			notestable.setSpacingBefore(10f); // Space before table
 			notestable.setSpacingAfter(0f); // Space after table
 
 			// Set Column widths
@@ -1370,7 +1370,7 @@ public class Singlepororeport {
 		
 		try {
 
-			Chunk redText = new Chunk("Sample ID : " + st, headertestname);
+			Chunk redText = new Chunk("Raw Data : " + st, headertestname);
 
 			Paragraph p1 = new Paragraph(redText);
 			
