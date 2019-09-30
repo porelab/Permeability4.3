@@ -718,6 +718,7 @@ public class Singlepororeport {
 		t4.setHorizontalAlignment(Element.ALIGN_LEFT);
 		t4.setVerticalAlignment(Element.ALIGN_MIDDLE);
 
+		
 		PdfPCell f1 = new PdfPCell(new Paragraph("Sample Thickness", sampleinfoq));
 		f1.setPaddingLeft(10);
 		f1.setPaddingTop(1);
