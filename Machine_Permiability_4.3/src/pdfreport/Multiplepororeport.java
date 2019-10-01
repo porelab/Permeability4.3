@@ -679,7 +679,7 @@ public class Multiplepororeport {
 		c44.setHorizontalAlignment(Element.ALIGN_CENTER);
 		c44.setVerticalAlignment(Element.ALIGN_MIDDLE);
 
-		PdfPCell c55 = new PdfPCell(new Paragraph("( dyne/cm )", whitecolun));
+		PdfPCell c55 = new PdfPCell(new Paragraph("( cP )", whitecolun));
 		c55.setBackgroundColor(backcellcoltable);
 		c55.setBorder(1);
 		c55.setBorder(c55.RIGHT);
@@ -846,11 +846,9 @@ public class Multiplepororeport {
 						.getRound(
 								Double.parseDouble(""
 										+ dr1.data.get("samplediameter")), 2);
-				String samplethik = Myapp.getRound(
-						Double.parseDouble("" + dr1.data.get("thikness")), 2);
+				String samplethik = "" + dr1.data.get("thikness");
 				String testfluid = "" + dr1.data.get("fluidname");
-				String surfacet = Myapp.getRound(
-						Double.parseDouble("" + dr1.data.get("fluidvalue")), 2);
+				String surfacet = "" + dr1.data.get("fluidvalue");
 				
 
 				// second column

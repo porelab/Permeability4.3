@@ -579,7 +579,7 @@ public class Singlepororeport {
 		cell1h.setHorizontalAlignment(Element.ALIGN_CENTER);
 		cell1h.setVerticalAlignment(Element.ALIGN_MIDDLE);
 
-		PdfPCell cell1 = new PdfPCell(new Paragraph("Customer id", sampleinfoq));
+		PdfPCell cell1 = new PdfPCell(new Paragraph("Customer ID", sampleinfoq));
 		cell1.setBorder(1);
 		cell1.setBorder(cell1.TOP | cell1.LEFT | cell1.RIGHT);
 		cell1.setBorderColor(new BaseColor(130, 130, 130));
@@ -755,7 +755,7 @@ public class Singlepororeport {
 		f3.setVerticalAlignment(Element.ALIGN_MIDDLE);
 
 		PdfPCell f4 = new PdfPCell(new Paragraph("" + d.data.get("fluidvalue")
-				+ " dyne/cm", sampleinfoa));
+				+ " cP ", sampleinfoa));
 		f4.setBorder(1);
 		f4.setBorder(f4.RIGHT);
 		f4.setBorderColor(new BaseColor(130, 130, 130));
