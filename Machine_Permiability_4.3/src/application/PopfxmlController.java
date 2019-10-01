@@ -37,21 +37,22 @@ public class PopfxmlController implements Initializable {
 
 	@FXML
 	AnchorPane root1;
-	
-	int valbpt,valtestacc,valdatas;
+
+	int valbpt, valtestacc, valdatas;
 
 	@FXML
 	TextField pendp1, pendp2;
 
 	@FXML
-	Label  pendp,pthresold, pfluid;
+	Label pendp, pthresold, pfluid;
 
 	@FXML
-	TextField psid,lotno,ptfact,pbptacc,txtdatastability,pporoacc,thincness;
-	
+	TextField psid, lotno, ptfact, pbptacc, txtdatastability, pporoacc,
+			thincness;
+
 	@FXML
-	ComboBox<String> cmbtesttrial,cmbfluid,cmbbptthresold;
-	
+	ComboBox<String> cmbtesttrial, cmbfluid, cmbbptthresold;
+
 	@FXML
 	Button starttest, btncancel;
 
@@ -59,36 +60,44 @@ public class PopfxmlController implements Initializable {
 	ComboBox<String> cmboproject;
 
 	@FXML
-	RadioButton bwd, dbw, bdw,datas1,datas2,datas3;
+	RadioButton bwd, dbw, bdw, datas1, datas2, datas3;
 
-	static String selectedrad6 = "",selectedrad7 = "";
+	@FXML
+	private RadioButton rdsmall;
 
-	static ToggleGroup tgb6,tgb7;
+	@FXML
+	private RadioButton rdmedium;
 
-    @FXML
-    private Button testaccbtnsub,testaccbtnplus,datasbtnsub,datasbtnplus,bptbtnsub,bptbtnplus;
+	@FXML
+	private RadioButton rdlarge;
 
-	
-	
+	static String selectedrad6 = "", selectedrad7 = "", selectedrad66 = "";
+
+	static ToggleGroup tgb6, tgb66, tgb7;
+
+	@FXML
+	private Button testaccbtnsub, testaccbtnplus, datasbtnsub, datasbtnplus,
+			bptbtnsub, bptbtnplus;
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
 		System.out.println("I am in Quick test");
 		setAllThings();
-		
+
 		setTestSequence();
 		// addShortCut();
 		LoadProject();
-	
+		setSamplePlate();
 		setkeyboardmode();
 
 		if (NConfigurePageController.bolkey) {
 			setClickkeyboard();
 
 		} else {
-		
+
 		}
-		
+
 		btncancel.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
@@ -111,9 +120,7 @@ public class PopfxmlController implements Initializable {
 			}
 		});
 
-		
 	}
-	
 
 	void addShortCut() {
 
@@ -141,27 +148,26 @@ public class PopfxmlController implements Initializable {
 
 		// System.out.println("Claidifcation"+alldata.get(0).get(3));
 		String splate = "" + alldata.get(0).get(11);
-	
+
 		// Industry name //
 		psid.setText(alldata.get(0).get(0));
 		ptfact.setText(alldata.get(0).get(10));
 		pendp1.setText(alldata.get(0).get(14));
 		pbptacc.setText(alldata.get(0).get(15));
-		
-		
+
 		pporoacc.setText(alldata.get(0).get(16));
 		lotno.setText(alldata.get(0).get(17));
 		pendp2.setText(alldata.get(0).get(18));
 		thincness.setText(alldata.get(0).get(12));
-		
-			/*New Chnages 01-07-2019*/
-		
+
+		/* New Chnages 01-07-2019 */
+
 		cmbbptthresold.setValue(alldata.get(0).get(5));
 		cmbfluid.setValue(alldata.get(0).get(6));
 		cmbtesttrial.setValue(alldata.get(0).get(9));
-		
-		String accstability= (alldata.get(0).get(21));
-		
+
+		String accstability = (alldata.get(0).get(21));
+
 		String stabilitytype = "" + alldata.get(0).get(20);
 		Myapp.accstability = (accstability);
 
@@ -186,7 +192,6 @@ public class PopfxmlController implements Initializable {
 			txtdatastability.setText(accstability);
 		}
 
-
 		Myapp.thresold = alldata.get(0).get(5);
 		Myapp.sampleid = alldata.get(0).get(0);
 		Myapp.testtrial = alldata.get(0).get(9);
@@ -202,21 +207,19 @@ public class PopfxmlController implements Initializable {
 		Myapp.materialtype = alldata.get(0).get(13);
 		Myapp.endpress = alldata.get(0).get(14);
 		Myapp.accbpt = (alldata.get(0).get(15));
-		Myapp.accstep= (alldata.get(0).get(16));
+		Myapp.accstep = (alldata.get(0).get(16));
 		Myapp.lotnumber = (alldata.get(0).get(17));
 		Myapp.startpress = (alldata.get(0).get(18));
-		
+
 		Myapp.accstability = (alldata.get(0).get(21));
 
 		valbpt = (int) (Double.parseDouble(Myapp.accbpt));
 		valtestacc = (int) (Double.parseDouble(Myapp.accstep));
 		valdatas = (int) (Double.parseDouble(Myapp.accstability));
-		
-		
-		
+
 		String testsequance = "" + alldata.get(0).get(19);
 		Myapp.testsequence = testsequance;
-//		System.out.println("Test Seu....................." + testsequance);
+		// System.out.println("Test Seu....................." + testsequance);
 
 		if (testsequance.equals("WUPDUP")) {
 			bwd.selectedProperty().set(true);
@@ -233,6 +236,26 @@ public class PopfxmlController implements Initializable {
 		else {
 			bdw.selectedProperty().set(true);
 			Myapp.testsequence = "WUPDCALCULATED";
+
+		}
+		
+/*Sample Plate*/
+		
+		if (splate.equals("Small")) {
+			rdsmall.selectedProperty().set(true);
+			Myapp.splate = "Small";
+
+		}
+
+		else if (splate.equals("Medium")) {
+			rdmedium.selectedProperty().set(true);
+			Myapp.splate = "Medium";
+
+		}
+
+		else {
+			rdlarge.selectedProperty().set(true);
+			Myapp.splate = "Large";
 
 		}
 
@@ -286,7 +309,7 @@ public class PopfxmlController implements Initializable {
 		tgb6 = new ToggleGroup();
 
 		bwd.setToggleGroup(tgb6);
-		bwd.setUserData("1");		
+		bwd.setUserData("1");
 		dbw.setToggleGroup(tgb6);
 		dbw.setUserData("2");
 		bdw.setToggleGroup(tgb6);
@@ -318,28 +341,29 @@ public class PopfxmlController implements Initializable {
 		});
 
 	}
-	void setAllThings()
-	{
-		cmbtesttrial.setItems(FXCollections.observableArrayList("1", "2", "3", "4",
-				"5", "6", "7", "8", "9", "10"));
-		
-		cmbbptthresold.setItems(FXCollections.observableArrayList("First bubble","Moderate","Continous"));
+
+	void setAllThings() {
+		cmbtesttrial.setItems(FXCollections.observableArrayList("1", "2", "3",
+				"4", "5", "6", "7", "8", "9", "10"));
+
+		cmbbptthresold.setItems(FXCollections.observableArrayList(
+				"First bubble", "Moderate", "Continous"));
 
 		getFluiddata();
-		
+
 		setDataStability();
-		
+
 		setAccuracybtn();
-		
+
 	}
-	
+
 	void getFluiddata() {
 		Database d = new Database();
 		List<List<String>> info = d.getData("select * from fluiddata");
 
 		try {
 
-		//	cmbfluid.getItems().add("Add Fluid");
+			// cmbfluid.getItems().add("Add Fluid");
 			for (int i = 0; i < info.size(); i++) {
 				cmbfluid.getItems().add(
 						info.get(i).get(0) + ":" + info.get(i).get(1));
@@ -395,11 +419,10 @@ public class PopfxmlController implements Initializable {
 			public void handle(ActionEvent event) {
 				// TODO Auto-generated method stub
 				if (valbpt != 100) {
-			
+
 					valbpt = valbpt + 10;
 					pbptacc.setText("" + valbpt);
-					Myapp.accbpt = ""+valbpt;
-					
+					Myapp.accbpt = "" + valbpt;
 
 				}
 
@@ -414,26 +437,25 @@ public class PopfxmlController implements Initializable {
 				if (valbpt != 10) {
 					valbpt = valbpt - 10;
 
-					pbptacc.setText(""+valbpt);
-					Myapp.accbpt = ""+valbpt;
+					pbptacc.setText("" + valbpt);
+					Myapp.accbpt = "" + valbpt;
 
 				}
-				
+
 			}
 		});
 
-/*Test Acc*/
+		/* Test Acc */
 		testaccbtnplus.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
 			public void handle(ActionEvent event) {
 				// TODO Auto-generated method stub
 				if (valtestacc != 100) {
-			
+
 					valtestacc = valtestacc + 10;
 					pporoacc.setText("" + valtestacc);
-					Myapp.accstep = ""+valtestacc;
-					
+					Myapp.accstep = "" + valtestacc;
 
 				}
 
@@ -448,26 +470,25 @@ public class PopfxmlController implements Initializable {
 				if (valtestacc != 10) {
 					valtestacc = valtestacc - 10;
 
-					pporoacc.setText(""+valtestacc);
-					Myapp.accstep = ""+valtestacc;
+					pporoacc.setText("" + valtestacc);
+					Myapp.accstep = "" + valtestacc;
 
 				}
-				
+
 			}
 		});
 
-		/*Data stability*/
+		/* Data stability */
 		datasbtnplus.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
 			public void handle(ActionEvent event) {
 				// TODO Auto-generated method stub
 				if (valdatas != 100) {
-			
+
 					valdatas = valdatas + 10;
 					txtdatastability.setText("" + valdatas);
-					Myapp.accstability = ""+valdatas;
-					
+					Myapp.accstability = "" + valdatas;
 
 				}
 
@@ -482,29 +503,23 @@ public class PopfxmlController implements Initializable {
 				if (valdatas != 10) {
 					valdatas = valdatas - 10;
 
-					txtdatastability.setText(""+valdatas);
-					Myapp.accstability = ""+valdatas;
+					txtdatastability.setText("" + valdatas);
+					Myapp.accstability = "" + valdatas;
 
 				}
-				
+
 			}
 		});
 
-		
-		
 	}
 
-
 	void setLastData() {
-		
-		
-		
+
 		Database d1 = new Database();
 		List<List<String>> alldata = d1
 				.getData("select * from lastprojects where lid='" + Myapp.email
 						+ "' ");
 
-		
 		psid.setText(alldata.get(0).get(1));
 		ptfact.setText(alldata.get(0).get(8));
 		pendp1.setText(alldata.get(0).get(14));
@@ -512,16 +527,15 @@ public class PopfxmlController implements Initializable {
 		pporoacc.setText(alldata.get(0).get(16));
 		lotno.setText(alldata.get(0).get(17));
 		pendp2.setText(alldata.get(0).get(18));
-		
+
 		thincness.setText(alldata.get(0).get(12));
-		
-		
-		/*New changes 01-07-2019*/
-		
+
+		/* New changes 01-07-2019 */
+
 		cmbbptthresold.setValue(alldata.get(0).get(6));
 		cmbfluid.setValue(alldata.get(0).get(7));
 		cmbtesttrial.setValue(alldata.get(0).get(9));
-		
+
 		Myapp.thresold = alldata.get(0).get(6);
 		Myapp.sampleid = alldata.get(0).get(1);
 		Myapp.testtrial = (alldata.get(0).get(9));
@@ -532,7 +546,8 @@ public class PopfxmlController implements Initializable {
 		String[] s = alldata.get(0).get(7).toString().split(":");
 		Myapp.fluidname = "" + s[0];
 		Myapp.fluidvalue = "" + s[1];
-		Myapp.splate = alldata.get(0).get(11);
+		String splate =alldata.get(0).get(11);
+		Myapp.splate = splate;
 		Myapp.thikness = alldata.get(0).get(12);
 		Myapp.materialtype = alldata.get(0).get(13);
 		Myapp.endpress = (alldata.get(0).get(14));
@@ -543,18 +558,15 @@ public class PopfxmlController implements Initializable {
 		String testsequance = "" + alldata.get(0).get(19);
 
 		Myapp.crossection = (alldata.get(0).get(5));
-		
-
 
 		String stabilitytype = "" + alldata.get(0).get(20);
-		String accstability= (alldata.get(0).get(21));
-		Myapp.accstability =""+ accstability;
+		String accstability = (alldata.get(0).get(21));
+		Myapp.accstability = "" + accstability;
 
 		valbpt = (int) (Double.parseDouble(Myapp.accbpt));
 		valtestacc = (int) (Double.parseDouble(Myapp.accstep));
 		valdatas = (int) (Double.parseDouble(Myapp.accstability));
-		
-		
+
 		if (testsequance.equals("WUPDUP")) {
 			bwd.selectedProperty().set(true);
 			Myapp.testsequence = "WUPDUP";
@@ -573,49 +585,66 @@ public class PopfxmlController implements Initializable {
 
 		}
 
-
 		// Stability Type
 
-				if (stabilitytype.equals("1")) {
-					datas1.selectedProperty().set(true);
-					Myapp.stabilitytype = "1";
-					txtdatastability.setText(accstability);
+		if (stabilitytype.equals("1")) {
+			datas1.selectedProperty().set(true);
+			Myapp.stabilitytype = "1";
+			txtdatastability.setText(accstability);
 
-				}
+		}
 
-				else if (stabilitytype.equals("2")) {
-					datas2.selectedProperty().set(true);
-					Myapp.stabilitytype = "2";
-					txtdatastability.setText(accstability);
-				}
+		else if (stabilitytype.equals("2")) {
+			datas2.selectedProperty().set(true);
+			Myapp.stabilitytype = "2";
+			txtdatastability.setText(accstability);
+		}
 
-				else {
-					datas3.selectedProperty().set(true);
-					Myapp.stabilitytype = "3";
-					txtdatastability.setText(accstability);
-				}
+		else {
+			datas3.selectedProperty().set(true);
+			Myapp.stabilitytype = "3";
+			txtdatastability.setText(accstability);
+		}
 		
-		
+		/*Sample Plate*/
+		if (splate.equals("Small")) {
+			rdsmall.selectedProperty().set(true);
+			Myapp.splate = "Small";
+
+		}
+
+		else if (splate.equals("Medium")) {
+			rdmedium.selectedProperty().set(true);
+			Myapp.splate = "Medium";
+
+		}
+
+		else {
+			rdlarge.selectedProperty().set(true);
+			Myapp.splate = "Large";
+
+		}
+
+
 	}
 
 	void teststart() {
 
-		
 		Myapp.endpress = pendp1.getText();
 		Myapp.lotnumber = lotno.getText();
 		Myapp.startpress = pendp2.getText();
-		 Myapp.accbpt = pbptacc.getText();
-		 Myapp.accstep = pporoacc.getText();
-		 Myapp.accstability = txtdatastability.getText();
-		 Myapp.sampleid = psid.getText();
-		 Myapp.thresold=cmbbptthresold.getSelectionModel().getSelectedItem();
-		Myapp.thikness=thincness.getText();
+		Myapp.accbpt = pbptacc.getText();
+		Myapp.accstep = pporoacc.getText();
+		Myapp.accstability = txtdatastability.getText();
+		Myapp.sampleid = psid.getText();
+		Myapp.thresold = cmbbptthresold.getSelectionModel().getSelectedItem();
+		Myapp.thikness = thincness.getText();
 
-		 
 		MyDialoug.closeDialoug();
 		Openscreen.open("/userinput/Nlivetest.fxml");
 
 	}
+
 	void setkeyboardmode() {
 
 		Database db = new Database();
@@ -636,7 +665,8 @@ public class PopfxmlController implements Initializable {
 			public void run() {
 				// TODO Auto-generated method stub
 
-				try {Myapp.virtualStage = null;
+				try {
+					Myapp.virtualStage = null;
 					if (Myapp.virtualStage == null) {
 
 						Parent root2;
@@ -648,17 +678,17 @@ public class PopfxmlController implements Initializable {
 						Myapp.virtualStage.initOwner(MyDialoug.dialog);
 						Myapp.virtualStage.initModality(Modality.WINDOW_MODAL);
 						Myapp.virtualStage.setScene(new Scene(root2, 805, 350));
-						
-						Myapp.virtualStage.setOnShown(new EventHandler<WindowEvent>() {
-							
-							@Override
-							public void handle(WindowEvent event) {
-								// TODO Auto-generated method stub
-								Myapp.keyboardinput
-								.setText(Myapp.currTf
-										.getText());
-							}
-						});
+
+						Myapp.virtualStage
+								.setOnShown(new EventHandler<WindowEvent>() {
+
+									@Override
+									public void handle(WindowEvent event) {
+										// TODO Auto-generated method stub
+										Myapp.keyboardinput
+												.setText(Myapp.currTf.getText());
+									}
+								});
 
 						Myapp.virtualStage
 								.setOnCloseRequest(new EventHandler<WindowEvent>() {
@@ -672,9 +702,7 @@ public class PopfxmlController implements Initializable {
 									}
 								});
 
-					}
-					else
-					{
+					} else {
 						Myapp.virtualStage.initOwner(MyDialoug.dialog);
 					}
 				} catch (Exception e) {
@@ -693,7 +721,7 @@ public class PopfxmlController implements Initializable {
 			// FXMLLoader.load(getClass().getClassLoader().getResource("/application/keyboard.fxml"));
 			Myapp.currTf = tf;
 			Myapp.nextTf = nextTf;
-			Myapp.nextlbl=nextlbl;
+			Myapp.nextlbl = nextlbl;
 			Myapp.lblkeyboard.setText(lbl);
 			Myapp.virtualStage.show();
 
@@ -710,10 +738,8 @@ public class PopfxmlController implements Initializable {
 
 	}
 
-
 	void setClickkeyboard() {
-		
-	
+
 		psid.setOnMouseClicked(new EventHandler<Event>() {
 
 			@Override
@@ -723,7 +749,7 @@ public class PopfxmlController implements Initializable {
 
 			}
 		});
-		
+
 		lotno.setOnMouseClicked(new EventHandler<Event>() {
 
 			@Override
@@ -733,7 +759,7 @@ public class PopfxmlController implements Initializable {
 
 			}
 		});
-		
+
 		thincness.setOnMouseClicked(new EventHandler<Event>() {
 
 			@Override
@@ -743,7 +769,7 @@ public class PopfxmlController implements Initializable {
 
 			}
 		});
-		
+
 		ptfact.setOnMouseClicked(new EventHandler<Event>() {
 
 			@Override
@@ -753,10 +779,7 @@ public class PopfxmlController implements Initializable {
 
 			}
 		});
-		
-		
-		
-		
+
 		pendp2.setOnMouseClicked(new EventHandler<Event>() {
 
 			@Override
@@ -772,12 +795,10 @@ public class PopfxmlController implements Initializable {
 			@Override
 			public void handle(Event event) {
 				// TODO Auto-generated method stub
-				setVitual(pendp1, null,  "End Pressure",null);
+				setVitual(pendp1, null, "End Pressure", null);
 			}
 		});
-		
-		
-	
+
 		lotno.setOnMouseClicked(new EventHandler<Event>() {
 
 			@Override
@@ -788,5 +809,42 @@ public class PopfxmlController implements Initializable {
 		});
 	}
 
-	
+	void setSamplePlate() {
+
+		tgb66 = new ToggleGroup();
+
+		rdsmall.setToggleGroup(tgb66);
+		rdsmall.setUserData("1");
+		rdmedium.setToggleGroup(tgb66);
+		rdmedium.setUserData("2");
+		rdlarge.setToggleGroup(tgb66);
+		rdlarge.setUserData("3");
+
+		selectedrad66 = "1";
+		Myapp.splate = "small";
+
+		tgb66.selectedToggleProperty().addListener(
+				new ChangeListener<Toggle>() {
+
+					@Override
+					public void changed(ObservableValue<? extends Toggle> arg0,
+							Toggle arg1, Toggle arg2) {
+
+						selectedrad6 = arg2.getUserData().toString();
+
+						if (selectedrad66.equals("1")) {
+							Myapp.splate = "Small";
+						}
+
+						else if (selectedrad66.equals("2")) {
+							Myapp.splate = "Medium";
+						} else {
+							Myapp.splate = "Large";
+						}
+
+					}
+				});
+
+	}
+
 }

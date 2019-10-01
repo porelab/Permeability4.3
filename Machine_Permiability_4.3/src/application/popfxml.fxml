@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:id="root1" minHeight="630.0" prefHeight="450.0" prefWidth="868.0" styleClass="bgwhite" stylesheets="@new_application.css" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.PopfxmlController">
+<AnchorPane fx:id="root1" minHeight="603.0" prefHeight="603.0" prefWidth="868.0" styleClass="bgwhite" stylesheets="@new_application.css" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.PopfxmlController">
    <children>
       <Line endX="700.0" layoutX="84.0" layoutY="140.0" stroke="#0e3c87" AnchorPane.leftAnchor="83.5" />
       <Label layoutX="83.0" layoutY="155.0" prefHeight="30.0" prefWidth="246.0" text="Material Information" textFill="#727272c4">
@@ -95,7 +95,7 @@
             <String fx:value="font-montserrat-semiBold" />
          </styleClass>
       </Label>
-      <Button fx:id="starttest" layoutX="366.0" layoutY="541.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="150.0" style="-fx-background-radius: 50;" styleClass="linear-grad-to-bottom-right" text="Next" textFill="WHITE" AnchorPane.leftAnchor="366.0">
+      <Button fx:id="starttest" layoutX="663.0" layoutY="508.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="150.0" style="-fx-background-radius: 50;" styleClass="linear-grad-to-bottom-right" text="Next" textFill="WHITE" AnchorPane.leftAnchor="663.0">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
@@ -256,8 +256,8 @@
          </font>
       </RadioButton>
       <Line layoutX="89.0" layoutY="462.0" startX="700.0" stroke="#0e3c87" AnchorPane.leftAnchor="88.5" AnchorPane.topAnchor="461.5" />
-      <Rectangle arcHeight="60.0" arcWidth="40.0" fill="#1f93ff00" height="40.0" layoutX="356.0" layoutY="476.0" stroke="#968f8f" strokeType="INSIDE" width="110.0" />
-      <TextField fx:id="pendp2" layoutX="364.0" layoutY="475.0" prefHeight="40.0" prefWidth="95.0">
+      <Rectangle arcHeight="60.0" arcWidth="40.0" fill="#1f93ff00" height="40.0" layoutX="194.0" layoutY="494.0" stroke="#968f8f" strokeType="INSIDE" width="110.0" />
+      <TextField fx:id="pendp2" layoutX="202.0" layoutY="493.0" prefHeight="40.0" prefWidth="95.0">
          <font>
             <Font size="18.0" />
          </font>
@@ -266,8 +266,8 @@
             <String fx:value="col-gray70" />
          </styleClass>
       </TextField>
-      <Rectangle arcHeight="40.0" arcWidth="40.0" fill="#1f93ff00" height="40.0" layoutX="522.0" layoutY="476.0" stroke="#968f8f" strokeType="INSIDE" width="110.0" />
-      <TextField fx:id="pendp1" layoutX="522.0" layoutY="476.0" prefHeight="40.0" prefWidth="95.0">
+      <Rectangle arcHeight="40.0" arcWidth="40.0" fill="#1f93ff00" height="40.0" layoutX="360.0" layoutY="494.0" stroke="#968f8f" strokeType="INSIDE" width="110.0" />
+      <TextField fx:id="pendp1" layoutX="360.0" layoutY="494.0" prefHeight="40.0" prefWidth="95.0">
          <font>
             <Font size="18.0" />
          </font>
@@ -276,24 +276,15 @@
             <String fx:value="col-gray70" />
          </styleClass>
       </TextField>
-      <Label layoutX="595.0" layoutY="482.0" styleClass="col-gray70" text="psi">
+      <Label layoutX="433.0" layoutY="500.0" styleClass="col-gray70" text="psi">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label layoutX="488.0" layoutY="483.0" styleClass="col-gray70" text="to">
+      <Label layoutX="326.0" layoutY="501.0" styleClass="col-gray70" text="to">
          <font>
             <Font size="18.0" />
          </font>
-      </Label>
-      <Label fx:id="lblendpress" layoutX="214.0" layoutY="482.0" text="Test Pressure" textFill="#707070b8">
-         <font>
-            <Font size="16.0" />
-         </font>
-         <styleClass>
-            <String fx:value="col-gray70" />
-            <String fx:value="font-montserrat-semiBold" />
-         </styleClass>
       </Label>
       <Rectangle arcHeight="60.0" arcWidth="40.0" fill="#1f93ff00" height="40.0" layoutX="183.0" layoutY="208.0" stroke="#968f8f" strokeType="INSIDE" width="230.0" />
       <TextField fx:id="psid" layoutX="191.0" layoutY="207.0" prefHeight="40.0" prefWidth="210.0">
@@ -466,7 +457,7 @@
             <String fx:value="col-gray70" />
          </styleClass>
       </TextField>
-      <Label layoutX="432.0" layoutY="483.0" styleClass="col-gray70" text="psi">
+      <Label layoutX="270.0" layoutY="501.0" styleClass="col-gray70" text="psi">
          <font>
             <Font size="18.0" />
          </font>
@@ -499,5 +490,38 @@
             <String fx:value="col-gray70" />
          </styleClass>
       </TextField>
+      <RadioButton fx:id="rdsmall" layoutX="190.0" layoutY="548.0" mnemonicParsing="false" selected="true" styleClass="col-gray70" text="Small" textFill="#797878e0">
+         <font>
+            <Font name="Calibri" size="20.0" />
+         </font>
+      </RadioButton>
+      <RadioButton fx:id="rdmedium" layoutX="297.0" layoutY="550.0" mnemonicParsing="false" styleClass="col-gray70" text="Medium" textFill="#797878e0">
+         <font>
+            <Font name="Calibri" size="20.0" />
+         </font>
+      </RadioButton>
+      <RadioButton fx:id="rdlarge" layoutX="434.0" layoutY="551.0" mnemonicParsing="false" styleClass="col-gray70" text="Large" textFill="#797878e0">
+         <font>
+            <Font name="Calibri" size="20.0" />
+         </font>
+      </RadioButton>
+      <Label layoutX="37.0" layoutY="547.0" prefHeight="25.0" prefWidth="130.0" text="Sample Plate" textFill="#707070bf">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+         <styleClass>
+            <String fx:value="col-gray70" />
+            <String fx:value="font-montserrat-semiBold" />
+         </styleClass>
+      </Label>
+      <Label layoutX="36.0" layoutY="501.0" prefHeight="25.0" prefWidth="130.0" text="Test Pressure" textFill="#707070bf">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+         <styleClass>
+            <String fx:value="col-gray70" />
+            <String fx:value="font-montserrat-semiBold" />
+         </styleClass>
+      </Label>
    </children>
 </AnchorPane>
