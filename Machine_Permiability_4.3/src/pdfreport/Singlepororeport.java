@@ -579,7 +579,7 @@ public class Singlepororeport {
 		cell1h.setHorizontalAlignment(Element.ALIGN_CENTER);
 		cell1h.setVerticalAlignment(Element.ALIGN_MIDDLE);
 
-		PdfPCell cell1 = new PdfPCell(new Paragraph("Customer id", sampleinfoq));
+		PdfPCell cell1 = new PdfPCell(new Paragraph("Customer ID", sampleinfoq));
 		cell1.setBorder(1);
 		cell1.setBorder(cell1.TOP | cell1.LEFT | cell1.RIGHT);
 		cell1.setBorderColor(new BaseColor(130, 130, 130));
@@ -755,7 +755,7 @@ public class Singlepororeport {
 		f3.setVerticalAlignment(Element.ALIGN_MIDDLE);
 
 		PdfPCell f4 = new PdfPCell(new Paragraph("" + d.data.get("fluidvalue")
-				+ " dyne/cm", sampleinfoa));
+				+ " cP ", sampleinfoa));
 		f4.setBorder(1);
 		f4.setBorder(f4.RIGHT);
 		f4.setBorderColor(new BaseColor(130, 130, 130));
@@ -801,7 +801,7 @@ public class Singlepororeport {
 		f33.setHorizontalAlignment(Element.ALIGN_LEFT);
 		f33.setVerticalAlignment(Element.ALIGN_MIDDLE);
 
-		PdfPCell f44 = new PdfPCell(new Paragraph("Swasti dey", sampleinfoa));
+		PdfPCell f44 = new PdfPCell(new Paragraph("Rujul Raimagia", sampleinfoa));
 		f44.setBorder(1);
 		f44.setBorder(f44.RIGHT);
 		f44.setBorderColor(new BaseColor(130, 130, 130));
@@ -1507,7 +1507,7 @@ public class Singlepororeport {
 
 		addTableHeader(tablem);
 
-		for (int j = 0; j < df.size(); j++) {
+		for (int j = 1; j < df.size(); j++) {
 
 			if (j % 45 == 0 && j != 0) {
 
@@ -1675,7 +1675,7 @@ public class Singlepororeport {
 
 			}
 
-			if (j == wpressur.size() - 2) {
+			if (j == wpressur.size() - 1) {
 
 				tablem.getRows().remove(tablem.getRows().size() - 1);
 

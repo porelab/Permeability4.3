@@ -531,7 +531,7 @@ public class NLivetestController implements Initializable {
 
 	
 	//find darcy value
-	String getDarcy(double ddp, double ddf) {
+	String getDarcy1(double ddp, double ddf) {
 
 		double k = 0;
 		try {
@@ -550,11 +550,47 @@ public class NLivetestController implements Initializable {
 		return "" + k;
 	}
 
+	void addAllDarcy(List<String> dp,List<String> df)
+	{
+
+		double k = 0;
+		double ddp,ddf;
+		for(int i=0;i<dp.size();i++)
+		{
+			
+
+			try {
+
+				ddp=Double.parseDouble(dp.get(i));
+				ddf=Double.parseDouble(df.get(i));
+				
+				k=0;
+				ddp = (double) ddp / 14.696;
+			   // ddf = ddf / 60;
+				double vis = Double.parseDouble(Myapp.fluidvalue);
+				double len = Double.parseDouble(Myapp.thikness);
+				k = (4 * (ddf * vis * len))
+						/ (calculationdia * calculationdia * 3.141592653589793 * ddp);
+
+				if(i>0)
+				{
+				darcyavg = darcyavg + k;
+				}
+			
+			} catch (Exception e) {
+			}
+			
+			darcylist.add(""+k);
+			
+			
+		}
+	}
+	
 	// get darcy value avg
 	double getDarcyAvg() {
 		double ans;
 
-		ans = (double) darcyavg / darcylist.size();
+		ans = (double) darcyavg / (darcylist.size()-1);
 
 		ans = (double) Math.round(ans * 100) / 100;
 
@@ -650,12 +686,27 @@ public class NLivetestController implements Initializable {
 			cs.newLine("materialclassification", Myapp.classification);
 			cs.newLine("splate", Myapp.splate);
 
-			double dar = getDarcyAvg();
-			cs.newLine("darcy avg", "" + Myapp.getRound(dar, 2));
-
+		
 			// cs.newLine("dflow", c.getNewDryFlow(dryplist, dryflist,dryplist,
 			// 3));
 			cs.newLine("dfloworiginal", dryflist);
+			cs.newLine("dpressureoriginal", dryplist);
+			
+			dryflist.remove(0);
+			dryplist.remove(0);
+			
+			dryflist.remove(1);
+			dryplist.remove(1);
+			
+			dryflist.remove(2);
+			dryplist.remove(2);
+			
+			dryflist.remove(3);
+			dryplist.remove(3);
+			
+
+			dryflist.remove(4);
+			dryplist.remove(4);
 			
 			if (DataStore.isCurveFit) {
 				if (dryflist.size() > 20) {
@@ -665,10 +716,22 @@ public class NLivetestController implements Initializable {
 				}
 			}
 
+		
+			
 			cs.newLine("dflow", dryflist);
 
 			cs.newLine("dpressure", dryplist);
+			
+			
+			
+			addAllDarcy(dryplist, dryflist);
+			
 			cs.newLine("darcy", darcylist);
+			
+			
+			double dar = getDarcyAvg();
+			cs.newLine("darcy avg", "" + Myapp.getRound(dar, 2));
+
 
 			cs.newLine("pg1value", DataStore.getPg1());
 			cs.newLine("pg2value", DataStore.getPg2());
@@ -1619,8 +1682,9 @@ public class NLivetestController implements Initializable {
 					series2.getData().add(new XYChart.Data(curpre, curflow));
 					dryplist.add("" + curpre );
 					dryflist.add("" + (curflow/60));
-					darcylist.add("" + getDarcy(curpre, curflow/60));
-					ind++;
+
+				//	darcylist.add("" + getDarcy1(curpre, curflow/60));
+				 ind++;
 					flowserires.getData().add(
 							new XYChart.Data(getTime(), curflow));
 					pressureserires.getData().add(
