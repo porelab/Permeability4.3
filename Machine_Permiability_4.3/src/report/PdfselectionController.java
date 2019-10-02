@@ -15,7 +15,9 @@ import application.Main;
 import data_read_write.DatareadN;
 import pdfreport.ExcelReport;
 import pdfreport.Multiplepororeport;
+import pdfreport.MultiplepororeportKusum;
 import pdfreport.Singlepororeport;
+import pdfreport.SinglepororeportKusum;
 import toast.MyDialoug;
 import toast.Toast;
 import javafx.beans.value.ChangeListener;
@@ -205,12 +207,22 @@ public class PdfselectionController implements Initializable {
 					sp.Report(path, ReportController.list_d.get(0),
 							txtnotes.getText(), txtcomname.getText(), imgpath,
 							graphs, bchkrowdata, bchkcoverpage, imgpath1);
+					
+					
+				/*	SinglepororeportKusum sp = new SinglepororeportKusum();
+					sp.Report(path, ReportController.list_d.get(0),
+							txtnotes.getText(), txtcomname.getText(), imgpath,
+							graphs, bchkrowdata, bchkcoverpage, imgpath1);*/
 
 				} else {
 					Multiplepororeport mp = new Multiplepororeport();
 					mp.Report(path, ReportController.list_d,
 							txtnotes.getText(), txtcomname.getText(), graphs,
 							bchkrowdata, bchkcoverpage, imgpath1);
+				/*	MultiplepororeportKusum mp = new MultiplepororeportKusum();
+					mp.Report(path, ReportController.list_d,
+							txtnotes.getText(), txtcomname.getText(), graphs,
+							bchkrowdata, bchkcoverpage, imgpath1);*/
 
 				}
 				try {

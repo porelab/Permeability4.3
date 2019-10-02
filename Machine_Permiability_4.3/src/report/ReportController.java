@@ -213,12 +213,20 @@ public class ReportController implements Initializable {
 				System.out.println("charts : " + i);
 
 				if (i == 1) {
+				/*	Pane p = c
+							.drawLinechartKusum(pagination1.getPrefWidth(),
+									pagination1.getPrefHeight(),
+									"Flow vs Pressure", "Pressure (psi)",
+									"Flow (cfm)", list_d, false, 11, 12,
+									"Flow vs Pressure");*/
+					
 					Pane p = c
 							.drawLinechart(pagination1.getPrefWidth(),
 									pagination1.getPrefHeight(),
 									"Flow vs Pressure", "Pressure (psi)",
 									"Flow (cm3/s)", list_d, false, 11, 12,
 									"(3) Incremental Filter-Flow % vs Diameter");
+					
 					charts.put(p);
 					listofchart.add(p);
 
