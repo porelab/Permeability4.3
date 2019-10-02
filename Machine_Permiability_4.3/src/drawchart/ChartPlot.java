@@ -181,6 +181,85 @@ public class ChartPlot {
 		return p;
 
 	}
+	public Pane drawLinechartKusum(double xsize, double ysize, String Title,
+			String Xname, String Yname, List<DatareadN> d, boolean reverse,
+			int xm, int ym,String mm) {
+		System.out.println("In DrawLineChart multiple file");
+
+		final NumberAxis xAxis = new NumberAxis();
+		final NumberAxis yAxis = new NumberAxis();
+		xAxis.setLabel(Xname);
+		yAxis.setLabel(Yname);
+		// creating the chart
+
+		SmoothedChart<Number, Number> lineChart = new SmoothedChart<>(xAxis,
+				yAxis);
+		lineChart.setSmoothed(true);
+		lineChart.setChartType(ChartType.LINE);
+		lineChart.setInteractive(true);
+		lineChart.setSubDivisions(8);
+
+		lineChart.setPrefSize(xsize, ysize - 50);
+		lineChart.setMinSize(xsize, ysize - 50);
+		lineChart.setMaxSize(xsize, ysize - 50);
+
+		// lineChart.setTitle(Title);
+		lineChart.setLegendVisible(false);
+		lineChart
+				.setStyle("-fx-background-color: rgba(255,255,355,0.05);-fx-background-radius: 10;");
+
+		// xAxis.setStyle("-fx-tick-label-font-size: 1.0em;-fx-tick-label-fill: #000000;-fx-tick-length: 18;-fx-minor-tick-length: 10;");
+		// yAxis.setStyle("-fx-tick-label-font-size: 1.0em;-fx-tick-label-fill: #000000;-fx-tick-length: 18;-fx-minor-tick-length: 10;");
+
+		XYChart.Series[] series = new XYChart.Series[d.size()];
+		for (int i = 0; i < d.size(); i++) {
+			series[i] = new XYChart.Series();
+			// System.out.println("File "+(i+1)+" is taking in action");
+
+			series[i].setName(d.get(i).filename);
+
+			DatareadN dr = d.get(i);
+
+			List<String> x = null, y = null;
+
+		
+				x = dr.getValuesOf(dr.data.get("dpressure") + "");
+				y = dr.getValuesOf(dr.data.get("dflow") + "");
+			
+
+			try {
+
+				for (int j = 2; j < x.size() - 1; j++) {
+					double xd = 0;
+					double yd = 0;
+
+				
+						xd = Double.parseDouble(x.get(j));
+						yd = Double.parseDouble(y.get(j))*0.00211888;
+					
+
+					series[i].getData().add(new XYChart.Data(xd, yd));
+
+				}
+
+			} catch (Exception e) {
+			}
+		}
+		lineChart.getStylesheets().add(
+				getClass().getResource("dynamicgraph.css").toExternalForm());
+		Pane p = new Pane();
+		p.setStyle("-fx-background-color: rgba(0, 100, 100, 0.0);");
+		p.setPrefSize(xsize, ysize - 50);
+		p.setMinSize(xsize, ysize - 50);
+		p.setMaxSize(xsize, ysize - 50);
+		p.getChildren().add(lineChart);
+		lineChart.setAnimated(false);
+		lineChart.getData().addAll(series);
+
+	       Zoom zoom =new Zoom(lineChart,p);
+		return p;
+
+	}
 
 	public Pane drawLinechartPsdMultiple(double xsize, double ysize, String Title,
 			String Xname, String Yname, List<String> ranges,LinkedHashMap<String,LinkedHashMap<String,Double>> map) {
