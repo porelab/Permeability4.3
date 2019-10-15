@@ -1675,7 +1675,7 @@ public class Singlepororeport {
 
 			}
 
-			if (j == wpressur.size() - 1) {
+			if (j == df.size() - 1) {
 
 				tablem.getRows().remove(tablem.getRows().size() - 1);
 
@@ -1713,7 +1713,6 @@ public class Singlepororeport {
 				
 				PdfPCell r99 = new PdfPCell(new Paragraph(Myapp.getRound(
 						Double.parseDouble("" + df.get(j)), 2), tabledata));
-				r99.setBorder(1);
 				r99.setBorder(1);
 				r99.setBorder(r99.RIGHT | r99.BOTTOM);
 				r99.setBorderColor(new BaseColor(130, 130, 130));
