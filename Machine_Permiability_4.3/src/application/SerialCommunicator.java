@@ -12,6 +12,7 @@ import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import application.SerialCommunicator.SerialReader;
 import toast.MyDialoug;
 import userinput.manualcontroller;
 import javafx.application.Platform;
@@ -52,32 +53,65 @@ public class SerialCommunicator {
 		if (portIdentifier.isCurrentlyOwned()) {
 			System.out.println("Error: Port is currently in use1");
 			
-			
-			
-		} else {
-
-			CommPort commPort = portIdentifier.open(this.getClass().getName(),
-					10000);
-
-			if (commPort instanceof SerialPort) {
-				DataStore.serialPort = (SerialPort) commPort;
-				DataStore.serialPort.setSerialPortParams(9600, SerialPort.DATABITS_8,
-						SerialPort.STOPBITS_1, SerialPort.PARITY_NONE);
+			if(DataStore.commPort!=null)
+			{
+				DataStore.commPort.close();
 				
-			DataStore.in = DataStore.serialPort.getInputStream();
-				DataStore.out = DataStore.serialPort.getOutputStream();
-				DataStore.sr=new SerialReader(DataStore.in);
-			
-				DataStore.serialPort.addEventListener(DataStore.sr);
-				DataStore.serialPort.notifyOnDataAvailable(true);
 				
-			//	DataStore.hardReset();
-
-			} else {
-				System.out
-						.println("Error: Only serial ports are handled by this example.");
 			}
-			// commPort.close();
+			
+		} 
+		setUpConnect(portIdentifier);
+		}
+	
+	
+	void setUpConnect(CommPortIdentifier portIdentifier)
+	{
+	
+		try {
+			DataStore.commPort = portIdentifier.open(this.getClass().getName(),
+					10000);
+		
+
+		
+		if (DataStore.commPort instanceof SerialPort) {
+			DataStore.serialPort = (SerialPort) DataStore.commPort;
+			DataStore.serialPort.setSerialPortParams(9600, SerialPort.DATABITS_8,
+					SerialPort.STOPBITS_1, SerialPort.PARITY_NONE);
+			
+		DataStore.in = DataStore.serialPort.getInputStream();
+			DataStore.out = DataStore.serialPort.getOutputStream();
+			DataStore.sr=new SerialReader(DataStore.in);
+		
+			DataStore.serialPort.addEventListener(DataStore.sr);
+			DataStore.serialPort.notifyOnDataAvailable(true);
+			
+		//	DataStore.hardReset();
+
+		} else {
+			System.out
+					.println("Error: Only serial ports are handled by this example.");
+		}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			//e.printStackTrace();
+			System.out.println("Error in serial communicator : "+e.getMessage());
+			
+			
+			
+			if(DataStore.commPort!=null)
+			{
+				System.out.println("error it is not null");
+				
+				DataStore.commPort.close();
+				setUpConnect(portIdentifier);
+				
+			}
+			else
+			{
+				System.out.println("error but it is null");
+			}
+			
 		}
 	}
 

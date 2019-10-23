@@ -1,5 +1,6 @@
 package application;
 
+import gnu.io.CommPort;
 import gnu.io.SerialPort;
 
 import java.io.InputStream;
@@ -30,12 +31,12 @@ public class DataStore
 {
 	
 
+	public static 	CommPort commPort;
 	public static SimpleBooleanProperty isconfigure=new SimpleBooleanProperty(false);
 	public static SerialPort serialPort;
 
 	public static InputStream in=null;
 	public static SerialReader sr;
-	
 	
 	
 	//for scada
