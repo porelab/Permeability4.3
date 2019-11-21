@@ -55,6 +55,7 @@ import application.Main;
 import application.Myapp;
 import application.SerialWriter;
 import application.writeFormat;
+import communicationProtocol.Mycommand;
 
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXToggleButton;
@@ -226,15 +227,20 @@ public class NLivetestController implements Initializable {
 
 	// setting plate value ..
 	void setPlateval() {
+		
+
 		if (Myapp.splate.equals("small")) {
 			calculationdia = 1;
 		} else if (Myapp.splate.equals("large")) {
 
-			calculationdia = 4.3;
+			calculationdia = 7;
 		} else {
 
 			calculationdia = 2.3;
 		}
+
+		System.out.println("Plate diameter : "+Myapp.splate+" : "+calculationdia);
+		calculationdia=7;
 	}
 
 	// set all shortcut
@@ -368,7 +374,15 @@ public class NLivetestController implements Initializable {
 					Boolean oldValue, Boolean newValue) {
 
 				if (newValue) {
+					
+					if(Myapp.testtype==1)
+					{
 					dryClick(0);
+					}
+					else if(Myapp.testtype==2)
+					{
+						stepClick();
+					}
 				}
 
 			}
@@ -487,8 +501,77 @@ public class NLivetestController implements Initializable {
 	}
 
 	
-	
+	void stepClick()
+	{
+		t2test = System.currentTimeMillis();
+		lblcurranttest.setText("Flow vs Pressure (Step Method) ");
+		stoptest.setDisable(false);
+		status.setText("Dry-test running..");
+		flowserires.getData().clear();
+		pressureserires.getData().clear();
+		dryplist.clear();
+		dryflist.clear();
+		darcylist.clear();
 
+		skip = 0;
+		darcyavg = 0;
+
+		yAxis.setLabel("Flow");
+		xAxis.setLabel("Pressure");
+		
+		series2.getData().clear();
+
+		dryplist.add(0, "0.0");
+		dryflist.add(0, "0.0");
+		series2.getData().add(new XYChart.Data(0, 0));
+
+		ind = 0;
+
+		tempt1 = System.currentTimeMillis();
+		starttestdry.setDisable(true);
+		
+		Mycommand.sendAdcEnableBits("001001000000000", 0);
+		Mycommand.setDelay(2000, 1000);
+		Mycommand.setDACValue('2', getCountOfFlow(Myapp.steppoints.get(ind)),2000);
+		Mycommand.startADC(5000);
+		
+	}
+
+	int getIntFromBit(int a1,int a2,int a3)
+	{
+		System.out.println(a1 + " : "+a2+ ": "+a3);
+		int a=0;
+		
+		a=a1<<16;
+		   a2=a2<<8;
+		   a = a|a2;
+		   a = a|a3;
+		   
+		   return a;
+	}
+	void setStep(int step)
+	{
+		
+		if(step<Myapp.steppoints.size())
+		{
+			
+		}
+		else
+		{
+			
+			
+			
+		}
+		
+	}
+	
+	int getCountOfFlow(int fl)
+	{
+		
+		int c=(int)fl*65535/Integer.parseInt(DataStore.getFc());
+		return c;
+	}
+	
 	// set dry test click event
 	void dryClick(int delay) {
 		t2test = System.currentTimeMillis();
@@ -1286,7 +1369,7 @@ public class NLivetestController implements Initializable {
 		System.out.println("Step Size : " + fla);
 		System.out.println("Static step size");
 		
-		List<Integer> data = getValueList(2000);
+		List<Integer> data = getValueList(1000);
 		return data;
 	}
 
@@ -1352,6 +1435,22 @@ public class NLivetestController implements Initializable {
 		sendData(ww, 500);
 	}
 
+	List<Integer> getAdcData(List<Integer> data)
+	{
+		List<Integer> d=new ArrayList<Integer>();
+		
+		System.out.println("READ .... ");
+		for(int i=4;i<49;i=i+3)
+		{
+		d.add(getIntFromBit(data.get(i), data.get(i+1), data.get(i+2)));
+	
+		}
+		System.out.println("READ DONE ..."+d.size());
+		System.out.println("Adc Data :"+d);
+		return d;
+	}
+	
+	
 	//setting all incooming packet event
 	public class SerialReader implements SerialPortEventListener {
 
@@ -1389,6 +1488,32 @@ public class NLivetestController implements Initializable {
 
 				for (int i = 1; i < readData.size(); i++) {
 
+				
+					if(readData.get(i)=='F' && readData.get(i+1)==(int)'M'&& readData.get(i+2)==(int)'A')
+        			{
+        			
+						List<Integer> recorddata=getAdcData(readData);
+					
+						System.out.println("Data : "+recorddata);
+						double fl,pr;
+						
+						int maxpre = Integer
+								.parseInt(DataStore.getPg2());
+						pr = (double) recorddata.get(2) * maxpre / 65535;
+
+						
+						fl = (double) recorddata.get(5)
+								* Integer.parseInt(DataStore.getFc())
+								/ 65535;
+
+						
+						DataStore.liveflow.set(fl);
+
+						DataStore.livepressure.set(pr);
+						
+        			}
+					
+					
 					if (readData.get(i) == (int) 'T'
 							&& readData.get(i + 1) == (int) 'D') {
 						int prd, fld;

@@ -78,6 +78,8 @@ public class SaveprojectController implements Initializable {
 
 	void setProjectData() {
 		Database d1 = new Database();
+		
+		System.out.println("Save Plate name.."+Myapp.splate);
 
 		if (d1.Insert("INSERT INTO projects VALUES('" + Myapp.sampleid + "','"
 				+ Myapp.indtype + "','" + Myapp.materialapp + "','"

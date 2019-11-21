@@ -1554,7 +1554,7 @@ public class NSelectproject1 implements Initializable {
 			Myapp.materialtype = "Unknown";
 
 		}
-
+System.out.println("Splate name...."+splate);
 		/* splate */
 		if (splate.equals("small")) {
 			t2group.selectToggle(tc_21);
@@ -1565,7 +1565,7 @@ public class NSelectproject1 implements Initializable {
 
 		} else if (splate.equals("large")) {
 			t2group.selectToggle(tc_23);
-			Myapp.thresold = "large";
+			Myapp.splate = "large";
 
 		}
 		// Test Sequance

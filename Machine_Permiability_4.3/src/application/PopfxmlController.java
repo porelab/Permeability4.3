@@ -241,21 +241,21 @@ public class PopfxmlController implements Initializable {
 		
 /*Sample Plate*/
 		
-		if (splate.equals("Small")) {
+		if (splate.equals("small")) {
 			rdsmall.selectedProperty().set(true);
-			Myapp.splate = "Small";
+			Myapp.splate = "small";
 
 		}
 
-		else if (splate.equals("Medium")) {
+		else if (splate.equals("medium")) {
 			rdmedium.selectedProperty().set(true);
-			Myapp.splate = "Medium";
+			Myapp.splate = "medium";
 
 		}
 
 		else {
 			rdlarge.selectedProperty().set(true);
-			Myapp.splate = "Large";
+			Myapp.splate = "large";
 
 		}
 
@@ -607,21 +607,21 @@ public class PopfxmlController implements Initializable {
 		}
 		
 		/*Sample Plate*/
-		if (splate.equals("Small")) {
+		if (splate.equals("small")) {
 			rdsmall.selectedProperty().set(true);
-			Myapp.splate = "Small";
+			Myapp.splate = "small";
 
 		}
 
-		else if (splate.equals("Medium")) {
+		else if (splate.equals("medium")) {
 			rdmedium.selectedProperty().set(true);
-			Myapp.splate = "Medium";
+			Myapp.splate = "medium";
 
 		}
 
 		else {
 			rdlarge.selectedProperty().set(true);
-			Myapp.splate = "Large";
+			Myapp.splate = "large";
 
 		}
 

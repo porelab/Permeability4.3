@@ -37,6 +37,12 @@ import firebase.FirebaseConnect;
 public class Myapp {
 
 
+	//..... for method selection...
+	
+	public static List<Integer> steppoints=new ArrayList<Integer>();
+	public static int testtype=1;  //1 for regular , 2 for step , 3 for dekay
+	
+	//.....
 	public static  Stage virtualStage=null;
 	public static TextField keyboardinput;
 	public static TextField currTf=null;
