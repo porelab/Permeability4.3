@@ -78,6 +78,8 @@ public class PopfxmlController implements Initializable {
 	@FXML
 	private Button testaccbtnsub, testaccbtnplus, datasbtnsub, datasbtnplus,
 			bptbtnsub, bptbtnplus;
+	
+	String splate;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -148,6 +150,8 @@ public class PopfxmlController implements Initializable {
 
 		// System.out.println("Claidifcation"+alldata.get(0).get(3));
 		String splate = "" + alldata.get(0).get(11);
+		
+		System.out.println("Project data splate"+splate);
 
 		// Industry name //
 		psid.setText(alldata.get(0).get(0));
@@ -239,23 +243,24 @@ public class PopfxmlController implements Initializable {
 
 		}
 		
-/*Sample Plate*/
+
+		/*Sample Plate*/
 		
-		if (splate.equals("small")) {
+		if (splate.equals("Small")) {
 			rdsmall.selectedProperty().set(true);
-			Myapp.splate = "small";
+			Myapp.splate = "Small";
 
 		}
 
-		else if (splate.equals("medium")) {
+		else if (splate.equals("Medium")) {
 			rdmedium.selectedProperty().set(true);
-			Myapp.splate = "medium";
+			Myapp.splate = "Medium";
 
 		}
 
 		else {
 			rdlarge.selectedProperty().set(true);
-			Myapp.splate = "large";
+			Myapp.splate = "Large";
 
 		}
 
@@ -546,8 +551,9 @@ public class PopfxmlController implements Initializable {
 		String[] s = alldata.get(0).get(7).toString().split(":");
 		Myapp.fluidname = "" + s[0];
 		Myapp.fluidvalue = "" + s[1];
-		String splate =alldata.get(0).get(11);
-		Myapp.splate = splate;
+		 splate =alldata.get(0).get(11);
+		Myapp.splate = alldata.get(0).get(11);;
+		System.out.println("Last Data in quick test splate "+Myapp.splate);
 		Myapp.thikness = alldata.get(0).get(12);
 		Myapp.materialtype = alldata.get(0).get(13);
 		Myapp.endpress = (alldata.get(0).get(14));
@@ -607,21 +613,21 @@ public class PopfxmlController implements Initializable {
 		}
 		
 		/*Sample Plate*/
-		if (splate.equals("small")) {
+		if (splate.equals("Small")) {
 			rdsmall.selectedProperty().set(true);
-			Myapp.splate = "small";
+			Myapp.splate = "Small";
 
 		}
 
-		else if (splate.equals("medium")) {
+		else if (splate.equals("Medium")) {
 			rdmedium.selectedProperty().set(true);
-			Myapp.splate = "medium";
+			Myapp.splate = "Medium";
 
 		}
 
 		else {
 			rdlarge.selectedProperty().set(true);
-			Myapp.splate = "large";
+			Myapp.splate = "Large";
 
 		}
 
@@ -639,9 +645,10 @@ public class PopfxmlController implements Initializable {
 		Myapp.sampleid = psid.getText();
 		Myapp.thresold = cmbbptthresold.getSelectionModel().getSelectedItem();
 		Myapp.thikness = thincness.getText();
-
 		MyDialoug.closeDialoug();
 		Openscreen.open("/userinput/Nlivetest.fxml");
+		Myapp.splate=splate;
+		System.out.println("Splate name"+Myapp.splate);
 
 	}
 
@@ -821,7 +828,7 @@ public class PopfxmlController implements Initializable {
 		rdlarge.setUserData("3");
 
 		selectedrad66 = "1";
-		Myapp.splate = "small";
+		Myapp.splate = "Small";
 
 		tgb66.selectedToggleProperty().addListener(
 				new ChangeListener<Toggle>() {
@@ -830,7 +837,7 @@ public class PopfxmlController implements Initializable {
 					public void changed(ObservableValue<? extends Toggle> arg0,
 							Toggle arg1, Toggle arg2) {
 
-						selectedrad6 = arg2.getUserData().toString();
+						selectedrad66 = arg2.getUserData().toString();
 
 						if (selectedrad66.equals("1")) {
 							Myapp.splate = "Small";

@@ -1236,11 +1236,12 @@ public class NSelectproject1 implements Initializable {
 					}
 				});
 
-		setToggleButtonProperty(tc_11, "small", "/userinput/small.png", t1group);
-		setToggleButtonProperty(tc_12, "medium", "/userinput/medium.png",
+		setToggleButtonProperty(tc_11, "Small", "/userinput/small.png", t1group);
+		setToggleButtonProperty(tc_12, "Medium", "/userinput/medium.png",
 				t1group);
-		setToggleButtonProperty(tc_13, "large", "/userinput/large.png", t1group);
+		setToggleButtonProperty(tc_13, "Large", "/userinput/large.png", t1group);
 		t1group.selectToggle(tc_11);
+
 
 	}
 
@@ -1521,19 +1522,7 @@ public class NSelectproject1 implements Initializable {
 			Myapp.crossection = "Unknown";
 		}
 
-		/* Thresold */
-
-		// System.out.println("First Bu------------>"+thresold);
-		if (thresold.equals("First bubble")) {
-			t1group.selectToggle(tc_11);
-			Myapp.thresold = "First bubble";
-		} else if (thresold.equals("Moderate")) {
-			t1group.selectToggle(tc_12);
-			Myapp.thresold = "Moderate";
-		} else if (thresold.equals("Continous")) {
-			t1group.selectToggle(tc_13);
-			Myapp.thresold = "Continous";
-		}
+		
 
 		// Material tyep hydro
 
@@ -1554,20 +1543,21 @@ public class NSelectproject1 implements Initializable {
 			Myapp.materialtype = "Unknown";
 
 		}
-System.out.println("Splate name...."+splate);
-		/* splate */
-		if (splate.equals("small")) {
-			t2group.selectToggle(tc_21);
-			Myapp.splate = "small";
-		} else if (splate.equals("medium")) {
-			t2group.selectToggle(tc_22);
-			Myapp.splate = "medium";
 
-		} else if (splate.equals("large")) {
-			t2group.selectToggle(tc_23);
-			Myapp.splate = "large";
 
-		}
+/* splate */
+if (splate.equals("Small")) {
+	t1group.selectToggle(tc_11);
+	Myapp.splate = "Small";
+} else if (splate.equals("Medium")) {
+	t1group.selectToggle(tc_12);
+	Myapp.splate = "Medium";
+
+} else if (splate.equals("Large")) {
+	t1group.selectToggle(tc_13);
+	Myapp.splate = "Large";
+
+}
 		// Test Sequance
 
 		if (testsequance.equals("WUPDUP")) {

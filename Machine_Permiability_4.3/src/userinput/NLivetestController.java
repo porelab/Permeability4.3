@@ -228,19 +228,20 @@ public class NLivetestController implements Initializable {
 	// setting plate value ..
 	void setPlateval() {
 		
-
-		if (Myapp.splate.equals("small")) {
+		if (Myapp.splate.equals("Small")) {
 			calculationdia = 1;
-		} else if (Myapp.splate.equals("large")) {
+			} else if (Myapp.splate.equals("Large")) {
 
 			calculationdia = 7;
-		} else {
+			} else {
 
 			calculationdia = 2.3;
-		}
+			}
+		
+		
 
-		System.out.println("Plate diameter : "+Myapp.splate+" : "+calculationdia);
-		calculationdia=7;
+		System.out.println("Plate diameter---> : "+Myapp.splate+" : "+calculationdia);
+		//calculationdia=7;
 	}
 
 	// set all shortcut
