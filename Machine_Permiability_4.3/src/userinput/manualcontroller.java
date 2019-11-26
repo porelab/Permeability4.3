@@ -135,6 +135,9 @@ public class manualcontroller implements Initializable {
 				DataStore.serialPort.addEventListener(in);
 				DataStore.serialPort.notifyOnDataAvailable(true);
 
+				
+				//Mycommand.setDACValue('1', 63000, 1000);
+				
 			} catch (TooManyListenersException e) {
 
 				MyDialoug.showError(102);

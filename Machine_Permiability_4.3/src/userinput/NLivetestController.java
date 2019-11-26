@@ -186,30 +186,46 @@ public class NLivetestController implements Initializable {
 
 	long tempt1;
 
-	int testtype = 0; // 0 for bubble 1 for wet 2 for dry
 	SerialReader in;
 
-	int testseq = 0; // 0 for wetupdryup , 1 for dryup-wetup , 2 wetup-caldry
+	
 
 	static boolean isSkiptest = false;
 
 	@FXML
 	Label lblresult, lbltesttype;
 
+	boolean isReadStep=false;
 	
 	double priPress=0,priFlow=0;
 	// stop test function it is used when test is completed or in while
 	// running...
+	
+	
+	void setTemp()
+	{
+		Myapp.testtype=2;
+		Myapp.steppoints.add(35000);
+		Myapp.steppoints.add(30000);
+		Myapp.steppoints.add(25000);
+		Myapp.steppoints.add(20000);
+		Myapp.steppoints.add(15000);
+		Myapp.steppoints.add(10000);
+		Myapp.steppoints.add(5000);
+		Myapp.steppoints.add(4000);
+		Myapp.steppoints.add(3000);
+		Myapp.steppoints.add(2000);
+		Myapp.steppoints.add(1000);
+		
+		
+	}
+	
 	void stopTest() {
 
 		starttest.setDisable(false);
 		status.setText("Test hase been Stop");
 		// TODO Auto-generated method stub
-		writeFormat wrD = new writeFormat();
-		wrD.stopTN();
-		wrD.addLast();
-
-		sendData(wrD);
+		sendStop();
 		starttestdry.setDisable(false);
 		starttestwet.setDisable(true);
 		starttest.setDisable(false);
@@ -241,7 +257,7 @@ public class NLivetestController implements Initializable {
 		
 
 		System.out.println("Plate diameter---> : "+Myapp.splate+" : "+calculationdia);
-		//calculationdia=7;
+		calculationdia=7;
 	}
 
 	// set all shortcut
@@ -303,12 +319,12 @@ public class NLivetestController implements Initializable {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
-
+//		/setTemp();
 		tones = new AudioClip(NLivetestController.class.getResource(
 				"stoptone.mp3").toString());
 
 		if (DataStore.getchambertype().equals("Autometed")) {
-
+			
 			chamberonoff.setVisible(true);
 		} else {
 			chamberonoff.setVisible(false);
@@ -353,7 +369,7 @@ public class NLivetestController implements Initializable {
 		trails = Integer.parseInt(Myapp.testtrial);
 
 		DataStore.getconfigdata();
-		conditionflow = (double) Double.parseDouble(DataStore.getFm2()) * 0.90;
+		conditionflow = (double) Double.parseDouble(DataStore.getFm2()) * 0.60;
 		conditionpressure = Double.parseDouble(Myapp.endpress);
 
 		isDryStart = new SimpleBooleanProperty(false);
@@ -382,7 +398,7 @@ public class NLivetestController implements Initializable {
 					}
 					else if(Myapp.testtype==2)
 					{
-						stepClick();
+					stepClick();
 					}
 				}
 
@@ -530,11 +546,12 @@ public class NLivetestController implements Initializable {
 
 		tempt1 = System.currentTimeMillis();
 		starttestdry.setDisable(true);
-		
 		Mycommand.sendAdcEnableBits("001001000000000", 0);
-		Mycommand.setDelay(2000, 1000);
-		Mycommand.setDACValue('2', getCountOfFlow(Myapp.steppoints.get(ind)),2000);
-		Mycommand.startADC(5000);
+		Mycommand.setDelay(5000, 1000);
+
+	//	Mycommand.setDACValue('2',5000,2000);
+		Mycommand.startADC(10000);
+		setStep(ind);
 		
 	}
 
@@ -555,12 +572,15 @@ public class NLivetestController implements Initializable {
 		
 		if(step<Myapp.steppoints.size())
 		{
-			
+			isReadStep=true;
+			Mycommand.setDACValue('2',(ind+1)*500,2000);
+			//Mycommand.setDACValue('2', getCountOfFlow(Myapp.steppoints.get(ind)),2000);
+		//	Mycommand.startADC(10000);
 		}
 		else
 		{
 			
-			
+			System.out.println("Set step else..."+"Step : "+step + " : size : "+Myapp.steppoints.size());
 			
 		}
 		
@@ -568,9 +588,18 @@ public class NLivetestController implements Initializable {
 	
 	int getCountOfFlow(int fl)
 	{
+		System.out.println("Flow : "+fl+" , Fc :"+Integer.parseInt(DataStore.getPr()));
+		long c=fl*65535/Integer.parseInt(DataStore.getPr());
+		System.out.println("Setting flow : "+c);
+		if(c<0)
+		{
+			c=c*2;
+			c=c/2;
+			System.out.println("Now Setting flow : "+c);
+		}
 		
-		int c=(int)fl*65535/Integer.parseInt(DataStore.getFc());
-		return c;
+		
+		return (int)c;
 	}
 	
 	// set dry test click event
@@ -605,12 +634,7 @@ public class NLivetestController implements Initializable {
 		tempt1 = System.currentTimeMillis();
 		starttestdry.setDisable(true);
 
-		try {
-
-			testtype = 2;
-		} catch (Exception e) {
-
-		}
+	
 	}
 
 	
@@ -779,18 +803,18 @@ public class NLivetestController implements Initializable {
 			dryflist.remove(0);
 			dryplist.remove(0);
 			
-			dryflist.remove(1);
-			dryplist.remove(1);
+		//	dryflist.remove(1);
+		//	dryplist.remove(1);
 			
-			dryflist.remove(2);
-			dryplist.remove(2);
+		//	dryflist.remove(2);
+		//	dryplist.remove(2);
 			
-			dryflist.remove(3);
-			dryplist.remove(3);
+		//	dryflist.remove(3);
+		//	dryplist.remove(3);
 			
 
-			dryflist.remove(4);
-			dryplist.remove(4);
+		//	dryflist.remove(4);
+		//	dryplist.remove(4);
 			
 			if (DataStore.isCurveFit) {
 				if (dryflist.size() > 20) {
@@ -823,14 +847,25 @@ public class NLivetestController implements Initializable {
 			cs.newLine("pg2offset", Myapp.pg2offset.get() + "");
 
 			System.out.println("Gurley Point : ");
-			double gurleyflow = c.getFlowPointOn(dryplist, dryflist, 500, 18,
+			double gurleyflow = c.getFlowPointOn(dryplist, dryflist, 500, 5,
 					0.178);
 			String gurley = getDarcyGurley(gurleyflow);
 
 			System.out.println("frazier Point : ");
-			double frazierflow = c.getFlowPointOn(dryplist, dryflist, 500, 18,
+			
+			/*double frazierflow = c.getFlowPointOn(dryplist, dryflist, 500, 5,
+					0.36019);
+			String frazier;
+			frazier = getDarcyFrazier(0.36019,frazierflow);
+			*/
+			
+		double frazierflow = c.getFlowPointOn(dryplist, dryflist, 500, 18,
 					0.0182);
 			String frazier;
+			frazier = getDarcyFrazier(0.0182,frazierflow);
+			
+			
+			/*
 			if(dryflist.size()>14)
 			{
 
@@ -846,6 +881,7 @@ public class NLivetestController implements Initializable {
 				cs.newLine("frazierflow1",dryflist.get(7));
 				cs.newLine("frazierpressure1",dryplist.get(7));
 			}
+			*/
 			cs.newLine("frazier", "" + Myapp.getRound(frazier, 5));
 			cs.newLine("gurley", "" + Myapp.getRound(gurley, 5));
 			
@@ -946,6 +982,8 @@ public class NLivetestController implements Initializable {
 			
 			k = 4 * (ddf / 471.9474) * (1 / (d * d * 3.141592653589793))*(0.01802/ddp);
 
+			// for converting flow to min
+			k=k*60;
 		} catch (Exception e) {
 		}
 		return "" + k;
@@ -1504,14 +1542,16 @@ public class NLivetestController implements Initializable {
 
 						
 						fl = (double) recorddata.get(5)
-								* Integer.parseInt(DataStore.getFc())
+								* Integer.parseInt(DataStore.getPr())
 								/ 65535;
 
 						
 						DataStore.liveflow.set(fl);
-
 						DataStore.livepressure.set(pr);
-						
+						//if(isReadStep)
+						//{
+						setPermiabilityStepPoints(pr, fl);
+						//}
         			}
 					
 					
@@ -1555,25 +1595,37 @@ public class NLivetestController implements Initializable {
 										.getPg1());
 								pr = (double) a * maxpre / 65535;
 
+								
+								
 								// b1 = b1 - Myapp.pg1offset.get();
 								System.out
 										.println(" Pressure guage1 original..... : "
 												+ a);
 
 								System.out.println(" Pressure guage1 ..... : "
-										+ pr);
+										+ pr + " torr");
 
+								
+								pr=pr/51.7149;
+								System.out.println(" Pressure gauge1 ..... : "
+										+ pr+" psi");
+								
 							} else if (readData.get(i + 4) == (int) '2') {
 								int maxpre = Integer.parseInt(DataStore
 										.getPg2());
 								System.out.println("Pressure Gauge2 Org Data "
 										+ a);
+							
 								pr = (double) a * maxpre / 65535;
 
 								// b1 = b1 - Myapp.pg2offset.get();
+								
 
 								System.out.println(" Pressure gauge2 ..... : "
-										+ pr);
+										+ pr+" psi");
+								
+							
+								
 
 							} else {
 								char c = (char) (int) readData.get(i + 6);
@@ -1634,10 +1686,7 @@ public class NLivetestController implements Initializable {
 
 						DataStore.livepressure.set(pr);
 
-						if (testtype == 2) {
-
-						//	setPermiabilityPoints(pr, fl);
-							
+					
 							
 							if(pr>priPress && fl>priFlow)
 							{
@@ -1650,7 +1699,7 @@ public class NLivetestController implements Initializable {
 							{
 								System.out.println("Ignore : "+pr+" , "+fl);
 							}
-						}
+						
 
 					}
 
@@ -1758,10 +1807,8 @@ public class NLivetestController implements Initializable {
 						pr = b1;
 						DataStore.livepressure.set(b1);
 
-						if (testtype == 2) {
-
-							setPermiabilityPoints(pr, fl);
-						}
+						setPermiabilityPoints(pr, fl);
+						
 
 					}
 
@@ -1792,6 +1839,75 @@ public class NLivetestController implements Initializable {
 
 
 	//set dry points on graph and check conditions
+	
+	void setPermiabilityStepPoints(double pr, double fl) {
+
+	//	isReadStep=false;
+	//	Mycommand.stopADC(1000);
+		System.out.println("Step permeability....");
+		curflow = fl;
+		curpre = pr;
+
+		if (curpre < conditionpressure && curflow < conditionflow && ind < Myapp.steppoints.size()
+				&& isSkiptest == false) {
+
+			Platform.runLater(new Runnable() {
+
+				@Override
+				public void run() {
+
+					series2.getData().add(new XYChart.Data(curpre, curflow));
+					dryplist.add("" + curpre );
+					dryflist.add("" + (curflow/60));
+
+				//	darcylist.add("" + getDarcy1(curpre, curflow/60));
+				    ind++;
+					flowserires.getData().add(
+							new XYChart.Data(getTime(), curflow));
+					pressureserires.getData().add(
+							new XYChart.Data(getTime(), curpre));
+
+				
+					setStep(ind);
+					
+				}
+			});
+		} else {
+
+			isSkiptest = false;
+			System.out.println("Stop is tirgger ");
+
+		
+
+			try {
+				Platform.runLater(new Runnable() {
+
+					@Override
+					public void run() {
+
+						status.setText("Test is Completed");
+						starttest.setDisable(false);
+						if (dryflist.size() > 0) {
+							createCsvTable();
+						} else {
+							System.out.println("NO file created");
+
+						}
+						sendStop();
+
+					}
+				});
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+		}
+
+	}
+
+	
+	
 	void setPermiabilityPoints(double pr, double fl) {
 
 		curflow = fl;
@@ -1823,7 +1939,7 @@ public class NLivetestController implements Initializable {
 			isSkiptest = false;
 			System.out.println("Stop is tirgger ");
 
-			testtype = 5;
+			
 			wrd = new writeFormat();
 			wrd.stopDryN();
 			wrd.addLast();
@@ -1878,8 +1994,10 @@ public class NLivetestController implements Initializable {
 		writeFormat wrD = new writeFormat();
 		wrD.stopTN();
 		wrD.addLast();
-		sendData(wrD, 1000);
-
+		sendData(wrD, 500);
+		Mycommand.setDACValue('2', 0, 1200);
+		Mycommand.stopADC(1700);
+		
 	}
 
 }

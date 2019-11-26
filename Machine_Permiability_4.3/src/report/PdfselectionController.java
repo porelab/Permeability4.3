@@ -215,14 +215,14 @@ public class PdfselectionController implements Initializable {
 							graphs, bchkrowdata, bchkcoverpage, imgpath1);*/
 
 				} else {
-					Multiplepororeport mp = new Multiplepororeport();
-					mp.Report(path, ReportController.list_d,
-							txtnotes.getText(), txtcomname.getText(), graphs,
-							bchkrowdata, bchkcoverpage, imgpath1);
-				/*	MultiplepororeportKusum mp = new MultiplepororeportKusum();
+				/*	Multiplepororeport mp = new Multiplepororeport();
 					mp.Report(path, ReportController.list_d,
 							txtnotes.getText(), txtcomname.getText(), graphs,
 							bchkrowdata, bchkcoverpage, imgpath1);*/
+					MultiplepororeportKusum mp = new MultiplepororeportKusum();
+					mp.Report(path, ReportController.list_d,
+							txtnotes.getText(), txtcomname.getText(), graphs,
+							bchkrowdata, bchkcoverpage, imgpath1);
 
 				}
 				try {

@@ -229,13 +229,13 @@ public class ChartPlot {
 
 			try {
 
-				for (int j = 2; j < x.size() - 1; j++) {
+				for (int j = 0; j < x.size() - 1; j++) {
 					double xd = 0;
 					double yd = 0;
 
 				
 						xd = Double.parseDouble(x.get(j));
-						yd = Double.parseDouble(y.get(j))*0.00211888;
+						yd = Double.parseDouble(y.get(j));//*0.00211888;
 					
 
 					series[i].getData().add(new XYChart.Data(xd, yd));

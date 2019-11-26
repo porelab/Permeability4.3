@@ -1739,7 +1739,7 @@ public class MultiplepororeportKusum {
 					tablem.getRows().remove(tablem.getRows().size() - 1);
 
 					PdfPCell r11 = new PdfPCell(new Paragraph(Myapp.getRound(
-							Double.parseDouble("" + dpress.get(j)), 2),
+							Double.parseDouble("" + dpress.get(j)), 4),
 							tabledata));
 					r11.setBorder(1);
 					r11.setBorder(r11.LEFT | r11.BOTTOM);
@@ -1753,7 +1753,7 @@ public class MultiplepororeportKusum {
 
 					// second column
 					PdfPCell r22 = new PdfPCell(new Paragraph(Myapp.getRound(
-							Double.parseDouble("" + dflow.get(j))*0.00211888, 2), tabledata));
+							Double.parseDouble("" + dflow.get(j))*0.00211888, 4), tabledata));
 					r22.setBorder(1);
 					r22.setBorder(r22.BOTTOM);
 					r22.setBorderColor(new BaseColor(130, 130, 130));
@@ -1767,7 +1767,7 @@ public class MultiplepororeportKusum {
 				
 
 					PdfPCell r99 = new PdfPCell(new Paragraph(Myapp.getRound(
-							Double.parseDouble("" + darcy.get(j)), 2), tabledata));
+							Double.parseDouble("" + darcy.get(j)), 4), tabledata));
 					r99.setBorder(1);
 					r99.setBorder(r99.RIGHT | r99.BOTTOM);
 					r99.setBorderColor(new BaseColor(130, 130, 130));
@@ -1806,7 +1806,7 @@ public class MultiplepororeportKusum {
 
 					// second column
 					PdfPCell r1 = new PdfPCell(new Paragraph(Myapp.getRound(
-							Double.parseDouble("" + dpress.get(j)), 2),
+							Double.parseDouble("" + dpress.get(j)), 4),
 							tabledata));
 
 					r1.setBorder(1);
@@ -1821,7 +1821,7 @@ public class MultiplepororeportKusum {
 
 					// second column
 					PdfPCell r2 = new PdfPCell(new Paragraph(Myapp.getRound(
-							Double.parseDouble("" + dflow.get(j))*0.00211888, 2), tabledata));
+							Double.parseDouble("" + dflow.get(j))*0.00211888, 4), tabledata));
 					r2.setBorder(0);
 					// r2.setBorder(r2.LEFT);
 					r2.setBorderColor(getColor(6));
@@ -1835,7 +1835,7 @@ public class MultiplepororeportKusum {
 				
 
 					PdfPCell r9 = new PdfPCell(new Paragraph(Myapp.getRound(
-							Double.parseDouble("" + darcy.get(j)), 2), tabledata));
+							Double.parseDouble("" + darcy.get(j)), 4), tabledata));
 					r9.setBorder(1);
 					r9.setBorder(r9.RIGHT);
 					r9.setBorderColor(new BaseColor(130, 130, 130));
@@ -1851,7 +1851,7 @@ public class MultiplepororeportKusum {
 
 					// second column
 					PdfPCell r1 = new PdfPCell(new Paragraph(Myapp.getRound(
-							Double.parseDouble("" + dpress.get(j)), 2),
+							Double.parseDouble("" + dpress.get(j)), 4),
 							tabledata));
 					r1.setBorder(1);
 					r1.setBorder(r1.LEFT);
@@ -1865,7 +1865,7 @@ public class MultiplepororeportKusum {
 
 					// second column
 					PdfPCell r2 = new PdfPCell(new Paragraph(Myapp.getRound(
-							Double.parseDouble("" + dflow.get(j))*0.00211888, 2), tabledata));
+							Double.parseDouble("" + dflow.get(j))*0.00211888, 4), tabledata));
 					r2.setBorder(0);
 					// r2.setBorder(r2.LEFT);
 					r2.setBorderColor(getColor(6));
@@ -1878,7 +1878,7 @@ public class MultiplepororeportKusum {
 
 			
 					PdfPCell r9 = new PdfPCell(new Paragraph(Myapp.getRound(
-							Double.parseDouble("" + darcy.get(j)), 2), tabledata));
+							Double.parseDouble("" + darcy.get(j)), 4), tabledata));
 					r9.setBorder(1);
 					r9.setBorder(r9.RIGHT);
 					r9.setBorderColor(new BaseColor(130, 130, 130));
@@ -1899,7 +1899,7 @@ public class MultiplepororeportKusum {
 							+ " : " + j);
 					// second column
 					PdfPCell r11 = new PdfPCell(new Paragraph(Myapp.getRound(
-							Double.parseDouble("" + dpress.get(j)), 2),
+							Double.parseDouble("" + dpress.get(j)), 4),
 							tabledata));
 					r11.setBorder(1);
 					r11.setBorder(r11.LEFT | r11.BOTTOM);
@@ -1913,7 +1913,7 @@ public class MultiplepororeportKusum {
 
 					// second column
 					PdfPCell r22 = new PdfPCell(new Paragraph(Myapp.getRound(
-							Double.parseDouble("" + dflow.get(j))*0.00211888, 2), tabledata));
+							Double.parseDouble("" + dflow.get(j))*0.00211888, 4), tabledata));
 					r22.setBorder(1);
 					r22.setBorder(r22.BOTTOM);
 					r22.setBorderColor(new BaseColor(130, 130, 130));
@@ -1927,7 +1927,7 @@ public class MultiplepororeportKusum {
 			
 
 					PdfPCell r99 = new PdfPCell(new Paragraph(Myapp.getRound(
-							Double.parseDouble("" + darcy.get(j)), 2), tabledata));
+							Double.parseDouble("" + darcy.get(j)), 4), tabledata));
 					r99.setBorder(1);
 					r99.setBorder(r99.RIGHT | r99.BOTTOM);
 					r99.setBorderColor(new BaseColor(130, 130, 130));

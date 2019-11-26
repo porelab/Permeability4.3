@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="600.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="boardcheck.ProtocolcheckController">
+   <children>
+      <Button fx:id="btn1" layoutX="27.0" layoutY="101.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="184.0" text="Set ADC Enable" />
+      <Button fx:id="btn2" layoutX="27.0" layoutY="139.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="184.0" text="ADC Delay" />
+      <Button fx:id="btn3" layoutX="27.0" layoutY="178.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="184.0" text="START / STOP ADC" />
+      <Label fx:id="lblstatus" layoutX="14.0" layoutY="50.0" prefHeight="17.0" prefWidth="239.0" />
+      <TextArea fx:id="txtbox" layoutX="235.0" layoutY="16.0" prefHeight="569.0" prefWidth="1053.0" />
+      <Button fx:id="btn31" layoutX="27.0" layoutY="220.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="184.0" text="Set DAC" />
+      <Button fx:id="btn311" layoutX="27.0" layoutY="257.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="184.0" text="Start Increment" />
+      <Button fx:id="btn3111" layoutX="27.0" layoutY="300.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="184.0" text="Stop Increment" />
+      <Button fx:id="btn4" layoutX="27.0" layoutY="339.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="184.0" text="Single Value" />
+      <Button fx:id="btn41" layoutX="27.0" layoutY="381.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="184.0" text="RESET" />
+      <Button fx:id="btnback" layoutX="27.0" layoutY="16.0" mnemonicParsing="false" text="Back" />
+      <Button fx:id="setvalve" layoutX="27.0" layoutY="426.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="184.0" text="Valve Set Latching" />
+      <ToggleButton fx:id="onoffvalve" layoutX="30.0" layoutY="471.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="177.0" text="VALVE ON OFF" />
+   </children>
+</AnchorPane>

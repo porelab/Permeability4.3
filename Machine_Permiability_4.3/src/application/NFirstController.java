@@ -430,7 +430,8 @@ public class NFirstController implements Initializable {
 
 			@Override
 			public void handle(ActionEvent arg0) {
-
+			//	Openscreen.open("/boardcheck/protocolcheck.fxml");
+				
 				Openscreen.open("/userinput/manualcontrol.fxml");
 				// TODO Auto-generated method stub
 			}

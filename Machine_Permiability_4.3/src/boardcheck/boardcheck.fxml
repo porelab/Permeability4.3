@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="768.0" prefWidth="1366.0" styleClass="firstpagebk" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="boardcheck.BoardcheckController">
+   <children>
+      <TextField fx:id="no" layoutX="59.0" layoutY="110.0" prefHeight="25.0" prefWidth="228.0" />
+      <Label layoutX="59.0" layoutY="93.0" text="set no of itration" textFill="#fcfafa" />
+      <Button fx:id="btnstart" layoutX="59.0" layoutY="191.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="111.0" text="Start" />
+      <Button fx:id="btnstop" layoutX="182.0" layoutY="191.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="111.0" text="Stop" />
+      <Label layoutX="58.0" layoutY="225.0" prefHeight="17.0" prefWidth="48.0" text="Status : " textFill="#fcfafa" />
+      <Label fx:id="lblstatus" alignment="TOP_LEFT" layoutX="103.0" layoutY="225.0" prefHeight="25.0" prefWidth="185.0" textFill="#fcfafa" wrapText="true" />
+      <Label layoutX="59.0" layoutY="269.0" text="Valve A - :" textFill="#fcfafa" />
+      <Label layoutX="58.0" layoutY="290.0" text="Valve B - :" textFill="#fcfafa" />
+      <Label layoutX="58.0" layoutY="313.0" text="Valve C - :" textFill="#fcfafa" />
+      <Label layoutX="58.0" layoutY="336.0" text="Valve D- :" textFill="#fcfafa" />
+      <Label layoutX="59.0" layoutY="360.0" text="Valve E- :" textFill="#fcfafa" />
+      <Label fx:id="lbla" layoutX="120.0" layoutY="269.0" prefHeight="17.0" prefWidth="61.0" textFill="#fcfafa" />
+      <Label fx:id="lblb" layoutX="120.0" layoutY="290.0" prefHeight="17.0" prefWidth="61.0" textFill="#fcfafa" />
+      <Label fx:id="lblc" layoutX="120.0" layoutY="313.0" prefHeight="17.0" prefWidth="61.0" textFill="#fcfafa" />
+      <Label fx:id="lbld" layoutX="120.0" layoutY="336.0" prefHeight="17.0" prefWidth="61.0" textFill="#fcfafa" />
+      <Label fx:id="lble" layoutX="120.0" layoutY="360.0" prefHeight="17.0" prefWidth="61.0" textFill="#fcfafa" />
+      <TextArea fx:id="txtarea" layoutX="335.0" layoutY="110.0" prefHeight="638.0" prefWidth="1006.0" />
+      <Label layoutX="335.0" layoutY="85.0" text="Console : " textFill="#fcfafa" />
+      <ToggleButton fx:id="record" layoutX="392.0" layoutY="81.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="105.0" text="Record" />
+      <Button fx:id="clear" layoutX="804.0" layoutY="81.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="96.0" text="Clear" />
+      <TextField fx:id="pr" layoutX="60.0" layoutY="157.0" prefHeight="25.0" prefWidth="111.0" />
+      <Label layoutX="61.0" layoutY="140.0" text="Pressure Regularor" textFill="#fcfafa" />
+      <Separator layoutX="70.0" layoutY="258.0" prefWidth="200.0" />
+      <TextField fx:id="fc" layoutX="180.0" layoutY="157.0" prefHeight="25.0" prefWidth="111.0" />
+      <Label layoutX="181.0" layoutY="140.0" text="Flow Controller" textFill="#fcfafa" />
+      <Button fx:id="back" layoutX="60.0" layoutY="28.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="151.0" text="Back" />
+      <ToggleButton fx:id="record1" layoutX="631.0" layoutY="81.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="158.0" text="Record Incomming Data" />
+   </children>
+</AnchorPane>
