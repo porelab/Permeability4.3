@@ -634,6 +634,7 @@ public class NConfigurePageController implements Initializable {
 
 	}
 
+	
 	/* Chamber Type Selection. */
 	void setChamerType() {
 
