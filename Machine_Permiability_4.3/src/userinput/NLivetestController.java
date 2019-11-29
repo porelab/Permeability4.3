@@ -803,8 +803,8 @@ public class NLivetestController implements Initializable {
 			dryflist.remove(0);
 			dryplist.remove(0);
 			
-		//	dryflist.remove(1);
-		//	dryplist.remove(1);
+			dryflist.remove(1);
+			dryplist.remove(1);
 			
 		//	dryflist.remove(2);
 		//	dryplist.remove(2);
@@ -818,9 +818,9 @@ public class NLivetestController implements Initializable {
 			
 			if (DataStore.isCurveFit) {
 				if (dryflist.size() > 20) {
-					c.getWetFlowSmooth(dryplist, dryflist, 1000, 1);
-				} else if (dryplist.size() >= 10) {
-					c.getWetFlowSmooth(dryplist, dryflist, 1000, 1);
+					c.getWetFlowSmooth(dryplist, dryflist, 50000,1);
+				} else if (dryplist.size() >= 5) {
+					c.getWetFlowSmooth(dryplist, dryflist, 50000, 1);
 				}
 			}
 
@@ -847,25 +847,27 @@ public class NLivetestController implements Initializable {
 			cs.newLine("pg2offset", Myapp.pg2offset.get() + "");
 
 			System.out.println("Gurley Point : ");
-			double gurleyflow = c.getFlowPointOn(dryplist, dryflist, 500, 5,
+			double gurleyflow = c.getFlowPointOn(dryplist, dryflist, 50000, 1,
 					0.178);
 			String gurley = getDarcyGurley(gurleyflow);
 
 			System.out.println("frazier Point : ");
+			String frazier;
 			
 			/*double frazierflow = c.getFlowPointOn(dryplist, dryflist, 500, 5,
 					0.36019);
-			String frazier;
-			frazier = getDarcyFrazier(0.36019,frazierflow);
+			
+			frazier = getDarcyFrazier(0.36019,frazierflow); 
 			*/
 			
-		double frazierflow = c.getFlowPointOn(dryplist, dryflist, 500, 18,
+			/*double frazierflow = c.getFlowPointOn(dryplist, dryflist, 50000, 1,
 					0.0182);
-			String frazier;
+			
 			frazier = getDarcyFrazier(0.0182,frazierflow);
+			*/
 			
-			
-			/*
+			double frazierflow = c.getFlowPointOn(dryplist, dryflist, 500, 1,
+					0.0182);
 			if(dryflist.size()>14)
 			{
 
@@ -877,11 +879,11 @@ public class NLivetestController implements Initializable {
 			else
 			{
 
-				frazier = getDarcyFrazier(Double.parseDouble(dryplist.get(7)),Double.parseDouble(dryflist.get(7)));
-				cs.newLine("frazierflow1",dryflist.get(7));
-				cs.newLine("frazierpressure1",dryplist.get(7));
+				frazier = getDarcyFrazier(Double.parseDouble(dryplist.get(5)),Double.parseDouble(dryflist.get(5)));
+				cs.newLine("frazierflow1",dryflist.get(5));
+				cs.newLine("frazierpressure1",dryplist.get(5));
 			}
-			*/
+			
 			cs.newLine("frazier", "" + Myapp.getRound(frazier, 5));
 			cs.newLine("gurley", "" + Myapp.getRound(gurley, 5));
 			
@@ -935,7 +937,7 @@ public class NLivetestController implements Initializable {
 		calculationdia = 1;
 		} else if (Myapp.splate.equals("Large")) {
 
-		calculationdia = 4.3;
+		calculationdia = 7;
 		} else {
 
 		calculationdia = 2.3;
@@ -980,13 +982,20 @@ public class NLivetestController implements Initializable {
 
 			
 			
-			k = 4 * (ddf / 471.9474) * (1 / (d * d * 3.141592653589793))*(0.01802/ddp);
+			//k = 4 * (ddf / 471.9474) * (1 / (d * d * 3.141592653589793))*(0.01802/ddp);
 
-			// for converting flow to min
-			k=k*60;
+			k = 4 * (ddf / 471.9474) * (1 / (d * d * 3.141592653589793))*(0.36094/ddp);
+
+			
+	
 		} catch (Exception e) {
 		}
 		return "" + k;
+		
+		
+		// k=ddf*60*0.000035314/0.0409029;
+		
+		//return ""+k;
 	}
 
 	// find last index of saving file 
@@ -1408,7 +1417,7 @@ public class NLivetestController implements Initializable {
 		System.out.println("Step Size : " + fla);
 		System.out.println("Static step size");
 		
-		List<Integer> data = getValueList(1000);
+		List<Integer> data = getValueList(600);
 		return data;
 	}
 

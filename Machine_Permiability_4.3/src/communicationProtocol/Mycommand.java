@@ -55,6 +55,21 @@ public class Mycommand {
 		
 	
 	}
+	public static void setLacthing(String ss,int slp)
+    {
+    	writeFormat wr=new writeFormat();
+		wr.addChar('L');
+		wr.addChar('V');
+		
+		for(int i=0;i<14;i++)
+		{
+			wr.addChar(ss.charAt(i));
+		}
+		wr.addLast();
+		sendData(wr, slp);
+		
+    }
+	
 	public static void valveOff(int no,int delay)
 	{
 
