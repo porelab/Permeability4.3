@@ -272,13 +272,13 @@ pagination{
 /*Live Scree.*/
 
 
-.list-cell {
+.list-cell-l {
   -fx-background-color: transparent;
   -fx-font-size:15.0;
      -fx-text-fill: black;
     
 }
-.list-view {
+.list-view-l {
   -fx-background-color: transparent;
   -fx-background-insets: 2 ;
 }
@@ -337,4 +337,20 @@ pagination{
 }
 .toggle-buttonm:selected:focused {
     -fx-background-color:#939598;
+}
+
+/*Test Type List view */
+
+.list-celltest:filled:selected:focused, .list-celltest:filled:selected {
+    -fx-background-color: linear-gradient(#328BDB 0%, #207BCF 25%, #1973C9 75%, #0A65BF 100%);
+    -fx-text-fill: white;
+}
+
+.list-celltest:even { /* <=== changed to even */
+    -fx-background-color: white;
+}
+
+.list-celltest:filled:hover {
+    -fx-background-color: #0093ff;
+    -fx-text-fill: white;
 }

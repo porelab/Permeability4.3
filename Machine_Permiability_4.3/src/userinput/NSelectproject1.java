@@ -1,27 +1,39 @@
 package userinput;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.function.UnaryOperator;
 import java.util.regex.Pattern;
 
+import com.jfoenix.controls.JFXSlider;
+
+import ConfigurationPart.NConfigurePageController;
+import application.Database;
+import application.Main;
+import application.Myapp;
+import extrafont.Myfont;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TabPane;
@@ -37,6 +49,9 @@ import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
@@ -49,17 +64,11 @@ import toast.MyDialoug;
 import toast.Openscreen;
 import toast.Systemtime;
 import toast.Toast;
-import ConfigurationPart.NConfigurePageController;
-import application.Database;
-import application.Main;
-import application.Myapp;
-
-import com.jfoenix.controls.JFXSlider;
-
-import extrafont.Myfont;
 
 public class NSelectproject1 implements Initializable {
 
+	static List<Integer> flowsteps = new ArrayList<Integer>();
+	static List<String> test3data = new ArrayList<String>();
 	@FXML
 	AnchorPane root, ancaddfluid;
 
@@ -70,12 +79,11 @@ public class NSelectproject1 implements Initializable {
 	private TabPane maintab;
 
 	@FXML
-	private ImageView imgdownarrow, imgback, imgdownarrow1, imgdownarrow2,
-			imgdownarrow3, imgdownarrow4, imgheader, keyboard;
+	private ImageView imgdownarrow, imgback, imgdownarrow1, imgdownarrow2, imgdownarrow3, imgdownarrow4, imgheader,
+			keyboard;
 
 	@FXML
-	private ComboBox<String> cmboproject, cmbtestt, cmbselectind, cmbmateriala,
-			cmbselectflui;
+	private ComboBox<String> cmboproject, cmbtestt, cmbselectind, cmbmateriala, cmbselectflui;
 
 	@FXML
 	private Button btnnext, start, btnaddfluid, btnfluiddelete;
@@ -84,9 +92,8 @@ public class NSelectproject1 implements Initializable {
 	private Button btnback, btnmainback, btndelete;
 
 	@FXML
-	private ToggleButton ms1_1, ms1_2, ms1_3, ms1_4, ms1_5, ms2_1, ms2_2,
-			ms2_3, ms2_4, ms2_5, ms2_6, ms2_7, tc_13, tc_12, tc_11, tc_21,
-			tc_22, tc_23;
+	private ToggleButton ms1_1, ms1_2, ms1_3, ms1_4, ms1_5, ms2_1, ms2_2, ms2_3, ms2_4, ms2_5, ms2_6, ms2_7, tc_13,
+			tc_12, tc_11, tc_21, tc_22, tc_23;
 
 	@FXML
 	private ImageView tfact;
@@ -98,8 +105,7 @@ public class NSelectproject1 implements Initializable {
 	private Button btnsub, btnplus;
 
 	@FXML
-	RadioButton rbhybic, rbhylic, rbunknown, bwd, dbw, bdw, datas1, datas2,
-			datas3;
+	RadioButton rbhybic, rbhylic, rbunknown, bwd, dbw, bdw, datas1, datas2, datas3;
 
 	@FXML
 	private JFXSlider bpind;
@@ -107,22 +113,20 @@ public class NSelectproject1 implements Initializable {
 	@FXML
 	private JFXSlider poroind, curvefit;
 
-	static String selectedrad4 = "", selectedrad6 = "", selectedrad7 = "";
+	static String selectedrad4 = "", selectedrad6 = "", selectedrad7 = "", selectedradttype = "";
 
-	static ToggleGroup tgb5, tgb6, tgb7;
+	static ToggleGroup tgb5, tgb6, tgb7, tgbttype;
 
 	@FXML
-	private TextField txttfvalue, txtsampleid, txtthiknes, txtendpre, txtlotno,
-			txtstartpre, txtnfname, txtnfvalue;
+	private TextField txttfvalue, txtsampleid, txtthiknes, txtendpre, txtlotno, txtstartpre, txtnfname, txtnfvalue;
 
 	public static TextField txtsampleid1;
 
 	int val = 0;
 
 	@FXML
-	Label lblot, lblproject, lblsampleid, lblindtype, lblmaterialapp,
-			lblmaterialtype, lbltfacts, samname21, lblenterrange, lblthikness,
-			lblfluid, lblbpt, lblporo, lblendpress;
+	Label lblot, lblproject, lblsampleid, lblindtype, lblmaterialapp, lblmaterialtype, lbltfacts, samname21,
+			lblenterrange, lblthikness, lblfluid, lblbpt, lblporo, lblendpress;
 
 	@FXML
 	Label lbltimedate;
@@ -155,16 +159,36 @@ public class NSelectproject1 implements Initializable {
 
 	public static Button btnkeyboard1;
 
+	/* Test Type */
+	@FXML
+	private Button btnaddflow;
+
+	@FXML
+	private ListView<String> listflowstep;
+
+	@FXML
+	private Button btnremoveflow;
+
+	@FXML
+	private TextField txtflowstep;
+
+	@FXML
+	BorderPane ancflowtype, ancpressuredk;
+
+	@FXML
+	RadioButton rdgasper, rdflowstep, rdpressurdk;
+
+	@FXML
+	private TextField txtdkpressure, txtdkholdtime, txtdkdatainterval;
+
+	String data = "";
+
 	void addShortCut() {
 
-		KeyCombination backevent = new KeyCodeCombination(KeyCode.B,
-				KeyCombination.CONTROL_ANY);
-		KeyCombination startevent = new KeyCodeCombination(KeyCode.S,
-				KeyCombination.CONTROL_ANY);
-		KeyCombination nextevent = new KeyCodeCombination(KeyCode.RIGHT,
-				KeyCombination.CONTROL_ANY);
-		KeyCombination preevent = new KeyCodeCombination(KeyCode.LEFT,
-				KeyCombination.CONTROL_ANY);
+		KeyCombination backevent = new KeyCodeCombination(KeyCode.B, KeyCombination.CONTROL_ANY);
+		KeyCombination startevent = new KeyCodeCombination(KeyCode.S, KeyCombination.CONTROL_ANY);
+		KeyCombination nextevent = new KeyCodeCombination(KeyCode.RIGHT, KeyCombination.CONTROL_ANY);
+		KeyCombination preevent = new KeyCodeCombination(KeyCode.LEFT, KeyCombination.CONTROL_ANY);
 
 		root.setOnKeyPressed(new EventHandler<KeyEvent>() {
 			@Override
@@ -177,11 +201,9 @@ public class NSelectproject1 implements Initializable {
 
 					if (cmboproject.getSelectionModel().getSelectedIndex() > 0) {
 
-						Toast.makeText(Main.mainstage, "Start Test...", 1000,
-								200, 200);
+						Toast.makeText(Main.mainstage, "Start Test...", 1000, 200, 200);
 					} else {
-						Toast.makeText(Main.mainstage, "Please select Project",
-								1000, 200, 200);
+						Toast.makeText(Main.mainstage, "Please select Project", 1000, 200, 200);
 
 					}
 
@@ -202,6 +224,8 @@ public class NSelectproject1 implements Initializable {
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
 
+		flowsteps.clear();
+		test3data.clear();
 		curvefit.setMin(10);
 		poroind.setMin(10);
 		bpind.setMin(10);
@@ -228,11 +252,48 @@ public class NSelectproject1 implements Initializable {
 		txtsampleid.textProperty().addListener(new ChangeListener<String>() {
 
 			@Override
-			public void changed(ObservableValue<? extends String> observable,
-					String oldValue, String newValue) {
+			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
 				// TODO Auto-generated method stub
 				samname21.setText(newValue + " ?");
 
+			}
+		});
+
+		btnremoveflow.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent event) {
+
+				try {
+
+					int index = listflowstep.getSelectionModel().getSelectedIndex();
+					listflowstep.getItems().remove(index);
+					flowsteps.remove(index);
+
+				} catch (Exception d) {
+					System.out.println("NO seletion");
+				}
+
+			}
+		});
+
+		btnaddflow.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent event) {
+				// TODO Auto-generated method stub
+
+				addDataToList();
+
+			}
+		});
+
+		txtflowstep.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				addDataToList();
 			}
 		});
 
@@ -247,8 +308,7 @@ public class NSelectproject1 implements Initializable {
 					// root2 =
 					// FXMLLoader.load(getClass().getClassLoader().getResource("/application/keyboard.fxml"));
 
-					root2 = FXMLLoader.load(getClass().getResource(
-							"/application/keyboard.fxml"));
+					root2 = FXMLLoader.load(getClass().getResource("/application/keyboard.fxml"));
 					System.out.println("PATH" + root2);
 					Stage stage1 = new Stage();
 					stage1.setTitle("Keyboard");
@@ -291,14 +351,13 @@ public class NSelectproject1 implements Initializable {
 		setTfactor();
 		setTestConfiguration1();
 		setTestConfiguration2();
-
+		selectTesttype();
 		LoadProject();
 
 		cmboproject.valueProperty().addListener(new ChangeListener<String>() {
 
 			@Override
-			public void changed(ObservableValue<? extends String> observable,
-					String oldValue, String newValue) {
+			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
 				// TODO Auto-generated method stub
 
 				try {
@@ -331,8 +390,7 @@ public class NSelectproject1 implements Initializable {
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
-				mm = new MyDialoug(Main.mainstage,
-						"/userinput/saveprojectpopup.fxml");
+				mm = new MyDialoug(Main.mainstage, "/userinput/saveprojectpopup.fxml");
 
 			}
 		});
@@ -342,36 +400,42 @@ public class NSelectproject1 implements Initializable {
 
 			@Override
 			public void handle(ActionEvent arg0) {
-				if (!txtendpre.getText().trim().equals("")
-						&& !txtstartpre.getText().trim().equals("")) {
+				//System.out.println("START CLICK : " + Myapp.testtype);
+				if ((Myapp.testtype) == 1) {
 
-					try {
-						int re = Integer.parseInt(txtstartpre.getText());
-						int re1 = Integer.parseInt(txtendpre.getText());
+					setSaveDat();
 
-						Myapp.sampleid = "" + txtsampleid.getText();
-						Myapp.testtrial = "" + cmbtestt.getValue();
-						Myapp.indtype = "" + cmbselectind.getValue();
-						Myapp.materialapp = "" + cmbmateriala.getValue();
-						String[] s = cmbselectflui.getValue().toString()
-								.split(":");
-						Myapp.fluidname = "" + s[0];
-						Myapp.fluidvalue = "" + s[1];
-						Myapp.thikness = "" + txtthiknes.getText();
-						Myapp.endpress = "" + txtendpre.getText();
-						Myapp.tfactore = "" + txttfvalue.getText();
-						Myapp.lotnumber = "" + txtlotno.getText();
-						Myapp.startpress = "" + txtstartpre.getText();
+				} else if ((Myapp.testtype) == 2) {
 
-						startClick();
-					} catch (Exception es) {
-						Toast.makeText(Main.mainstage,
-								"Please enter valid input.", 1500, 500, 500);
+					if (flowsteps.size() > 5) {
+						Myapp.steppoints.addAll(flowsteps);
+						data = Myapp.steppoints.toString();
+						setSaveDat();
+					} else {
+						System.out.println("minimum 5 steps");
+					}
+					
+
+				} else if ((Myapp.testtype) == 3) {
+					if (!txtdkdatainterval.getText().trim().equals("") && !txtdkholdtime.getText().trim().equals("")
+							&& !txtdkpressure.getText().trim().equals("")) {
+						Myapp.dkdatainterval = "" + txtdkdatainterval.getText();
+						Myapp.dkholdtime = "" + txtdkholdtime.getText();
+						Myapp.dkpressure = "" + txtdkpressure.getText();
+
+						test3data.add(Myapp.dkdatainterval);
+						test3data.add(Myapp.dkholdtime);
+						test3data.add(Myapp.dkpressure);
+						
+						data = test3data.toString();
+
+
+						setSaveDat();
+
+					} else {
+						Toast.makeText(Main.mainstage, "Please enter PressureDK Details.", 1500, 500, 500);
 					}
 
-				} else {
-					Toast.makeText(Main.mainstage, "Please enter all details",
-							1500, 500, 500);
 				}
 
 			}
@@ -379,42 +443,84 @@ public class NSelectproject1 implements Initializable {
 
 	}
 
+	void addDataToList() {
+
+		try {
+
+			int vl = Integer.parseInt(txtflowstep.getText());
+			if (vl > 0) {
+				flowsteps.add(vl);
+				listflowstep.getItems().add(vl + "");
+				txtflowstep.setText("");
+
+			} else {
+				System.out.println("Not added");
+			}
+
+		} catch (Exception e) {
+			System.out.println("Not added");
+		}
+	}
+	/* Save Data Inforamtion */
+
+	void setSaveDat() {
+
+		if (!txtendpre.getText().trim().equals("") && !txtstartpre.getText().trim().equals("")) {
+
+			try {
+				int re = Integer.parseInt(txtstartpre.getText());
+				int re1 = Integer.parseInt(txtendpre.getText());
+
+				Myapp.sampleid = "" + txtsampleid.getText();
+				Myapp.testtrial = "" + cmbtestt.getValue();
+				Myapp.indtype = "" + cmbselectind.getValue();
+				Myapp.materialapp = "" + cmbmateriala.getValue();
+				String[] s = cmbselectflui.getValue().toString().split(":");
+				Myapp.fluidname = "" + s[0];
+				Myapp.fluidvalue = "" + s[1];
+				Myapp.thikness = "" + txtthiknes.getText();
+				Myapp.endpress = "" + txtendpre.getText();
+				Myapp.tfactore = "" + txttfvalue.getText();
+				Myapp.lotnumber = "" + txtlotno.getText();
+				Myapp.startpress = "" + txtstartpre.getText();
+
+				startClick();
+			} catch (Exception es) {
+				Toast.makeText(Main.mainstage, "Please enter valid input.", 1500, 500, 500);
+			}
+
+		} else {
+			Toast.makeText(Main.mainstage, "Please enter all details", 1500, 500, 500);
+		}
+	}
+
 	/* set image in button */
 	void setMainbtns() {
-		image = new Image(this.getClass().getResourceAsStream(
-				"/userinput/tfact-6.png"));
+		image = new Image(this.getClass().getResourceAsStream("/userinput/tfact-6.png"));
 		tfact.setImage(image);
 
-		image = new Image(this.getClass().getResourceAsStream(
-				"/userinput/back.png"));
+		image = new Image(this.getClass().getResourceAsStream("/userinput/back.png"));
 		imgback.setImage(image);
 
-		image = new Image(this.getClass().getResourceAsStream(
-				"/userinput/keyboard.png"));
+		image = new Image(this.getClass().getResourceAsStream("/userinput/keyboard.png"));
 		keyboard.setImage(image);
 
-		image = new Image(this.getClass().getResourceAsStream(
-				"/userinput/downarrow.png"));
+		image = new Image(this.getClass().getResourceAsStream("/userinput/downarrow.png"));
 		imgdownarrow.setImage(image);
 
-		image = new Image(this.getClass().getResourceAsStream(
-				"/userinput/downarrow.png"));
+		image = new Image(this.getClass().getResourceAsStream("/userinput/downarrow.png"));
 		imgdownarrow1.setImage(image);
 
-		image = new Image(this.getClass().getResourceAsStream(
-				"/userinput/downarrow.png"));
+		image = new Image(this.getClass().getResourceAsStream("/userinput/downarrow.png"));
 		imgdownarrow2.setImage(image);
 
-		image = new Image(this.getClass().getResourceAsStream(
-				"/userinput/downarrow.png"));
+		image = new Image(this.getClass().getResourceAsStream("/userinput/downarrow.png"));
 		imgdownarrow3.setImage(image);
 
-		image = new Image(this.getClass().getResourceAsStream(
-				"/userinput/downarrow.png"));
+		image = new Image(this.getClass().getResourceAsStream("/userinput/downarrow.png"));
 		imgdownarrow4.setImage(image);
 
-		image = new Image(this.getClass().getResourceAsStream(
-				"/userinput/header.png"));
+		image = new Image(this.getClass().getResourceAsStream("/userinput/header.png"));
 		imgheader.setImage(image);
 	}
 
@@ -468,8 +574,7 @@ public class NSelectproject1 implements Initializable {
 		bpind.valueProperty().addListener(new ChangeListener<Number>() {
 
 			@Override
-			public void changed(ObservableValue<? extends Number> observable,
-					Number oldValue, Number newValue) {
+			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
 
 				double v = (double) newValue;
 
@@ -482,8 +587,7 @@ public class NSelectproject1 implements Initializable {
 		poroind.valueProperty().addListener(new ChangeListener<Number>() {
 
 			@Override
-			public void changed(ObservableValue<? extends Number> observable,
-					Number oldValue, Number newValue) {
+			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
 
 				double v = (double) newValue;
 
@@ -496,8 +600,7 @@ public class NSelectproject1 implements Initializable {
 		curvefit.valueProperty().addListener(new ChangeListener<Number>() {
 
 			@Override
-			public void changed(ObservableValue<? extends Number> observable,
-					Number oldValue, Number newValue) {
+			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
 
 				double v = (double) newValue;
 
@@ -505,24 +608,21 @@ public class NSelectproject1 implements Initializable {
 			}
 		});
 
-		cmbselectind.setItems(FXCollections.observableArrayList("Biotech",
-				"Textile", "Non-woven & Paper", "Filtration", "Pharma",
-				"Polymer", "Battery", "Packaging", "Enviroment & Hygene",
-				"Chemical", "Ceramics", "Acoustics", "Other"));
+		cmbselectind.setItems(FXCollections.observableArrayList("Biotech", "Textile", "Non-woven & Paper", "Filtration",
+				"Pharma", "Polymer", "Battery", "Packaging", "Enviroment & Hygene", "Chemical", "Ceramics", "Acoustics",
+				"Other"));
 
-		cmbmateriala.setItems(FXCollections.observableArrayList("Fibrous",
-				"Particulate", "Consolidated", "Coated", "laminated"));
+		cmbmateriala.setItems(
+				FXCollections.observableArrayList("Fibrous", "Particulate", "Consolidated", "Coated", "laminated"));
 
-		cmbtestt.setItems(FXCollections.observableArrayList("1", "2", "3", "4",
-				"5", "6", "7", "8", "9", "10"));
+		cmbtestt.setItems(FXCollections.observableArrayList("1", "2", "3", "4", "5", "6", "7", "8", "9", "10"));
 		cmbtestt.getSelectionModel().select(0);
 
 		/* Fluid Selection and Add new fluid Option */
 		cmbselectflui.valueProperty().addListener(new ChangeListener<String>() {
 
 			@Override
-			public void changed(ObservableValue<? extends String> observable,
-					String oldValue, String newValue) {
+			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
 				// TODO Auto-generated method stub
 
 				try {
@@ -534,23 +634,20 @@ public class NSelectproject1 implements Initializable {
 						ancaddfluid.setVisible(false);
 
 						try {
-							
-						
-						String deld = "select flag from fluiddata where name='"
-								+ newValue.substring(0, newValue.indexOf(":"))
-								+ "'";
 
-						Database d = new Database();
-						List<List<String>> data = d.getData(deld);
+							String deld = "select flag from fluiddata where name='"
+									+ newValue.substring(0, newValue.indexOf(":")) + "'";
 
-						System.out.println("Data : " + data + " for "
-								+ newValue);
-						if (data.get(0).get(0).equals("0")) {
-							btnfluiddelete.setVisible(true);
-						} else {
-							btnfluiddelete.setVisible(false);
+							Database d = new Database();
+							List<List<String>> data = d.getData(deld);
 
-						}
+							System.out.println("Data : " + data + " for " + newValue);
+							if (data.get(0).get(0).equals("0")) {
+								btnfluiddelete.setVisible(true);
+							} else {
+								btnfluiddelete.setVisible(false);
+
+							}
 						} catch (Exception e) {
 							// TODO: handle exception
 						}
@@ -569,98 +666,76 @@ public class NSelectproject1 implements Initializable {
 		cmbselectind.valueProperty().addListener(new ChangeListener<String>() {
 
 			@Override
-			public void changed(ObservableValue<? extends String> observable,
-					String oldValue, String newValue) {
+			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
 				if (newValue.equals("Biotech")) {
 					cmbmateriala.setVisible(true);
-					cmbmateriala.setItems(FXCollections.observableArrayList(
-							"Tissue", "Bandage", "Implant", "Body Part",
+					cmbmateriala.setItems(FXCollections.observableArrayList("Tissue", "Bandage", "Implant", "Body Part",
 							"Filter", "Skin"));
 
 				} else if (newValue.equals("Other")) {
 					cmbmateriala.setVisible(true);
-					cmbmateriala.setItems(FXCollections
-							.observableArrayList("Other"));
+					cmbmateriala.setItems(FXCollections.observableArrayList("Other"));
 
 				} else if (newValue.equals("Textile")) {
 					cmbmateriala.setVisible(true);
 					cmbmateriala.getSelectionModel().clearSelection();
-					cmbmateriala.setItems(FXCollections.observableArrayList(
-							"Geotextiles", "Bullet Proof Vests", "Space suits",
-							"Automotive", "Medical", "Nanotechnology",
-							"Construction", "Agrotextiles", "Packaging",
-							"Sports"));
+					cmbmateriala.setItems(FXCollections.observableArrayList("Geotextiles", "Bullet Proof Vests",
+							"Space suits", "Automotive", "Medical", "Nanotechnology", "Construction", "Agrotextiles",
+							"Packaging", "Sports"));
 
 				} else if (newValue.equals("Non-woven & Paper")) {
 					cmbmateriala.setVisible(true);
 					cmbmateriala.getSelectionModel().clearSelection();
-					cmbmateriala.setItems(FXCollections.observableArrayList(
-							"Aeronautical", "Automotive", "Construction",
-							"Filtration", "Medical", "Agriculture",
-							"Home Furnishing", "Clothing", "Geo textiles",
-							"Coated Paper", "Packaging", "Felt"));
+					cmbmateriala.setItems(FXCollections.observableArrayList("Aeronautical", "Automotive",
+							"Construction", "Filtration", "Medical", "Agriculture", "Home Furnishing", "Clothing",
+							"Geo textiles", "Coated Paper", "Packaging", "Felt"));
 				} else if (newValue.equals("Filtration")) {
 					cmbmateriala.setVisible(true);
 					cmbmateriala.getSelectionModel().clearSelection();
-					cmbmateriala.setItems(FXCollections.observableArrayList(
-							"Felts", "Wire Mesh", "Textiles", "Perforated",
-							"water filter", "air filter", "oil filter",
-							"Minipleat HEPA Filters", "Rigidpack",
-							"Multiwedge", "Grease Filter", "Carbon Panel",
-							"Eco Bag Filter", "Carbon CF Filter", "Cartridge",
-							"Strainers", "Hydraulic Filters"));
+					cmbmateriala.setItems(FXCollections.observableArrayList("Felts", "Wire Mesh", "Textiles",
+							"Perforated", "water filter", "air filter", "oil filter", "Minipleat HEPA Filters",
+							"Rigidpack", "Multiwedge", "Grease Filter", "Carbon Panel", "Eco Bag Filter",
+							"Carbon CF Filter", "Cartridge", "Strainers", "Hydraulic Filters"));
 				} else if (newValue.equals("Pharma")) {
 					cmbmateriala.setVisible(true);
 					cmbmateriala.getSelectionModel().clearSelection();
-					cmbmateriala.setItems(FXCollections.observableArrayList(
-							"Powdered Drugs", "Packaging materials", "Pouches"));
+					cmbmateriala.setItems(
+							FXCollections.observableArrayList("Powdered Drugs", "Packaging materials", "Pouches"));
 				} else if (newValue.equals("Polymer")) {
 					cmbmateriala.setVisible(true);
 					cmbmateriala.getSelectionModel().clearSelection();
-					cmbmateriala.setItems(FXCollections.observableArrayList(
-							"ABS (Acrylonitrile-butadiene-styrene)",
-							"Acrylics(poly-methyl-methacrylate)",
-							"Fluorocarbons(PTFE or TFE)", "Polycarbonates",
-							"Polyethylene", "Polypropylene", "Polystyrene",
-							"Polyester", "Epoxies", "Phenolics"));
+					cmbmateriala.setItems(FXCollections.observableArrayList("ABS (Acrylonitrile-butadiene-styrene)",
+							"Acrylics(poly-methyl-methacrylate)", "Fluorocarbons(PTFE or TFE)", "Polycarbonates",
+							"Polyethylene", "Polypropylene", "Polystyrene", "Polyester", "Epoxies", "Phenolics"));
 				} else if (newValue.equals("Battery")) {
 					cmbmateriala.setVisible(true);
-					cmbmateriala.setItems(FXCollections
-							.observableArrayList("battery separators"));
+					cmbmateriala.setItems(FXCollections.observableArrayList("battery separators"));
 				} else if (newValue.equals("Packaging")) {
 					cmbmateriala.setVisible(true);
-					cmbmateriala.setItems(FXCollections.observableArrayList(
-							"liquid", "solid", "moisture"));
+					cmbmateriala.setItems(FXCollections.observableArrayList("liquid", "solid", "moisture"));
 
 				} else if (newValue.equals("Enviroment & Hygene")) {
 					cmbmateriala.setVisible(true);
-					cmbmateriala.setItems(FXCollections.observableArrayList(
-							"Diapers", "Tissues", "Paper towel", "Sheets",
-							"Cosmetics"));
+					cmbmateriala.setItems(FXCollections.observableArrayList("Diapers", "Tissues", "Paper towel",
+							"Sheets", "Cosmetics"));
 
 					// System.out.println("select text");
 				} else if (newValue.equals("Chemical")) {
 					cmbmateriala.setVisible(true);
-					cmbmateriala.setItems(FXCollections.observableArrayList(
-							"Zeolites", "Catalysts", "Carbon black",
+					cmbmateriala.setItems(FXCollections.observableArrayList("Zeolites", "Catalysts", "Carbon black",
 							"Abrasives", "Fertilizers", "Metal powders"));
 
 					// System.out.println("select text");
 				} else if (newValue.equals("Ceramics")) {
 					cmbmateriala.setVisible(true);
-					cmbmateriala.setItems(FXCollections.observableArrayList(
-							"Automotive", "Electronics", "Filtration",
-							"Aerospace", "Composites", "Coatings", "Implants",
-							"Enviromental", "Chemical"));
+					cmbmateriala.setItems(FXCollections.observableArrayList("Automotive", "Electronics", "Filtration",
+							"Aerospace", "Composites", "Coatings", "Implants", "Enviromental", "Chemical"));
 
 				} else if (newValue.equals("Acoustics")) {
 					cmbmateriala.setVisible(true);
-					cmbmateriala.setItems(FXCollections
-							.observableArrayList("Foams", "Barriers",
-									"Composites", "Diffusers",
-									"Ceiling Baffles", "Fiber Glass",
-									"Blankets", "Wall Panels", "Automotive",
-									"Aircraft", "Building"));
+					cmbmateriala.setItems(FXCollections.observableArrayList("Foams", "Barriers", "Composites",
+							"Diffusers", "Ceiling Baffles", "Fiber Glass", "Blankets", "Wall Panels", "Automotive",
+							"Aircraft", "Building"));
 
 				}
 				cmbmateriala.getSelectionModel().select(0);
@@ -677,8 +752,7 @@ public class NSelectproject1 implements Initializable {
 
 			cmbselectflui.getItems().add("Add Fluid");
 			for (int i = 0; i < info.size(); i++) {
-				cmbselectflui.getItems().add(
-						info.get(i).get(0) + ":" + info.get(i).get(1));
+				cmbselectflui.getItems().add(info.get(i).get(0) + ":" + info.get(i).get(1));
 
 			}
 		} catch (Exception e) {
@@ -692,15 +766,12 @@ public class NSelectproject1 implements Initializable {
 
 		Database d1 = new Database();
 
-		if (d1.Insert("INSERT INTO fluiddata VALUES('" + txtnfname.getText()
-				+ "','" + txtnfvalue.getText() + "','0')")) {
-			cmbselectflui.getItems().add(
-					txtnfname.getText() + ":" + txtnfvalue.getText());
-			cmbselectflui.getSelectionModel().select(
-					txtnfname.getText() + ":" + txtnfvalue.getText());
+		if (d1.Insert(
+				"INSERT INTO fluiddata VALUES('" + txtnfname.getText() + "','" + txtnfvalue.getText() + "','0')")) {
+			cmbselectflui.getItems().add(txtnfname.getText() + ":" + txtnfvalue.getText());
+			cmbselectflui.getSelectionModel().select(txtnfname.getText() + ":" + txtnfvalue.getText());
 
-			Toast.makeText(Main.mainstage,
-					"Successfully New Fluid Data Added.", 1500, 500, 500);
+			Toast.makeText(Main.mainstage, "Successfully New Fluid Data Added.", 1500, 500, 500);
 		} else {
 		}
 
@@ -709,8 +780,7 @@ public class NSelectproject1 implements Initializable {
 	/* Fluid delete */
 	void Deletefluid() {
 		String ss = cmbselectflui.getSelectionModel().getSelectedItem();
-		String del = "delete from fluiddata where name='"
-				+ ss.substring(0, ss.indexOf(":")) + "'";
+		String del = "delete from fluiddata where name='" + ss.substring(0, ss.indexOf(":")) + "'";
 		Database database = new Database();
 		if (database.Insert(del)) {
 			cmbselectflui.getItems().remove(ss);
@@ -745,15 +815,10 @@ public class NSelectproject1 implements Initializable {
 
 	void fontload() {
 
-		Font.loadFont(
-				NSelectproject1.class.getResource("Montserrat-SemiBold.ttf")
-						.toExternalForm(), 25);
-		Font.loadFont(NSelectproject1.class.getResource("Roboto-Regular.ttf")
-				.toExternalForm(), 25);
-		Font.loadFont(NSelectproject1.class
-				.getResource("Montserrat-Medium.ttf").toExternalForm(), 25);
-		Font.loadFont(NSelectproject1.class.getResource("BebasNeue.otf")
-				.toExternalForm(), 25);
+		Font.loadFont(NSelectproject1.class.getResource("Montserrat-SemiBold.ttf").toExternalForm(), 25);
+		Font.loadFont(NSelectproject1.class.getResource("Roboto-Regular.ttf").toExternalForm(), 25);
+		Font.loadFont(NSelectproject1.class.getResource("Montserrat-Medium.ttf").toExternalForm(), 25);
+		Font.loadFont(NSelectproject1.class.getResource("BebasNeue.otf").toExternalForm(), 25);
 
 	}
 
@@ -788,29 +853,24 @@ public class NSelectproject1 implements Initializable {
 
 		if ((oldpos + 1) == 1) {
 			boolean bol = true;
-			if (txtsampleid.getText().toString().contains(".")
-					|| txtsampleid.getText().toString().contains("#")
+			if (txtsampleid.getText().toString().contains(".") || txtsampleid.getText().toString().contains("#")
 					|| txtsampleid.getText().toString().contains("_")
 					|| txtsampleid.getText().toString().contains("-")) {
 				bol = false;
 			}
-			if (!txtsampleid.getText().trim().equals("")
-					&& !txtlotno.getText().trim().equals("")
+			if (!txtsampleid.getText().trim().equals("") && !txtlotno.getText().trim().equals("")
 					&& cmbtestt.getSelectionModel().getSelectedItem() != null) {
 				if (bol) {
 
 					prgmain.setProgress(0.41);
 				} else {
 					isvalid = false;
-					Toast.makeText(Main.mainstage,
-							"Special characters not allowed in SampleID", 1500,
-							500, 500);
+					Toast.makeText(Main.mainstage, "Special characters not allowed in SampleID", 1500, 500, 500);
 
 				}
 			} else {
 				isvalid = false;
-				Toast.makeText(Main.mainstage, "Please enter all details",
-						1500, 500, 500);
+				Toast.makeText(Main.mainstage, "Please enter all details", 1500, 500, 500);
 
 			}
 
@@ -827,8 +887,7 @@ public class NSelectproject1 implements Initializable {
 				prgmain.setProgress(0.50);
 			} else {
 				isvalid = false;
-				Toast.makeText(Main.mainstage, "Please enter all details",
-						1500, 500, 500);
+				Toast.makeText(Main.mainstage, "Please enter all details", 1500, 500, 500);
 
 			}
 
@@ -859,18 +918,22 @@ public class NSelectproject1 implements Initializable {
 					Float re = Float.parseFloat(txtthiknes.getText());
 				} catch (Exception es) {
 					isvalid = false;
-					Toast.makeText(Main.mainstage, "Please enter valid input.",
-							1500, 500, 500);
+					Toast.makeText(Main.mainstage, "Please enter valid input.", 1500, 500, 500);
 				}
-				prgmain.setProgress(0.90);
+				prgmain.setProgress(0.85);
 
 			} else {
 				isvalid = false;
-				Toast.makeText(Main.mainstage, "Please enter all details",
-						1500, 500, 500);
+				Toast.makeText(Main.mainstage, "Please enter all details", 1500, 500, 500);
 			}
 
-		} else if ((oldpos + 1) == 7) {
+		}
+
+		else if ((oldpos + 1) == 7) {
+
+			prgmain.setProgress(0.90);
+
+		} else if ((oldpos + 1) == 8) {
 			ic3.setVisible(true);
 			prgmain.setProgress(1);
 
@@ -881,9 +944,9 @@ public class NSelectproject1 implements Initializable {
 				btnback.setVisible(true);
 			}
 
-			if (oldpos == 5) {
+			if (oldpos == 7) {
 				btnnext.setVisible(false);
-				maintab.getSelectionModel().select(oldpos + 2);
+				maintab.getSelectionModel().select(oldpos + 1);
 
 			} else {
 
@@ -902,26 +965,20 @@ public class NSelectproject1 implements Initializable {
 
 	void setMaterialSpecification1() {
 
-		m1group.selectedToggleProperty().addListener(
-				new ChangeListener<Toggle>() {
-					public void changed(ObservableValue<? extends Toggle> ov,
-							Toggle oldToggle, Toggle newToggle) {
-						if (newToggle == null)
-							oldToggle.setSelected(true);
-						// System.out.println(m1group.getSelectedToggle().getUserData());
-						Myapp.classification = ""
-								+ m1group.getSelectedToggle().getUserData();
+		m1group.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
+			public void changed(ObservableValue<? extends Toggle> ov, Toggle oldToggle, Toggle newToggle) {
+				if (newToggle == null)
+					oldToggle.setSelected(true);
+				// System.out.println(m1group.getSelectedToggle().getUserData());
+				Myapp.classification = "" + m1group.getSelectedToggle().getUserData();
 
-					}
-				});
+			}
+		});
 
-		setToggleButtonProperty(ms1_1, "Fibrous", "/userinput/m1_1.png",
-				m1group);
+		setToggleButtonProperty(ms1_1, "Fibrous", "/userinput/m1_1.png", m1group);
 		setToggleButtonProperty(ms1_2, "Coated", "/userinput/m1_2.png", m1group);
-		setToggleButtonProperty(ms1_3, "Consolidate", "/userinput/m1_3.png",
-				m1group);
-		setToggleButtonProperty(ms1_4, "Laminated", "/userinput/m1_4.png",
-				m1group);
+		setToggleButtonProperty(ms1_3, "Consolidate", "/userinput/m1_3.png", m1group);
+		setToggleButtonProperty(ms1_4, "Laminated", "/userinput/m1_4.png", m1group);
 		setToggleButtonProperty(ms1_5, "Unknown", "/userinput/7.png", m1group);
 
 		m1group.selectToggle(ms1_1);
@@ -930,25 +987,20 @@ public class NSelectproject1 implements Initializable {
 
 	void setMaterialSpecification2() {
 
-		m2group.selectedToggleProperty().addListener(
-				new ChangeListener<Toggle>() {
-					public void changed(ObservableValue<? extends Toggle> ov,
-							Toggle oldToggle, Toggle newToggle) {
-						if (newToggle == null)
-							oldToggle.setSelected(true);
-						// System.out.println(m2group.getSelectedToggle()
-						// .getUserData());
+		m2group.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
+			public void changed(ObservableValue<? extends Toggle> ov, Toggle oldToggle, Toggle newToggle) {
+				if (newToggle == null)
+					oldToggle.setSelected(true);
+				// System.out.println(m2group.getSelectedToggle()
+				// .getUserData());
 
-						Myapp.crossection = ""
-								+ m2group.getSelectedToggle().getUserData();
-					}
+				Myapp.crossection = "" + m2group.getSelectedToggle().getUserData();
+			}
 
-				});
+		});
 
-		setToggleButtonProperty(ms2_1, "Triangular", "/userinput/1.png",
-				m2group);
-		setToggleButtonProperty(ms2_2, "Rectangular", "/userinput/2.png",
-				m2group);
+		setToggleButtonProperty(ms2_1, "Triangular", "/userinput/1.png", m2group);
+		setToggleButtonProperty(ms2_2, "Rectangular", "/userinput/2.png", m2group);
 		setToggleButtonProperty(ms2_3, "Circular", "/userinput/3.png", m2group);
 		setToggleButtonProperty(ms2_4, "Eliptical", "/userinput/4.png", m2group);
 		setToggleButtonProperty(ms2_5, "Square", "/userinput/5.png", m2group);
@@ -958,8 +1010,7 @@ public class NSelectproject1 implements Initializable {
 		m2group.selectToggle(ms2_1);
 	}
 
-	void setToggleButtonProperty(ToggleButton tb, String title, String img,
-			ToggleGroup group) {
+	void setToggleButtonProperty(ToggleButton tb, String title, String img, ToggleGroup group) {
 		Image image = new Image(this.getClass().getResourceAsStream(img));
 		ImageView imageView = new ImageView(image);
 		imageView.setFitWidth(150);
@@ -975,7 +1026,7 @@ public class NSelectproject1 implements Initializable {
 	void backClick() {
 
 		int oldpos = maintab.getSelectionModel().getSelectedIndex();
-		if (oldpos - 1 < 7) {
+		if (oldpos - 1 < 8) {
 			btnnext.setVisible(true);
 		}
 
@@ -993,7 +1044,7 @@ public class NSelectproject1 implements Initializable {
 				maintab.getSelectionModel().select(oldpos - 3);
 			} else if (oldpos == 7) {
 
-				maintab.getSelectionModel().select(oldpos - 2);
+				maintab.getSelectionModel().select(oldpos - 1);
 			} else {
 				maintab.getSelectionModel().select(oldpos - 1);
 			}
@@ -1026,16 +1077,19 @@ public class NSelectproject1 implements Initializable {
 			prgmain.setProgress(0.79);
 
 		} else if ((oldpos - 1) == 6) {
-			prgmain.setProgress(0.90);
+			prgmain.setProgress(0.85);
 
 		} else if ((oldpos - 1) == 7) {
+			prgmain.setProgress(0.90);
+
+		} else if ((oldpos - 1) == 8) {
 			prgmain.setProgress(1);
 
 		}
 
 	}
 
-		/* tortuosity set */
+	/* tortuosity set */
 	void setTfactor() {
 		btnplus.setOnAction(new EventHandler<ActionEvent>() {
 
@@ -1076,46 +1130,39 @@ public class NSelectproject1 implements Initializable {
 		slaccuracy.valueProperty().addListener(new ChangeListener<Number>() {
 
 			@Override
-			public void changed(ObservableValue<? extends Number> observable,
-					Number oldValue, Number newValue) {
+			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
 				// TODO Auto-generated method stub
 				Myapp.tfactore = "" + (double) newValue / 100;
 
 				if (newValue.equals(0.0)) {
 
-					Image image = new Image(this.getClass()
-							.getResourceAsStream("/userinput/tfact-6.png"));
+					Image image = new Image(this.getClass().getResourceAsStream("/userinput/tfact-6.png"));
 					tfact.setImage(image);
 
 				}
 
 				else if (newValue.equals(20.0)) {
 
-					Image image = new Image(this.getClass()
-							.getResourceAsStream("/userinput/tfact-5.png"));
+					Image image = new Image(this.getClass().getResourceAsStream("/userinput/tfact-5.png"));
 					tfact.setImage(image);
 
 				} else if (newValue.equals(40.0)) {
 
-					Image image = new Image(this.getClass()
-							.getResourceAsStream("/userinput/tfact-4.png"));
+					Image image = new Image(this.getClass().getResourceAsStream("/userinput/tfact-4.png"));
 					tfact.setImage(image);
 
 				} else if (newValue.equals(60.0)) {
 
-					Image image = new Image(this.getClass()
-							.getResourceAsStream("/userinput/tfact-3.png"));
+					Image image = new Image(this.getClass().getResourceAsStream("/userinput/tfact-3.png"));
 					tfact.setImage(image);
 
 				} else if (newValue.equals(80.0)) {
 
-					Image image = new Image(this.getClass()
-							.getResourceAsStream("/userinput/tfact-2.png"));
+					Image image = new Image(this.getClass().getResourceAsStream("/userinput/tfact-2.png"));
 					tfact.setImage(image);
 
 				} else {
-					Image image = new Image(this.getClass()
-							.getResourceAsStream("/userinput/tfact-1.png"));
+					Image image = new Image(this.getClass().getResourceAsStream("/userinput/tfact-1.png"));
 					tfact.setImage(image);
 
 				}
@@ -1130,8 +1177,7 @@ public class NSelectproject1 implements Initializable {
 
 	void setTextwatchr_tfactor() {
 
-		Pattern validEditingState = Pattern
-				.compile("((0?(\\.[0-9]*)?)|(1?(\\.0)?))");
+		Pattern validEditingState = Pattern.compile("((0?(\\.[0-9]*)?)|(1?(\\.0)?))");
 
 		UnaryOperator<TextFormatter.Change> filter = c -> {
 			String text = c.getControlNewText();
@@ -1146,8 +1192,7 @@ public class NSelectproject1 implements Initializable {
 
 			@Override
 			public Double fromString(String s) {
-				if (s.isEmpty() || "-".equals(s) || ".".equals(s)
-						|| "-.".equals(s)) {
+				if (s.isEmpty() || "-".equals(s) || ".".equals(s) || "-.".equals(s)) {
 					return 0.0;
 				} else {
 					return Double.valueOf(s);
@@ -1160,8 +1205,7 @@ public class NSelectproject1 implements Initializable {
 			}
 		};
 
-		TextFormatter<Double> textFormatter = new TextFormatter<>(converter,
-				0.1, filter);
+		TextFormatter<Double> textFormatter = new TextFormatter<>(converter, 0.1, filter);
 
 		txttfvalue.setOnKeyReleased(new EventHandler<Event>() {
 
@@ -1222,51 +1266,38 @@ public class NSelectproject1 implements Initializable {
 	/* Sample Plate Selection */
 	void setTestConfiguration1() {
 
-		t1group.selectedToggleProperty().addListener(
-				new ChangeListener<Toggle>() {
-					public void changed(ObservableValue<? extends Toggle> ov,
-							Toggle oldToggle, Toggle newToggle) {
-						if (newToggle == null)
-							oldToggle.setSelected(true);
-						System.out.println(t1group.getSelectedToggle()
-								.getUserData());
-						Myapp.splate = ""
-								+ t1group.getSelectedToggle().getUserData();
+		t1group.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
+			public void changed(ObservableValue<? extends Toggle> ov, Toggle oldToggle, Toggle newToggle) {
+				if (newToggle == null)
+					oldToggle.setSelected(true);
+				System.out.println(t1group.getSelectedToggle().getUserData());
+				Myapp.splate = "" + t1group.getSelectedToggle().getUserData();
 
-					}
-				});
+			}
+		});
 
 		setToggleButtonProperty(tc_11, "Small", "/userinput/small.png", t1group);
-		setToggleButtonProperty(tc_12, "Medium", "/userinput/medium.png",
-				t1group);
+		setToggleButtonProperty(tc_12, "Medium", "/userinput/medium.png", t1group);
 		setToggleButtonProperty(tc_13, "Large", "/userinput/large.png", t1group);
 		t1group.selectToggle(tc_11);
-
 
 	}
 
 	void setTestConfiguration2() {
 
-		t2group.selectedToggleProperty().addListener(
-				new ChangeListener<Toggle>() {
-					public void changed(ObservableValue<? extends Toggle> ov,
-							Toggle oldToggle, Toggle newToggle) {
-						if (newToggle == null)
-							oldToggle.setSelected(true);
-						System.out.println(t2group.getSelectedToggle()
-								.getUserData());
-						Myapp.thresold = ""
-								+ t2group.getSelectedToggle().getUserData();
+		t2group.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
+			public void changed(ObservableValue<? extends Toggle> ov, Toggle oldToggle, Toggle newToggle) {
+				if (newToggle == null)
+					oldToggle.setSelected(true);
+				System.out.println(t2group.getSelectedToggle().getUserData());
+				Myapp.thresold = "" + t2group.getSelectedToggle().getUserData();
 
-					}
-				});
+			}
+		});
 
-		setToggleButtonProperty(tc_21, "First Bubble",
-				"/userinput/firstbubble.png", t2group);
-		setToggleButtonProperty(tc_22, "Moderate",
-				"/userinput/moderatebubble.png", t2group);
-		setToggleButtonProperty(tc_23, "Continous",
-				"/userinput/continousbubble.png", t2group);
+		setToggleButtonProperty(tc_21, "First Bubble", "/userinput/firstbubble.png", t2group);
+		setToggleButtonProperty(tc_22, "Moderate", "/userinput/moderatebubble.png", t2group);
+		setToggleButtonProperty(tc_23, "Continous", "/userinput/continousbubble.png", t2group);
 		t2group.selectToggle(tc_21);
 
 	}
@@ -1289,8 +1320,7 @@ public class NSelectproject1 implements Initializable {
 		tgb5.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
 
 			@Override
-			public void changed(ObservableValue<? extends Toggle> arg0,
-					Toggle arg1, Toggle arg2) {
+			public void changed(ObservableValue<? extends Toggle> arg0, Toggle arg1, Toggle arg2) {
 				if (arg2 == null)
 					arg1.setSelected(true);
 				selectedrad4 = arg2.getUserData().toString();
@@ -1334,14 +1364,12 @@ public class NSelectproject1 implements Initializable {
 		tgb6.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
 
 			@Override
-			public void changed(ObservableValue<? extends Toggle> arg0,
-					Toggle arg1, Toggle arg2) {
+			public void changed(ObservableValue<? extends Toggle> arg0, Toggle arg1, Toggle arg2) {
 				if (arg2 == null)
 					arg1.setSelected(true);
 				selectedrad6 = arg2.getUserData().toString();
 
-				System.out.println("SElect ted record................"
-						+ selectedrad6);
+				System.out.println("SElect ted record................" + selectedrad6);
 
 				if (selectedrad6.equals("1")) {
 					Myapp.testsequence = "WUPDUP";
@@ -1375,8 +1403,7 @@ public class NSelectproject1 implements Initializable {
 		tgb7.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
 
 			@Override
-			public void changed(ObservableValue<? extends Toggle> arg0,
-					Toggle arg1, Toggle arg2) {
+			public void changed(ObservableValue<? extends Toggle> arg0, Toggle arg1, Toggle arg2) {
 				if (arg2 == null)
 					arg1.setSelected(true);
 				selectedrad7 = arg2.getUserData().toString();
@@ -1400,9 +1427,7 @@ public class NSelectproject1 implements Initializable {
 
 		Database d = new Database();
 		cmboproject.getItems().clear();
-		List<List<String>> info = d
-				.getData("select project from projects where useremailid='"
-						+ Myapp.email + "'");
+		List<List<String>> info = d.getData("select project from projects where useremailid='" + Myapp.email + "'");
 		try {
 			cmboproject.getItems().add("New Project");
 
@@ -1420,11 +1445,10 @@ public class NSelectproject1 implements Initializable {
 	void LoadProjectData(String projectname) {
 		Database d = new Database();
 		isproject = true;
-		List<List<String>> alldata = d
-				.getData("select * from projects where useremailid='"
-						+ Myapp.email + "' and project='" + projectname + "' ");
+		List<List<String>> alldata = d.getData(
+				"select * from projects where useremailid='" + Myapp.email + "' and project='" + projectname + "' ");
 
-		// System.out.println("alalalalal"+alldata);
+		System.out.println("alalalalal--->>" + alldata);
 		txtsampleid.setText(alldata.get(0).get(0));
 		cmbtestt.setValue(alldata.get(0).get(9));
 
@@ -1441,6 +1465,7 @@ public class NSelectproject1 implements Initializable {
 		// System.out.println("Tfactor "+Myapp.tfactore);
 
 		setDefaultValue();
+		System.out.println("Thickness Valu-------->" + alldata.get(0).get(12));
 		txtthiknes.setText(alldata.get(0).get(12));
 		txtendpre.setText(alldata.get(0).get(14));
 		bpind.setValue(Double.parseDouble(alldata.get(0).get(15)));
@@ -1455,10 +1480,15 @@ public class NSelectproject1 implements Initializable {
 		String crossection = "" + alldata.get(0).get(4);
 		String thresold = "" + alldata.get(0).get(5);
 		String splate = "" + alldata.get(0).get(11);
-		System.out.println("Splate : "+splate);
+		System.out.println("Splate : " + splate);
 		String materialtype = "" + alldata.get(0).get(13);
 		String testsequance = "" + alldata.get(0).get(19);
 		String stabilitytype = "" + alldata.get(0).get(20);
+
+		String testtype = "" + alldata.get(0).get(22);
+		String testdata = "" + alldata.get(0).get(23);
+
+		//System.out.println("Test Data----->" + testtype + "---" + testdata + "");
 
 		// Material Specification
 
@@ -1522,8 +1552,6 @@ public class NSelectproject1 implements Initializable {
 			Myapp.crossection = "Unknown";
 		}
 
-		
-
 		// Material tyep hydro
 
 		if (materialtype.equals("Hydrophobic")) {
@@ -1544,20 +1572,19 @@ public class NSelectproject1 implements Initializable {
 
 		}
 
+		/* splate */
+		if (splate.equals("Small")) {
+			t1group.selectToggle(tc_11);
+			Myapp.splate = "Small";
+		} else if (splate.equals("Medium")) {
+			t1group.selectToggle(tc_12);
+			Myapp.splate = "Medium";
 
-/* splate */
-if (splate.equals("Small")) {
-	t1group.selectToggle(tc_11);
-	Myapp.splate = "Small";
-} else if (splate.equals("Medium")) {
-	t1group.selectToggle(tc_12);
-	Myapp.splate = "Medium";
+		} else if (splate.equals("Large")) {
+			t1group.selectToggle(tc_13);
+			Myapp.splate = "Large";
 
-} else if (splate.equals("Large")) {
-	t1group.selectToggle(tc_13);
-	Myapp.splate = "Large";
-
-}
+		}
 		// Test Sequance
 
 		if (testsequance.equals("WUPDUP")) {
@@ -1598,6 +1625,74 @@ if (splate.equals("Small")) {
 
 		}
 
+		// Material test Type
+
+		if (testtype.equals("1")) {
+			rdgasper.selectedProperty().set(true);
+			Myapp.testtype = 1;
+
+		}
+
+		else if (testtype.equals("2")) {
+			rdflowstep.selectedProperty().set(true);
+			Myapp.testtype = 2;
+			ancflowtype.setVisible(true);
+			ancpressuredk.setVisible(false);
+			flowsteps.clear();
+			flowsteps.addAll(getListFromString(testdata));
+			listflowstep.getItems().clear();
+			for (int i = 0; i < flowsteps.size(); i++) {
+				listflowstep.getItems().add(flowsteps.get(i) + "");
+
+			}
+			Myapp.steppoints.clear();
+			Myapp.steppoints.addAll(flowsteps);
+		}
+
+		else {
+			rdpressurdk.selectedProperty().set(true);
+			Myapp.testtype = 3;
+			ancpressuredk.setVisible(true);
+			ancflowtype.setVisible(false);
+			test3data.clear();
+			test3data = getStringListFromString(testdata);
+
+			txtdkdatainterval.setText(test3data.get(0) + "");
+			txtdkholdtime.setText(test3data.get(1) + "");
+			txtdkpressure.setText(test3data.get(2) + "");
+
+		}
+
+	}
+
+	List<String> getStringListFromString(String d) {
+
+		List<String> dd = new ArrayList<String>();
+
+		d = d.substring(1, d.length() - 1);
+		String[] s = d.split(",");
+		for (int i = 0; i < s.length; i++) {
+			dd.add(s[i]);
+		}
+
+		return dd;
+
+	}
+
+	List<Integer> getListFromString(String d) {
+
+		List<Integer> dd = new ArrayList<Integer>();
+		d = d.trim();
+		d = d.replace(" ", "");
+		d = d.substring(1, d.length() - 1);
+		String[] s = d.split(",");
+		for (int i = 0; i < s.length; i++) {
+
+			dd.add(Integer.parseInt(s[i]));
+
+		}
+		return dd;
+
 	}
 
 	/* Check Selected project or Not */
@@ -1622,20 +1717,28 @@ if (splate.equals("Small")) {
 	void setupdatedProjectData() {
 		Database d1 = new Database();
 
-		String updatequry = "update projects set sampleid='" + Myapp.sampleid
-				+ "',indtype='" + Myapp.indtype + "',materialtype='"
-				+ Myapp.materialapp + "',clasification='"
-				+ Myapp.classification + "',crosssection='" + Myapp.crossection
-				+ "',thresold='" + Myapp.thresold + "',fluid='"
-				+ cmbselectflui.getValue() + "',tfactor='" + Myapp.tfactore
-				+ "',testtrial='" + Myapp.testtrial + "',splate='"
-				+ Myapp.splate + "',thikness='" + txtthiknes.getText()
-				+ "',materialtyephydro='" + Myapp.materialtype + "',endpress='"
-				+ txtendpre.getText() + "',accbpt='" + Myapp.accbpt
-				+ "',accporo='" + Myapp.accstep + "',lotno='" + Myapp.lotnumber
-				+ "',startpress='" + Myapp.startpress + "',testsequence='"
-				+ Myapp.testsequence + "',stabilitytype='"
-				+ Myapp.stabilitytype + "',accstability='" + Myapp.accstability
+		if ((Myapp.testtype) == 1) {
+
+			data = "";
+
+		} else if ((Myapp.testtype) == 2) {
+
+			data = Myapp.steppoints.toString();
+
+		} else {
+
+			data = NSelectproject1.test3data.toString();
+		}
+
+		String updatequry = "update projects set sampleid='" + Myapp.sampleid + "',indtype='" + Myapp.indtype
+				+ "',materialtype='" + Myapp.materialapp + "',clasification='" + Myapp.classification
+				+ "',crosssection='" + Myapp.crossection + "',thresold='" + Myapp.thresold + "',fluid='"
+				+ cmbselectflui.getValue() + "',tfactor='" + Myapp.tfactore + "',testtrial='" + Myapp.testtrial
+				+ "',splate='" + Myapp.splate + "',thikness='" + txtthiknes.getText() + "',materialtyephydro='"
+				+ Myapp.materialtype + "',endpress='" + txtendpre.getText() + "',accbpt='" + Myapp.accbpt
+				+ "',accporo='" + Myapp.accstep + "',lotno='" + Myapp.lotnumber + "',startpress='" + Myapp.startpress
+				+ "',testsequence='" + Myapp.testsequence + "',stabilitytype='" + Myapp.stabilitytype
+				+ "',accstability='" + Myapp.accstability + "',testtype='" + Myapp.testtype + "',data='" + data
 				+ "'  where sampleid='" + Myapp.sampleid + "'";
 
 		if (d1.Insert(updatequry)) {
@@ -1648,6 +1751,7 @@ if (splate.equals("Small")) {
 
 	/* Load Last test Data */
 	void lastproject() {
+
 		Database d1 = new Database();
 		try {
 
@@ -1663,51 +1767,36 @@ if (splate.equals("Small")) {
 			Myapp.lotnumber = "" + txtlotno.getText();
 			Myapp.startpress = "" + txtstartpre.getText();
 
-			if (!d1.isExist("select * from lastprojects where lid='"
-					+ Myapp.email + "'")) {
+			if (!d1.isExist("select * from lastprojects where lid='" + Myapp.email + "'")) {
 
-				if (d1.Insert("INSERT INTO lastprojects VALUES('" + Myapp.email
-						+ "','" + Myapp.sampleid + "','" + Myapp.indtype
-						+ "','" + Myapp.materialapp + "','"
-						+ Myapp.classification + "','" + Myapp.crossection
-						+ "','" + Myapp.thresold + "','"
-						+ cmbselectflui.getValue() + "','" + Myapp.tfactore
-						+ "','" + Myapp.testtrial + "','" + Myapp.username
-						+ "','" + Myapp.splate + "','" + txtthiknes.getText()
-						+ "','" + Myapp.materialtype + "','"
-						+ txtendpre.getText() + "','" + Myapp.accbpt + "','"
-						+ Myapp.accstep + "','" + Myapp.lotnumber + "','"
-						+ Myapp.startpress + "', '" + Myapp.testsequence
-						+ "', '" + Myapp.stabilitytype + "', '"
-						+ Myapp.accstability + "')")) {
-					// System.out.println("Last Project Insert data");
+				if (d1.Insert("INSERT INTO lastprojects VALUES('" + Myapp.email + "','" + Myapp.sampleid + "','"
+						+ Myapp.indtype + "','" + Myapp.materialapp + "','" + Myapp.classification + "','"
+						+ Myapp.crossection + "','" + Myapp.thresold + "','" + cmbselectflui.getValue() + "','"
+						+ Myapp.tfactore + "','" + Myapp.testtrial + "','" + Myapp.username + "','" + Myapp.splate
+						+ "','" + txtthiknes.getText() + "','" + Myapp.materialtype + "','" + txtendpre.getText()
+						+ "','" + Myapp.accbpt + "','" + Myapp.accstep + "','" + Myapp.lotnumber + "','"
+						+ Myapp.startpress + "', '" + Myapp.testsequence + "', '" + Myapp.stabilitytype + "', '"
+						+ Myapp.accstability + "','" + Myapp.testtype + "','" + data + "')")) {
+					System.out.println("Last Project Insert data" + test3data);
 				} else {
-					// System.out.println(" Last Project  not insertetd");
+					// System.out.println(" Last Project not insertetd");
 				}
 			} else {
 
-				String updatequry = "update lastprojects set sampleid='"
-						+ Myapp.sampleid + "',indtype='" + Myapp.indtype
-						+ "',materialtype='" + Myapp.materialapp
-						+ "',clasification='" + Myapp.classification
-						+ "',crosssection='" + Myapp.crossection
-						+ "',thresold='" + Myapp.thresold + "',fluid='"
-						+ cmbselectflui.getValue() + "',tfactor='"
-						+ Myapp.tfactore + "',testtrial='" + Myapp.testtrial
-						+ "',uname='" + Myapp.username + "',splate='"
-						+ Myapp.splate + "',thikness='" + txtthiknes.getText()
-						+ "',materialtyephydro='" + Myapp.materialtype
-						+ "',endpress='" + txtendpre.getText() + "',accbpt='"
-						+ Myapp.accbpt + "',accporo='" + Myapp.accstep
-						+ "',lotno='" + Myapp.lotnumber + "',startpress='"
-						+ Myapp.startpress + "',testsequence='"
-						+ Myapp.testsequence + "',stabilitytype='"
-						+ Myapp.stabilitytype + "',accstability='"
-						+ Myapp.accstability + "'  where lid='" + Myapp.email
-						+ "'";
+				String updatequry = "update lastprojects set sampleid='" + Myapp.sampleid + "',indtype='"
+						+ Myapp.indtype + "',materialtype='" + Myapp.materialapp + "',clasification='"
+						+ Myapp.classification + "',crosssection='" + Myapp.crossection + "',thresold='"
+						+ Myapp.thresold + "',fluid='" + cmbselectflui.getValue() + "',tfactor='" + Myapp.tfactore
+						+ "',testtrial='" + Myapp.testtrial + "',uname='" + Myapp.username + "',splate='" + Myapp.splate
+						+ "',thikness='" + txtthiknes.getText() + "',materialtyephydro='" + Myapp.materialtype
+						+ "',endpress='" + txtendpre.getText() + "',accbpt='" + Myapp.accbpt + "',accporo='"
+						+ Myapp.accstep + "',lotno='" + Myapp.lotnumber + "',startpress='" + Myapp.startpress
+						+ "',testsequence='" + Myapp.testsequence + "',stabilitytype='" + Myapp.stabilitytype
+						+ "',accstability='" + Myapp.accstability + "',testtype='" + Myapp.testtype + "',data='" + data
+						+ "'  where lid='" + Myapp.email + "'";
 
 				if (d1.Insert(updatequry)) {
-					// System.out.println(" Updated");
+					//System.out.println("Last Project Updated data" + data);
 				} else {
 
 					// System.out.println("Not Updated");
@@ -1730,8 +1819,7 @@ if (splate.equals("Small")) {
 
 		if (d.Insert(delete1)) {
 			LoadProject();
-			Toast.makeText(Main.mainstage, "Successfully deleted Project..",
-					1000, 200, 200);
+			Toast.makeText(Main.mainstage, "Successfully deleted Project..", 1000, 200, 200);
 
 		} else {
 
@@ -1764,8 +1852,7 @@ if (splate.equals("Small")) {
 					if (Myapp.virtualStage == null) {
 
 						Parent root2;
-						root2 = FXMLLoader.load(getClass().getResource(
-								"/application/keyboard.fxml"));
+						root2 = FXMLLoader.load(getClass().getResource("/application/keyboard.fxml"));
 						Myapp.virtualStage = new Stage();
 						Myapp.virtualStage.setTitle("Keyboard");
 						Myapp.virtualStage.initStyle(StageStyle.UTILITY);
@@ -1773,28 +1860,23 @@ if (splate.equals("Small")) {
 						Myapp.virtualStage.initModality(Modality.WINDOW_MODAL);
 						Myapp.virtualStage.setScene(new Scene(root2, 805, 350));
 
-						Myapp.virtualStage
-								.setOnShown(new EventHandler<WindowEvent>() {
+						Myapp.virtualStage.setOnShown(new EventHandler<WindowEvent>() {
 
-									@Override
-									public void handle(WindowEvent event) {
-										// TODO Auto-generated method stub
-										Myapp.keyboardinput
-												.setText(Myapp.currTf.getText());
-									}
-								});
+							@Override
+							public void handle(WindowEvent event) {
+								// TODO Auto-generated method stub
+								Myapp.keyboardinput.setText(Myapp.currTf.getText());
+							}
+						});
 
-						Myapp.virtualStage
-								.setOnCloseRequest(new EventHandler<WindowEvent>() {
+						Myapp.virtualStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 
-									@Override
-									public void handle(WindowEvent arg0) {
+							@Override
+							public void handle(WindowEvent arg0) {
 
-										Myapp.currTf
-												.setText(Myapp.keyboardinput
-														.getText());
-									}
-								});
+								Myapp.currTf.setText(Myapp.keyboardinput.getText());
+							}
+						});
 
 					}
 				} catch (Exception e) {
@@ -1807,8 +1889,7 @@ if (splate.equals("Small")) {
 	}
 
 	/* Open Keyboard Scren stage. */
-	public static void setVitual(TextField tf, TextField nextTf, String lbl,
-			String nextlbl) {
+	public static void setVitual(TextField tf, TextField nextTf, String lbl, String nextlbl) {
 		try {
 			// root2 =
 			// FXMLLoader.load(getClass().getClassLoader().getResource("/application/keyboard.fxml"));
@@ -1867,8 +1948,7 @@ if (splate.equals("Small")) {
 			@Override
 			public void handle(Event event) {
 				// TODO Auto-generated method stub
-				setVitual(txtstartpre, txtendpre, "Start Pressure",
-						"End Pressure");
+				setVitual(txtstartpre, txtendpre, "Start Pressure", "End Pressure");
 
 			}
 		});
@@ -1882,6 +1962,46 @@ if (splate.equals("Small")) {
 			}
 		});
 
+	}
+
+	void selectTesttype() {
+		tgbttype = new ToggleGroup();
+
+		rdgasper.setToggleGroup(tgbttype);
+		rdgasper.setUserData("1");
+		rdflowstep.setToggleGroup(tgbttype);
+		rdflowstep.setUserData("2");
+		rdpressurdk.setToggleGroup(tgbttype);
+		rdpressurdk.setUserData("3");
+
+		selectedradttype = "1";
+		Myapp.testtype = 1;
+
+		tgbttype.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
+
+			@Override
+			public void changed(ObservableValue<? extends Toggle> arg0, Toggle arg1, Toggle arg2) {
+				if (arg2 == null)
+					arg1.setSelected(true);
+				selectedradttype = arg2.getUserData().toString();
+
+				if (selectedradttype.equals("1")) {
+					Myapp.testtype = 1;
+					ancflowtype.setVisible(false);
+					ancpressuredk.setVisible(false);
+				}
+
+				else if (selectedradttype.equals("2")) {
+					Myapp.testtype = 2;
+					ancpressuredk.setVisible(false);
+					ancflowtype.setVisible(true);
+				} else {
+					Myapp.testtype = 3;
+					ancflowtype.setVisible(false);
+					ancpressuredk.setVisible(true);
+				}
+			}
+		});
 	}
 
 }

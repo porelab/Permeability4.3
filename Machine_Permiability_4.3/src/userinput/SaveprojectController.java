@@ -35,7 +35,7 @@ public class SaveprojectController implements Initializable {
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
 
-		/*Save Project in get Project name*/
+		/* Save Project in get Project name */
 
 		btncancel.getStyleClass().add("transperant_comm");
 
@@ -78,21 +78,31 @@ public class SaveprojectController implements Initializable {
 
 	void setProjectData() {
 		Database d1 = new Database();
-		
-		System.out.println("Save Plate name.."+Myapp.splate);
 
-		if (d1.Insert("INSERT INTO projects VALUES('" + Myapp.sampleid + "','"
-				+ Myapp.indtype + "','" + Myapp.materialapp + "','"
-				+ Myapp.classification + "','" + Myapp.crossection + "','"
-				+ Myapp.thresold + "','" + Myapp.fluidname + ":"
-				+ Myapp.fluidvalue + "','" + Myapp.email + "','"
-				+ projectname.getText() + "','" + Myapp.testtrial + "','"
-				+ Myapp.tfactore + "','" + Myapp.splate + "','"
-				+ Myapp.thikness + "','" + Myapp.materialtype + "','"
-				+ Myapp.endpress + "','" + Myapp.accbpt + "','" + Myapp.accstep
-				+ "','" + Myapp.lotnumber + "','" + Myapp.startpress + "','"
-				+ Myapp.testsequence + "','" + Myapp.stabilitytype + "','"
-				+ Myapp.accstability + "')")) {
+		System.out.println("Save Plate name.." + Myapp.splate);
+
+		String  data = "";
+
+		if ((Myapp.testtype) == 1) {
+			
+			data="";
+
+		} else if ((Myapp.testtype) == 2) {
+
+			data=Myapp.steppoints.toString();
+			
+		} else  {
+
+			data=NSelectproject1.test3data.toString();
+		}
+
+		if (d1.Insert("INSERT INTO projects VALUES('" + Myapp.sampleid + "','" + Myapp.indtype + "','"
+				+ Myapp.materialapp + "','" + Myapp.classification + "','" + Myapp.crossection + "','" + Myapp.thresold
+				+ "','" + Myapp.fluidname + ":" + Myapp.fluidvalue + "','" + Myapp.email + "','" + projectname.getText()
+				+ "','" + Myapp.testtrial + "','" + Myapp.tfactore + "','" + Myapp.splate + "','" + Myapp.thikness
+				+ "','" + Myapp.materialtype + "','" + Myapp.endpress + "','" + Myapp.accbpt + "','" + Myapp.accstep
+				+ "','" + Myapp.lotnumber + "','" + Myapp.startpress + "','" + Myapp.testsequence + "','"
+				+ Myapp.stabilitytype + "','" + Myapp.accstability + "','" + Myapp.testtype + "','"+data+"')")) {
 
 			System.out.println("Insert data New Project");
 		} else {

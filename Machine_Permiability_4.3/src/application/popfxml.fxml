@@ -10,10 +10,10 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:id="root1" minHeight="603.0" prefHeight="603.0" prefWidth="868.0" styleClass="bgwhite" stylesheets="@new_application.css" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.PopfxmlController">
+<AnchorPane fx:id="root1" minHeight="603.0" prefHeight="663.0" prefWidth="868.0" styleClass="bgwhite" stylesheets="@new_application.css" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.PopfxmlController">
    <children>
-      <Line endX="700.0" layoutX="84.0" layoutY="140.0" stroke="#0e3c87" AnchorPane.leftAnchor="83.5" />
-      <Label layoutX="83.0" layoutY="155.0" prefHeight="30.0" prefWidth="246.0" text="Material Information" textFill="#727272c4">
+      <Line endX="700.0" layoutX="84.0" layoutY="124.0" stroke="#0e3c87" AnchorPane.leftAnchor="83.5" />
+      <Label layoutX="83.0" layoutY="139.0" prefHeight="30.0" prefWidth="246.0" text="Material Information" textFill="#727272c4">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
@@ -22,7 +22,7 @@
             <String fx:value="col-gray70" />
          </styleClass>
       </Label>
-      <Label layoutX="521.0" layoutY="155.0" prefHeight="30.0" prefWidth="246.0" text="Test Configuration" textFill="#727272c4">
+      <Label layoutX="521.0" layoutY="139.0" prefHeight="30.0" prefWidth="246.0" text="Test Configuration" textFill="#727272c4">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
@@ -31,8 +31,8 @@
             <String fx:value="col-gray70" />
          </styleClass>
       </Label>
-      <Line layoutX="316.0" layoutY="306.0" rotate="90.0" startX="240.0" stroke="#0e3c87" AnchorPane.leftAnchor="315.5" AnchorPane.rightAnchor="311.5" />
-      <Label layoutX="52.0" layoutY="247.0" prefHeight="23.0" prefWidth="170.0" text="Industry type" textFill="#707070c0" visible="false">
+      <Line layoutX="316.0" layoutY="290.0" rotate="90.0" startX="240.0" stroke="#0e3c87" AnchorPane.leftAnchor="315.5" AnchorPane.rightAnchor="311.5" />
+      <Label layoutX="52.0" layoutY="231.0" prefHeight="23.0" prefWidth="170.0" text="Industry type" textFill="#707070c0" visible="false">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
@@ -41,7 +41,7 @@
             <String fx:value="font-montserrat-semiBold" />
          </styleClass>
       </Label>
-      <Label layoutX="50.0" layoutY="280.0" prefHeight="23.0" prefWidth="170.0" text="Material Application" textFill="#707070bf" visible="false">
+      <Label layoutX="50.0" layoutY="264.0" prefHeight="23.0" prefWidth="170.0" text="Material Application" textFill="#707070bf" visible="false">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
@@ -50,7 +50,7 @@
             <String fx:value="font-montserrat-semiBold" />
          </styleClass>
       </Label>
-      <Label layoutX="50.0" layoutY="313.0" prefHeight="23.0" prefWidth="170.0" text="Classification" textFill="#707070bf" visible="false">
+      <Label layoutX="50.0" layoutY="297.0" prefHeight="23.0" prefWidth="170.0" text="Classification" textFill="#707070bf" visible="false">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
@@ -59,7 +59,7 @@
             <String fx:value="font-montserrat-semiBold" />
          </styleClass>
       </Label>
-      <Label layoutX="50.0" layoutY="346.0" prefHeight="23.0" prefWidth="170.0" text="Pore-shape" textFill="#707070bf" visible="false">
+      <Label layoutX="50.0" layoutY="330.0" prefHeight="23.0" prefWidth="170.0" text="Pore-shape" textFill="#707070bf" visible="false">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
@@ -68,7 +68,7 @@
             <String fx:value="font-montserrat-semiBold" />
          </styleClass>
       </Label>
-      <Label layoutX="465.0" layoutY="225.0" prefHeight="25.0" prefWidth="133.0" text="Sample Holder" textFill="#707070bf" visible="false">
+      <Label layoutX="465.0" layoutY="209.0" prefHeight="25.0" prefWidth="133.0" text="Sample Holder" textFill="#707070bf" visible="false">
          <font>
             <Font size="16.0" />
          </font>
@@ -77,7 +77,7 @@
             <String fx:value="font-montserrat-semiBold" />
          </styleClass>
       </Label>
-      <Label layoutX="465.0" layoutY="255.0" prefHeight="23.0" prefWidth="100.0" text="Thickness" textFill="#707070bf" visible="false">
+      <Label layoutX="465.0" layoutY="239.0" prefHeight="23.0" prefWidth="100.0" text="Thickness" textFill="#707070bf" visible="false">
          <font>
             <Font size="16.0" />
          </font>
@@ -86,7 +86,7 @@
             <String fx:value="font-montserrat-semiBold" />
          </styleClass>
       </Label>
-      <Label layoutX="30.0" layoutY="315.0" prefHeight="23.0" prefWidth="150.0" text="Test Trial" textFill="#666666bf">
+      <Label layoutX="30.0" layoutY="299.0" prefHeight="23.0" prefWidth="150.0" text="Test Trial" textFill="#666666bf">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
@@ -95,12 +95,12 @@
             <String fx:value="font-montserrat-semiBold" />
          </styleClass>
       </Label>
-      <Button fx:id="starttest" layoutX="663.0" layoutY="508.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="150.0" style="-fx-background-radius: 50;" styleClass="linear-grad-to-bottom-right" text="Next" textFill="WHITE" AnchorPane.leftAnchor="663.0">
+      <Button fx:id="starttest" layoutX="677.0" layoutY="572.0" mnemonicParsing="false" prefHeight="70.0" prefWidth="173.0" style="-fx-background-radius: 50;" styleClass="linear-grad-to-bottom-right" text="Next" textFill="WHITE" AnchorPane.leftAnchor="677.0">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
       </Button>
-      <Label layoutX="28.0" layoutY="367.0" prefHeight="25.0" prefWidth="150.0" text="Gas viscosity" textFill="#707070bf">
+      <Label layoutX="28.0" layoutY="351.0" prefHeight="25.0" prefWidth="150.0" text="Gas viscosity" textFill="#707070bf">
          <font>
             <Font size="16.0" />
          </font>
@@ -109,7 +109,7 @@
             <String fx:value="font-montserrat-semiBold" />
          </styleClass>
       </Label>
-      <Label layoutX="464.0" layoutY="215.0" prefHeight="23.0" prefWidth="110.0" text="BPT Thresold" textFill="#707070bf" visible="false">
+      <Label layoutX="464.0" layoutY="199.0" prefHeight="23.0" prefWidth="110.0" text="BPT Thresold" textFill="#707070bf" visible="false">
          <font>
             <Font size="16.0" />
          </font>
@@ -118,7 +118,7 @@
             <String fx:value="font-montserrat-semiBold" />
          </styleClass>
       </Label>
-      <Label layoutX="464.0" layoutY="267.0" prefHeight="25.0" prefWidth="127.0" text="BPT Accuracy" textFill="#707070bf" visible="false">
+      <Label layoutX="464.0" layoutY="251.0" prefHeight="25.0" prefWidth="127.0" text="BPT Accuracy" textFill="#707070bf" visible="false">
          <font>
             <Font size="16.0" />
          </font>
@@ -127,7 +127,7 @@
             <String fx:value="font-montserrat-semiBold" />
          </styleClass>
       </Label>
-      <Label layoutX="462.0" layoutY="220.0" prefHeight="25.0" prefWidth="133.0" text="Test Accuracy" textFill="#707070bf">
+      <Label layoutX="462.0" layoutY="204.0" prefHeight="25.0" prefWidth="133.0" text="Test Accuracy" textFill="#707070bf">
          <font>
             <Font size="16.0" />
          </font>
@@ -136,7 +136,7 @@
             <String fx:value="font-montserrat-semiBold" />
          </styleClass>
       </Label>
-      <Label layoutX="25.0" layoutY="417.0" prefHeight="25.0" prefWidth="150.0" text="Tortuosity Factor" textFill="#707070bf" visible="false">
+      <Label layoutX="25.0" layoutY="401.0" prefHeight="25.0" prefWidth="150.0" text="Tortuosity Factor" textFill="#707070bf" visible="false">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
@@ -145,7 +145,7 @@
             <String fx:value="font-montserrat-semiBold" />
          </styleClass>
       </Label>
-      <Label layoutX="50.0" layoutY="413.0" prefHeight="23.0" prefWidth="170.0" text="Material type" textFill="#707070bf" visible="false">
+      <Label layoutX="50.0" layoutY="397.0" prefHeight="23.0" prefWidth="170.0" text="Material type" textFill="#707070bf" visible="false">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
@@ -173,14 +173,14 @@
             </ImageView>
          </graphic>
       </Button>
-      <Rectangle arcHeight="500.0" arcWidth="65.0" fill="#bfb9b900" height="57.0" layoutX="431.0" layoutY="57.0" stroke="#bfb9b9" strokeType="INSIDE" strokeWidth="2.0" width="327.0" />
-      <ImageView fx:id="imgdownarrow1" fitHeight="25.0" fitWidth="25.0" layoutX="703.0" layoutY="73.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="703.0">
+      <Rectangle arcHeight="500.0" arcWidth="65.0" fill="#bfb9b900" height="57.0" layoutX="431.0" layoutY="50.0" stroke="#bfb9b9" strokeType="INSIDE" strokeWidth="2.0" width="327.0" />
+      <ImageView fx:id="imgdownarrow1" fitHeight="25.0" fitWidth="25.0" layoutX="703.0" layoutY="66.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="703.0">
          <image>
             <Image url="@downarrow.png" />
          </image>
       </ImageView>
-      <ComboBox fx:id="cmboproject" layoutX="442.0" layoutY="59.0" prefHeight="55.0" prefWidth="309.0" promptText="sample profile" styleClass="cmbtrasperant" />
-      <Label layoutX="134.0" layoutY="68.0" prefHeight="30.0" prefWidth="302.0" text="Please select sample profile" textFill="#727272c4">
+      <ComboBox fx:id="cmboproject" layoutX="442.0" layoutY="52.0" prefHeight="55.0" prefWidth="309.0" promptText="sample profile" styleClass="cmbtrasperant" />
+      <Label layoutX="134.0" layoutY="64.0" prefHeight="30.0" prefWidth="302.0" text="Please select sample profile" textFill="#727272c4">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
@@ -189,7 +189,7 @@
             <String fx:value="col-gray70" />
          </styleClass>
       </Label>
-      <Label layoutX="29.0" layoutY="266.0" prefHeight="25.0" prefWidth="150.0" text="Lot Number" textFill="#707070bf">
+      <Label layoutX="29.0" layoutY="250.0" prefHeight="25.0" prefWidth="150.0" text="Lot Number" textFill="#707070bf">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
@@ -198,7 +198,7 @@
             <String fx:value="font-montserrat-semiBold" />
          </styleClass>
       </Label>
-      <Label fx:id="lblmaterialtype1" layoutX="211.0" layoutY="550.0" text="Test Method" textFill="#707070b8" visible="false">
+      <Label fx:id="lblmaterialtype1" layoutX="211.0" layoutY="534.0" text="Test Method" textFill="#707070b8" visible="false">
          <font>
             <Font size="16.0" />
          </font>
@@ -207,22 +207,22 @@
             <String fx:value="font-montserrat-semiBold" />
          </styleClass>
       </Label>
-      <RadioButton fx:id="bwd" layoutX="351.0" layoutY="550.0" mnemonicParsing="false" selected="true" styleClass="col-gray70" text="Wet - Up Dry Up " textFill="#797878e0" visible="false" AnchorPane.leftAnchor="350.0">
+      <RadioButton fx:id="bwd" layoutX="350.0" layoutY="534.0" mnemonicParsing="false" selected="true" styleClass="col-gray70" text="Wet - Up Dry Up " textFill="#797878e0" visible="false" AnchorPane.leftAnchor="350.0">
          <font>
             <Font name="Calibri" size="20.0" />
          </font>
       </RadioButton>
-      <RadioButton fx:id="dbw" layoutX="350.0" layoutY="596.0" mnemonicParsing="false" styleClass="col-gray70" text="Dry - Up Wet Up" textFill="#797878e0" visible="false" AnchorPane.leftAnchor="350.0">
+      <RadioButton fx:id="dbw" layoutX="350.0" layoutY="580.0" mnemonicParsing="false" styleClass="col-gray70" text="Dry - Up Wet Up" textFill="#797878e0" visible="false" AnchorPane.leftAnchor="350.0">
          <font>
             <Font name="Calibri" size="20.0" />
          </font>
       </RadioButton>
-      <RadioButton fx:id="bdw" layoutX="350.0" layoutY="643.0" mnemonicParsing="false" styleClass="col-gray70" text="Wet - Up Calculated Dry" textFill="#797878e0" visible="false" AnchorPane.leftAnchor="350.0">
+      <RadioButton fx:id="bdw" layoutX="350.0" layoutY="627.0" mnemonicParsing="false" styleClass="col-gray70" text="Wet - Up Calculated Dry" textFill="#797878e0" visible="false" AnchorPane.leftAnchor="350.0">
          <font>
             <Font name="Calibri" size="20.0" />
          </font>
       </RadioButton>
-      <Label layoutX="30.0" layoutY="217.0" prefHeight="25.0" prefWidth="150.0" text="Sample ID " textFill="#707070bf">
+      <Label layoutX="30.0" layoutY="201.0" prefHeight="25.0" prefWidth="150.0" text="Sample ID " textFill="#707070bf">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
@@ -231,7 +231,7 @@
             <String fx:value="font-montserrat-semiBold" />
          </styleClass>
       </Label>
-      <Label layoutX="463.0" layoutY="264.0" prefHeight="25.0" prefWidth="158.0" text="Data Stability Type" textFill="#707070bf">
+      <Label layoutX="463.0" layoutY="244.0" prefHeight="25.0" prefWidth="158.0" text="Data Stability Type" textFill="#707070bf">
          <font>
             <Font size="16.0" />
          </font>
@@ -240,24 +240,24 @@
             <String fx:value="font-montserrat-semiBold" />
          </styleClass>
       </Label>
-      <RadioButton fx:id="datas1" layoutX="637.0" layoutY="268.0" mnemonicParsing="false" selected="true" styleClass="col-gray70" text="Delay" textFill="#797878e0">
+      <RadioButton fx:id="datas1" layoutX="483.0" layoutY="281.0" mnemonicParsing="false" selected="true" styleClass="col-gray70" text="Delay" textFill="#797878e0" AnchorPane.topAnchor="281.0">
          <font>
             <Font name="Calibri" size="18.0" />
          </font>
       </RadioButton>
-      <RadioButton fx:id="datas2" layoutX="637.0" layoutY="309.0" mnemonicParsing="false" styleClass="col-gray70" text="Average" textFill="#797878e0">
+      <RadioButton fx:id="datas2" layoutX="598.0" layoutY="281.0" mnemonicParsing="false" styleClass="col-gray70" text="Average" textFill="#797878e0" AnchorPane.topAnchor="281.0">
          <font>
             <Font name="Calibri" size="18.0" />
          </font>
       </RadioButton>
-      <RadioButton fx:id="datas3" layoutX="637.0" layoutY="350.0" mnemonicParsing="false" styleClass="col-gray70" text="Method-3" textFill="#797878e0">
+      <RadioButton fx:id="datas3" layoutX="727.0" layoutY="281.0" mnemonicParsing="false" styleClass="col-gray70" text="Method-3" textFill="#797878e0" AnchorPane.topAnchor="281.0">
          <font>
             <Font name="Calibri" size="18.0" />
          </font>
       </RadioButton>
-      <Line layoutX="89.0" layoutY="462.0" startX="700.0" stroke="#0e3c87" AnchorPane.leftAnchor="88.5" AnchorPane.topAnchor="461.5" />
-      <Rectangle arcHeight="60.0" arcWidth="40.0" fill="#1f93ff00" height="40.0" layoutX="194.0" layoutY="494.0" stroke="#968f8f" strokeType="INSIDE" width="110.0" />
-      <TextField fx:id="pendp2" layoutX="202.0" layoutY="493.0" prefHeight="40.0" prefWidth="95.0">
+      <Line layoutX="89.0" layoutY="444.5" startX="700.0" stroke="#0e3c87" AnchorPane.leftAnchor="88.5" AnchorPane.topAnchor="444.0" />
+      <Rectangle arcHeight="60.0" arcWidth="40.0" fill="#1f93ff00" height="40.0" layoutX="200.0" layoutY="456.0" stroke="#968f8f" strokeType="INSIDE" width="110.0" />
+      <TextField fx:id="pendp2" layoutX="208.0" layoutY="455.0" prefHeight="40.0" prefWidth="95.0">
          <font>
             <Font size="18.0" />
          </font>
@@ -266,8 +266,8 @@
             <String fx:value="col-gray70" />
          </styleClass>
       </TextField>
-      <Rectangle arcHeight="40.0" arcWidth="40.0" fill="#1f93ff00" height="40.0" layoutX="360.0" layoutY="494.0" stroke="#968f8f" strokeType="INSIDE" width="110.0" />
-      <TextField fx:id="pendp1" layoutX="360.0" layoutY="494.0" prefHeight="40.0" prefWidth="95.0">
+      <Rectangle arcHeight="40.0" arcWidth="40.0" fill="#1f93ff00" height="40.0" layoutX="366.0" layoutY="456.0" stroke="#968f8f" strokeType="INSIDE" width="110.0" />
+      <TextField fx:id="pendp1" layoutX="366.0" layoutY="456.0" prefHeight="40.0" prefWidth="95.0">
          <font>
             <Font size="18.0" />
          </font>
@@ -276,18 +276,18 @@
             <String fx:value="col-gray70" />
          </styleClass>
       </TextField>
-      <Label layoutX="433.0" layoutY="500.0" styleClass="col-gray70" text="psi">
+      <Label layoutX="439.0" layoutY="462.0" styleClass="col-gray70" text="psi">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label layoutX="326.0" layoutY="501.0" styleClass="col-gray70" text="to">
+      <Label layoutX="332.0" layoutY="463.0" styleClass="col-gray70" text="to">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Rectangle arcHeight="60.0" arcWidth="40.0" fill="#1f93ff00" height="40.0" layoutX="183.0" layoutY="208.0" stroke="#968f8f" strokeType="INSIDE" width="230.0" />
-      <TextField fx:id="psid" layoutX="191.0" layoutY="207.0" prefHeight="40.0" prefWidth="210.0">
+      <Rectangle arcHeight="60.0" arcWidth="40.0" fill="#1f93ff00" height="40.0" layoutX="183.0" layoutY="192.0" stroke="#968f8f" strokeType="INSIDE" width="230.0" />
+      <TextField fx:id="psid" layoutX="191.0" layoutY="191.0" prefHeight="40.0" prefWidth="210.0">
          <font>
             <Font size="18.0" />
          </font>
@@ -296,8 +296,8 @@
             <String fx:value="col-gray70" />
          </styleClass>
       </TextField>
-      <Rectangle arcHeight="60.0" arcWidth="40.0" fill="#1f93ff00" height="40.0" layoutX="183.0" layoutY="258.0" stroke="#968f8f" strokeType="INSIDE" width="230.0" />
-      <TextField fx:id="lotno" layoutX="191.0" layoutY="257.0" prefHeight="40.0" prefWidth="210.0">
+      <Rectangle arcHeight="60.0" arcWidth="40.0" fill="#1f93ff00" height="40.0" layoutX="183.0" layoutY="242.0" stroke="#968f8f" strokeType="INSIDE" width="230.0" />
+      <TextField fx:id="lotno" layoutX="191.0" layoutY="241.0" prefHeight="40.0" prefWidth="210.0">
          <font>
             <Font size="18.0" />
          </font>
@@ -306,29 +306,29 @@
             <String fx:value="col-gray70" />
          </styleClass>
       </TextField>
-      <Rectangle arcHeight="60.0" arcWidth="40.0" fill="#bfb9b900" height="40.0" layoutX="184.0" layoutY="309.0" stroke="#bfb9b9" strokeType="INSIDE" width="230.0" />
-      <ImageView fx:id="imgdownarrow11" fitHeight="18.0" fitWidth="18.0" layoutX="360.0" layoutY="320.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="390.0">
+      <Rectangle arcHeight="60.0" arcWidth="40.0" fill="#bfb9b900" height="40.0" layoutX="184.0" layoutY="293.0" stroke="#bfb9b9" strokeType="INSIDE" width="230.0" />
+      <ImageView fx:id="imgdownarrow11" fitHeight="18.0" fitWidth="18.0" layoutX="390.0" layoutY="304.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="390.0">
          <image>
             <Image url="@downarrow.png" />
          </image>
       </ImageView>
-      <ComboBox fx:id="cmbtesttrial" layoutX="190.0" layoutY="304.0" minHeight="35.0" prefHeight="45.0" prefWidth="222.0" promptText="Test trial" styleClass="cmbtrasperant" />
-      <Rectangle arcHeight="500.0" arcWidth="40.0" fill="#bfb9b900" height="40.0" layoutX="595.0" layoutY="209.0" stroke="#bfb9b9" strokeType="INSIDE" visible="false" width="210.0" />
-      <ImageView fx:id="imgdownarrow111" fitHeight="18.0" fitWidth="18.0" layoutX="767.0" layoutY="220.0" pickOnBounds="true" preserveRatio="true" visible="false" AnchorPane.leftAnchor="767.0">
+      <ComboBox fx:id="cmbtesttrial" layoutX="190.0" layoutY="288.0" minHeight="35.0" prefHeight="45.0" prefWidth="222.0" promptText="Test trial" styleClass="cmbtrasperant" />
+      <Rectangle arcHeight="500.0" arcWidth="40.0" fill="#bfb9b900" height="40.0" layoutX="595.0" layoutY="193.0" stroke="#bfb9b9" strokeType="INSIDE" visible="false" width="210.0" />
+      <ImageView fx:id="imgdownarrow111" fitHeight="18.0" fitWidth="18.0" layoutX="767.0" layoutY="204.0" pickOnBounds="true" preserveRatio="true" visible="false" AnchorPane.leftAnchor="767.0">
          <image>
             <Image url="@downarrow.png" />
          </image>
       </ImageView>
-      <ComboBox fx:id="cmbbptthresold" layoutX="603.0" layoutY="204.0" minHeight="35.0" prefHeight="45.0" prefWidth="190.0" promptText="BPT Thresold" styleClass="cmbtrasperant" visible="false" AnchorPane.leftAnchor="603.0" />
-      <Rectangle arcHeight="500.0" arcWidth="40.0" fill="#bfb9b900" height="40.0" layoutX="185.0" layoutY="360.0" stroke="#bfb9b9" strokeType="INSIDE" width="230.0" />
-      <ImageView fx:id="imgdownarrow112" fitHeight="18.0" fitWidth="18.0" layoutX="361.0" layoutY="371.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="390.0">
+      <ComboBox fx:id="cmbbptthresold" layoutX="603.0" layoutY="188.0" minHeight="35.0" prefHeight="45.0" prefWidth="190.0" promptText="BPT Thresold" styleClass="cmbtrasperant" visible="false" AnchorPane.leftAnchor="603.0" />
+      <Rectangle arcHeight="500.0" arcWidth="40.0" fill="#bfb9b900" height="40.0" layoutX="185.0" layoutY="344.0" stroke="#bfb9b9" strokeType="INSIDE" width="230.0" />
+      <ImageView fx:id="imgdownarrow112" fitHeight="18.0" fitWidth="18.0" layoutX="390.0" layoutY="355.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="390.0">
          <image>
             <Image url="@downarrow.png" />
          </image>
       </ImageView>
-      <ComboBox fx:id="cmbfluid" layoutX="186.0" layoutY="355.0" minHeight="35.0" prefHeight="45.0" prefWidth="230.0" promptText="Gas viscosity" styleClass="cmbtrasperant" />
-      <Rectangle arcHeight="60.0" arcWidth="40.0" fill="#1f93ff00" height="40.0" layoutX="185.0" layoutY="412.0" stroke="#968f8f" strokeType="INSIDE" visible="false" width="230.0" />
-      <TextField fx:id="ptfact" layoutX="193.0" layoutY="411.0" prefHeight="40.0" prefWidth="222.0" visible="false">
+      <ComboBox fx:id="cmbfluid" layoutX="186.0" layoutY="339.0" minHeight="35.0" prefHeight="45.0" prefWidth="230.0" promptText="Gas viscosity" styleClass="cmbtrasperant" />
+      <Rectangle arcHeight="60.0" arcWidth="40.0" fill="#1f93ff00" height="40.0" layoutX="185.0" layoutY="396.0" stroke="#968f8f" strokeType="INSIDE" visible="false" width="230.0" />
+      <TextField fx:id="ptfact" layoutX="193.0" layoutY="395.0" prefHeight="40.0" prefWidth="222.0" visible="false">
          <font>
             <Font size="18.0" />
          </font>
@@ -337,7 +337,7 @@
             <String fx:value="col-gray70" />
          </styleClass>
       </TextField>
-      <Button fx:id="bptbtnsub" layoutX="578.0" layoutY="258.0" maxWidth="56.0" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="56.0" styleClass="cmbtrasperant" text="-" textFill="#727376" visible="false">
+      <Button fx:id="bptbtnsub" layoutX="578.0" layoutY="242.0" maxWidth="56.0" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="56.0" styleClass="cmbtrasperant" text="-" textFill="#727376" visible="false">
          <font>
             <Font name="System Bold" size="30.0" />
          </font>
@@ -352,7 +352,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button fx:id="bptbtnplus" layoutX="745.0" layoutY="259.0" maxWidth="56.0" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="56.0" styleClass="cmbtrasperant" text="+" textFill="#727376" visible="false">
+      <Button fx:id="bptbtnplus" layoutX="745.0" layoutY="243.0" maxWidth="56.0" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="56.0" styleClass="cmbtrasperant" text="+" textFill="#727376" visible="false">
          <font>
             <Font name="System Bold" size="30.0" />
          </font>
@@ -367,8 +367,8 @@
             </ImageView>
          </graphic>
       </Button>
-      <Rectangle arcHeight="60.0" arcWidth="40.0" fill="#1f93ff00" height="40.0" layoutX="636.0" layoutY="259.0" stroke="#968f8f" strokeType="INSIDE" visible="false" width="110.0" />
-      <TextField fx:id="pbptacc" alignment="CENTER" editable="false" layoutX="644.0" layoutY="258.0" prefHeight="40.0" prefWidth="95.0" visible="false">
+      <Rectangle arcHeight="60.0" arcWidth="40.0" fill="#1f93ff00" height="40.0" layoutX="636.0" layoutY="243.0" stroke="#968f8f" strokeType="INSIDE" visible="false" width="110.0" />
+      <TextField fx:id="pbptacc" alignment="CENTER" editable="false" layoutX="644.0" layoutY="242.0" prefHeight="40.0" prefWidth="95.0" visible="false">
          <font>
             <Font size="18.0" />
          </font>
@@ -377,7 +377,7 @@
             <String fx:value="col-gray70" />
          </styleClass>
       </TextField>
-      <Button fx:id="testaccbtnsub" layoutX="583.0" layoutY="211.0" maxWidth="56.0" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="56.0" styleClass="cmbtrasperant" text="-" textFill="#727376">
+      <Button fx:id="testaccbtnsub" layoutX="583.0" layoutY="195.0" maxWidth="56.0" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="56.0" styleClass="cmbtrasperant" text="-" textFill="#727376">
          <font>
             <Font name="System Bold" size="30.0" />
          </font>
@@ -392,7 +392,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button fx:id="testaccbtnplus" layoutX="750.0" layoutY="211.0" maxWidth="56.0" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="56.0" styleClass="cmbtrasperant" text="+" textFill="#727376">
+      <Button fx:id="testaccbtnplus" layoutX="750.0" layoutY="195.0" maxWidth="56.0" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="56.0" styleClass="cmbtrasperant" text="+" textFill="#727376">
          <font>
             <Font name="System Bold" size="30.0" />
          </font>
@@ -407,8 +407,8 @@
             </ImageView>
          </graphic>
       </Button>
-      <Rectangle arcHeight="60.0" arcWidth="40.0" fill="#1f93ff00" height="40.0" layoutX="641.0" layoutY="212.0" stroke="#968f8f" strokeType="INSIDE" width="110.0" />
-      <TextField fx:id="pporoacc" alignment="CENTER" editable="false" layoutX="649.0" layoutY="211.0" prefHeight="40.0" prefWidth="95.0">
+      <Rectangle arcHeight="60.0" arcWidth="40.0" fill="#1f93ff00" height="40.0" layoutX="641.0" layoutY="196.0" stroke="#968f8f" strokeType="INSIDE" width="110.0" />
+      <TextField fx:id="pporoacc" alignment="CENTER" editable="false" layoutX="649.0" layoutY="195.0" prefHeight="40.0" prefWidth="95.0">
          <font>
             <Font size="18.0" />
          </font>
@@ -417,7 +417,7 @@
             <String fx:value="col-gray70" />
          </styleClass>
       </TextField>
-      <Button fx:id="datasbtnsub" layoutX="612.0" layoutY="389.0" maxWidth="56.0" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="56.0" styleClass="cmbtrasperant" text="-" textFill="#727376">
+      <Button fx:id="datasbtnsub" layoutX="583.0" layoutY="321.0" maxWidth="56.0" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="56.0" styleClass="cmbtrasperant" text="-" textFill="#727376">
          <font>
             <Font name="System Bold" size="30.0" />
          </font>
@@ -432,7 +432,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button fx:id="datasbtnplus" layoutX="779.0" layoutY="388.0" maxWidth="56.0" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="56.0" styleClass="cmbtrasperant" text="+" textFill="#727376">
+      <Button fx:id="datasbtnplus" layoutX="750.0" layoutY="320.0" maxWidth="56.0" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="56.0" styleClass="cmbtrasperant" text="+" textFill="#727376">
          <font>
             <Font name="System Bold" size="30.0" />
          </font>
@@ -447,8 +447,8 @@
             </ImageView>
          </graphic>
       </Button>
-      <Rectangle arcHeight="60.0" arcWidth="40.0" fill="#1f93ff00" height="40.0" layoutX="670.0" layoutY="389.0" stroke="#968f8f" strokeType="INSIDE" width="110.0" />
-      <TextField fx:id="txtdatastability" alignment="CENTER" editable="false" layoutX="678.0" layoutY="388.0" prefHeight="40.0" prefWidth="95.0">
+      <Rectangle arcHeight="60.0" arcWidth="40.0" fill="#1f93ff00" height="40.0" layoutX="641.0" layoutY="321.0" stroke="#968f8f" strokeType="INSIDE" width="110.0" />
+      <TextField fx:id="txtdatastability" alignment="CENTER" editable="false" layoutX="649.0" layoutY="320.0" prefHeight="40.0" prefWidth="95.0">
          <font>
             <Font size="18.0" />
          </font>
@@ -457,12 +457,12 @@
             <String fx:value="col-gray70" />
          </styleClass>
       </TextField>
-      <Label layoutX="270.0" layoutY="501.0" styleClass="col-gray70" text="psi">
+      <Label layoutX="276.0" layoutY="463.0" styleClass="col-gray70" text="psi">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label layoutX="456.0" layoutY="395.0" prefHeight="25.0" prefWidth="158.0" text="Data Stability Type" textFill="#707070bf">
+      <Label layoutX="456.0" layoutY="328.0" prefHeight="25.0" prefWidth="130.0" text="Stability Value" textFill="#707070bf">
          <font>
             <Font size="16.0" />
          </font>
@@ -471,7 +471,7 @@
             <String fx:value="font-montserrat-semiBold" />
          </styleClass>
       </Label>
-      <Label layoutX="29.0" layoutY="415.0" prefHeight="25.0" prefWidth="150.0" text="Thickness" textFill="#707070bf">
+      <Label layoutX="29.0" layoutY="399.0" prefHeight="25.0" prefWidth="150.0" text="Thickness" textFill="#707070bf">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
@@ -480,8 +480,8 @@
             <String fx:value="font-montserrat-semiBold" />
          </styleClass>
       </Label>
-      <Rectangle arcHeight="60.0" arcWidth="40.0" fill="#1f93ff00" height="40.0" layoutX="186.0" layoutY="409.0" stroke="#968f8f" strokeType="INSIDE" width="230.0" />
-      <TextField fx:id="thincness" layoutX="194.0" layoutY="408.0" prefHeight="40.0" prefWidth="210.0">
+      <Rectangle arcHeight="60.0" arcWidth="40.0" fill="#1f93ff00" height="40.0" layoutX="186.0" layoutY="393.0" stroke="#968f8f" strokeType="INSIDE" width="230.0" />
+      <TextField fx:id="thincness" layoutX="194.0" layoutY="392.0" prefHeight="40.0" prefWidth="210.0">
          <font>
             <Font size="18.0" />
          </font>
@@ -490,22 +490,22 @@
             <String fx:value="col-gray70" />
          </styleClass>
       </TextField>
-      <RadioButton fx:id="rdsmall" layoutX="190.0" layoutY="548.0" mnemonicParsing="false" selected="true" styleClass="col-gray70" text="Small" textFill="#797878e0">
+      <RadioButton fx:id="rdsmall" layoutX="487.0" layoutY="400.0" mnemonicParsing="false" selected="true" styleClass="col-gray70" text="Small" textFill="#797878e0">
          <font>
             <Font name="Calibri" size="20.0" />
          </font>
       </RadioButton>
-      <RadioButton fx:id="rdmedium" layoutX="297.0" layoutY="550.0" mnemonicParsing="false" styleClass="col-gray70" text="Medium" textFill="#797878e0">
+      <RadioButton fx:id="rdmedium" layoutX="594.0" layoutY="402.0" mnemonicParsing="false" styleClass="col-gray70" text="Medium" textFill="#797878e0">
          <font>
             <Font name="Calibri" size="20.0" />
          </font>
       </RadioButton>
-      <RadioButton fx:id="rdlarge" layoutX="434.0" layoutY="551.0" mnemonicParsing="false" styleClass="col-gray70" text="Large" textFill="#797878e0">
+      <RadioButton fx:id="rdlarge" layoutX="731.0" layoutY="403.0" mnemonicParsing="false" styleClass="col-gray70" text="Large" textFill="#797878e0">
          <font>
             <Font name="Calibri" size="20.0" />
          </font>
       </RadioButton>
-      <Label layoutX="37.0" layoutY="547.0" prefHeight="25.0" prefWidth="130.0" text="Sample Plate" textFill="#707070bf">
+      <Label layoutX="466.0" layoutY="364.0" prefHeight="25.0" prefWidth="130.0" text="Sample Plate" textFill="#707070bf">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
@@ -514,7 +514,7 @@
             <String fx:value="font-montserrat-semiBold" />
          </styleClass>
       </Label>
-      <Label layoutX="36.0" layoutY="501.0" prefHeight="25.0" prefWidth="130.0" text="Test Pressure" textFill="#707070bf">
+      <Label layoutX="42.0" layoutY="463.0" prefHeight="25.0" prefWidth="130.0" text="Test Pressure" textFill="#707070bf">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
@@ -523,5 +523,108 @@
             <String fx:value="font-montserrat-semiBold" />
          </styleClass>
       </Label>
+      <RadioButton fx:id="rdgasper" layoutX="171.0" layoutY="522.0" mnemonicParsing="false" selected="true" styleClass="col-gray70" text="Gas Permeability" textFill="#797878e0" AnchorPane.leftAnchor="171.0" AnchorPane.topAnchor="516.0">
+         <font>
+            <Font name="Calibri" size="20.0" />
+         </font>
+      </RadioButton>
+      <RadioButton fx:id="rdflowstep" layoutX="354.0" layoutY="525.0" mnemonicParsing="false" styleClass="col-gray70" text="Flow Step" textFill="#797878e0" AnchorPane.leftAnchor="354.0" AnchorPane.topAnchor="516.0">
+         <font>
+            <Font name="Calibri" size="20.0" />
+         </font>
+      </RadioButton>
+      <RadioButton fx:id="rdpressurdk" layoutX="489.0" layoutY="526.0" mnemonicParsing="false" styleClass="col-gray70" text="Pressure DK" textFill="#797878e0" AnchorPane.topAnchor="516.0">
+         <font>
+            <Font name="Calibri" size="20.0" />
+         </font>
+      </RadioButton>
+      <Label layoutX="42.0" layoutY="516.0" prefHeight="25.0" prefWidth="130.0" text="Sample Plate" textFill="#707070bf" AnchorPane.topAnchor="516.0">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+         <styleClass>
+            <String fx:value="col-gray70" />
+            <String fx:value="font-montserrat-semiBold" />
+         </styleClass>
+      </Label>
+      <BorderPane fx:id="ancflowtype" layoutX="35.0" layoutY="553.0" prefHeight="94.0" prefWidth="625.0" style="-fx-border-color: gray; -fx-border-radius: 5; -fx-background-color: white;" visible="false" AnchorPane.leftAnchor="35.0" AnchorPane.topAnchor="553.0">
+         <center>
+            <AnchorPane prefHeight="73.0" prefWidth="416.0">
+               <children>
+                  <Label layoutX="19.0" layoutY="8.0" styleClass="col-gray70" text="Add Flow Step">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                  </Label>
+                  <Rectangle arcHeight="60.0" arcWidth="55.0" fill="#1f93ff00" height="50.0" layoutX="15.0" layoutY="37.0" stroke="#968f8f" strokeType="INSIDE" width="130.0" />
+                  <TextField fx:id="txtflowstep" layoutX="15.0" layoutY="37.0" prefHeight="50.0" prefWidth="118.0">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <styleClass>
+                        <String fx:value="cmbtrasperant" />
+                        <String fx:value="col-gray70" />
+                     </styleClass>
+                  </TextField>
+                  <Button fx:id="btnaddflow" layoutX="153.0" layoutY="43.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="74.0" styleClass="linear-grad-to-bottom-right" text="Add" textFill="WHITE" />
+                  <ListView fx:id="listflowstep" layoutX="232.0" layoutY="12.0" orientation="HORIZONTAL" prefHeight="67.0" prefWidth="293.0" />
+                  <Button fx:id="btnremoveflow" layoutX="532.0" layoutY="43.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="74.0" styleClass="linear-grad-to-bottom-right" text="Remove" textFill="WHITE" />
+               </children>
+            </AnchorPane>
+         </center>
+      </BorderPane>
+      <BorderPane fx:id="ancpressuredk" layoutX="45.0" layoutY="563.0" prefHeight="94.0" prefWidth="625.0" style="-fx-border-color: gray; -fx-border-radius: 5; -fx-background-color: white;" visible="false" AnchorPane.leftAnchor="35.0" AnchorPane.topAnchor="553.0">
+         <center>
+            <AnchorPane prefHeight="73.0" prefWidth="416.0">
+               <children>
+                  <Label layoutX="45.0" layoutY="8.0" styleClass="col-gray70" text="Test Pressure">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                  </Label>
+                  <Rectangle arcHeight="60.0" arcWidth="55.0" fill="#1f93ff00" height="50.0" layoutX="15.0" layoutY="37.0" stroke="#968f8f" strokeType="INSIDE" width="158.0" />
+                  <TextField fx:id="txtdkpressure" alignment="CENTER" layoutX="15.0" layoutY="37.0" prefHeight="50.0" prefWidth="157.0">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <styleClass>
+                        <String fx:value="cmbtrasperant" />
+                        <String fx:value="col-gray70" />
+                     </styleClass>
+                  </TextField>
+                  <Label layoutX="274.0" layoutY="6.0" styleClass="col-gray70" text="Hold Time">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                  </Label>
+                  <Rectangle arcHeight="60.0" arcWidth="55.0" fill="#1f93ff00" height="50.0" layoutX="236.0" layoutY="35.0" stroke="#968f8f" strokeType="INSIDE" width="158.0" />
+                  <TextField fx:id="txtdkholdtime" alignment="CENTER" layoutX="236.0" layoutY="35.0" prefHeight="50.0" prefWidth="157.0">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <styleClass>
+                        <String fx:value="cmbtrasperant" />
+                        <String fx:value="col-gray70" />
+                     </styleClass>
+                  </TextField>
+                  <Label layoutX="480.0" layoutY="6.0" styleClass="col-gray70" text="Data Interval">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                  </Label>
+                  <Rectangle arcHeight="60.0" arcWidth="55.0" fill="#1f93ff00" height="50.0" layoutX="450.0" layoutY="35.0" stroke="#968f8f" strokeType="INSIDE" width="158.0" />
+                  <TextField fx:id="txtdkdatainterval" alignment="CENTER" layoutX="450.0" layoutY="35.0" prefHeight="50.0" prefWidth="157.0">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <styleClass>
+                        <String fx:value="cmbtrasperant" />
+                        <String fx:value="col-gray70" />
+                     </styleClass>
+                  </TextField>
+               </children>
+            </AnchorPane>
+         </center>
+      </BorderPane>
    </children>
 </AnchorPane>

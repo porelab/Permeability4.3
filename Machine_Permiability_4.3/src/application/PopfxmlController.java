@@ -1,6 +1,7 @@
 package application;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -18,6 +19,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Toggle;
@@ -25,15 +27,20 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
 import toast.MyDialoug;
 import toast.Openscreen;
+import toast.Toast;
 import ConfigurationPart.NConfigurePageController;
 
 public class PopfxmlController implements Initializable {
+	
+	static List<Integer> flowsteps = new ArrayList<Integer>();
+	static List<String> test3data = new ArrayList<String>();
 
 	@FXML
 	AnchorPane root1;
@@ -71,15 +78,35 @@ public class PopfxmlController implements Initializable {
 	@FXML
 	private RadioButton rdlarge;
 
-	static String selectedrad6 = "", selectedrad7 = "", selectedrad66 = "";
+	static String selectedrad6 = "", selectedrad7 = "", selectedrad66 = "",selectedradttype="";
 
-	static ToggleGroup tgb6, tgb66, tgb7;
+	static ToggleGroup tgb6, tgb66, tgb7,tgbttype;
 
 	@FXML
 	private Button testaccbtnsub, testaccbtnplus, datasbtnsub, datasbtnplus,
 			bptbtnsub, bptbtnplus;
 	
 	String splate;
+	
+/*ADD Test Type*/
+	 @FXML
+	    private RadioButton rdgasper,rdflowstep,rdpressurdk;
+
+	     @FXML
+	    private BorderPane ancflowtype,ancpressuredk;
+
+	    @FXML
+	    private TextField txtflowstep,txtdkpressure,txtdkholdtime,txtdkdatainterval;
+
+	    @FXML
+	    private Button btnaddflow;
+
+	    @FXML
+		private ListView<String> listflowstep;
+
+	    @FXML
+	    private Button btnremoveflow;
+
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -92,6 +119,7 @@ public class PopfxmlController implements Initializable {
 		LoadProject();
 		setSamplePlate();
 		setkeyboardmode();
+		selectTesttype();
 
 		if (NConfigurePageController.bolkey) {
 			setClickkeyboard();
@@ -121,6 +149,46 @@ public class PopfxmlController implements Initializable {
 
 			}
 		});
+		
+		btnremoveflow.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent event) {
+
+				try {
+
+					int index = listflowstep.getSelectionModel().getSelectedIndex();
+					listflowstep.getItems().remove(index);
+					flowsteps.remove(index);
+
+				} catch (Exception d) {
+					System.out.println("NO seletion");
+				}
+
+			}
+		});
+
+		
+		btnaddflow.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent event) {
+				// TODO Auto-generated method stub
+
+				addDataToList();
+
+			}
+		});
+
+		txtflowstep.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				addDataToList();
+			}
+		});
+		
 
 	}
 
@@ -151,8 +219,7 @@ public class PopfxmlController implements Initializable {
 		// System.out.println("Claidifcation"+alldata.get(0).get(3));
 		String splate = "" + alldata.get(0).get(11);
 		
-		System.out.println("Project data splate"+splate);
-
+	
 		// Industry name //
 		psid.setText(alldata.get(0).get(0));
 		ptfact.setText(alldata.get(0).get(10));
@@ -174,6 +241,14 @@ public class PopfxmlController implements Initializable {
 
 		String stabilitytype = "" + alldata.get(0).get(20);
 		Myapp.accstability = (accstability);
+		
+		
+		/*Test Type */
+		String testtype = "" + alldata.get(0).get(22);
+		String testdata = "" + alldata.get(0).get(23);
+		
+
+		
 
 		// Stability Type
 
@@ -255,16 +330,103 @@ public class PopfxmlController implements Initializable {
 		else if (splate.equals("Medium")) {
 			rdmedium.selectedProperty().set(true);
 			Myapp.splate = "Medium";
-
 		}
 
 		else {
 			rdlarge.selectedProperty().set(true);
 			Myapp.splate = "Large";
+		}
+		
+		/*Test Type*/
+		
+		if (testtype.equals("1")) {
+			rdgasper.selectedProperty().set(true);
+			Myapp.testtype = 1;
+
+		}
+
+		else if (testtype.equals("2")) {
+			rdflowstep.selectedProperty().set(true);
+			Myapp.testtype = 2;
+			ancflowtype.setVisible(true);
+			ancpressuredk.setVisible(false);
+			flowsteps.clear();
+			flowsteps.addAll(getListFromString(testdata));
+			listflowstep.getItems().clear();
+			for (int i = 0; i < flowsteps.size(); i++) {
+				listflowstep.getItems().add(flowsteps.get(i) + "");
+
+			}
+			Myapp.steppoints.clear();
+			Myapp.steppoints.addAll(flowsteps);
+		}
+
+		else {
+			rdpressurdk.selectedProperty().set(true);
+			Myapp.testtype = 3;
+			ancpressuredk.setVisible(true);
+			ancflowtype.setVisible(false);
+			test3data.clear();
+			test3data = getStringListFromString(testdata);
+			
+			txtdkdatainterval.setText(test3data.get(0) + "");
+			txtdkholdtime.setText(test3data.get(1) + "");
+			txtdkpressure.setText(test3data.get(2) + "");
 
 		}
 
 	}
+	
+	
+	List<String> getStringListFromString(String d) {
+
+		List<String> dd = new ArrayList<String>();
+
+		d = d.substring(1, d.length() - 1);
+		String[] s = d.split(",");
+		for (int i = 0; i < s.length; i++) {
+			dd.add(s[i]);
+		}
+
+		return dd;
+
+	}
+
+	List<Integer> getListFromString(String d) {
+
+		List<Integer> dd = new ArrayList<Integer>();
+		d=d.trim();
+		d=d.replace(" ", "");
+		d = d.substring(1, d.length() - 1);
+		String[] s = d.split(",");
+		for (int i = 0; i < s.length; i++) {
+
+			dd.add(Integer.parseInt(s[i]));
+
+		}
+		return dd;
+
+	}
+
+	void addDataToList() {
+
+		try {
+
+			int vl = Integer.parseInt(txtflowstep.getText());
+			if (vl > 0) {
+				flowsteps.add(vl);
+				listflowstep.getItems().add(vl + "");
+				txtflowstep.setText("");
+
+			} else {
+				System.out.println("Not added");
+			}
+
+		} catch (Exception e) {
+			System.out.println("Not added");
+		}
+	}
+	
 
 	void LoadProject() {
 
@@ -340,8 +502,6 @@ public class PopfxmlController implements Initializable {
 				} else {
 					Myapp.testsequence = "WUPDCALCULATED";
 				}
-
-				System.out.println("Select : " + selectedrad6);
 			}
 		});
 
@@ -553,7 +713,7 @@ public class PopfxmlController implements Initializable {
 		Myapp.fluidvalue = "" + s[1];
 		 splate =alldata.get(0).get(11);
 		Myapp.splate = alldata.get(0).get(11);;
-		System.out.println("Last Data in quick test splate "+Myapp.splate);
+
 		Myapp.thikness = alldata.get(0).get(12);
 		Myapp.materialtype = alldata.get(0).get(13);
 		Myapp.endpress = (alldata.get(0).get(14));
@@ -569,6 +729,14 @@ public class PopfxmlController implements Initializable {
 		String accstability = (alldata.get(0).get(21));
 		Myapp.accstability = "" + accstability;
 
+		/*Test Typr*/
+		/*Test Type */
+		String testtype1 = "" + alldata.get(0).get(22);
+		String testdata1 = "" + alldata.get(0).get(23);
+		
+
+		
+		
 		valbpt = (int) (Double.parseDouble(Myapp.accbpt));
 		valtestacc = (int) (Double.parseDouble(Myapp.accstep));
 		valdatas = (int) (Double.parseDouble(Myapp.accstability));
@@ -630,12 +798,98 @@ public class PopfxmlController implements Initializable {
 			Myapp.splate = "Large";
 
 		}
+		
+
+		
+/*Test Type*/
+
+		if (testtype1.equals("1")) {
+			rdgasper.selectedProperty().set(true);
+			Myapp.testtype = 1;
+//			System.out.println("Test Typr........1.."+Myapp.testtype);			
+
+		}
+
+		else if (testtype1.equals("2")) {
+			Myapp.testtype = 2;
+			
+			rdflowstep.selectedProperty().set(true);
+			ancflowtype.setVisible(true);
+			ancpressuredk.setVisible(false);
+			flowsteps.clear();
+			flowsteps.addAll(getListFromString(testdata1));
+			listflowstep.getItems().clear();
+			for (int i = 0; i < flowsteps.size(); i++) {
+				listflowstep.getItems().add(flowsteps.get(i) + "");
+
+			}
+			Myapp.steppoints.clear();
+			Myapp.steppoints.addAll(flowsteps);
+			System.out.println("Test Typr........2.."+Myapp.testtype);			
+
+		}
+
+		else {
+			Myapp.testtype = 3;
+			
+			rdpressurdk.selectedProperty().set(true);
+			ancpressuredk.setVisible(true);
+			ancflowtype.setVisible(false);
+			test3data.clear();
+			test3data = getStringListFromString(testdata1);
+			
+			txtdkdatainterval.setText(test3data.get(0) + "");
+			txtdkholdtime.setText(test3data.get(1) + "");
+			txtdkpressure.setText(test3data.get(2) + "");
+			System.out.println("Test Typr........3.."+Myapp.testtype);			
+
+		}
 
 
 	}
 
 	void teststart() {
+		
+		
+		if ((Myapp.testtype) == 1) {
 
+			setSaveDat();
+
+		} else if ((Myapp.testtype) == 2) {
+
+			if (flowsteps.size() > 5) {
+				Myapp.steppoints.addAll(flowsteps);
+				setSaveDat();
+			} else {
+				System.out.println("minimum 5 steps");
+			}
+
+		} else if ((Myapp.testtype) == 3) {
+			if (!txtdkdatainterval.getText().trim().equals("") && !txtdkholdtime.getText().trim().equals("")
+					&& !txtdkpressure.getText().trim().equals("")) {
+				Myapp.dkdatainterval = "" + txtdkdatainterval.getText();
+				Myapp.dkholdtime = "" + txtdkholdtime.getText();
+				Myapp.dkpressure = "" + txtdkpressure.getText();
+
+				test3data.add(Myapp.dkdatainterval);
+				test3data.add(Myapp.dkholdtime);
+				test3data.add(Myapp.dkpressure);
+				
+				
+				System.out.println("LAst------->"+txtdkpressure);
+
+				setSaveDat();
+
+			} else {
+				Toast.makeText(Main.mainstage, "Please enter PressureDK Details.", 1500, 500, 500);
+			}
+
+		}
+		
+	}
+	
+	void setSaveDat() 
+	{
 		Myapp.endpress = pendp1.getText();
 		Myapp.lotnumber = lotno.getText();
 		Myapp.startpress = pendp2.getText();
@@ -646,10 +900,12 @@ public class PopfxmlController implements Initializable {
 		Myapp.thresold = cmbbptthresold.getSelectionModel().getSelectedItem();
 		Myapp.thikness = thincness.getText();
 		MyDialoug.closeDialoug();
+		
+			String[] s = cmbfluid.getValue().toString().split(":");
+			Myapp.fluidname = "" + s[0];
+			Myapp.fluidvalue = "" + s[1];
+		
 		Openscreen.open("/userinput/Nlivetest.fxml");
-		Myapp.splate=splate;
-		System.out.println("Splate name"+Myapp.splate);
-
 	}
 
 	void setkeyboardmode() {
@@ -853,5 +1109,46 @@ public class PopfxmlController implements Initializable {
 				});
 
 	}
+	
+	void selectTesttype() {
+		tgbttype = new ToggleGroup();
+
+		rdgasper.setToggleGroup(tgbttype);
+		rdgasper.setUserData("1");
+		rdflowstep.setToggleGroup(tgbttype);
+		rdflowstep.setUserData("2");
+		rdpressurdk.setToggleGroup(tgbttype);
+		rdpressurdk.setUserData("3");
+
+		selectedradttype = "1";
+		Myapp.testtype = 1;
+
+		tgbttype.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
+
+			@Override
+			public void changed(ObservableValue<? extends Toggle> arg0, Toggle arg1, Toggle arg2) {
+				if (arg2 == null)
+					arg1.setSelected(true);
+				selectedradttype = arg2.getUserData().toString();
+
+				if (selectedradttype.equals("1")) {
+					Myapp.testtype = 1;
+					ancflowtype.setVisible(false);
+					ancpressuredk.setVisible(false);
+				}
+
+				else if (selectedradttype.equals("2")) {
+					Myapp.testtype = 2;
+					ancpressuredk.setVisible(false);
+					ancflowtype.setVisible(true);
+				} else {
+					Myapp.testtype = 3;
+					ancflowtype.setVisible(false);
+					ancpressuredk.setVisible(true);
+				}
+			}
+		});
+	}
+
 
 }

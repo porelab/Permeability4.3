@@ -42,6 +42,7 @@ public class Myapp {
 	public static List<Integer> steppoints=new ArrayList<Integer>();
 	public static int testtype=1;  //1 for regular , 2 for step , 3 for dekay
 	
+	public static String dkpressure,dkholdtime,dkdatainterval;
 	//.....
 	public static  Stage virtualStage=null;
 	public static TextField keyboardinput;
