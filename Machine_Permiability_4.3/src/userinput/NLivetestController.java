@@ -255,9 +255,9 @@ public class NLivetestController implements Initializable {
 			}
 		
 		
-
+		calculationdia = 2.3;
 		System.out.println("Plate diameter---> : "+Myapp.splate+" : "+calculationdia);
-		calculationdia=7;
+		//calculationdia=7;
 	}
 
 	// set all shortcut
@@ -369,7 +369,7 @@ public class NLivetestController implements Initializable {
 		trails = Integer.parseInt(Myapp.testtrial);
 
 		DataStore.getconfigdata();
-		conditionflow = (double) Double.parseDouble(DataStore.getFm2()) * 0.60;
+		conditionflow = (double) Double.parseDouble(DataStore.getFm2()) * 0.65;
 		conditionpressure = Double.parseDouble(Myapp.endpress);
 
 		isDryStart = new SimpleBooleanProperty(false);
@@ -851,6 +851,8 @@ public class NLivetestController implements Initializable {
 					0.178);
 			String gurley = getDarcyGurley(gurleyflow);
 
+			double frzusinggurly=507.5/Double.parseDouble(gurley);
+			
 			System.out.println("frazier Point : ");
 			String frazier;
 			
@@ -866,15 +868,19 @@ public class NLivetestController implements Initializable {
 			frazier = getDarcyFrazier(0.0182,frazierflow);
 			*/
 			
-			double frazierflow = c.getFlowPointOn(dryplist, dryflist, 500, 1,
+			double frazierflow = c.getFlowPointOn(dryplist, dryflist, 50000, 1,
 					0.0182);
+			
+			String frazier10inch="";
+			
 			if(dryflist.size()>14)
 			{
 
 				frazier = getDarcyFrazier(Double.parseDouble(dryplist.get(10)),Double.parseDouble(dryflist.get(10)));
 				cs.newLine("frazierflow1",dryflist.get(10));
 				cs.newLine("frazierpressure1",dryplist.get(10));
-				
+				frazier10inch = getDarcyFrazier10inch(Double.parseDouble(dryplist.get(10)),Double.parseDouble(dryflist.get(10)));
+			
 			}
 			else
 			{
@@ -882,6 +888,8 @@ public class NLivetestController implements Initializable {
 				frazier = getDarcyFrazier(Double.parseDouble(dryplist.get(5)),Double.parseDouble(dryflist.get(5)));
 				cs.newLine("frazierflow1",dryflist.get(5));
 				cs.newLine("frazierpressure1",dryplist.get(5));
+				frazier10inch = getDarcyFrazier10inch(Double.parseDouble(dryplist.get(5)),Double.parseDouble(dryflist.get(5)));
+					
 			}
 			
 			cs.newLine("frazier", "" + Myapp.getRound(frazier, 5));
@@ -889,6 +897,8 @@ public class NLivetestController implements Initializable {
 			
 			cs.newLine("gurleyflow", "" + Myapp.getRound(gurleyflow, 2));
 			cs.newLine("frazierflow", "" + Myapp.getRound(frazierflow, 2));
+			cs.newLine("frazier10inch",frazier10inch);
+			cs.newLine("frazierbygurly",""+frzusinggurly);
 			
 			
 			p1list.clear();
@@ -932,16 +942,6 @@ public class NLivetestController implements Initializable {
 		double ans1=(double)100/ddf;
 
 		double ans2=0;
-		double calculationdia;
-		if (Myapp.splate.equals("Small")) {
-		calculationdia = 1;
-		} else if (Myapp.splate.equals("Large")) {
-
-		calculationdia = 7;
-		} else {
-
-		calculationdia = 2.3;
-		}
 
 		System.out.println("IN gurly : ");
 		System.out.println("Dia : "+calculationdia);
@@ -970,7 +970,7 @@ public class NLivetestController implements Initializable {
 
 
 	//calculate darcy frazier value
-	String getDarcyFrazier(double ddp, double ddf) {
+	String getDarcyFrazier10inch(double ddp, double ddf) {
 
 	
 		
@@ -997,7 +997,32 @@ public class NLivetestController implements Initializable {
 		
 		//return ""+k;
 	}
+	String getDarcyFrazier(double ddp, double ddf) {
 
+	
+		
+		
+		double k = 0;
+		try {
+
+			double d = calculationdia / 30.48;
+
+			
+			
+			k = 4 * (ddf / 471.9474) * (1 / (d * d * 3.141592653589793))*(0.01802/ddp)*60;
+
+			
+			
+	
+		} catch (Exception e) {
+		}
+		return "" + k;
+		
+		
+		// k=ddf*60*0.000035314/0.0409029;
+		
+		//return ""+k;
+	}
 	// find last index of saving file 
 	int findInt(String[] s) {
 		try {
@@ -1417,7 +1442,7 @@ public class NLivetestController implements Initializable {
 		System.out.println("Step Size : " + fla);
 		System.out.println("Static step size");
 		
-		List<Integer> data = getValueList(600);
+		List<Integer> data = getValueList(300);
 		return data;
 	}
 
@@ -1615,7 +1640,7 @@ public class NLivetestController implements Initializable {
 										+ pr + " torr");
 
 								
-								pr=pr/51.7149;
+								//pr=pr/51.7149;
 								System.out.println(" Pressure gauge1 ..... : "
 										+ pr+" psi");
 								
@@ -1683,6 +1708,7 @@ public class NLivetestController implements Initializable {
 								fl = (double) a
 										* Integer.parseInt(DataStore.getFm2())
 										/ 65535;
+								fl=fl-5000;
 								// b=(double)a*8000/65535;
 								System.out.println("Flow Meter 2 : ... :" + fl);
 
