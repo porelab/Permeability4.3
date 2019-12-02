@@ -900,6 +900,10 @@ public class NLivetestController implements Initializable {
 			cs.newLine("frazier10inch",frazier10inch);
 			cs.newLine("frazierbygurly",""+frzusinggurly);
 			
+			cs.newLine("flow05inch", ""+c.getFlowPointOn(dryplist, dryflist, 50000, 1,
+					0.0182));
+			cs.newLine("flow10inch", ""+c.getFlowPointOn(dryplist, dryflist, 50000, 1,
+					0.36019));
 			
 			p1list.clear();
 			p2list.clear();
