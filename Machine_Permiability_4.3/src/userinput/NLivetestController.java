@@ -255,7 +255,7 @@ public class NLivetestController implements Initializable {
 			}
 		
 		
-		calculationdia = 2.3;
+		calculationdia = 7;
 		System.out.println("Plate diameter---> : "+Myapp.splate+" : "+calculationdia);
 		//calculationdia=7;
 	}
@@ -816,6 +816,14 @@ public class NLivetestController implements Initializable {
 		//	dryflist.remove(4);
 		//	dryplist.remove(4);
 			
+			System.out.println("frazier Point : ");
+			String frazier;
+			
+			double frazierflow = c.getFlowPointOn(dryplist, dryflist, 50000,5,
+					0.0182);
+			
+			frazier = getDarcyFrazier(0.0182,frazierflow);
+			
 			if (DataStore.isCurveFit) {
 				if (dryflist.size() > 20) {
 					c.getWetFlowSmooth(dryplist, dryflist, 50000,1);
@@ -851,10 +859,7 @@ public class NLivetestController implements Initializable {
 					0.178);
 			String gurley = getDarcyGurley(gurleyflow);
 
-			double frzusinggurly=507.5/Double.parseDouble(gurley);
-			
-			System.out.println("frazier Point : ");
-			String frazier;
+		
 			
 			/*double frazierflow = c.getFlowPointOn(dryplist, dryflist, 500, 5,
 					0.36019);
@@ -862,23 +867,18 @@ public class NLivetestController implements Initializable {
 			frazier = getDarcyFrazier(0.36019,frazierflow); 
 			*/
 			
-			/*double frazierflow = c.getFlowPointOn(dryplist, dryflist, 50000, 1,
-					0.0182);
 			
-			frazier = getDarcyFrazier(0.0182,frazierflow);
-			*/
 			
-			double frazierflow = c.getFlowPointOn(dryplist, dryflist, 50000, 1,
-					0.0182);
+			
 			
 			String frazier10inch="";
 			
-			if(dryflist.size()>14)
+			/*if(dryflist.size()>14)
 			{
 
 				frazier = getDarcyFrazier(Double.parseDouble(dryplist.get(10)),Double.parseDouble(dryflist.get(10)));
-				cs.newLine("frazierflow1",dryflist.get(10));
-				cs.newLine("frazierpressure1",dryplist.get(10));
+				
+			
 				frazier10inch = getDarcyFrazier10inch(Double.parseDouble(dryplist.get(10)),Double.parseDouble(dryflist.get(10)));
 			
 			}
@@ -886,19 +886,20 @@ public class NLivetestController implements Initializable {
 			{
 
 				frazier = getDarcyFrazier(Double.parseDouble(dryplist.get(5)),Double.parseDouble(dryflist.get(5)));
-				cs.newLine("frazierflow1",dryflist.get(5));
-				cs.newLine("frazierpressure1",dryplist.get(5));
+				
 				frazier10inch = getDarcyFrazier10inch(Double.parseDouble(dryplist.get(5)),Double.parseDouble(dryflist.get(5)));
 					
 			}
+			*/
 			
 			cs.newLine("frazier", "" + Myapp.getRound(frazier, 5));
 			cs.newLine("gurley", "" + Myapp.getRound(gurley, 5));
-			
 			cs.newLine("gurleyflow", "" + Myapp.getRound(gurleyflow, 2));
 			cs.newLine("frazierflow", "" + Myapp.getRound(frazierflow, 2));
+			
+			cs.newLine("frazier05inch", "" + Myapp.getRound(frazier, 5));
 			cs.newLine("frazier10inch",frazier10inch);
-			cs.newLine("frazierbygurly",""+frzusinggurly);
+		
 			
 			cs.newLine("flow05inch", ""+c.getFlowPointOn(dryplist, dryflist, 50000, 1,
 					0.0182));
@@ -1013,7 +1014,7 @@ public class NLivetestController implements Initializable {
 
 			
 			
-			k = 4 * (ddf / 471.9474) * (1 / (d * d * 3.141592653589793))*(0.01802/ddp)*60;
+			k = 4 * (ddf / 471.9474) * (1 / (d * d * 3.141592653589793))*(0.01802/ddp);
 
 			
 			
@@ -1472,7 +1473,9 @@ public class NLivetestController implements Initializable {
 				val = c + (int) mindelay;
 			}
 			System.out.println("Delay : " + val);
-			wrD.addData1(getValueList(val));
+			
+			//wrD.addData1(getValueList(val));
+			wrD.addData1(getValueList(3000));
 
 		} else if (Myapp.stabilitytype.equals("2")) {
 
@@ -1644,7 +1647,7 @@ public class NLivetestController implements Initializable {
 										+ pr + " torr");
 
 								
-								//pr=pr/51.7149;
+								pr=pr/51.7149;
 								System.out.println(" Pressure gauge1 ..... : "
 										+ pr+" psi");
 								
@@ -1712,7 +1715,7 @@ public class NLivetestController implements Initializable {
 								fl = (double) a
 										* Integer.parseInt(DataStore.getFm2())
 										/ 65535;
-								fl=fl-5000;
+								//fl=fl-5000;
 								// b=(double)a*8000/65535;
 								System.out.println("Flow Meter 2 : ... :" + fl);
 
@@ -1725,19 +1728,9 @@ public class NLivetestController implements Initializable {
 
 						DataStore.livepressure.set(pr);
 
-					
+						setPermiabilityPoints(pr, fl);
 							
-							if(pr>priPress && fl>priFlow)
-							{
-								priPress=pr;
-								priFlow=fl;
-								setPermiabilityPoints(pr, fl);
-										
-							}
-							else
-							{
-								System.out.println("Ignore : "+pr+" , "+fl);
-							}
+					
 						
 
 					}
@@ -1960,12 +1953,25 @@ public class NLivetestController implements Initializable {
 				@Override
 				public void run() {
 
-					series2.getData().add(new XYChart.Data(curpre, curflow));
-					dryplist.add("" + curpre );
-					dryflist.add("" + (curflow/60));
+					if(pr>priPress && fl>priFlow)
+					{
+						priPress=pr;
+						priFlow=fl;
+					
+						series2.getData().add(new XYChart.Data(curpre, curflow));
+						dryplist.add("" + curpre );
+						dryflist.add("" + (curflow/60));
+						 ind++;
+					}
+					else
+					{
+						System.out.println("Ignore : "+pr+" , "+fl);
+					}
+					
+					
 
 				//	darcylist.add("" + getDarcy1(curpre, curflow/60));
-				 ind++;
+				
 					flowserires.getData().add(
 							new XYChart.Data(getTime(), curflow));
 					pressureserires.getData().add(

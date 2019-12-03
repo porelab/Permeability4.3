@@ -104,7 +104,7 @@ public class DeletepopupController implements Initializable {
 		FirstController.isDelete.set(true);
 		MyDialoug.closeDialoug();
 	
-		
+		Openscreen.open("/report/first.fxml");
 		}
 		catch(Exception e)
 		{
