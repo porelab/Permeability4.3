@@ -1443,7 +1443,7 @@ public class MultiplepororeportKusum {
 					legendtab.addCell(l2);
 
 					PdfPCell l1 = new PdfPCell(new Paragraph(""
-							+ allfiles.get(i - 1).data.get("sample"), lt));
+							+ allfiles.get(i - 1).filename, lt));
 					l1.setBorder(1);
 					l1.setBorder(l1.BOTTOM | l1.TOP);
 					l1.setBorderColor(new BaseColor(150, 150, 150));

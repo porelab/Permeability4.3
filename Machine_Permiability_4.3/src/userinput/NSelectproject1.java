@@ -226,6 +226,9 @@ public class NSelectproject1 implements Initializable {
 
 		flowsteps.clear();
 		test3data.clear();
+		
+		Myapp.steppoints.clear();
+		
 		curvefit.setMin(10);
 		poroind.setMin(10);
 		bpind.setMin(10);
@@ -570,7 +573,8 @@ public class NSelectproject1 implements Initializable {
 	void setAllThings() {
 
 		slaccuracy.setValue(0f);
-
+		Myapp.accbpt = "50";
+		Myapp.accstep = "50";
 		bpind.valueProperty().addListener(new ChangeListener<Number>() {
 
 			@Override
@@ -850,6 +854,8 @@ public class NSelectproject1 implements Initializable {
 		boolean isvalid = true;
 		// TODO Auto-generated method stub
 		int oldpos = maintab.getSelectionModel().getSelectedIndex();
+		
+		System.out.println("Old postion"+oldpos);
 
 		if ((oldpos + 1) == 1) {
 			boolean bol = true;
@@ -954,11 +960,22 @@ public class NSelectproject1 implements Initializable {
 				if (oldpos == 2) {
 
 					maintab.getSelectionModel().select(oldpos + 3);
+					
 				}
-
+				else if(oldpos==5)
+				{
+					maintab.getSelectionModel().select(oldpos + 2);
+					
+				}
 				else {
 					maintab.getSelectionModel().select(oldpos + 1);
 				}
+				
+				
+				
+				
+				
+				
 			}
 		}
 	}
@@ -1042,9 +1059,11 @@ public class NSelectproject1 implements Initializable {
 			if (oldpos == 5) {
 
 				maintab.getSelectionModel().select(oldpos - 3);
-			} else if (oldpos == 7) {
+			} 
+		
+			else if (oldpos == 7) {
 
-				maintab.getSelectionModel().select(oldpos - 1);
+				maintab.getSelectionModel().select(oldpos - 2);
 			} else {
 				maintab.getSelectionModel().select(oldpos - 1);
 			}
@@ -1369,7 +1388,7 @@ public class NSelectproject1 implements Initializable {
 					arg1.setSelected(true);
 				selectedrad6 = arg2.getUserData().toString();
 
-				System.out.println("SElect ted record................" + selectedrad6);
+		//		System.out.println("SElect ted record................" + selectedrad6);
 
 				if (selectedrad6.equals("1")) {
 					Myapp.testsequence = "WUPDUP";
@@ -1639,13 +1658,13 @@ public class NSelectproject1 implements Initializable {
 			ancflowtype.setVisible(true);
 			ancpressuredk.setVisible(false);
 			flowsteps.clear();
+			Myapp.steppoints.clear();
 			flowsteps.addAll(getListFromString(testdata));
 			listflowstep.getItems().clear();
 			for (int i = 0; i < flowsteps.size(); i++) {
 				listflowstep.getItems().add(flowsteps.get(i) + "");
 
 			}
-			Myapp.steppoints.clear();
 			Myapp.steppoints.addAll(flowsteps);
 		}
 

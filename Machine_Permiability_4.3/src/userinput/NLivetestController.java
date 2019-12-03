@@ -319,6 +319,28 @@ public class NLivetestController implements Initializable {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
+		
+	System.out.println("All Live data--->Sample Plate-->"+Myapp.splate+"--End Press--->"+Myapp.endpress+"--thickness-->"+Myapp.thikness+"---Accu Poro-->"+Myapp.accstep+"---Accu statbility--->"+Myapp.accstability);
+
+		
+		String ss=""+Myapp.testtype;
+		
+		if (ss.equals("1")) {
+			System.out.println("---Test Typr--->"+Myapp.testtype);
+				}
+
+		else if (ss.equals("2")) {
+			System.out.println("---Test Typr--->"+Myapp.testtype+"--Test Data--->"+Myapp.steppoints);
+						}
+		
+
+		else {
+			System.out.println("---Test Typr--->"+Myapp.testtype+"--Dk interval--->"+Myapp.dkdatainterval+"--Dk hold time--->"+Myapp.dkholdtime+"--Dk pressure--->"+Myapp.dkpressure);
+			
+		}		
+
+		
+		
 //		/setTemp();
 		tones = new AudioClip(NLivetestController.class.getResource(
 				"stoptone.mp3").toString());

@@ -79,8 +79,6 @@ public class SaveprojectController implements Initializable {
 	void setProjectData() {
 		Database d1 = new Database();
 
-		System.out.println("Save Plate name.." + Myapp.splate);
-
 		String  data = "";
 
 		if ((Myapp.testtype) == 1) {
@@ -104,7 +102,7 @@ public class SaveprojectController implements Initializable {
 				+ "','" + Myapp.lotnumber + "','" + Myapp.startpress + "','" + Myapp.testsequence + "','"
 				+ Myapp.stabilitytype + "','" + Myapp.accstability + "','" + Myapp.testtype + "','"+data+"')")) {
 
-			System.out.println("Insert data New Project");
+			System.out.println("Insert data New Project---");
 		} else {
 			System.out.println("not insertetd");
 		}

@@ -160,7 +160,7 @@ public class PopfxmlController implements Initializable {
 					int index = listflowstep.getSelectionModel().getSelectedIndex();
 					listflowstep.getItems().remove(index);
 					flowsteps.remove(index);
-
+			
 				} catch (Exception d) {
 					System.out.println("NO seletion");
 				}
@@ -417,7 +417,7 @@ public class PopfxmlController implements Initializable {
 				flowsteps.add(vl);
 				listflowstep.getItems().add(vl + "");
 				txtflowstep.setText("");
-
+		
 			} else {
 				System.out.println("Not added");
 			}
@@ -684,6 +684,10 @@ public class PopfxmlController implements Initializable {
 		List<List<String>> alldata = d1
 				.getData("select * from lastprojects where lid='" + Myapp.email
 						+ "' ");
+		
+		
+		
+		System.out.println("All Last Data in Quick test--->"+alldata);
 
 		psid.setText(alldata.get(0).get(1));
 		ptfact.setText(alldata.get(0).get(8));
@@ -712,7 +716,7 @@ public class PopfxmlController implements Initializable {
 		Myapp.fluidname = "" + s[0];
 		Myapp.fluidvalue = "" + s[1];
 		 splate =alldata.get(0).get(11);
-		Myapp.splate = alldata.get(0).get(11);;
+		Myapp.splate = splate;
 
 		Myapp.thikness = alldata.get(0).get(12);
 		Myapp.materialtype = alldata.get(0).get(13);
@@ -850,15 +854,20 @@ public class PopfxmlController implements Initializable {
 
 	void teststart() {
 		
-		
 		if ((Myapp.testtype) == 1) {
 
-			setSaveDat();
+			setSaveDat();		
 
 		} else if ((Myapp.testtype) == 2) {
-
 			if (flowsteps.size() > 5) {
+				for (int i = 0; i < flowsteps.size(); i++) {
+					listflowstep.getItems().add(flowsteps.get(i) + "");
+
+				}
+				
+				Myapp.steppoints.clear();
 				Myapp.steppoints.addAll(flowsteps);
+			
 				setSaveDat();
 			} else {
 				System.out.println("minimum 5 steps");
@@ -1084,8 +1093,7 @@ public class PopfxmlController implements Initializable {
 		rdlarge.setUserData("3");
 
 		selectedrad66 = "1";
-		Myapp.splate = "Small";
-
+	
 		tgb66.selectedToggleProperty().addListener(
 				new ChangeListener<Toggle>() {
 
@@ -1120,9 +1128,7 @@ public class PopfxmlController implements Initializable {
 		rdpressurdk.setToggleGroup(tgbttype);
 		rdpressurdk.setUserData("3");
 
-		selectedradttype = "1";
-		Myapp.testtype = 1;
-
+	
 		tgbttype.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
 
 			@Override
