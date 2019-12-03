@@ -95,7 +95,7 @@ public class FirstController implements Initializable {
 
 	Myfont fontss = new Myfont(14);
 
-	int maxfile = 10;
+	int maxfile = 1;
 
 	public static SimpleBooleanProperty isLogin = new SimpleBooleanProperty(
 			true);
@@ -247,11 +247,11 @@ public class FirstController implements Initializable {
 			public void handle(ActionEvent event) {
 				// TODO Auto-generated method stub
 				int ff=setSelectedLab();
-				if (ff > 0 && ff<=10) {
+				if (ff > 0 && ff<=1) {
 					Openscreen.open("/report/report.fxml");
 				} else {
 					Toast.makeText(Main.mainstage,
-							"Please select file in between 1 to 10.", 2000, 300, 300);
+							"Please select only 1 file.", 2000, 300, 300);
 				}
 			}
 		});
@@ -674,6 +674,12 @@ Arrays.sort(listOfFiles, new Comparator<File>() {
 						
 						File[] fftemp1 = ftemp.listFiles();
 						
+						Arrays.sort(fftemp1, new Comparator<File>() {
+						    public int compare(File f1, File f2) {
+						        return Long.compare(f2.lastModified(),f1.lastModified());
+						    }
+						});
+						
 						List<File> fftemp=filterfile(fftemp1);
 						
 						List<CheckBox> ck = new ArrayList<CheckBox>();
@@ -963,7 +969,6 @@ Arrays.sort(listOfFiles, new Comparator<File>() {
 									100);
 						}
 
-						System.out.println(" I M  CALLLLLLLLINNNNNGGGGGGG");
 					}
 				});
 			}
