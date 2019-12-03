@@ -95,7 +95,7 @@ public class FirstController implements Initializable {
 
 	Myfont fontss = new Myfont(14);
 
-	int maxfile = 1;
+	int maxfile = 10;
 
 	public static SimpleBooleanProperty isLogin = new SimpleBooleanProperty(
 			true);
@@ -247,11 +247,17 @@ public class FirstController implements Initializable {
 			public void handle(ActionEvent event) {
 				// TODO Auto-generated method stub
 				int ff=setSelectedLab();
-				if (ff > 0 && ff<=1) {
+				if (ff > 0 && ff<11) {
 					Openscreen.open("/report/report.fxml");
-				} else {
+				}
+				else if(ff==0)
+				{
 					Toast.makeText(Main.mainstage,
-							"Please select only 1 file.", 2000, 300, 300);
+							"Please select atleast 1 file.", 2000, 300, 300);
+				}
+				else {
+					Toast.makeText(Main.mainstage,
+							"Please select upto 10 files.", 2000, 300, 300);
 				}
 			}
 		});
