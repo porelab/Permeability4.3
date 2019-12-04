@@ -44,6 +44,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.SnapshotResult;
+import javafx.scene.chart.LineChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.chart.XYChart.Data;
 import javafx.scene.control.Button;
@@ -220,12 +221,17 @@ public class ReportController implements Initializable {
 									"Flow (cfm)", list_d, false, 11, 12,
 									"Flow vs Pressure");*/
 					
-					Pane p = c
+				/*	Pane p = c
 							.drawLinechart(pagination1.getPrefWidth(),
 									pagination1.getPrefHeight(),
 									"Flow vs Pressure", "Pressure (psi)",
 									"Flow (cm3/s)", list_d, false, 11, 12,
 									"(3) Incremental Filter-Flow % vs Diameter");
+					*/
+					
+					Pane p=c.drawLinechartWithScatterMultiple(pagination1.getPrefWidth(), pagination1.getPrefHeight(),
+							"Flow vs Pressure", "Pressure (psi)", "Flow (cm3/s)", list_d,
+							"(3) Incremental Filter-Flow % vs Diameter");
 					
 					charts.put(p);
 					listofchart.add(p);
@@ -827,6 +833,7 @@ public class ReportController implements Initializable {
 				if (0 < saveChartsTask.getWorkDone()) {
 					Pane ap = listofchart.get(0);
 
+					try {
 					SmoothedChart<Number, Number> lineChart = (SmoothedChart<Number, Number>) ap
 							.getChildren().get(0);
 
@@ -834,10 +841,18 @@ public class ReportController implements Initializable {
 
 					// Zoom zoom =new Zoom(lineChart,ap);
 
+					
+					}
+					catch(Exception e)
+					{
+						LineChart<Number, Number> lineChart = (LineChart<Number, Number>) ap
+								.getChildren().get(0);
+
+						setDataPointPopup(lineChart);
+					}
 					pagination1.getChildren().setAll(ap);
 
 					saveChartsTask.workDoneProperty().removeListener(this);
-
 				}
 			}
 		};
