@@ -6,6 +6,7 @@ import java.util.ResourceBundle;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import toast.LoadAnchor;
 import toast.Systemtime;
 
 import com.google.auth.oauth2.GoogleCredentials;
@@ -116,6 +117,7 @@ public class Splashscreen implements Initializable {
 					public void run() {
 						// TODO Auto-generated method stub
 						Main.mainstage=primaryStage;
+						LoadAnchor.LoadAllPages();
 						
 						try{Parent root1 = FXMLLoader.load(getClass().getResource("mainanc.fxml"));
 					    Scene scene = new Scene(root1,1366,768);

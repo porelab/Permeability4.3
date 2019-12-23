@@ -47,6 +47,7 @@ import javafx.scene.paint.Stop;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.stage.Popup;
+import toast.LoadAnchor;
 import toast.MyDialoug;
 import toast.Toast;
 import Notification.Notification.Notifier;
@@ -953,11 +954,12 @@ public class NLivetestController implements Initializable {
 			});
 			System.out.println("Permeability CSV Created");
 			// Openscreen.open("/userinput/Nresult.fxml");
-
+			LoadAnchor.LoadReportPage();
 		} catch (Exception e) {
 
 			e.printStackTrace();
 		}
+		LoadAnchor.LoadCreateTestPage();
 
 	}
 
