@@ -327,6 +327,7 @@ public class ChartPlot {
 						.setStyle(strokeStyle);
 				m = lineChart.getData().get(ik).getData();
 
+				
 				for (int i2 = 0; i2 < m.size(); i2++) {
 					((Data) m.get(i2)).getNode().setStyle(
 							"-fx-background-color: " + clr + ", transparent;");
