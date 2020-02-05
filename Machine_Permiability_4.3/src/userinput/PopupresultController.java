@@ -14,6 +14,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import toast.MyDialoug;
 import toast.Openscreen;
+import application.DataStore;
 import application.Myapp;
 import data_read_write.DatareadN;
 import drawchart.ChartPlot;
@@ -21,7 +22,7 @@ import drawchart.ChartPlot;
 public class PopupresultController implements Initializable {
 
     @FXML
-    private Label lblsamplename,lblbpp,lblbpdiamter,lblmeanp;
+    private Label lblsamplename,lblbpp,lblbpdiamter,lblmeanp,lblunitegurley,lblunitefrazier;
 
     @FXML
     private Button btnhome,startautotest;
@@ -71,6 +72,8 @@ public class PopupresultController implements Initializable {
 	void setData(DatareadN dr)	
 	{
 		
+		
+		
 		List<DatareadN> list_d =new ArrayList<DatareadN>();
 			c=new ChartPlot(true);
 		list_d.add(dr);
@@ -78,14 +81,16 @@ public class PopupresultController implements Initializable {
 	//pagination1.getChildren().add(c.drawBarchartNumber(pagination1.getPrefWidth(),pagination1.getPrefHeight(),"Pore size Distribution", "Diameter (micron)", "Percentage (%)", list_d.get(0).getValuesOf(list_d.get(0).data.get("diameter").toString()),list_d.get(0).getValuesOf(list_d.get(0).data.get("psd").toString())));
 	
 		pagination1.getChildren().add(c.drawLinechart(pagination1.getPrefWidth(),pagination1.getPrefHeight(),"Pore size Distribution", "Diameter (micron)", "Percentage (%)",list_d,false,8,10,"(4) Poresize % vs Diameter"));
-   	
-		
 		
 		
 		lblsamplename.setText(""+dr.data.get("sample"));
-		lblbpp.setText(""+Myapp.getRound(Double.parseDouble(""+dr.data.get("darcy avg")), 2));
-		lblbpdiamter.setText(""+Myapp.getRound(Double.parseDouble(""+dr.data.get("frazier")), 2));
-	     lblmeanp.setText(""+Double.parseDouble(""+dr.data.get("gurley")));
+
+	     lblmeanp.setText(""+DataStore.ConvertGurely(""+dr.data.get("gurley")));
+	     lblbpp.setText("" +Myapp.getRound(""+dr.data.get("darcy avg"), DataStore.getRoundOff()));
+	     lblbpdiamter.setText("" +DataStore.ConvertFrazier(""+dr.data.get("frazier")));
+	     
+	     lblunitefrazier.setText( "("+DataStore.getUnitefrazier()+")");
+	     lblunitegurley.setText(" ("+DataStore.getUnitegurely()+")");
 
 	}
 }

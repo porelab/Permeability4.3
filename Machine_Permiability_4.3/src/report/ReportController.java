@@ -80,6 +80,7 @@ import org.apache.commons.math3.util.MathArrays.Position;
 
 import toast.MyDialoug;
 import toast.Openscreen;
+import application.DataStore;
 import application.Main;
 import application.Myapp;
 import data_read_write.DatareadN;
@@ -125,7 +126,7 @@ public class ReportController implements Initializable {
 	double avgbubpt = 0;
 
 	@FXML
-	Label grlable, lbldarcy, lblgurl, lblfraz;
+	Label grlable, lbldarcy, lblgurl, lblfraz,lblunitefraz,lblunitegur,lblunitedarcy;
 
 	@FXML
 	AnchorPane ancgauge1, pagination1, ancguagesdarcy;
@@ -555,44 +556,36 @@ public class ReportController implements Initializable {
 		BigDecimal bb = BigDecimal.valueOf(0);
 		List<String> clrs = getColorMultiple();
 		for (int i = 0; i < list_d.size(); i++) {
+
 			fff = "" + list_d.get(i).filename;
+			wff = "" + DataStore.ConvertPressure(list_d.get(i).data.get("darcy avg").toString());
+			gurff = "" + DataStore.ConvertDiameter(list_d.get(i).data.get("gurley").toString());
+			fraff = "" + DataStore.ConvertPressure(list_d.get(i).data.get("frazier").toString());
 
-			wff = "" + list_d.get(i).data.get("darcy avg");
-			gurff = "" + list_d.get(i).data.get("gurley");
-			fraff = "" + list_d.get(i).data.get("frazier");
-
-			bb.add(BigDecimal.valueOf(Double.parseDouble(wff)));
 			avgbp = avgbp + Double.parseDouble(wff);
-
-			bb.add(BigDecimal.valueOf(Double.parseDouble(gurff)));
 			avggur = avggur + Double.parseDouble(gurff);
-
-			bb.add(BigDecimal.valueOf(Double.parseDouble(fraff)));
 			avgfra = avgfra + Double.parseDouble(fraff);
-
+			
 			v.getChildren().add(
-					getVBox(fff, Myapp.getRound(Double.parseDouble(wff), 2),
-							""+Double.parseDouble(gurff),
-							""+Double.parseDouble(fraff),
-							clrs.get(i)));
+					getVBox(fff,wff, gurff,fraff,clrs.get(i)));
+
 		}
 
-		BigDecimal b = BigDecimal.valueOf(avgbp / list_d.size());
+		double ansdavg=(double)avgbp/list_d.size();
+		double ansgur=(double)avggur/list_d.size();	
+		double ansfrz=(double)avgfra/list_d.size();	
+		
+		
 
-		//b = b.setScale(2, BigDecimal.ROUND_HALF_UP);
+		
+		lblgurl.setText("" +Myapp.getRound(ansgur, DataStore.getRoundOff()));
+		lblfraz.setText("" +Myapp.getRound(ansfrz, DataStore.getRoundOff()));
+		lbldarcy.setText("" +Myapp.getRound(ansdavg, DataStore.getRoundOff()));
 
-		BigDecimal b1 = BigDecimal.valueOf(avggur / list_d.size());
-
-		//b1 = b1.setScale(2, BigDecimal.ROUND_HALF_UP);
-
-		BigDecimal b2 = BigDecimal.valueOf(avgfra / list_d.size());
-
-	//	b2 = b2.setScale(2, BigDecimal.ROUND_HALF_UP);
-
-		lblgurl.setText("" + b1);
-		lblfraz.setText("" + b2);
-		lbldarcy.setText("" + b);
-
+		lblunitedarcy.setText("(darcy)");
+		lblunitefraz.setText(" ("+DataStore.getUnitefrazier()+")");
+		lblunitegur.setText(" ("+DataStore.getUnitegurely()+")");
+		
 		scrfilename.setContent(v);
 	}
 

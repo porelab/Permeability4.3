@@ -159,17 +159,17 @@
             <Font name="System Bold" size="20.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" layoutX="875.0" layoutY="613.0" prefWidth="161.0" text="darcy" textFill="#898585">
+      <Label fx:id="lblunitedarcy" alignment="CENTER" layoutX="875.0" layoutY="613.0" prefWidth="161.0" textFill="#898585">
          <font>
             <Font size="13.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" layoutX="1044.0" layoutY="613.0" prefWidth="161.0" text="S" textFill="#898585">
+      <Label fx:id="lblunitegur" alignment="CENTER" layoutX="1044.0" layoutY="613.0" prefWidth="161.0" textFill="#898585">
          <font>
             <Font size="13.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" layoutX="1204.0" layoutY="608.0" prefHeight="37.0" prefWidth="161.0" text="Cubic feet / Square foot - min" textFill="#898585" wrapText="true" />
+      <Label fx:id="lblunitefraz" alignment="CENTER" layoutX="1204.0" layoutY="608.0" prefHeight="37.0" prefWidth="161.0" textFill="#898585" wrapText="true" />
       <Label layoutX="1174.0" layoutY="162.0" text="( 0.178 psi )">
          <font>
             <Font size="10.0" />

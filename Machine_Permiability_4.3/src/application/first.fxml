@@ -181,7 +181,7 @@
                <graphic>
                   <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../../permeability_iit/permiability_iit/src/application/close2.png" />
+                        <Image url="@close2.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -196,7 +196,7 @@
                <graphic>
                   <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../../permeability_iit/permiability_iit/src/application/fullscreen.png" />
+                        <Image url="@fullscreen.png" />
                      </image>
                   </ImageView>
                </graphic>

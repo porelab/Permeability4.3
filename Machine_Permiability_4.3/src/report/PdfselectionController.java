@@ -212,17 +212,18 @@ public class PdfselectionController implements Initializable {
 				/*	SinglepororeportKusum sp = new SinglepororeportKusum();
 					sp.Report(path, ReportController.list_d.get(0),
 							txtnotes.getText(), txtcomname.getText(), imgpath,
-							graphs, bchkrowdata, bchkcoverpage, imgpath1);*/
-
+							graphs, bchkrowdata, bchkcoverpage, imgpath1);
+*/
 				} else {
-				/*	Multiplepororeport mp = new Multiplepororeport();
-					mp.Report(path, ReportController.list_d,
-							txtnotes.getText(), txtcomname.getText(), graphs,
-							bchkrowdata, bchkcoverpage, imgpath1);*/
-					MultiplepororeportKusum mp = new MultiplepororeportKusum();
+					Multiplepororeport mp = new Multiplepororeport();
 					mp.Report(path, ReportController.list_d,
 							txtnotes.getText(), txtcomname.getText(), graphs,
 							bchkrowdata, bchkcoverpage, imgpath1);
+					/*
+					MultiplepororeportKusum mp = new MultiplepororeportKusum();
+					mp.Report(path, ReportController.list_d,
+							txtnotes.getText(), txtcomname.getText(), graphs,
+							bchkrowdata, bchkcoverpage, imgpath1);*/
 
 				}
 				try {

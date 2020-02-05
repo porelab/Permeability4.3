@@ -152,6 +152,34 @@ public class Myapp {
 		notifier.notify(NotificationBuilder.create().title(title).message(msg).image(Notification.INFO_ICON).build());
 
 	}
+	
+	public static double getRoundDouble(double r, int round) {
+		
+		if (round == 2) {
+			r = (double) Math.round(r * 100) / 100;
+		} else if (round == 3) {
+			r = (double) Math.round(r * 1000) / 1000;
+
+		}
+		else if(round==1)
+		{
+			r = (double) Math.round(r * 10) / 10;
+		
+		}
+		 else if(round==4) {
+				r = (double) Math.round(r * 10000) / 10000;
+
+			}
+		else {
+			r = (double) Math.round(r * 100000) / 100000;
+
+		}
+
+		return r ;
+
+	}
+
+	
 	public static String getRound(Double r, int round) {
 
 		if (round == 2) {
@@ -318,5 +346,33 @@ public class Myapp {
 			e.printStackTrace();
 		}
 	}
-	
+	public static void PrintAll() {
+		System.out.println("sample id--"+Myapp.sampleid);
+		System.out.println("Lot no --"+Myapp.lotnumber);
+		System.out.println("Test trial--"+Myapp.testtrial);
+		System.out.println("Wetting fluid -"+Myapp.fluidname+"-----Wetting value"+Myapp.fluidvalue);
+		System.out.println("Toutchocity Factor--"+Myapp.tfactore);
+		System.out.println("BPT Thresold--"+Myapp.thresold);
+		System.out.println("BPT ACC--"+Myapp.accbpt);
+		System.out.println("Test ACC--"+Myapp.accstep);
+		System.out.println("Data stability---Typr----"+Myapp.stabilitytype+"--Value"+Myapp.accstability);
+		System.out.println("Test Press start and and---->"+Myapp.startpress+"---End Press---"+Myapp.endpress);
+		System.out.println("Test Medthod--"+Myapp.testsequence);
+		System.out.println("Sample Plate--"+Myapp.splate);
+		
+		
+		
+		System.err.println("isPG1 : Absolute : "+DataStore.isabsolutepg1());
+		System.err.println("isPG1 : Absolute : "+DataStore.isabsolutepg1());
+		System.err.println("Pg1 : unit :"+DataStore.getUnitepg1());
+		System.err.println("pg2: unit :"+DataStore.getUnitepg2());
+		System.err.println("fm1 : unit :"+DataStore.getUnitefm1());
+		System.err.println("fm2: unit :"+DataStore.getUnitefm2());
+		
+		System.err.println("Flow : unit :"+DataStore.getUniteflow());
+		System.err.println("Pressure: unit :"+DataStore.getUnitepressure());
+		
+		
+	}
+
 }

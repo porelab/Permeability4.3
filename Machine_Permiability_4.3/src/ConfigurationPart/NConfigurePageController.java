@@ -61,7 +61,7 @@ public class NConfigurePageController implements Initializable {
 			txtthmoderate, txtthcontinous;
 
 	@FXML
-	private Button applypro, btndefaultsetting;
+	private Button applypro, btndefaultsetting,btnpreference;
 
 	@FXML
 	private JFXToggleButton tgb215, tgb2111;
@@ -91,6 +91,15 @@ public class NConfigurePageController implements Initializable {
 			troubleshot, boardcali, manual, autometed;
 
 	MyDialoug mydia;
+	
+	
+	/*System Config*/
+	@FXML
+    ComboBox<String> cmbpg1,cmbpg2,cmbfm1,cmbfm2;
+	
+	/*Prefrance*/
+	@FXML
+	ComboBox<String> cmbpress, cmbflow, cmblenghth, cmbroundoff,cmbgurley,cmbfrazier;
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -104,6 +113,10 @@ public class NConfigurePageController implements Initializable {
 
 		/* Set Last Data */
 		setulastdata();
+		
+		setTestLastunite();
+		
+		setLastunite();
 
 		/* Button Click Event */
 		setBtnClicks();
@@ -126,6 +139,22 @@ public class NConfigurePageController implements Initializable {
 		DataStore.getthfirstbp();
 		// cmbcom.getItems().addAll("Test", "Test2", "Test3");
 
+		/*Test Config Unite and Pg Absolute or relative*/
+		
+		cmbpg1.getItems().addAll("psi", "bar", "torr");
+		cmbpg2.getItems().addAll("psi", "bar", "torr");
+		cmbfm1.getItems().addAll("sccm", "sccs");
+		cmbfm2.getItems().addAll("sccm", "sccs");
+		
+		/*Preframce Data Add */
+		cmbpress.getItems().addAll("psi", "bar", "torr");
+		cmbflow.getItems().addAll("sccm", "sccs","cfm");
+		cmblenghth.getItems().addAll("nm", "µm");
+		cmbroundoff.getItems().addAll("1", "2", "3","4","5");
+		
+		cmbgurley.getItems().addAll("s");
+		cmbfrazier.getItems().addAll("cubic feet / square foot - min");
+		
 		/* Set Keyboard mode. Computer or Tablet Mode */
 		setkeyboardmode();
 
@@ -158,6 +187,14 @@ public class NConfigurePageController implements Initializable {
 						"/ConfigurationPart/defaultsettingpopup.fxml");
 				mydia.showDialoug();
 
+			}
+		});
+		
+		/* selected unite save in database */
+		btnpreference.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent arg0) {
+				unitesave();
 			}
 		});
 
@@ -352,6 +389,59 @@ public class NConfigurePageController implements Initializable {
 		}
 
 	}
+	
+	
+	
+	void unitesave() {
+
+		String upress, uflow, roundoff, ulenghth,ugurley,ufrazier;
+
+		upress = cmbpress.getSelectionModel().getSelectedItem();
+		uflow = cmbflow.getSelectionModel().getSelectedItem();
+		ulenghth = cmblenghth.getSelectionModel().getSelectedItem();
+		roundoff = cmbroundoff.getSelectionModel().getSelectedItem();
+		
+		ugurley = cmbgurley.getSelectionModel().getSelectedItem();
+		ufrazier = cmbfrazier.getSelectionModel().getSelectedItem();
+
+		String unites = "update unite set pressure='" + upress + "',  flow='" + uflow + "',  length='" + ulenghth
+				+ "',  roundoff='" + roundoff + "', gurley='"+ugurley +"', frazier='"+ufrazier +"'";
+
+		Database dd = new Database();
+
+		if (dd.Insert(unites)) {
+			Toast.makeText(Main.mainstage, "Successfully saved selected Unites", 1000, 200, 200);
+
+		}
+
+	}
+
+	
+	void Testunitesave() {
+
+		String pg1s, pg2s, fm1s, fm2s, prs, fcs;
+
+		pg1s = cmbpg1.getSelectionModel().getSelectedItem();
+		pg2s = cmbpg2.getSelectionModel().getSelectedItem();
+		fm1s = cmbfm1.getSelectionModel().getSelectedItem();
+		fm2s = cmbfm2.getSelectionModel().getSelectedItem();
+	
+		String testunites = "update testunite set pg1='" + pg1s + "',  pg2='" + pg2s + "',  fm1='" + fm1s
+				+ "',  fm2='" + fm2s + "'";
+
+		Database dd = new Database();
+
+		if (dd.Insert(testunites)) {
+			
+
+			//Toast.makeText(Main.mainstage, "Successfully Saved Selected Test Unites", 1000, 200, 200);
+
+		}
+
+	}
+
+	
+	
 
 	/* Comport Selection */
 	void comsave() {
@@ -433,6 +523,8 @@ public class NConfigurePageController implements Initializable {
 				} else {
 					System.out.println("Configration Data save d Eroorr.....");
 				}
+				
+				Testunitesave();
 
 				String propg1temp, propg2temp, profm1temp, profm2temp, pp1scaletypet, pp2scaletypet;
 
@@ -453,6 +545,41 @@ public class NConfigurePageController implements Initializable {
 			}
 		});
 	}
+	
+
+	void setTestLastunite() {
+		List<List<String>> ll = db.getData("select * from testunite");
+
+		String pg1 = (ll.get(0).get(0));
+		String pg2 = (ll.get(0).get(1));
+		String fm1 = (ll.get(0).get(2));
+		String fm2 = (ll.get(0).get(3));
+
+			
+		cmbpg1.setValue(pg1);
+		cmbpg2.setValue(pg2);
+		cmbfm1.setValue(fm1);
+		cmbfm2.setValue(fm2);
+	}
+	
+	void setLastunite() {
+		List<List<String>> ll = db.getData("select * from unite");
+		String upres = (ll.get(0).get(0));
+		String uflow = (ll.get(0).get(1));
+		String ulength = (ll.get(0).get(2));
+		String uthicknes = (ll.get(0).get(3));
+		String ugurley = (ll.get(0).get(4));
+		String ufrazier = (ll.get(0).get(5));
+
+		cmbpress.setValue(upres);
+		cmbflow.setValue(uflow);
+		cmblenghth.setValue(ulength);
+		cmbroundoff.setValue(uthicknes);
+		cmbgurley.setValue(ugurley);
+		cmbfrazier.setValue(ufrazier);
+
+	}
+
 
 	/* Set Last Data */
 	public void setulastdata() {

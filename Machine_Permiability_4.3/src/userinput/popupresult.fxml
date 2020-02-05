@@ -62,7 +62,7 @@
             <Font name="System Bold" size="25.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" graphicTextGap="0.0" layoutX="557.0" layoutY="187.0" prefHeight="50.0" prefWidth="211.0" styleClass="font-montserrat-semiBold" text="( S )" textAlignment="CENTER" textFill="#646464" wrapText="true" AnchorPane.topAnchor="187.0">
+      <Label fx:id="lblunitegurley" alignment="CENTER" graphicTextGap="0.0" layoutX="557.0" layoutY="187.0" prefHeight="50.0" prefWidth="211.0" styleClass="font-montserrat-semiBold" textAlignment="CENTER" textFill="#646464" wrapText="true" AnchorPane.topAnchor="187.0">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
@@ -92,7 +92,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Label graphicTextGap="0.0" layoutX="341.0" layoutY="188.0" prefHeight="50.0" prefWidth="211.0" styleClass="font-montserrat-semiBold" text="( Cubic feet of air / Square foot of sample )" textAlignment="CENTER" textFill="#646464" wrapText="true">
+      <Label fx:id="lblunitefrazier" graphicTextGap="0.0" layoutX="341.0" layoutY="188.0" prefHeight="50.0" prefWidth="211.0" styleClass="font-montserrat-semiBold" textAlignment="CENTER" textFill="#646464" wrapText="true">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
