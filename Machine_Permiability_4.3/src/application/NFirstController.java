@@ -1,9 +1,16 @@
 package application;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.Enumeration;
 import java.util.ResourceBundle;
 
+import com.jfoenix.controls.JFXDialog;
+import com.jfoenix.controls.JFXDialog.DialogTransition;
+import com.jfoenix.controls.JFXDialogLayout;
+
+import extrafont.Myfont;
+import gnu.io.CommPortIdentifier;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.value.ChangeListener;
@@ -29,13 +36,6 @@ import toast.LoadAnchor;
 import toast.MyDialoug;
 import toast.Openscreen;
 import toast.Toast;
-
-import com.jfoenix.controls.JFXDialog;
-import com.jfoenix.controls.JFXDialog.DialogTransition;
-import com.jfoenix.controls.JFXDialogLayout;
-
-import extrafont.Myfont;
-import gnu.io.CommPortIdentifier;
 
 public class NFirstController implements Initializable {
 
@@ -63,7 +63,10 @@ public class NFirstController implements Initializable {
 	Database d = new Database();
 
 	boolean bolConnected;
-
+	public static void clearScreen() {  
+		
+	}
+	
 	void addShortCut() {
 
 		KeyCombination manushortcut = new KeyCodeCombination(KeyCode.M,
@@ -171,7 +174,7 @@ public class NFirstController implements Initializable {
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		DataStore.isconfigure.set(true);
 		DataStore.sc = new SerialCommunicator();
-
+		clearScreen();
 		addShortCut();
 		if (DataStore.connect_hardware.get()) {
 
@@ -400,8 +403,10 @@ public class NFirstController implements Initializable {
 						// TODO Auto-generated method stub
 
 					//	Openscreen.open("/userinput/Nselectproject1.fxml");
-						MainancController.mainanc1.getChildren().setAll(LoadAnchor.createtestfxml);
-						
+						//MainancController.mainanc1.getChildren().setAll(LoadAnchor.createtestfxml);
+
+						Openscreen.open("/userinput/Nselectproject1.fxml");
+
 					}
 				});
 
@@ -413,9 +418,9 @@ public class NFirstController implements Initializable {
 			@Override
 			public void handle(ActionEvent arg0) {
 
-				MainancController.mainanc1.getChildren().setAll(LoadAnchor.reportfxml);
+				//MainancController.mainanc1.getChildren().setAll(LoadAnchor.reportfxml);
 				
-				//Openscreen.open("/report/first.fxml");
+				Openscreen.open("/report/first.fxml");
 		
 			}
 		});
