@@ -177,6 +177,8 @@ public class NConfigurePageController implements Initializable {
 	/* All Button Click Event */
 	void setBtnClicks() {
 
+		
+		
 		/* Default Button click event */
 		btndefaultsetting.setOnAction(new EventHandler<ActionEvent>() {
 
