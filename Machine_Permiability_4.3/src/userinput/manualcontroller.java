@@ -703,7 +703,7 @@ public class manualcontroller implements Initializable {
 
 		gauge3.setPrefSize(ap3.getPrefWidth(), ap3.getPrefHeight());
 		lblfm1max.setText("FM1 : " + Double.parseDouble(DataStore.getFm1())
-				+ " (sccm)");
+				+ " ("+DataStore.getUnitefm1()+")");
 		gauge3.setMaxValue(Double.parseDouble(DataStore.getFm1()));
 		gauge3.valueProperty().bind(DataStore.sfm1);
 
@@ -732,7 +732,7 @@ public class manualcontroller implements Initializable {
 
 		gauge4.setMaxValue(Double.parseDouble(DataStore.getFm2()));
 		lblfm2max.setText("FM2 : " + Double.parseDouble(DataStore.getFm2())
-				+ " (sccm)");
+				+ " ("+DataStore.getUnitefm2()+")");
 		gauge4.valueProperty().bind(DataStore.sfm2);
 		gauge4.setPrefSize(ap4.getPrefWidth(), ap4.getPrefHeight());
 		ap4.getChildren().add(gauge4);
@@ -762,7 +762,7 @@ public class manualcontroller implements Initializable {
 		gauge5.setMaxValue(Integer.parseInt(DataStore.getPg2()));
 		gauge5.valueProperty().bind(DataStore.spg2);
 		lblpg2max.setText("PG2" + "\n" + Integer.parseInt(DataStore.getPg2())
-				+ " (psi)");
+				+ " ("+DataStore.getUnitepg2()+")");
 
 		gauge5.setPrefSize(ap6.getPrefWidth(), ap6.getPrefHeight());
 		ap6.getChildren().add(gauge5);
@@ -789,7 +789,7 @@ public class manualcontroller implements Initializable {
 
 		gauge6.setMaxValue(Integer.parseInt(DataStore.getPg1()));
 		lblpg1max.setText("PG1" + "\n" + Integer.parseInt(DataStore.getPg1())
-				+ " (psi)");
+				+ " ("+DataStore.getUnitepg1()+")");
 		gauge6.setPrefSize(ap5.getPrefWidth(), ap5.getPrefHeight());
 		gauge6.valueProperty().bind(DataStore.spg1);
 		// pg2value.textProperty().bind(DataStore.sspg2);

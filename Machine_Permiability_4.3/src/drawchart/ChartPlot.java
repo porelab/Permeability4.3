@@ -34,6 +34,7 @@ import javax.imageio.ImageIO;
 
 import com.sun.javafx.charts.Legend;
 
+import application.DataStore;
 import data_read_write.DatareadN;
 import de.tesis.dynaware.javafx.fancychart.zoom.Zoom;
 import drawchart.SmoothedChart.ChartType;
@@ -300,9 +301,9 @@ public class ChartPlot {
 			List<String> x = new ArrayList<String>();
 			List<String> y = new ArrayList<String>();
 
-			x = dr.getValuesOf("" + dr.data.get("dpressureoriginal"));
-			y = dr.getValuesOf("" + dr.data.get("dfloworiginal"));
-
+		
+			x = DataStore.ConvertPressure(dr.getValuesOf("" + dr.data.get("dpressureoriginal")));
+			y = DataStore.ConvertFlow(dr.getValuesOf("" + dr.data.get("dfloworiginal")));
 			try {
 				for (int j = 0; j < x.size(); j++) {
 					double xd = 0;
@@ -343,10 +344,12 @@ public class ChartPlot {
 
 			series[ik].setName(d.get(i).filename);
 
-			List<String> temppre = dr
-					.getValuesOf(dr.data.get("dpressure") + "");
-			List<String> tempfl = dr.getValuesOf(dr.data.get("dflow") + "");
+			List<String> temppre =  DataStore.ConvertPressure(dr
+					.getValuesOf(dr.data.get("dpressure") + ""));
+			List<String> tempfl =  DataStore.ConvertFlow(dr.getValuesOf(dr.data.get("dflow") + ""));
 
+			
+			
 			double mxpr = Double.parseDouble(x.get(1));
 
 			List<Double> temphdpr = new ArrayList<Double>();

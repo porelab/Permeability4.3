@@ -87,6 +87,8 @@ public class NLivetestController implements Initializable {
 	double stepsizepercentage = 0.2, maxpressureinstepsize = 1, mindelay = 200,
 			maxdelay = 10000, minavg = 2, maxavg = 12;
 
+	double lastpressur = 0, lastflow = 0;
+
 	@FXML
 	Rectangle manualblock;
 
@@ -249,14 +251,14 @@ public class NLivetestController implements Initializable {
 			calculationdia = 1;
 			} else if (Myapp.splate.equals("Large")) {
 
-			calculationdia = 7;
+			calculationdia = 7.2;
 			} else {
 
 			calculationdia = 2.3;
 			}
 		
 		
-		calculationdia = 7;
+		calculationdia = 7.2;
 		System.out.println("Plate diameter---> : "+Myapp.splate+" : "+calculationdia);
 		//calculationdia=7;
 	}
@@ -392,7 +394,7 @@ public class NLivetestController implements Initializable {
 		trails = Integer.parseInt(Myapp.testtrial);
 
 		DataStore.getconfigdata();
-		conditionflow = (double) Double.parseDouble(DataStore.getFm2()) * 0.65;
+		conditionflow = (double) Double.parseDouble(DataStore.getFm2()) * 0.95;
 		conditionpressure = Double.parseDouble(Myapp.endpress);
 
 		isDryStart = new SimpleBooleanProperty(false);
@@ -556,8 +558,8 @@ public class NLivetestController implements Initializable {
 		skip = 0;
 		darcyavg = 0;
 
-		yAxis.setLabel("Flow");
-		xAxis.setLabel("Pressure");
+		yAxis.setLabel("Flow ("+DataStore.getUniteflow()+")" );
+		xAxis.setLabel("Pressure ("+DataStore.getUnitepressure()+")");
 		
 		series2.getData().clear();
 
@@ -640,8 +642,8 @@ public class NLivetestController implements Initializable {
 		skip = 0;
 		darcyavg = 0;
 
-		yAxis.setLabel("Flow");
-		xAxis.setLabel("Pressure");
+		yAxis.setLabel("Flow ("+DataStore.getUniteflow()+")");
+		xAxis.setLabel("Pressure ("+DataStore.getUnitepressure()+")");
 		wrd = new writeFormat();
 		wrd.startDryN();
 		wrd.addLast();
@@ -829,11 +831,11 @@ public class NLivetestController implements Initializable {
 			dryflist.remove(1);
 			dryplist.remove(1);
 			
-		//	dryflist.remove(2);
-		//	dryplist.remove(2);
+			dryflist.remove(2);
+			dryplist.remove(2);
 			
-		//	dryflist.remove(3);
-		//	dryplist.remove(3);
+			dryflist.remove(3);
+			dryplist.remove(3);
 			
 
 		//	dryflist.remove(4);
@@ -842,10 +844,18 @@ public class NLivetestController implements Initializable {
 			System.out.println("frazier Point : ");
 			String frazier;
 			
-			double frazierflow = c.getFlowPointOn(dryplist, dryflist, 50000,5,
+		/*	double frazierflow = c.getFlowPointOn(dryplist, dryflist, 50000,1,
 					0.0182);
 			
-			frazier = getDarcyFrazier(0.0182,frazierflow);
+			frazier = getDarcyFrazier(0.0182,frazierflow); 
+			*/
+			
+			double frazierflow = c.getFlowPointOn(dryplist, dryflist, 50000,1,
+					0.0182);
+			
+			frazier = getDarcyFrazier(0.0182,frazierflow); 
+			
+			
 			
 			if (DataStore.isCurveFit) {
 				if (dryflist.size() > 20) {
@@ -896,26 +906,21 @@ public class NLivetestController implements Initializable {
 			
 			String frazier10inch="";
 			
-			/*if(dryflist.size()>14)
+			if(dryflist.size()>14)
 			{
-
 				frazier = getDarcyFrazier(Double.parseDouble(dryplist.get(10)),Double.parseDouble(dryflist.get(10)));
-				
-			
 				frazier10inch = getDarcyFrazier10inch(Double.parseDouble(dryplist.get(10)),Double.parseDouble(dryflist.get(10)));
-			
 			}
 			else
 			{
-
-				frazier = getDarcyFrazier(Double.parseDouble(dryplist.get(5)),Double.parseDouble(dryflist.get(5)));
-				
-				frazier10inch = getDarcyFrazier10inch(Double.parseDouble(dryplist.get(5)),Double.parseDouble(dryflist.get(5)));
-					
+				frazier = getDarcyFrazier(Double.parseDouble(dryplist.get(4)),Double.parseDouble(dryflist.get(4)));	
+				frazier10inch = getDarcyFrazier10inch(Double.parseDouble(dryplist.get(4)),Double.parseDouble(dryflist.get(4)));		
 			}
-			*/
 			
-			cs.newLine("frazier", "" + Myapp.getRound(frazier, 5));
+			
+			cs.newLine("frazier", "" + Myapp.getRound(frazier10inch, 5));
+			
+			//cs.newLine("frazier", "" + Myapp.getRound(frazier, 5));
 			cs.newLine("gurley", "" + Myapp.getRound(gurley, 5));
 			cs.newLine("gurleyflow", "" + Myapp.getRound(gurleyflow, 2));
 			cs.newLine("frazierflow", "" + Myapp.getRound(frazierflow, 2));
@@ -927,7 +932,7 @@ public class NLivetestController implements Initializable {
 			cs.newLine("flow05inch", ""+c.getFlowPointOn(dryplist, dryflist, 50000, 1,
 					0.0182));
 			cs.newLine("flow10inch", ""+c.getFlowPointOn(dryplist, dryflist, 50000, 1,
-					0.36019));
+					0.3));
 			
 			p1list.clear();
 			p2list.clear();
@@ -954,12 +959,12 @@ public class NLivetestController implements Initializable {
 			});
 			System.out.println("Permeability CSV Created");
 			// Openscreen.open("/userinput/Nresult.fxml");
-			LoadAnchor.LoadReportPage();
+			//LoadAnchor.LoadReportPage();
 		} catch (Exception e) {
 
 			e.printStackTrace();
 		}
-		LoadAnchor.LoadCreateTestPage();
+		//LoadAnchor.LoadCreateTestPage();
 
 	}
 
@@ -1013,14 +1018,15 @@ public class NLivetestController implements Initializable {
 			
 			//k = 4 * (ddf / 471.9474) * (1 / (d * d * 3.141592653589793))*(0.01802/ddp);
 
-			k = 4 * (ddf / 471.9474) * (1 / (d * d * 3.141592653589793))*(0.36094/ddp);
+			k = 4 * (ddf / 471.9474) * (1 / (d * d * 3.141592653589793))*(0.3/ddp);
 
 			
+			System.out.println("10in ans  : "+k);
 	
 		} catch (Exception e) {
 		}
 		return "" + k;
-		
+	
 		
 		// k=ddf*60*0.000035314/0.0409029;
 		
@@ -1117,8 +1123,8 @@ public class NLivetestController implements Initializable {
 
 		sc.setAnimated(false);
 		sc.setLegendVisible(false);
-		yAxis.setLabel("F/PT");
-		xAxis.setLabel("Time");
+		yAxis.setLabel("Flow ("+DataStore.getUniteflow()+")");
+		xAxis.setLabel("Pressure ("+DataStore.getUnitepressure()+")");
 		sc.setCreateSymbols(true);
 		series1.setName("Dry-Test");
 		series2.setName("Wet-Test");
@@ -1150,9 +1156,9 @@ public class NLivetestController implements Initializable {
 				getClass().getResource("dynamicgraph2.css").toExternalForm());
 		// sc1.setTitle("Flow Vs Time");
 
-		yAxis1.setLabel("Flow");
+		yAxis1.setLabel("Flow ("+DataStore.getUniteflow()+")");
 		xAxis1.setLabel("Time");
-		yAxis2.setLabel("Pressure");
+		yAxis2.setLabel("Pressure ("+DataStore.getUnitepressure()+")");
 		xAxis2.setLabel("Time");
 
 		sc1.prefWidthProperty().bind(root1.widthProperty());
@@ -1198,7 +1204,7 @@ public class NLivetestController implements Initializable {
 				.startFromZero(true)
 				.thresholdVisible(false)
 				.title("Pressure")
-				.unit("Psi")
+				.unit(DataStore.getUnitepressure())
 
 				.textColor(Color.GRAY)
 				.unitColor(Color.GRAY)
@@ -1647,6 +1653,7 @@ public class NLivetestController implements Initializable {
 										.parseInt(DataStore.getPr());
 								pr = (double) a * maxpre / 65535;
 
+
 								System.out
 										.println(" Pressure Regulator..... : "
 												+ pr);
@@ -1662,35 +1669,71 @@ public class NLivetestController implements Initializable {
 
 								
 								
+								if(DataStore.getUnitepg1().equals("bar"))
+								{
+									pr=DataStore.barToPsi(pr);
+								}
+								else if(DataStore.getUnitepg1().equals("torr"))
+								{
+									pr=DataStore.torrToPsi(pr);
+								}
+								
+								if(DataStore.isabsolutepg1())
+								{
+									pr=pr-14.6;
+									if(pr<0)
+									{
+										pr=0;
+									}
+								}
+								
+								
+								
+								
+							//	pr=pr-14.7;
 								// b1 = b1 - Myapp.pg1offset.get();
 								System.out
 										.println(" Pressure guage1 original..... : "
 												+ a);
 
-								System.out.println(" Pressure guage1 ..... : "
-										+ pr + " torr");
 
-								
-								pr=pr/51.7149;
-								System.out.println(" Pressure gauge1 ..... : "
-										+ pr+" psi");
-								
+								System.out.println(" Pressure guage1 ..... : "
+										+ pr);
+
 							} else if (readData.get(i + 4) == (int) '2') {
 								int maxpre = Integer.parseInt(DataStore
 										.getPg2());
 								System.out.println("Pressure Gauge2 Org Data "
 										+ a);
-							
 								pr = (double) a * maxpre / 65535;
+								
+								
+								
+
+								if(DataStore.getUnitepg2().equals("bar"))
+								{
+									pr=DataStore.barToPsi(pr);
+								}
+								else if(DataStore.getUnitepg2().equals("torr"))
+								{
+									pr=DataStore.torrToPsi(pr);
+								}
+								
+								if(DataStore.isabsolutepg2())
+								{
+									pr=pr-14.6;
+									if(pr<0)
+									{
+										pr=0;
+									}
+								}
+								
+								
 
 								// b1 = b1 - Myapp.pg2offset.get();
-								
 
 								System.out.println(" Pressure gauge2 ..... : "
-										+ pr+" psi");
-								
-							
-								
+										+ pr);
 
 							} else {
 								char c = (char) (int) readData.get(i + 6);
@@ -1719,6 +1762,8 @@ public class NLivetestController implements Initializable {
 										* Integer.parseInt(DataStore.getFc())
 										/ 65535;
 
+								Myapp.ftype.set(3);
+
 								System.out.println("Flow Controller :  ... :"
 										+ fl);
 
@@ -1730,18 +1775,36 @@ public class NLivetestController implements Initializable {
 								fl = (double) a
 										* Integer.parseInt(DataStore.getFm1())
 										/ 65535;
+								
+								if(DataStore.getUnitefm1().equals("sccs"))
+								{
+									fl=DataStore.sccsToSccm(fl);
+								
+								}
+								
+								
 								System.out.println(" Flow meter 1.... : " + a);
 
 								// b=(double)a*8000/65535;
 								System.out.println("Flow Meter 1 : ... :" + fl);
 
+								Myapp.ftype.set(1);
+
 							} else if (readData.get(i + 10) == (int) '2') {
 								fl = (double) a
 										* Integer.parseInt(DataStore.getFm2())
 										/ 65535;
-								//fl=fl-5000;
+								
+								if(DataStore.getUnitefm2().equals("sccs"))
+								{
+									fl=DataStore.sccsToSccm(fl);
+								
+								}
+								
+								
 								// b=(double)a*8000/65535;
 								System.out.println("Flow Meter 2 : ... :" + fl);
+								Myapp.ftype.set(2);
 
 							}
 						}
@@ -1752,121 +1815,28 @@ public class NLivetestController implements Initializable {
 
 						DataStore.livepressure.set(pr);
 
-						setPermiabilityPoints(pr, fl);
-							
+									if (pr > lastpressur && fl > lastflow) {
+								lastpressur = pr;
+								lastflow = fl;
+
+								setPermiabilityPoints(pr, fl);
+
+							} else {
+								
+								if (isSkiptest||conditionpressure<pr) {
+									isSkiptest=true;
+									setPermiabilityPoints(lastpressur, lastflow);
+								}
+								System.out.println("Ignore  : " + pr + " , "
+										+ fl);
+							}
+						
+
+					}
+
+
 					
-						
 
-					}
-
-					if (readData.get(i) == 80 && readData.get(i + 5) == 70) {
-
-						double pr, fl;
-						// System.out.println("Pressure: "+Integer.parseInt(Integer.toHexString(readData.get(i+1))+""+Integer.toHexString(readData.get(i+2))+""+Integer.toHexString(readData.get(i+3)),16));
-						int a = 0, a1, a2, a3;
-						a1 = readData.get(i + 2);
-						a2 = readData.get(i + 3);
-						a3 = readData.get(i + 4);
-						System.out
-								.println("...........................................................\n\nOriginal Pressure Data BIT :"
-										+ a1 + " : " + a2 + " : " + a3);
-
-						a = a1 << 16;
-						a2 = a2 << 8;
-						a = a | a2;
-						a = a | a3;
-						System.out.println("Original Pressure Data ..... : "
-								+ a);
-
-						// double b=(double)a*110/16777215;
-
-						double b1 = 0;
-						// b = Math.round(b*10000)/10000D;
-						if (readData.get(i + 1) == 49) {
-							int maxpre = Integer.parseInt(DataStore.getPr());
-							b1 = (double) a * maxpre / 65535;
-
-							System.out.println(" Pressure Regulator..... : "
-									+ b1);
-
-							DataStore.spr.set(b1);
-
-						} else if (readData.get(i + 1) == 50) {
-							int maxpre = Integer.parseInt(DataStore.getPg1());
-							b1 = (double) a * maxpre / 65535;
-
-							// b1 = b1 - Myapp.pg1offset.get();
-							System.out
-									.println(" Pressure guage1 ..... : " + b1);
-
-							DataStore.spg1.set(b1);
-
-							DataStore.sv3.set(true);
-
-						} else if (readData.get(i + 1) == 51) {
-							int maxpre = Integer.parseInt(DataStore.getPg2());
-							System.out.println("Pressure Gauge2 Org Data " + a);
-							b1 = (double) a * maxpre / 65535;
-
-							// b1 = b1 - Myapp.pg2offset.get();
-
-							System.out
-									.println(" Pressure gauge2 ..... : " + b1);
-
-							DataStore.spg2.set(b1);
-							DataStore.sv3.set(false);
-						}
-
-						a1 = readData.get(i + 7);
-						a2 = readData.get(i + 8);
-						a3 = readData.get(i + 9);
-
-						System.out.println("Original Flow Data BIT :" + a1
-								+ " : " + a2 + " : " + a3);
-						a = a1 << 16;
-						a2 = a2 << 8;
-						a = a | a2;
-						a = a | a3;
-						System.out.println("Original Flow Data ..... : " + a);
-						double b = 0;
-						// System.out.println("BIT VALUE:"+readData.get(i+1));
-						if (readData.get(i + 6) == 49) {
-							b = (double) a
-									* Integer.parseInt(DataStore.getFc())
-									/ 65535;
-
-							System.out.println("Flow Controller :  ... :" + b);
-							DataStore.sfc.set((int) b);
-
-						} else if (readData.get(i + 6) == 50) {
-							b = (double) a
-									* Integer.parseInt(DataStore.getFm1())
-									/ 65535;
-							// b=(double)a*8000/65535;
-							System.out.println("Flow Meter 1 : ... :" + b);
-							DataStore.sfm1.set((int) b);
-							DataStore.sv1.set(true);
-							DataStore.sv2.set(false);
-						} else if (readData.get(i + 6) == 51) {
-							b = (double) a
-									* Integer.parseInt(DataStore.getFm2())
-									/ 65535;
-							// b=(double)a*200000/65535;
-							System.out.println("Flow Meter 2 : ... :" + b);
-							DataStore.sfm2.set((int) b);
-							DataStore.sv1.set(false);
-							DataStore.sv2.set(true);
-						}
-
-						fl = b;
-						DataStore.liveflow.set((double) b);
-						pr = b1;
-						DataStore.livepressure.set(b1);
-
-						setPermiabilityPoints(pr, fl);
-						
-
-					}
 
 					readData.clear();
 					break;

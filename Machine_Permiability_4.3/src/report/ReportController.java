@@ -231,7 +231,7 @@ public class ReportController implements Initializable {
 					*/
 					
 					Pane p=c.drawLinechartWithScatterMultiple(pagination1.getPrefWidth(), pagination1.getPrefHeight(),
-							"Flow vs Pressure", "Pressure (psi)", "Flow (cm3/s)", list_d,
+							"Flow vs Pressure", "Pressure ("+DataStore.getUnitepressure()+")", "Flow ("+DataStore.getUniteflow()+")", list_d,
 							"(3) Incremental Filter-Flow % vs Diameter");
 					
 					charts.put(p);
