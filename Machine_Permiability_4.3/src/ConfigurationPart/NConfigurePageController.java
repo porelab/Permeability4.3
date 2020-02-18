@@ -490,12 +490,12 @@ public class NConfigurePageController implements Initializable {
 
 	/* Tab - 1 Setting save in database */
 	void apllaypro() {
-		selectelowhigh();
+	//	selectelowhigh();
 		applypro.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
 			public void handle(ActionEvent event) {
-
+				selectelowhigh();
 				System.out.println("applypro");
 				/*
 				 * String type="Pro";
@@ -526,21 +526,7 @@ public class NConfigurePageController implements Initializable {
 				
 				Testunitesave();
 
-				String propg1temp, propg2temp, profm1temp, profm2temp, pp1scaletypet, pp2scaletypet;
-
-				// pscale type
-
-				if (pp1scaletype.equals("absolute")) {
-					pp1scaletypet = "0";
-				} else {
-					pp1scaletypet = "1";
-				}
-
-				if (pp2scaletype.equals("absolute")) {
-					pp2scaletypet = "0";
-				} else {
-					pp2scaletypet = "1";
-				}
+				
 
 			}
 		});
@@ -644,18 +630,18 @@ public class NConfigurePageController implements Initializable {
 
 			// absolute and relative pscaletype
 
-			if (pscaletype4p.equals("absolute")) {
+			if (pscaletype4p.equals("relative")) {
 				ab1.setSelected(true);
-				pp1scaletype = "absolute";
-			} else {
 				pp1scaletype = "relative";
+			} else {
+				pp1scaletype = "absolute";
 			}
 
-			if (pscaletype5p.equals("absolute")) {
+			if (pscaletype5p.equals("relative")) {
 				ab2.setSelected(true);
-				pp2scaletype = "absolute";
-			} else {
 				pp2scaletype = "relative";
+			} else {
+				pp2scaletype = "absolute";
 			}
 
 			/* chamber */
