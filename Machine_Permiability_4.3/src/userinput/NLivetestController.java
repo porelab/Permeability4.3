@@ -258,7 +258,7 @@ public class NLivetestController implements Initializable {
 			}
 		
 		
-		calculationdia = 7.2;
+		//calculationdia = 2.3;
 		System.out.println("Plate diameter---> : "+Myapp.splate+" : "+calculationdia);
 		//calculationdia=7;
 	}
@@ -1446,38 +1446,19 @@ public class NLivetestController implements Initializable {
  
 	//set Step size of pressure
 	List<Integer> getStepSize() {
-		
+		int max=2000;
 		int fl = Integer.parseInt(Myapp.accstep);
-		int pr = Integer.parseInt(DataStore.getPr());
-		System.out.println("PR  : "+pr);
+	//	int pr = Integer.parseInt(DataStore.getPr());
+	//	System.out.println("PR  : "+pr);
 		System.out.println("Selected..... : "+fl);
 		fl = 110 - fl;
 
-		double min = (double) pr * stepsizepercentage / 100;
-		double val = 0;
-
-		System.out.println("Stpeps percentage : " + fl + " min : " + min);
-		if (fl == 10) {
-			val = min;
-		} else if (fl == 100) {
-			val = maxpressureinstepsize;
-		} else {
-			double s1 = (maxpressureinstepsize - min) / 9;
-			val = (((fl - 10) / 10) * s1) + min;
-			System.out.println("Val : " + val);
-		}
-
 		
+		int ans=max*fl/100;
 		
-		double fla = (double) val * 65535 / pr;
-		System.out.println("Val in 65535 : " + fla);
-		if (fla < 132) {
-			fla = 132;
-		}
-		System.out.println("Step Size : " + fla);
-		System.out.println("Static step size");
+		System.out.println("Step size calculate : "+ans);
 		
-		List<Integer> data = getValueList(300);
+		List<Integer> data = getValueList(ans);
 		return data;
 	}
 
@@ -1669,7 +1650,7 @@ public class NLivetestController implements Initializable {
 
 								
 								
-								if(DataStore.getUnitepg1().equals("bar"))
+								/*if(DataStore.getUnitepg1().equals("bar"))
 								{
 									pr=DataStore.barToPsi(pr);
 								}
@@ -1686,7 +1667,7 @@ public class NLivetestController implements Initializable {
 										pr=0;
 									}
 								}
-								
+								*/
 								
 								
 								
