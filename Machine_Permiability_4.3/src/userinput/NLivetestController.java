@@ -1448,6 +1448,7 @@ public class NLivetestController implements Initializable {
 	List<Integer> getStepSize() {
 		int max=2000;
 		int fl = Integer.parseInt(Myapp.accstep);
+		
 	//	int pr = Integer.parseInt(DataStore.getPr());
 	//	System.out.println("PR  : "+pr);
 		System.out.println("Selected..... : "+fl);
