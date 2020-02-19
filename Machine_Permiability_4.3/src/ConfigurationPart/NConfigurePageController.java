@@ -268,6 +268,7 @@ public class NConfigurePageController implements Initializable {
 					Toast.makeText(Main.mainstage,
 							"Successfully Save Configuration Data..", 1000,
 							200, 200);
+					
 
 				} else {
 					// System.out.println("Configration Data save d Eroorr.....");

@@ -1729,7 +1729,7 @@ public class Singlepororeport {
 				cell = new PdfPCell(new Phrase());
 				cell.setPaddingLeft(10);
 				cell.setPaddingBottom(10);
-				Image img = Image.getInstance("logo.jpg");
+				Image img = Image.getInstance("logo1.jpg");
 				// img.scalePercent(15);
 				// img.scaleToFit(100, 50);
 				img.scaleToFit(50, 26);

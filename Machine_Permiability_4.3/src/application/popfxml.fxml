@@ -538,7 +538,7 @@
             <Font name="Calibri" size="20.0" />
          </font>
       </RadioButton>
-      <Label layoutX="42.0" layoutY="516.0" prefHeight="25.0" prefWidth="130.0" text="Sample Plate" textFill="#707070bf" AnchorPane.topAnchor="516.0">
+      <Label layoutX="42.0" layoutY="516.0" prefHeight="25.0" prefWidth="130.0" text="Test Type" textFill="#707070bf" AnchorPane.topAnchor="516.0">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>

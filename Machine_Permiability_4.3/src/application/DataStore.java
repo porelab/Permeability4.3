@@ -524,6 +524,7 @@ public class DataStore
 		Database db=new Database();		
 		List<List<String>> ll=db.getData("select fc from admin_screen1");
 		bp =Integer.parseInt((ll.get(0).get(0)));
+		
 		return bp+"";
 	}
 	

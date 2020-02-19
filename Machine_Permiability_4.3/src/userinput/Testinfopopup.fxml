@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane fx:id="root" maxHeight="410.0" maxWidth="485.0" minHeight="180.0" minWidth="335.0" prefHeight="254.0" prefWidth="335.0" style="-fx-border-width: 2; -fx-border-color: #254f94;" stylesheets="@../application/new_application.css" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="userinput.TestinfopopupContoller">
+   <children>
+      <Label layoutX="22.0" layoutY="14.0" styleClass="font-montserrat-semiBold" text="Test Information" textFill="#254f94" AnchorPane.leftAnchor="22.0" AnchorPane.topAnchor="14.0">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Button fx:id="btnclose" layoutX="260.0" layoutY="17.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="49.0" style="-fx-background-radius: 50;" styleClass="background-col-white" text="X" textFill="#254f94" AnchorPane.leftAnchor="260.0" AnchorPane.topAnchor="14.0">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Label layoutX="22.0" layoutY="63.0" prefHeight="32.0" prefWidth="100.0" text="Sample ID " textFill="#070000" AnchorPane.leftAnchor="22.0" AnchorPane.topAnchor="63.0">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblsname" layoutX="124.0" layoutY="69.0" prefHeight="20.0" prefWidth="150.0" style="-fx-background-color: #e1e1e1; -fx-padding: 0 0 0 5;" textFill="#070000" AnchorPane.leftAnchor="124.0" AnchorPane.topAnchor="69.0">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="22.0" layoutY="94.0" prefHeight="32.0" prefWidth="100.0" text="Test Type" textFill="#070000" AnchorPane.leftAnchor="22.0" AnchorPane.topAnchor="94.0">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+      <Label fx:id="lbltesttype" layoutX="124.0" layoutY="100.0" prefHeight="20.0" prefWidth="150.0" style="-fx-background-color: #e1e1e1; -fx-padding: 0 0 0 5;" textFill="#070000" AnchorPane.leftAnchor="124.0" AnchorPane.topAnchor="100.0">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="22.0" layoutY="124.0" prefHeight="32.0" prefWidth="100.0" text="Sample Plate" textFill="#070000" AnchorPane.leftAnchor="22.0" AnchorPane.topAnchor="124.0">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblsplate" layoutX="124.0" layoutY="130.0" prefHeight="20.0" prefWidth="150.0" style="-fx-background-color: #e1e1e1; -fx-padding: 0 0 0 5;" textFill="#070000" AnchorPane.leftAnchor="124.0" AnchorPane.topAnchor="130.0">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="22.0" layoutY="193.0" prefHeight="32.0" prefWidth="100.0" text="Stability Type" textFill="#070000" AnchorPane.leftAnchor="22.0" AnchorPane.topAnchor="188.0">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblstability" layoutX="125.0" layoutY="194.0" prefHeight="20.0" prefWidth="150.0" style="-fx-background-color: #e1e1e1; -fx-padding: 0 0 0 5;" textFill="#070000" AnchorPane.leftAnchor="125.0" AnchorPane.topAnchor="194.0">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="22.0" layoutY="156.0" prefHeight="32.0" prefWidth="100.0" text="Test Accuracy" textFill="#070000" AnchorPane.leftAnchor="22.0" AnchorPane.topAnchor="156.0">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+      <Label fx:id="lbltestacc" layoutX="124.0" layoutY="162.0" prefHeight="20.0" prefWidth="150.0" style="-fx-background-color: #e1e1e1; -fx-padding: 0 0 0 5;" textFill="#070000" AnchorPane.leftAnchor="124.0" AnchorPane.topAnchor="162.0">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

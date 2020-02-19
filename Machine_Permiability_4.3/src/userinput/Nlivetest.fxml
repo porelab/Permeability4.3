@@ -107,7 +107,7 @@
          </font>
       </JFXToggleButton>
       <Rectangle fx:id="manualblock" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="47.0" layoutX="224.0" layoutY="659.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" visible="false" width="501.0" />
-      <Label fx:id="lblfilename" alignment="BASELINE_LEFT" contentDisplay="CENTER" layoutX="18.0" layoutY="10.0" prefHeight="53.0" prefWidth="341.0" styleClass="font-montserrat-medium" text="file name" textFill="WHITE">
+      <Label fx:id="lblfilename" alignment="BASELINE_LEFT" contentDisplay="CENTER" layoutX="18.0" layoutY="10.0" prefHeight="53.0" prefWidth="341.0" styleClass="font-montserrat-medium" text="file name" textFill="WHITE" AnchorPane.leftAnchor="65.0">
          <font>
             <Font size="36.0" />
          </font>
@@ -123,8 +123,20 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <Label fx:id="lbltesttype" alignment="BASELINE_LEFT" contentDisplay="CENTER" layoutX="23.0" layoutY="55.0" prefHeight="29.0" prefWidth="108.0" styleClass="font-montserrat-medium" text="Sample Id" textFill="WHITE" />
+      <Label fx:id="lbltesttype" alignment="BASELINE_LEFT" contentDisplay="CENTER" layoutX="23.0" layoutY="55.0" prefHeight="29.0" prefWidth="108.0" styleClass="font-montserrat-medium" text="Sample Id" textFill="WHITE" AnchorPane.leftAnchor="65.0" />
       <Label fx:id="lblbpc" alignment="BASELINE_LEFT" contentDisplay="CENTER" layoutX="170.0" layoutY="57.0" prefHeight="29.0" prefWidth="160.0" styleClass="font-montserrat-medium" textFill="WHITE" />
-      <ToggleButton fx:id="chamberonoff" layoutX="1006.0" layoutY="32.0" mnemonicParsing="false" text="Chamber Open" />
+      <ToggleButton fx:id="chamberonoff" layoutX="941.0" layoutY="32.0" mnemonicParsing="false" text="Chamber Open" />
+      <Button fx:id="btninfo" layoutX="78.0" layoutY="3.0" maxHeight="40.0" maxWidth="40.0" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" opacity="0.65" prefHeight="40.0" prefWidth="40.0" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="20.0">
+         <graphic>
+            <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@info_icon.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
    </children>
 </AnchorPane>

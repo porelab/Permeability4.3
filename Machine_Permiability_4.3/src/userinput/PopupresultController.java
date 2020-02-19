@@ -80,7 +80,7 @@ public class PopupresultController implements Initializable {
 	//pagination1.getChildren().add(c.drawBarchart(pagination1.getPrefWidth(),pagination1.getPrefHeight(),"Pore size Distribution", "Diameter (micron)", "Percentage (%)", list_d.get(0).getDistributionChart(list_d.get(0).getValuesOf(list_d.get(0).data.get("diameter")+""),list_d.get(0).getValuesOf(list_d.get(0).data.get("psd")+""),30)));
 	//pagination1.getChildren().add(c.drawBarchartNumber(pagination1.getPrefWidth(),pagination1.getPrefHeight(),"Pore size Distribution", "Diameter (micron)", "Percentage (%)", list_d.get(0).getValuesOf(list_d.get(0).data.get("diameter").toString()),list_d.get(0).getValuesOf(list_d.get(0).data.get("psd").toString())));
 	
-		pagination1.getChildren().add(c.drawLinechart(pagination1.getPrefWidth(),pagination1.getPrefHeight(),"Pore size Distribution", "Diameter (micron)", "Percentage (%)",list_d,false,8,10,"(4) Poresize % vs Diameter"));
+		pagination1.getChildren().add(c.drawLinechart(pagination1.getPrefWidth(),pagination1.getPrefHeight(),"Pressure vs Flow", "Pressure (psi)", "Flow (sccs)",list_d,false,8,10,"(4) Pressure vs Flow"));
 		
 		
 		lblsamplename.setText(""+dr.data.get("sample"));

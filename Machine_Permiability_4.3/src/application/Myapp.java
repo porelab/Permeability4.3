@@ -59,7 +59,8 @@ public class Myapp {
 	public static DoubleProperty fm2offset=new SimpleDoubleProperty(0);
 	
 	
-	public static SimpleIntegerProperty ftype =new SimpleIntegerProperty(1);
+	public static SimpleIntegerProperty ftype =new SimpleIntegerProperty(7);
+	public static SimpleIntegerProperty ptype =new SimpleIntegerProperty(7);
 	public static SimpleBooleanProperty isInternetConnected=new SimpleBooleanProperty(false);
 	
 	public static String oldpass;

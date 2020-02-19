@@ -108,7 +108,7 @@ public class NLivetestController implements Initializable {
 
 	@FXML
 	private Button btnabr, starttestdry, starttest, stoptest, starttestwet,
-			startautotest;
+			startautotest,btninfo;
 
 	int thval = 3000;
 	int delayinauto = 2500;
@@ -1260,8 +1260,7 @@ public class NLivetestController implements Initializable {
 		// v.getChildren().add(ll2);
 		// v.getChildren().add(ll22);
 		// v.getChildren().add(gauge);
-
-		Myapp.ftype.addListener(new ChangeListener<Number>() {
+		Myapp.ptype.addListener(new ChangeListener<Number>() {
 
 			@Override
 			public void changed(ObservableValue<? extends Number> observable,
@@ -1273,12 +1272,39 @@ public class NLivetestController implements Initializable {
 
 					@Override
 					public void run() {
+						System.out.println("In Pregsruree agabe");
+						if (Integer.parseInt("" + newValue) == 1) {
+							gauge5.setTitle("Pressure Gauge 1");
+						} else {
+							gauge5.setTitle("Pressure Gauge 2");
+						}
+						
+					}
+				});
 
+			}
+
+		});
+	
+		Myapp.ftype.addListener(new ChangeListener<Number>() {
+
+			@Override
+			public void changed(ObservableValue<? extends Number> observable,
+					Number oldValue, Number newValue) {
+
+				String pp = "" + newValue;
+					
+				System.out.println("This is new valie"+pp);
+				Platform.runLater(new Runnable() {
+
+					@Override
+					public void run() {
+						System.out.println("In flow meter");
 						// TODO Auto-generated method stub
 						if (Integer.parseInt("" + newValue) == 1) {
-							// ll22.setText("Flow Type : Low");
+							gauge.setTitle("Flow Meter 1");
 						} else {
-							// ll22.setText("Flow Type : High");
+							gauge.setTitle("Flow Meter 2");
 						}
 					}
 				});
@@ -1301,6 +1327,7 @@ public class NLivetestController implements Initializable {
 					public void run() {
 						// TODO Auto-generated method stub
 						gauge5.setValue((double) newValue);
+						
 
 					}
 				});
@@ -1361,10 +1388,22 @@ public class NLivetestController implements Initializable {
 	//set button clicks
 	void setButtons() {
 
+		btninfo.getStyleClass().add("transperant_comm");
 		btnabr.getStyleClass().add("transperant_comm");
 		startautotest.getStyleClass().add("transperant_comm");
 		stoptest.getStyleClass().add("transperant_comm");
+		
 
+		btninfo.setOnAction(new EventHandler<ActionEvent>() {
+			
+			@Override
+			public void handle(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				testinfo();
+				System.out.println("Method infpo Call");
+			}
+		});
+		
 		btnabr.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
@@ -1376,6 +1415,15 @@ public class NLivetestController implements Initializable {
 
 	}
 
+	
+	//set test stop popup
+	void testinfo() {
+
+		mydia = new MyDialoug(Main.mainstage, "/userinput/Testinfopopup.fxml");
+	
+		mydia.showDialoug();
+
+	}
 	
 	//set test stop popup
 	void testabourd() {
@@ -1678,7 +1726,7 @@ public class NLivetestController implements Initializable {
 										.println(" Pressure guage1 original..... : "
 												+ a);
 
-
+								Myapp.ptype.set(1);
 								System.out.println(" Pressure guage1 ..... : "
 										+ pr);
 
@@ -1711,7 +1759,7 @@ public class NLivetestController implements Initializable {
 								}
 								
 								
-
+								Myapp.ptype.set(2);
 								// b1 = b1 - Myapp.pg2offset.get();
 
 								System.out.println(" Pressure gauge2 ..... : "
