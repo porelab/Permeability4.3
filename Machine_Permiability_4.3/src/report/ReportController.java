@@ -553,15 +553,15 @@ public class ReportController implements Initializable {
 		double avgbp = 0, avggur = 0, avgfra = 0;
 		String fff = null, wff = null, gurff = null, fraff = null;
 
-		BigDecimal bb = BigDecimal.valueOf(0);
 		List<String> clrs = getColorMultiple();
 		for (int i = 0; i < list_d.size(); i++) {
 
-			fff = "" + list_d.get(i).filename;
-			wff = "" + DataStore.ConvertPressure(list_d.get(i).data.get("darcy avg").toString());
-			gurff = "" + DataStore.ConvertDiameter(list_d.get(i).data.get("gurley").toString());
-			fraff = "" + DataStore.ConvertPressure(list_d.get(i).data.get("frazier").toString());
-
+			fff = "" +   list_d.get(i).filename;
+			wff = "" +   DataStore.getconvertToSimpleNumber(DataStore.getRoundAuto(list_d.get(i).data.get("darcy avg").toString()));
+			gurff = "" + DataStore.getconvertToSimpleNumber(DataStore.getRoundAuto(list_d.get(i).data.get("gurley").toString()));
+			fraff = "" + DataStore.getconvertToSimpleNumber(DataStore.getRoundAuto(list_d.get(i).data.get("frazier").toString()));
+			
+		
 			avgbp = avgbp + Double.parseDouble(wff);
 			avggur = avggur + Double.parseDouble(gurff);
 			avgfra = avgfra + Double.parseDouble(fraff);
@@ -578,9 +578,9 @@ public class ReportController implements Initializable {
 		
 
 		
-		lblgurl.setText("" +Myapp.getRound(ansgur, DataStore.getRoundOff()));
-		lblfraz.setText("" +Myapp.getRound(ansfrz, DataStore.getRoundOff()));
-		lbldarcy.setText("" +Myapp.getRound(ansdavg, DataStore.getRoundOff()));
+		lblgurl.setText("" +DataStore.getconvertToSimpleNumber(Myapp.getRound(ansgur, DataStore.getRoundOff())));
+		lblfraz.setText("" +DataStore.getconvertToSimpleNumber(Myapp.getRound(ansfrz, DataStore.getRoundOff())));
+		lbldarcy.setText("" +DataStore.getconvertToSimpleNumber(Myapp.getRound(ansdavg, DataStore.getRoundOff())));
 
 		lblunitedarcy.setText("(darcy)");
 		lblunitefraz.setText(" ("+DataStore.getUnitefrazier()+")");

@@ -1733,7 +1733,8 @@ public class Multiplepororeport {
 			for (int k1 = 0; k1 < dpress.size(); k1++) {
 				List<String> temp = new ArrayList<String>();
 
-				String press = ""+DataStore.ConvertPressure(dpress.get(k1));
+				String press = ""+DataStore.getconvertToSimpleNumber(DataStore.ConvertPressure(dpress.get(k)));
+				//String press = ""+DataStore.ConvertPressure(dpress.get(k1));
 				temp.add(press);
 
 				String wetflow = ""+DataStore.ConvertFlow(dflow.get(k1));

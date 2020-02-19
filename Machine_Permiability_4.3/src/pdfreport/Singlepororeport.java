@@ -1511,7 +1511,7 @@ public class Singlepororeport {
 		for (int k = 0; k < wpressur.size(); k++) {
 			List<String> temp = new ArrayList<String>();
 
-			String press = ""+DataStore.ConvertPressure(wpressur.get(k));
+			String press = ""+DataStore.getconvertToSimpleNumber(DataStore.ConvertPressure(wpressur.get(k)));
 
 			temp.add(press);
 

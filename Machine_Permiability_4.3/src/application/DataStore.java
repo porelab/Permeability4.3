@@ -1,10 +1,9 @@
 package application;
 
-import gnu.io.CommPort;
-import gnu.io.SerialPort;
-
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -14,7 +13,8 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 
 import application.SerialCommunicator.SerialReader;
 import communicationProtocol.Mycommand;
-import toast.Toast;
+import gnu.io.CommPort;
+import gnu.io.SerialPort;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleDoubleProperty;
@@ -26,6 +26,7 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.stage.Stage;
+import toast.Toast;
 
 //this class is for data flow and data storing while page changes
 public class DataStore 
@@ -684,14 +685,14 @@ public class DataStore
 		double ans;
 		if (DataStore.getUniteflow().equals("sccs")) {
 
-			ans = toSccs(flow);
+			ans = toSccs(flow)*60;
 
 		} 
 		else if (DataStore.getUniteflow().equals("cfm")) {
-			ans = DataStore.toCfm(flow);
+			ans = DataStore.toCfm(flow)*60;
 		}
 		else {
-			ans = Double.parseDouble(flow);
+			ans = Double.parseDouble(flow)*60;
 		}
 		return Myapp.getRoundDouble(ans, getRoundOff());
 	}
@@ -732,6 +733,30 @@ public class DataStore
 		return Myapp.getRoundDouble(diameter, getRoundOff());
 	}
 
+	
+	
+
+ public static String getconvertToSimpleNumber(double number) {
+    // Check if in scientific notation
+    if (String.valueOf(number).toLowerCase().contains("e")) {
+             NumberFormat formatter = new DecimalFormat();
+        formatter.setMaximumFractionDigits(25);
+        return formatter.format(number);
+    } else
+        return String.valueOf(number);
+}
+ public static String getconvertToSimpleNumber(String num) {
+	    // Check if in scientific notation
+	 double number=Double.parseDouble(num);
+	    if (String.valueOf(number).toLowerCase().contains("e")) {
+	             NumberFormat formatter = new DecimalFormat();
+	        formatter.setMaximumFractionDigits(25);
+	        return formatter.format(number);
+	    } else
+	        return String.valueOf(number);
+	}
+	
+	
 	public static double ConvertPressure(String pressure) {
 		double ans;
 		if (DataStore.getUnitepressure().equals("bar")) {
@@ -756,64 +781,54 @@ public class DataStore
 
 	public static double ConvertGurely(String gurely) {
 		double ans;
-		if (DataStore.getUnitepressure().equals("bar")) {
-			ans = DataStore.toBar(gurely);
-		}  else {
+		
 			ans = Double.parseDouble(gurely);
-		}
+		
 		return Myapp.getRoundDouble(ans, getRoundOff());
 	}
 
 	public static double ConvertGurely(Double gurely) {
 
-		if (DataStore.getUnitepressure().equals("bar")) {
-			
-		} 
+	
 		return Myapp.getRoundDouble(gurely, getRoundOff());
 	}
 
 	public static double ConvertFrazier(String frazier) {
 		double ans;
-		if (DataStore.getUnitepressure().equals("bar")) {
-			ans = DataStore.toBar(frazier);
-		} else if (DataStore.getUnitegurely().equals("torr")) {
-			ans = DataStore.toTorr(frazier);
-		} else {
+	
 			ans = Double.parseDouble(frazier);
-		}
+		
 		return Myapp.getRoundDouble(ans, getRoundOff());
 	}
 
 	public static double ConvertFrazier(Double frazier) {
 
-		if (DataStore.getUnitepressure().equals("bar")) {
-			
-		} 
+		
 		return Myapp.getRoundDouble(frazier, getRoundOff());
 	}
 	
 	public static List<String> ConvertFlow(List<String> flow) {
 
 		List<String> data=new ArrayList<String>();
-		int round=4;//getRoundOff();
+		int round=5;//getRoundOff();
 		
 		if (DataStore.getUniteflow().equals("sccs")) {
 			for(int i=0;i<flow.size();i++)
 			{
-				data.add(Myapp.getRound(toSccs(flow.get(i)), round));
+				data.add(Myapp.getRound(toSccs(flow.get(i))*60, round));
 			}
 		
 		} else if (DataStore.getUnitepressure().equals("cfm")) {
 			for(int i=0;i<flow.size();i++)
 			{
-				data.add(Myapp.getRound(toCfm(flow.get(i)), round));
+				data.add(Myapp.getRound(toCfm(flow.get(i))*60, round));
 			}
 		}
 		else
 		{
 			for(int i=0;i<flow.size();i++)
 			{
-				data.add(""+Myapp.getRound(flow.get(i), round));
+				data.add(""+Myapp.getRound(Double.parseDouble(flow.get(i))*60, round));
 			}
 		}
 		
@@ -825,7 +840,7 @@ public class DataStore
 	public static List<String> ConvertDiameter(List<String> diameter) {
 
 		List<String> data=new ArrayList<String>();
-		int round=4;getRoundOff();
+		int round=6;//getRoundOff();
 		
 		if (DataStore.getUnitediameter().equals("nm")) {
 			for(int i=0;i<diameter.size();i++)
@@ -849,7 +864,7 @@ public class DataStore
 	public static List<Double> ConvertDiameterDouble(List<String> diameter) {
 
 		List<Double> data=new ArrayList<Double>();
-		int round=4;getRoundOff();
+		int round=6;//getRoundOff();
 		
 		if (DataStore.getUnitediameter().equals("nm")) {
 			for(int i=0;i<diameter.size();i++)
@@ -874,26 +889,23 @@ public class DataStore
 	public static List<String> ConvertPressure(List<String> pressure) {
 
 		List<String> data=new ArrayList<String>();
-		int round=4;//getRoundOff();
+
 		
 		if (DataStore.getUnitepressure().equals("bar")) {
 			for(int i=0;i<pressure.size();i++)
 			{
-				data.add(Myapp.getRound(toBar(pressure.get(i)), round));
+				data.add(toBar(pressure.get(i))+"");
 			}
 		
 		} else if (DataStore.getUnitepressure().equals("torr")) {
 			for(int i=0;i<pressure.size();i++)
 			{
-				data.add(Myapp.getRound(toTorr(pressure.get(i)), round));
+				data.add(toTorr(pressure.get(i))+"");
 			}
 		}
 		else
 		{
-			for(int i=0;i<pressure.size();i++)
-			{
-				data.add(""+Myapp.getRound(pressure.get(i), round));
-			}
+		data.addAll(pressure);
 		}
 		
 		return data;
@@ -910,6 +922,16 @@ public class DataStore
 		return roundoff;
 		
 		
+	}
+	
+	public static double getRoundAuto(String d)
+	{
+		return Myapp.getRound(d, getRoundOff());
+	}
+	
+	public static double getRoundAuto(double d)
+	{
+		return Myapp.getRound(d+"", getRoundOff());
 	}
 	
 	public static double barToPsi(double bar)
