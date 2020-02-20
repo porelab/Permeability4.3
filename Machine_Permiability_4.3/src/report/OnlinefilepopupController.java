@@ -7,19 +7,34 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
+import java.util.regex.Pattern;
 
+import com.google.api.core.ApiFuture;
+import com.google.cloud.firestore.DocumentReference;
+import com.google.cloud.firestore.DocumentSnapshot;
+import com.jfoenix.controls.JFXSpinner;
+
+import application.Main;
+import application.Myapp;
+import data_read_write.DatareadN;
+import extrafont.Myfont;
+import firebase.FirebaseConnect;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -28,20 +43,11 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import toast.MyDialoug;
 import toast.Toast;
-import application.Main;
-import application.Myapp;
-
-import com.google.api.core.ApiFuture;
-import com.google.cloud.firestore.DocumentReference;
-import com.google.cloud.firestore.DocumentSnapshot;
-import com.jfoenix.controls.JFXSpinner;
-
-import data_read_write.DatareadN;
-import extrafont.Myfont;
-import firebase.FirebaseConnect;
 
 public class OnlinefilepopupController implements Initializable {
 
+	int maxrow=3;
+	
 	@FXML
 	AnchorPane root1;
 
@@ -56,6 +62,9 @@ public class OnlinefilepopupController implements Initializable {
 
 	@FXML
 	Label lblsuccess;
+	
+	@FXML
+	TextField txtsearch;
 
 	static Image image;
 
@@ -64,7 +73,8 @@ public class OnlinefilepopupController implements Initializable {
 
 	static List<String> onlinefoldersname;
 
-	Myfont fontss = new Myfont(14);
+	Myfont fontss = new Myfont(12);
+	List<String> folders;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -73,7 +83,7 @@ public class OnlinefilepopupController implements Initializable {
 		scroll.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
 		onlinefoldersname = new ArrayList<String>();
 		spin.setVisible(true);
-		
+		/*Get All Online File List*/
 			new Thread(new Runnable() {
 				
 				@Override
@@ -89,6 +99,7 @@ public class OnlinefilepopupController implements Initializable {
 				}
 			}).start();
 		
+			/*cloud sample Dialougbox Close*/
 		btncancel.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
@@ -100,6 +111,7 @@ public class OnlinefilepopupController implements Initializable {
 			}
 		});
 
+		/*Sample Download Starting..*/
 		starttest.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
@@ -119,9 +131,36 @@ public class OnlinefilepopupController implements Initializable {
 
 			}
 		});
+		
+		txtsearch.setOnKeyReleased(new EventHandler<Event>() {
+
+			@Override
+			public void handle(Event arg0) {
+				
+				if(folders!=null)
+				{
+					
+					if(!folders.isEmpty())
+					{
+						
+						
+						System.out.println(" ------ > New search  :  "+txtsearch.getText());
+
+						getOnlineFolderList(folders,txtsearch.getText());
+						
+						
+					}
+					
+					
+					
+				}
+				
+			}
+		});
 
 	}
 
+	/*Get Online File List*/
 	void getOnlineList() throws UnknownHostException
 	{
 		try {
@@ -141,7 +180,7 @@ public class OnlinefilepopupController implements Initializable {
 
 				Map<String, Object> dddd = ddd.get().getData();
 
-				List<String> folders = (List<String>) dddd.get("files_name");
+				folders = (List<String>) dddd.get("files_name");
 				System.out.println("Folders : "+folders);
 				onlinefoldersname.clear();
 				onlinefoldersname.addAll(folders);
@@ -153,8 +192,12 @@ public class OnlinefilepopupController implements Initializable {
 					public void run() {
 						// TODO Auto-generated method stub
 					
+						txtsearch.setVisible(true);
 						spin.setVisible(false);
-						getOnlineFolderList(folders);
+						txtsearch.setPromptText("search from "+folders.size()+" samples");
+						getOnlineFolderList(folders,"");
+						
+						
 
 					}
 				});
@@ -165,6 +208,7 @@ public class OnlinefilepopupController implements Initializable {
 					public void run() {
 						// TODO Auto-generated method stub
 
+						//txtsearch.setVisible(true);
 						spin.setVisible(false);
 						lblsuccess.setVisible(true);
 						lblsuccess.setText("No data found");
@@ -180,6 +224,7 @@ public class OnlinefilepopupController implements Initializable {
 				public void run() {
 					// TODO Auto-generated method stub
 
+					//txtsearch.setVisible(true);
 					spin.setVisible(false);
 					lblsuccess.setVisible(true);
 					lblsuccess.setText("No data found");
@@ -190,6 +235,7 @@ public class OnlinefilepopupController implements Initializable {
 		}
 	}
 
+	/*Download File Save Path*/
 	void saveFile() {
 		try{
 		if (fileno >= listofdownloadfile.size()) {
@@ -267,6 +313,7 @@ public class OnlinefilepopupController implements Initializable {
 		}
 	}
 
+	/*Create Save to Cloud*/
 	void createCsvporometers(Map<String, Object> dr, String uid,
 			String samname, String testname) {
 
@@ -298,29 +345,115 @@ public class OnlinefilepopupController implements Initializable {
 
 	}
 
-	void getOnlineFolderList(List<String> list) {
+	/*Display Online File List*/
+	void getOnlineFolderList(List<String> list,String name) {
 
-		VBox v = new VBox(30);
-		v.setPadding(new Insets(0, 0, 10, 30));
-		HBox h = new HBox(30);
-		for (int i = 0; i < list.size(); i++) {
-			int num = i % 5;
-			if (num == 0) {
-				h = new HBox(30);
-				v.getChildren().add(h);
+		
+		
+		if(name.equals(""))
+		{
+			VBox v = new VBox(10);
+			v.setPadding(new Insets(0, 0, 10, 30));
+			HBox h = new HBox(10);
+			for (int i = 0; i < list.size(); i++) {
+				
+			
+				int num = i % maxrow;
+				if (num == 0) {
+					h = new HBox(10);
+					v.getChildren().add(h);
+				}
 
+				//System.out.println("Sample add : "+list.get(i));
+				Node vtemp = getVBoxofFolderOnline(list.get(i));
+				h.getChildren().add(vtemp);
+			
+				
 			}
 
-			VBox vtemp = getVBoxofFolderOnline(list.get(i));
+			scroll.setContent(v);
+		}
+		else
+		{
+		VBox v = new VBox(10);
+		v.setPadding(new Insets(0, 0, 10, 30));
+		HBox h = new HBox(10);
+		int num=0;
+		for (int i = 0; i < list.size(); i++) {
+			
+			if(Pattern.compile(Pattern.quote(name), Pattern.CASE_INSENSITIVE).matcher(list.get(i)).find())
+			{
+			
+			if (num % maxrow == 0) {
+				h = new HBox(10);
+				v.getChildren().add(h);
+			}
+
+			System.out.println("Sample add : "+list.get(i));
+			Node vtemp = getVBoxofFolderOnline(list.get(i));
 			h.getChildren().add(vtemp);
+			num++;
+		
+			}
 		}
 
 		scroll.setContent(v);
-		System.out.println("set view");
+		}
+		//System.out.println("set view");
 
 	}
 
-	VBox getVBoxofFolderOnline(String name) {
+	/*Sample List Set Image and Button Click Event*/
+	HBox getVBoxofFolderOnline(String name) {
+		HBox v1 = new HBox(8);
+
+		image = new Image(getClass().getResourceAsStream("fl.png"));
+		ImageView imageView = new ImageView(image);
+		imageView.setFitWidth(40);
+		imageView.setFitHeight(40);
+		
+		
+		
+
+		CheckBox chk = new CheckBox();
+		chk.setText("" + name);
+		chk.setWrapText(true);
+		int wid=200;
+		chk.setMinWidth(wid);
+		chk.setMaxWidth(wid);
+		chk.setPrefWidth(wid);
+		chk.setPrefHeight(40);
+		chk.setMinHeight(40);
+		chk.setMaxHeight(40);
+//	/	v1.setAlignment(Pos.CENTER);
+	
+		chk.setFont(fontss.getM_M());
+		chk.setTextFill(Color.web("727376"));
+
+		chk.selectedProperty().addListener(new ChangeListener<Boolean>() {
+			@Override
+			public void changed(ObservableValue<? extends Boolean> observable,
+					Boolean oldValue, Boolean newValue) {
+				if (newValue) {
+					if (!listofdownloadfile.contains(chk.getText())) {
+						listofdownloadfile.add(chk.getText());
+					}
+				} else {
+					if (!listofdownloadfile.contains(chk.getText())) {
+						listofdownloadfile.remove(chk.getText());
+					}
+				}
+			}
+		});
+		v1.setFillHeight(true);          // Added this
+		v1.setAlignment(Pos.CENTER_LEFT);
+		v1.getChildren().addAll(imageView, chk);
+
+		return v1;
+	}
+	
+	
+	VBox getVBoxofFolderOnlineOld(String name) {
 		VBox v1 = new VBox(15);
 
 		image = new Image(getClass().getResourceAsStream("fl.png"));

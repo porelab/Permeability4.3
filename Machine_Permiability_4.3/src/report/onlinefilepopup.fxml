@@ -22,7 +22,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <ImageView fitHeight="65.0" fitWidth="800.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="53.0" fitWidth="456.0" pickOnBounds="true">
          <image>
             <Image url="@quickh.png" />
          </image>
@@ -46,7 +46,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Label layoutX="39.0" layoutY="12.0" styleClass="font-montserrat-semiBold" text="Samples" textFill="WHITE">
+      <Label layoutX="25.0" layoutY="12.0" styleClass="font-montserrat-semiBold" text="Cloud" textFill="WHITE">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
@@ -61,6 +61,8 @@
             <Font name="System Bold" size="16.0" />
          </font>
       </Label>
+      <Rectangle arcHeight="500.0" arcWidth="30.0" fill="#2197ff00" height="35.0" layoutX="137.0" layoutY="18.0" stroke="#bfb9b9" strokeType="INSIDE" strokeWidth="2.0" width="308.0" />
+      <TextField fx:id="txtsearch" layoutX="146.0" layoutY="21.0" prefHeight="25.0" prefWidth="284.0" promptText="Search Sample" styleClass="uinputtextbox1" />
    </children>
    <stylesheets>
       <URL value="@../application/new_application.css" />
