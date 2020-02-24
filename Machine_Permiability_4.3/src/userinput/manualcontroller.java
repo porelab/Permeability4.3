@@ -19,6 +19,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -798,6 +799,26 @@ public class manualcontroller implements Initializable {
 		// labp2.textProperty().bind(DataStore.sspg2);
 
 		ap5.getChildren().add(gauge6);
+		
+		pr.setOnMouseClicked(new EventHandler<Event>() {
+
+			@Override
+			public void handle(Event event) {
+				// TODO Auto-generated method stub
+				setVitual(pr, null, "Pressure Regulator", null);
+			}
+		});
+		
+		fc.setOnMouseClicked(new EventHandler<Event>() {
+
+			@Override
+			public void handle(Event event) {
+				// TODO Auto-generated method stub
+				setVitual(fc, null, "Flow controller", null);
+			}
+		});
+		
+		
 
 		pr.setOnAction(new EventHandler<ActionEvent>() {
 
@@ -1142,6 +1163,30 @@ public class manualcontroller implements Initializable {
 				e.printStackTrace();
 			}
 
+		}
+
+	}
+	/* Open Keyboard Scren stage. */
+	public static void setVitual(TextField tf, TextField nextTf, String lbl,
+			String nextlbl) {
+		try {
+			// root2 =
+			// FXMLLoader.load(getClass().getClassLoader().getResource("/application/keyboard.fxml"));
+			Myapp.currTf = tf;
+			Myapp.nextTf = nextTf;
+			Myapp.nextlbl = nextlbl;
+			Myapp.lblkeyboard.setText(lbl);
+			Myapp.virtualStage.show();
+
+			// Hide this current window (if this is what you want)
+			// ((Node)(event.getSource())).getScene().getWindow().hide();
+
+			// Set position of second window, related to primary window.
+			// stage1.setX(primaryStage.getX() + 200);
+			// stage1.setY(primaryStage.getY() + 100);
+
+		} catch (Exception ex) {
+			ex.printStackTrace();
 		}
 
 	}

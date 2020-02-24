@@ -179,15 +179,15 @@
                                  </font>
                               </Label>
                               <Rectangle arcHeight="300.0" arcWidth="30.0" fill="#1f93ff00" height="28.0" layoutX="693.0" layoutY="43.0" stroke="#bfb9b9" strokeType="INSIDE" strokeWidth="2.0" style="-fx-fill: white;" visible="false" width="46.0" />
-                              <Line endX="227.0" layoutX="146.0" layoutY="126.0" startX="-100.0" stroke="#bfb9b9" strokeWidth="2.0" />
+                              <Line endX="850.0" layoutX="146.0" layoutY="126.0" startX="-100.0" stroke="#bfb9b9" strokeWidth="2.0" />
                               <Line layoutX="394.0" layoutY="63.0" rotate="90.0" startX="-50.0" stroke="#bfb9b9" strokeWidth="2.0" visible="false" />
                               <Line layoutX="590.0" layoutY="63.0" rotate="90.0" startX="-50.0" stroke="#bfb9b9" strokeWidth="2.0" visible="false" />
-                              <Line endX="227.0" layoutX="144.0" layoutY="198.0" startX="-100.0" stroke="#bfb9b9" strokeWidth="2.0" />
+                              <Line endX="850.0" layoutX="144.0" layoutY="198.0" startX="-100.0" stroke="#bfb9b9" strokeWidth="2.0" />
                               <Line layoutX="394.0" layoutY="135.0" rotate="90.0" startX="-50.0" stroke="#bfb9b9" strokeWidth="2.0" visible="false" />
                               <Line layoutX="590.0" layoutY="135.0" rotate="90.0" startX="-50.0" stroke="#bfb9b9" strokeWidth="2.0" visible="false" />
-                              <Line endX="227.0" layoutX="145.0" layoutY="271.0" startX="-100.0" stroke="#bfb9b9" strokeWidth="2.0" />
+                              <Line endX="850.0" layoutX="145.0" layoutY="271.0" startX="-100.0" stroke="#bfb9b9" strokeWidth="2.0" />
                               <Line layoutX="395.0" layoutY="208.0" rotate="90.0" startX="-50.0" stroke="#bfb9b9" strokeWidth="2.0" visible="false" />
-                              <Line endX="227.0" layoutX="144.0" layoutY="340.0" startX="-100.0" stroke="#bfb9b9" strokeWidth="2.0" />
+                              <Line endX="850.0" layoutX="144.0" layoutY="340.0" startX="-100.0" stroke="#bfb9b9" strokeWidth="2.0" />
                               <Line layoutX="394.0" layoutY="277.0" rotate="90.0" startX="-50.0" stroke="#bfb9b9" strokeWidth="2.0" visible="false" />
                               <Line endX="227.0" layoutX="143.0" layoutY="419.0" startX="-100.0" stroke="#bfb9b9" strokeWidth="2.0" AnchorPane.leftAnchor="42.0" />
                               <Line endX="227.0" layoutX="142.0" layoutY="448.0" startX="-100.0" stroke="#bfb9b9" strokeWidth="2.0" visible="false" />
@@ -196,16 +196,16 @@
                               <Line layoutX="397.0" layoutY="246.0" rotate="90.0" startX="-50.0" stroke="#bfb9b9" strokeWidth="2.0" AnchorPane.leftAnchor="346.0" />
                               <Line layoutX="397.0" layoutY="315.0" rotate="90.0" startX="-50.0" stroke="#bfb9b9" strokeWidth="2.0" AnchorPane.leftAnchor="346.0" />
                               <Line layoutX="397.0" layoutY="394.0" rotate="90.0" startX="-50.0" stroke="#bfb9b9" strokeWidth="2.0" AnchorPane.leftAnchor="346.0" />
-                              <Rectangle arcHeight="500.0" arcWidth="42.0" fill="#2197ff00" height="50.0" layoutX="416.0" layoutY="211.0" opacity="0.61" stroke="#bfb9b9" strokeType="INSIDE" strokeWidth="2.0" width="200.0" AnchorPane.leftAnchor="416.0" />
-                              <ComboBox fx:id="cmbfm1" layoutX="416.0" layoutY="211.0" prefHeight="48.0" prefWidth="200.0" styleClass="cmbtrasperant" AnchorPane.leftAnchor="416.0" />
-                              <Rectangle arcHeight="500.0" arcWidth="42.0" fill="#2197ff00" height="50.0" layoutX="416.0" layoutY="284.0" opacity="0.61" stroke="#bfb9b9" strokeType="INSIDE" strokeWidth="2.0" width="200.0" AnchorPane.leftAnchor="416.0" />
-                              <ComboBox fx:id="cmbfm2" layoutX="416.0" layoutY="284.0" prefHeight="48.0" prefWidth="200.0" styleClass="cmbtrasperant" AnchorPane.leftAnchor="416.0" />
+                              <Rectangle arcHeight="500.0" arcWidth="42.0" fill="#2197ff00" height="50.0" layoutX="416.0" layoutY="211.0" opacity="0.61" stroke="#bfb9b9" strokeType="INSIDE" strokeWidth="2.0" width="200.0" AnchorPane.leftAnchor="422.0" />
+                              <ComboBox fx:id="cmbfm1" layoutX="416.0" layoutY="211.0" prefHeight="48.0" prefWidth="200.0" styleClass="cmbtrasperant" AnchorPane.leftAnchor="422.0" />
+                              <Rectangle arcHeight="500.0" arcWidth="42.0" fill="#2197ff00" height="50.0" layoutX="416.0" layoutY="284.0" opacity="0.61" stroke="#bfb9b9" strokeType="INSIDE" strokeWidth="2.0" width="200.0" AnchorPane.leftAnchor="422.0" AnchorPane.topAnchor="282.0" />
+                              <ComboBox fx:id="cmbfm2" layoutX="416.0" layoutY="284.0" prefHeight="48.0" prefWidth="200.0" styleClass="cmbtrasperant" AnchorPane.leftAnchor="422.0" AnchorPane.topAnchor="282.0" />
+                              <Rectangle arcHeight="500.0" arcWidth="42.0" fill="#2197ff00" height="50.0" layoutX="421.0" layoutY="68.0" opacity="0.61" stroke="#bfb9b9" strokeType="INSIDE" strokeWidth="2.0" width="200.0" AnchorPane.leftAnchor="422.0" />
+                              <ComboBox fx:id="cmbpg1" layoutX="422.0" layoutY="68.0" prefHeight="48.0" prefWidth="200.0" styleClass="cmbtrasperant" AnchorPane.leftAnchor="422.0" />
                            </children>
                         </AnchorPane>
-                        <Rectangle arcHeight="500.0" arcWidth="42.0" fill="#2197ff00" height="50.0" layoutX="411.0" layoutY="79.0" opacity="0.61" stroke="#bfb9b9" strokeType="INSIDE" strokeWidth="2.0" width="200.0" />
-                        <ComboBox fx:id="cmbpg1" layoutX="411.0" layoutY="79.0" prefHeight="48.0" prefWidth="200.0" styleClass="cmbtrasperant" AnchorPane.leftAnchor="416.0" />
-                        <Rectangle arcHeight="500.0" arcWidth="42.0" fill="#2197ff00" height="50.0" layoutX="411.0" layoutY="151.0" opacity="0.61" stroke="#bfb9b9" strokeType="INSIDE" strokeWidth="2.0" width="200.0" AnchorPane.leftAnchor="416.0" />
-                        <ComboBox fx:id="cmbpg2" layoutX="411.0" layoutY="151.0" prefHeight="48.0" prefWidth="200.0" styleClass="cmbtrasperant" AnchorPane.leftAnchor="416.0" />
+                        <Rectangle arcHeight="500.0" arcWidth="42.0" fill="#2197ff00" height="50.0" layoutX="411.0" layoutY="151.0" opacity="0.61" stroke="#bfb9b9" strokeType="INSIDE" strokeWidth="2.0" width="200.0" AnchorPane.leftAnchor="422.0" AnchorPane.topAnchor="146.0" />
+                        <ComboBox fx:id="cmbpg2" layoutX="411.0" layoutY="151.0" prefHeight="48.0" prefWidth="200.0" styleClass="cmbtrasperant" AnchorPane.leftAnchor="422.0" AnchorPane.topAnchor="146.0" />
                         <Label layoutX="448.0" layoutY="34.0" text="Select Unit" textFill="#0e3c87">
                            <font>
                               <Font size="20.0" />
@@ -537,6 +537,11 @@
                               <String fx:value="combo-box1" />
                            </styleClass>
                         </ComboBox>
+                        <Line endX="570.0" layoutX="151.0" layoutY="144.0" startX="-100.0" stroke="#bfb9b9" strokeWidth="2.0" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="143.0" />
+                        <Line endX="240.0" layoutX="161.0" layoutY="154.0" startX="-100.0" stroke="#bfb9b9" strokeWidth="2.0" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="217.0" />
+                        <Line endX="240.0" layoutX="171.0" layoutY="164.0" startX="-100.0" stroke="#bfb9b9" strokeWidth="2.0" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="303.0" />
+                        <Line endX="240.0" layoutX="171.0" layoutY="164.0" startX="-100.0" stroke="#bfb9b9" strokeWidth="2.0" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="450.0" />
+                        <Line endX="240.0" layoutX="181.0" layoutY="174.0" startX="-100.0" stroke="#bfb9b9" strokeWidth="2.0" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="380.0" />
                      </children></AnchorPane>
                </content>
             </Tab>
@@ -570,19 +575,19 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </Button>
-                        <Label layoutX="105.0" layoutY="213.0" styleClass="col-gray70" text="Compluter" textFill="WHITE">
+                        <Label layoutX="105.0" layoutY="132.0" styleClass="col-gray70" text="Compluter" textFill="WHITE">
                            <font>
                               <Font size="22.0" />
                            </font>
                         </Label>
-                        <Label layoutX="285.0" layoutY="213.0" prefHeight="32.0" prefWidth="89.0" styleClass="col-gray70" text="Tablet" textFill="WHITE">
+                        <Label layoutX="285.0" layoutY="132.0" prefHeight="32.0" prefWidth="89.0" styleClass="col-gray70" text="Tablet" textFill="WHITE">
                            <font>
                               <Font size="22.0" />
                            </font>
                         </Label>
-                        <Rectangle arcHeight="300.0" arcWidth="30.0" fill="#1f93ff00" height="28.0" layoutX="219.0" layoutY="215.0" stroke="#bfb9b9" strokeType="INSIDE" strokeWidth="2.0" style="-fx-fill: white;" width="46.0" />
-                        <JFXToggleButton fx:id="tgbkeyboard" alignment="BASELINE_CENTER" layoutX="209.0" layoutY="201.0" text=" " toggleColor="#0e3c87" toggleLineColor="WHITE" unToggleLineColor="#99999903" />
-                        <Button fx:id="btndefaultsetting" layoutX="359.0" layoutY="293.0" mnemonicParsing="false" prefHeight="57.0" prefWidth="54.0" textFill="WHITE">
+                        <Rectangle arcHeight="300.0" arcWidth="30.0" fill="#1f93ff00" height="28.0" layoutX="219.0" layoutY="134.0" stroke="#bfb9b9" strokeType="INSIDE" strokeWidth="2.0" style="-fx-fill: white;" width="46.0" />
+                        <JFXToggleButton fx:id="tgbkeyboard" alignment="BASELINE_CENTER" layoutX="209.0" layoutY="120.0" text=" " toggleColor="#0e3c87" toggleLineColor="WHITE" unToggleLineColor="#99999903" />
+                        <Button fx:id="btndefaultsetting" layoutX="344.0" layoutY="183.0" mnemonicParsing="false" prefHeight="57.0" prefWidth="54.0" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="20.0" />
                            </font>
@@ -601,11 +606,14 @@
                               <String fx:value="cmbtrasperant" />
                            </styleClass>
                         </Button>
-                        <Label layoutX="112.0" layoutY="311.0" styleClass="col-gray70" text="Apply Default Setting" textFill="WHITE">
+                        <Label layoutX="90.0" layoutY="201.0" styleClass="col-gray70" text="Apply Default Setting" textFill="WHITE">
                            <font>
                               <Font size="22.0" />
                            </font>
                         </Label>
+                        <Line endX="570.0" startX="-100.0" stroke="#bfb9b9" strokeWidth="2.0" AnchorPane.leftAnchor="90.0" AnchorPane.topAnchor="110.0" />
+                        <Line endX="570.0" layoutX="10.0" layoutY="10.0" startX="-100.0" stroke="#bfb9b9" strokeWidth="2.0" AnchorPane.leftAnchor="90.0" AnchorPane.topAnchor="180.0" />
+                        <Line endX="570.0" layoutX="20.0" layoutY="20.0" startX="-100.0" stroke="#bfb9b9" strokeWidth="2.0" AnchorPane.leftAnchor="90.0" AnchorPane.topAnchor="250.0" />
                      </children>
                   </AnchorPane>
                </content>
