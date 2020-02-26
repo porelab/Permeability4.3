@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.TooManyListenersException;
 
+import ConfigurationPart.NConfigurePageController;
 import communicationProtocol.Mycommand;
 
 import javafx.application.Platform;
@@ -22,7 +23,10 @@ import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -39,9 +43,15 @@ import javafx.scene.paint.Paint;
 import javafx.scene.paint.Stop;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+import javafx.stage.WindowEvent;
 import toast.MyDialoug;
 import toast.Openscreen;
 import application.DataStore;
+import application.Database;
+import application.Main;
 import application.Myapp;
 import application.SerialWriter;
 import application.writeFormat;
@@ -173,6 +183,17 @@ public class manualcontroller implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		
+		
+		setkeyboardmode();
+
+		if (NConfigurePageController.bolkey) {
+			setClickkeyboard();
+
+		} else {
+		
+		}
+		
 
 		/* Manual Controller */
 
@@ -800,23 +821,6 @@ public class manualcontroller implements Initializable {
 
 		ap5.getChildren().add(gauge6);
 		
-		pr.setOnMouseClicked(new EventHandler<Event>() {
-
-			@Override
-			public void handle(Event event) {
-				// TODO Auto-generated method stub
-				setVitual(pr, null, "Pressure Regulator", null);
-			}
-		});
-		
-		fc.setOnMouseClicked(new EventHandler<Event>() {
-
-			@Override
-			public void handle(Event event) {
-				// TODO Auto-generated method stub
-				setVitual(fc, null, "Flow controller", null);
-			}
-		});
 		
 		
 
@@ -857,8 +861,30 @@ public class manualcontroller implements Initializable {
 				setFC(gauge2);
 			}
 		});
+		
 	}
 
+	/* Virtual Keyboard Textbox Click Event. */
+	void setClickkeyboard() {
+	pr.setOnMouseClicked(new EventHandler<Event>() {
+
+		@Override
+		public void handle(Event event) {
+			// TODO Auto-generated method stub
+			setVitual(pr, null, "Pressure Regulator", null);
+		}
+	});
+	
+	fc.setOnMouseClicked(new EventHandler<Event>() {
+
+		@Override
+		public void handle(Event event) {
+			// TODO Auto-generated method stub
+			setVitual(fc, null, "Flow controller", null);
+		}
+	});
+	}
+	
 	void addShortCut() {
 		KeyCombination backevent = new KeyCodeCombination(KeyCode.B,
 				KeyCombination.CONTROL_ANY);
@@ -1166,6 +1192,76 @@ public class manualcontroller implements Initializable {
 		}
 
 	}
+	
+	/* Keyboard Mode Checking */
+	void setkeyboardmode() {
+
+		Database db = new Database();
+
+		List<List<String>> ll = db.getData("select * from keyboardmode");
+		String mode = (ll.get(0).get(0));
+
+		if (mode.equals("true")) {
+
+			NConfigurePageController.bolkey = true;
+		} else {
+
+			NConfigurePageController.bolkey = false;
+		}
+		javafx.application.Platform.runLater(new Runnable() {
+
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+
+				try {
+					Myapp.virtualStage = null;
+					if (Myapp.virtualStage == null) {
+
+						Parent root2;
+						root2 = FXMLLoader.load(getClass().getResource(
+								"/application/keyboard.fxml"));
+						Myapp.virtualStage = new Stage();
+						Myapp.virtualStage.setTitle("Keyboard");
+						Myapp.virtualStage.initStyle(StageStyle.UTILITY);
+						Myapp.virtualStage.initOwner(Main.mainstage);
+						Myapp.virtualStage.initModality(Modality.WINDOW_MODAL);
+						Myapp.virtualStage.setScene(new Scene(root2, 805, 350));
+						Myapp.virtualStage.setResizable(false);
+
+						Myapp.virtualStage
+								.setOnShown(new EventHandler<WindowEvent>() {
+
+									@Override
+									public void handle(WindowEvent event) {
+										// TODO Auto-generated method stub
+										Myapp.keyboardinput
+												.setText(Myapp.currTf.getText());
+									}
+								});
+
+						Myapp.virtualStage
+								.setOnCloseRequest(new EventHandler<WindowEvent>() {
+
+									@Override
+									public void handle(WindowEvent arg0) {
+
+										Myapp.currTf
+												.setText(Myapp.keyboardinput
+														.getText());
+									}
+								});
+
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+
+			}
+		});
+
+	}
+	
 	/* Open Keyboard Scren stage. */
 	public static void setVitual(TextField tf, TextField nextTf, String lbl,
 			String nextlbl) {
