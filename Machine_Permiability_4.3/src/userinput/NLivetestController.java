@@ -1149,6 +1149,35 @@ public class NLivetestController implements Initializable {
 		// v.getChildren().add(ll2);
 		// v.getChildren().add(ll22);
 		// v.getChildren().add(gauge);
+		Myapp.ptype.addListener(new ChangeListener<Number>() {
+
+			@Override
+			public void changed(ObservableValue<? extends Number> observable,
+					Number oldValue, Number newValue) {
+
+				String pp = "" + newValue;
+
+				Platform.runLater(new Runnable() {
+
+					@Override
+					public void run() {
+						if (Integer.parseInt("" + newValue) == 1) {
+
+							gauge5.setTitle("Pressure Gauge 1");
+
+						} else {
+							gauge5.setTitle("Pressure Gauge 2");
+
+							
+							
+						}
+					}
+				});
+
+			}
+
+		});
+	
 
 		Myapp.ftype.addListener(new ChangeListener<Number>() {
 
@@ -1162,11 +1191,13 @@ public class NLivetestController implements Initializable {
 					@Override
 					public void run() {
 
-						// TODO Auto-generated method stub
 						if (Integer.parseInt("" + newValue) == 1) {
-							// ll22.setText("Flow Type : Low");
+
+							gauge.setTitle("Flow Meter 1");
+
 						} else {
-							// ll22.setText("Flow Type : High");
+							gauge.setTitle("Flow Meter 2");
+							
 						}
 					}
 				});
@@ -1552,7 +1583,7 @@ public class NLivetestController implements Initializable {
 							if (readData.get(i + 4) == (int) '1') {
 								int maxpre = Integer.parseInt(DataStore.getPr());
 								pr = (double) a * maxpre / 65535;
-
+								Myapp.ptype.set(3);
 								System.out.println(" Pressure Regulator..... : " + pr);
 
 							}
@@ -1578,7 +1609,7 @@ public class NLivetestController implements Initializable {
 								// pr=pr-14.7;
 								// b1 = b1 - Myapp.pg1offset.get();
 								System.out.println(" Pressure guage1 original..... : " + a);
-
+								Myapp.ptype.set(1);
 								System.out.println(" Pressure guage1 ..... : " + pr);
 
 							} else if (readData.get(i + 4) == (int) '2') {
@@ -1598,7 +1629,7 @@ public class NLivetestController implements Initializable {
 										pr = 0;
 									}
 								}
-
+								Myapp.ptype.set(2);
 								// b1 = b1 - Myapp.pg2offset.get();
 
 								System.out.println(" Pressure gauge2 ..... : " + pr);
