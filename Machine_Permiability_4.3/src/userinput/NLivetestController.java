@@ -634,6 +634,7 @@ public class NLivetestController implements Initializable {
 	//	Mycommand.setDACValue('2', 10000, 1000);
 		dryplist.add(0, "0.0");
 		dryflist.add(0, "0.0");
+		
 		series2.getData().add(new XYChart.Data(0, 0));
 
 		ind = 0;
