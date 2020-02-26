@@ -251,7 +251,7 @@ public class NLivetestController implements Initializable {
 			calculationdia = 2.3;
 		}
 
-		calculationdia = 7.2;
+		//calculationdia = 7.2;
 		System.out.println("Plate diameter---> : " + Myapp.splate + " : " + calculationdia);
 		// calculationdia=7;
 	}
@@ -542,9 +542,9 @@ public class NLivetestController implements Initializable {
 
 		series2.getData().clear();
 
-		dryplist.add(0, "0.0");
-		dryflist.add(0, "0.0");
-		series2.getData().add(new XYChart.Data(0, 0));
+		//dryplist.add(0, "0.0");
+		//dryflist.add(0, "0.0");
+		//series2.getData().add(new XYChart.Data(0, 0));
 
 		ind = 0;
 
@@ -576,7 +576,12 @@ public class NLivetestController implements Initializable {
 		if (step < Myapp.steppoints.size()) {
 			isReadStep = true;
 			// Mycommand.setDACValue('2',(ind+1)*500,2000);
-			Mycommand.setDACValue('2', getCountOfFlow(Myapp.steppoints.get(ind)), 2000);
+			int c=getCountOfFlow(Myapp.steppoints.get(ind));
+			Mycommand.setDACValue('2',c, 2000);
+			
+			System.out.println("Step : " + Myapp.steppoints.get(ind) + " : size : ");
+
+			
 			// Mycommand.startADC(10000);
 		} else {
 
@@ -588,11 +593,15 @@ public class NLivetestController implements Initializable {
 
 	int getCountOfFlow(int fl) {
 		System.out.println("Flow : " + fl + " , Fc :" + Integer.parseInt(DataStore.getPr()));
-		long c = fl * 65535 / Integer.parseInt(DataStore.getPr());
+		int maxp=Integer.parseInt(DataStore.getPr());
+		double c =(double) fl * 65535 / maxp;
+		
+		
+		
 		System.out.println("Setting flow : " + c);
 		if (c < 0) {
-			c = c * 2;
-			c = c / 2;
+			c = c * c;
+			c = c / c;
 			System.out.println("Now Setting flow : " + c);
 		}
 
@@ -616,12 +625,13 @@ public class NLivetestController implements Initializable {
 
 		yAxis.setLabel("Flow (" + DataStore.getUniteflow() + ")");
 		xAxis.setLabel("Pressure (" + DataStore.getUnitepressure() + ")");
+		
 		wrd = new writeFormat();
 		wrd.startDryN();
 		wrd.addLast();
 		sendData(wrd, delay);
 		series2.getData().clear();
-
+	//	Mycommand.setDACValue('2', 10000, 1000);
 		dryplist.add(0, "0.0");
 		dryflist.add(0, "0.0");
 		series2.getData().add(new XYChart.Data(0, 0));
@@ -634,7 +644,8 @@ public class NLivetestController implements Initializable {
 	}
 
 	// find darcy value
-	String getDarcy1(double ddp, double ddf) {
+	String getDarcy1(double ddp, double ddf) 
+	{
 
 		double k = 0;
 		try {
@@ -792,8 +803,8 @@ public class NLivetestController implements Initializable {
 			dryflist.remove(2);
 			dryplist.remove(2);
 
-			dryflist.remove(3);
-			dryplist.remove(3);
+		//	dryflist.remove(3);
+		//	dryplist.remove(3);
 
 			// dryflist.remove(4);
 			// dryplist.remove(4);
@@ -1471,14 +1482,51 @@ public class NLivetestController implements Initializable {
 
 						int maxpre = Integer.parseInt(DataStore.getPg2());
 						pr = (double) recorddata.get(2) * maxpre / 65535;
+						
+						
+						
+						if (DataStore.getUnitepg2().equals("bar")) {
+							pr = DataStore.barToPsi(pr);
+						} else if (DataStore.getUnitepg2().equals("torr")) {
+							pr = DataStore.torrToPsi(pr);
+						}
+
+						if (DataStore.isabsolutepg2()) {
+							pr = pr - 14.6;
+							if (pr < 0) {
+								pr = 0;
+							}
+						}
+						
 
 						fl = (double) recorddata.get(5) * Integer.parseInt(DataStore.getPr()) / 65535;
 
+						System.out.println("Record  p count : "+ recorddata.get(2)+"\nRecord F count : "+ recorddata.get(5));
+						
 						DataStore.liveflow.set(fl);
 						DataStore.livepressure.set(pr);
-						if (isReadStep) {
-							setPermiabilityStepPoints(pr, fl);
+						
+						
+						if (pr > lastpressur && fl > lastflow) {
+							lastpressur = pr;
+							lastflow = fl;
+
+							if (isReadStep) {
+								setPermiabilityStepPoints(pr, fl);
+							}
+							
+
+						} else {
+
+							if (isSkiptest || conditionpressure < pr) {
+								isSkiptest = true;
+								setPermiabilityStepPoints(lastpressur, lastflow);
+							}
+							System.out.println("Ignore  : " + pr + " , " + fl);
 						}
+						
+						
+						
 					}
 
 					if (readData.get(i) == (int) 'T' && readData.get(i + 1) == (int) 'D') {
@@ -1667,7 +1715,6 @@ public class NLivetestController implements Initializable {
 
 		isReadStep = false;
 		// Mycommand.stopADC(1000);
-		System.out.println("Step permeability....");
 		curflow = fl;
 		curpre = pr;
 
@@ -1688,42 +1735,54 @@ public class NLivetestController implements Initializable {
 					flowserires.getData().add(new XYChart.Data(getTime(), curflow));
 					pressureserires.getData().add(new XYChart.Data(getTime(), curpre));
 
+					if(ind<Myapp.steppoints.size())
+					{
 					setStep(ind);
-
+					}
+					else
+					{
+						stopStepMethod();
+					}
 				}
 			});
 		} else {
 
-			isSkiptest = false;
-			System.out.println("Stop is tirgger ");
-			sendStop();
-
-			try {
-				Platform.runLater(new Runnable() {
-
-					@Override
-					public void run() {
-
-						status.setText("Test is Completed");
-						starttest.setDisable(false);
-						if (dryflist.size() > 0) {
-							createCsvTable();
-						} else {
-							System.out.println("NO file created");
-
-						}
-
-					}
-				});
-
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-
+			stopStepMethod();
 		}
+
 
 	}
 
+	void stopStepMethod()
+	{
+		isSkiptest = false;
+		System.out.println("Stop is tirgger ");
+		sendStop();
+
+		try {
+			Platform.runLater(new Runnable() {
+
+				@Override
+				public void run() {
+
+					status.setText("Test is Completed");
+					starttest.setDisable(false);
+					if (dryflist.size() > 0) {
+						createCsvTable();
+					} else {
+						System.out.println("NO file created");
+
+					}
+
+				}
+			});
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
+	
 	void setPermiabilityPoints(double pr, double fl) {
 
 		curflow = fl;
