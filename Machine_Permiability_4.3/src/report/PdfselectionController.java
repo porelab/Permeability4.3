@@ -97,7 +97,7 @@ public class PdfselectionController implements Initializable {
 			excelsave.setVisible(false);
 		}
 
-		txtnotes.setText("The following test Procedure is based on ASTM D737-96 (Standard Test Method for Pore Size Characterization.)");
+		txtnotes.setText("The following test procedure is based on ASTM D737-96 (Standard Test Method for Air Permeability).");
 
 		btncancel.setOnAction(new EventHandler<ActionEvent>() {
 
