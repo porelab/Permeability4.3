@@ -1251,7 +1251,8 @@ public class Multiplepororeport {
 		n3.setBorder(0);
 
 		// n3.setBorder(n3.BOTTOM);
-		n3.setFixedHeight(160f);
+	//	n3.setFixedHeight(160f);
+		n3.setMinimumHeight(50);
 		// n3.setBackgroundColor(backcellcoltable1);
 		n3.setBorderColor(new BaseColor(130, 130, 130));
 		n3.setHorizontalAlignment(Element.ALIGN_TOP);
