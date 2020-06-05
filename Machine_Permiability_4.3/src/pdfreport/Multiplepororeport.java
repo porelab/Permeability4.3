@@ -56,10 +56,17 @@ public class Multiplepororeport {
 
 	Font rowhed = FontFactory.getFont(FontFactory.HELVETICA, 9, Font.BOLD,
 			new BaseColor(255, 255, 255));
+	
+	Font resultlab = FontFactory.getFont(FontFactory.HELVETICA, 14, Font.BOLD,
+			new BaseColor(81, 81, 83));
+
 
 	String companyname;
 	String notes;
 	String imgpath,imgpath1;
+	
+	Boolean darcys, gurley , frazier,sampleinfo;
+
 
 	Font blueFont = FontFactory.getFont(FontFactory.TIMES_ROMAN, 9,
 			Font.NORMAL, new CMYKColor(0, 0, 0, 0));
@@ -130,12 +137,17 @@ public class Multiplepororeport {
 	}
 	/* Main Function Create Report */
 	public void Report(String path, List<DatareadN> d, String notes, String comname,
-			List<String> graphs, Boolean btabledata, Boolean bcoverpage,String imgpath1) {
+			List<String> graphs, Boolean btabledata, Boolean bcoverpage,String imgpath1 , Boolean lbldarcy, Boolean lblgurley , Boolean lblfrazer,Boolean tablesampleinfo) {
 		allfiles = d;
 
 		this.companyname = comname;
 		this.notes = notes;
 		this.imgpath1 = imgpath1;
+		
+		this.darcys = lbldarcy;
+		this.gurley = lblgurley;
+		this.frazier = lblfrazer;
+		this.sampleinfo =tablesampleinfo;
 
 		try {
 			writer = PdfWriter
@@ -154,6 +166,9 @@ public class Multiplepororeport {
 			document.newPage();
 			HeaderFooterPageEvent event = new HeaderFooterPageEvent();
 			writer.setPageEvent(event);
+			
+			
+		
 
 			resulttable(d);
 
@@ -565,6 +580,9 @@ public class Multiplepororeport {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
+		
+		if (sampleinfo == true) {
+		
 
 		PdfPCell c1 = new PdfPCell(new Paragraph("Sample ID", whitecol));
 		c1.setBackgroundColor(backcellcoltable);
@@ -925,6 +943,8 @@ public class Multiplepororeport {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+	}
 
 		PdfPTable tablem = new PdfPTable(4); // 3 columns.
 		tablem.setWidthPercentage(100); // Width 100%
@@ -940,9 +960,23 @@ public class Multiplepororeport {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
+		
+		
+		PdfPCell titl4 = new PdfPCell(new Paragraph("Results", resultlab));
+		titl4.setBorder(0);
+		titl4.setBorderColor(new BaseColor(130, 130, 130));
+		titl4.setPaddingLeft(10);
+		titl4.setPaddingTop(1);
+		titl4.setFixedHeight(35f);
+		titl4.setColspan(4);
+		titl4.setHorizontalAlignment(Element.ALIGN_CENTER);
+		titl4.setVerticalAlignment(Element.ALIGN_MIDDLE);
+
+		
 
 		PdfPCell cell1 = new PdfPCell(new Paragraph("Sample ID", whitecol));
-		cell1.setBackgroundColor(backcellcoltable);
+//		cell1.setBackgroundColor(backcellcoltable);
+		cell1.setBackgroundColor(getColor(14));	
 		cell1.setBorder(0);
 		// cell1.setBorder(cell1.TOP | cell1.BOTTOM);
 		cell1.setBorderColor(getColor(6));
@@ -955,7 +989,8 @@ public class Multiplepororeport {
 	
 		PdfPCell cell5 = new PdfPCell(
 				new Paragraph("Darcy constant", whitecol));
-		cell5.setBackgroundColor(backcellcoltable);
+		//cell5.setBackgroundColor(backcellcoltable);
+		cell5.setBackgroundColor(getColor(14));
 		cell5.setBorder(0);
 		// cell5.setBorder(cell5.TOP | cell5.BOTTOM | cell5.LEFT);
 		cell5.setBorderColor(getColor(6));
@@ -967,7 +1002,7 @@ public class Multiplepororeport {
 
 		PdfPCell cell6 = new PdfPCell(
 				new Paragraph("Gurley permeability", whitecol));
-		cell6.setBackgroundColor(backcellcoltable);
+		cell6.setBackgroundColor(getColor(14));
 		cell6.setBorder(0);
 		// cell5.setBorder(cell5.TOP | cell5.BOTTOM | cell5.LEFT);
 		cell6.setBorderColor(getColor(6));
@@ -979,7 +1014,8 @@ public class Multiplepororeport {
 
 		PdfPCell cell7 = new PdfPCell(
 				new Paragraph("Frazier permeability", whitecol));
-		cell7.setBackgroundColor(backcellcoltable);
+//		cell7.setBackgroundColor(backcellcoltable);
+		cell7.setBackgroundColor(getColor(14));
 		cell7.setBorder(0);
 		// cll5.setBorder(cell5.TOP | cell5.BOTTOM | cell5.LEFT);
 		cell7.setBorderColor(getColor(6));
@@ -992,7 +1028,8 @@ public class Multiplepororeport {
 		/*Unite>>>>>>>>>>*/
 		
 		PdfPCell cell11 = new PdfPCell(new Paragraph("( Trial )", whitecolun));
-		cell11.setBackgroundColor(backcellcoltable);
+//		cell11.setBackgroundColor(backcellcoltable);
+		cell11.setBackgroundColor(getColor(14));	
 		cell11.setBorder(0);
 		// cell11.setBorder(cell11.TOP | cell11.BOTTOM);
 		cell11.setBorderColor(getColor(6));
@@ -1005,7 +1042,8 @@ public class Multiplepororeport {
 	
 		PdfPCell cell51 = new PdfPCell(
 				new Paragraph("( Darcy )", whitecolun));
-		cell51.setBackgroundColor(backcellcoltable);
+//		cell51.setBackgroundColor(backcellcoltable);
+		cell51.setBackgroundColor(getColor(14));
 		cell51.setBorder(0);
 		// cell51.setBorder(cell51.TOP | cell51.BOTTOM | cell51.LEFT);
 		cell51.setBorderColor(getColor(6));
@@ -1017,7 +1055,8 @@ public class Multiplepororeport {
 
 		PdfPCell cell61 = new PdfPCell(
 				new Paragraph("( "+DataStore.getUnitegurely()+" )", whitecolun));
-		cell61.setBackgroundColor(backcellcoltable);
+//		cell61.setBackgroundColor(backcellcoltable);
+		cell61.setBackgroundColor(getColor(14));
 		cell61.setBorder(0);
 		// cell5.setBorder(cell5.TOP | cell5.BOTTOM | cell5.LEFT);
 		cell61.setBorderColor(getColor(6));
@@ -1029,7 +1068,8 @@ public class Multiplepororeport {
 
 		PdfPCell cell71 = new PdfPCell(
 				new Paragraph("( "+DataStore.getUnitefrazier()+" )", whitecolun));
-		cell71.setBackgroundColor(backcellcoltable);
+//		cell71.setBackgroundColor(backcellcoltable);
+		cell71.setBackgroundColor(getColor(14));
 		cell71.setBorder(0);
 		// cll5.setBorder(cell5.TOP | cell5.BOTTOM | cell5.LEFT);
 		cell71.setBorderColor(getColor(6));
@@ -1040,6 +1080,7 @@ public class Multiplepororeport {
 		cell71.setVerticalAlignment(Element.ALIGN_TOP);
 		
 		
+		tablem.addCell(titl4);
 		
 		
 		tablem.addCell(cell1);		
@@ -1063,15 +1104,20 @@ public class Multiplepororeport {
 			DatareadN dr = d.get(j);
 			String st = "" + dr.filename;
 			 //st = st.substring(0, st.indexOf('.'));
-			
-			String mp = dr.data.get("darcy avg")+"";
-			 double d1=Double.parseDouble("" + dr.data.get("gurley"));
+				
+				String mp = dr.data.get("darcy avg")+"";
+		
+				double d1 =Double.parseDouble("" + dr.data.get("gurley"));
 				
 
 				 DecimalFormat formatter = new DecimalFormat("0.00000");
 					String gurl=formatter .format(d1);
+			
+					
+					String	fraz = Myapp.getRound(Double.parseDouble("" + dr.data.get("frazier")),2);
 				
-				String fraz = Myapp.getRound(Double.parseDouble("" + dr.data.get("frazier")),2);
+					
+					
 
 			if (j % 2 == 0) {
 
@@ -1095,8 +1141,16 @@ public class Multiplepororeport {
 				*/
 				
 			// second column
-				PdfPCell record5 = new PdfPCell(new Paragraph(mp+"",
-						tabledata));
+				PdfPCell record5;
+				if (darcys== true) {
+					record5 = new PdfPCell(new Paragraph(mp,
+							tabledata));
+					
+						}
+				else {
+					record5 = new PdfPCell(new Paragraph("-",
+							tabledata));
+				}
 				record5.setBorder(0);
 			//	record5.setBorder(record5.RIGHT);
 				record5.setBorderColor(new BaseColor(130, 130, 130));
@@ -1108,8 +1162,20 @@ public class Multiplepororeport {
 				tablem.addCell(record5);
 
 				// second column
-				PdfPCell record6 = new PdfPCell(new Paragraph(gurl,
-						tabledata));
+				PdfPCell record6;
+				
+				if (gurley== true) {
+					record6 = new PdfPCell(new Paragraph(gurl,
+							tabledata));
+					
+						}
+				else {
+					record6 = new PdfPCell(new Paragraph("-",
+							tabledata));
+					
+				} 
+				
+				
 				record6.setBorder(0);
 			//	record6.setBorder(record5.RIGHT);
 				record6.setBorderColor(new BaseColor(130, 130, 130));
@@ -1121,8 +1187,18 @@ public class Multiplepororeport {
 				tablem.addCell(record6);
 				
 				// second column
-				PdfPCell record7 = new PdfPCell(new Paragraph("" + fraz,
-						tabledata));
+				PdfPCell record7;
+				if (frazier== true) {
+					record7 = new PdfPCell(new Paragraph("" + fraz,
+							tabledata));
+					
+						}
+				else {
+					record7 = new PdfPCell(new Paragraph("-",
+							tabledata));
+					
+				}
+
 				record7.setBorder(1);
 				record7.setBorder(record5.RIGHT);
 				record7.setBorderColor(new BaseColor(130, 130, 130));
@@ -1153,8 +1229,16 @@ public class Multiplepororeport {
 
 				
 				
-				PdfPCell record5 = new PdfPCell(new Paragraph(Myapp.getRound(mp+"" , DataStore.getRoundOff())+" ",
-						tabledata));
+				PdfPCell record5;
+				if (darcys== true) {
+					record5 = new PdfPCell(new Paragraph(mp,
+							tabledata));
+					
+						}
+				else {
+					record5 = new PdfPCell(new Paragraph("-",
+							tabledata));
+				}
 				record5.setBorder(0);
 	//			record5.setBorder(record5.RIGHT);
 				record5.setBorderColor(new BaseColor(130, 130, 130));
@@ -1167,8 +1251,19 @@ public class Multiplepororeport {
 
 				
 				// second column
-				PdfPCell record6 = new PdfPCell(new Paragraph(DataStore.ConvertGurely(gurl)+" ",
-						tabledata));
+				PdfPCell record6;
+				
+				if (gurley== true) {
+					record6 = new PdfPCell(new Paragraph(gurl,
+							tabledata));
+					
+						}
+				else {
+					record6 = new PdfPCell(new Paragraph("-",
+							tabledata));
+					
+				} 
+
 				record6.setBorder(0);
 //				record6.setBorder(record6.RIGHT);
 				record6.setBorderColor(new BaseColor(130, 130, 130));
@@ -1180,8 +1275,19 @@ public class Multiplepororeport {
 				tablem.addCell(record6);
 
 				// second column
-				PdfPCell record7 = new PdfPCell(new Paragraph("" + DataStore.ConvertFrazier(fraz),
-						tabledata));
+				
+				PdfPCell record7;
+				if (frazier== true) {
+					record7 = new PdfPCell(new Paragraph("" + fraz,
+							tabledata));
+					
+						}
+				else {
+					record7 = new PdfPCell(new Paragraph("-",
+							tabledata));
+					
+				}
+				
 				record7.setBorder(1);
 				record7.setBorder(record7.RIGHT);
 				record7.setBorderColor(new BaseColor(130, 130, 130));

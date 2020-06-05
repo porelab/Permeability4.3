@@ -25,7 +25,7 @@ public class Tempmain {
 			dd.add("1");
 			dd.add("1");
 			
-			sp.Report("C:/Users/Jayesh/Desktop/111.pdf",d,"dd","Sun Pharmaceutical","",dd,true,true,"");
+			sp.Report("C:/Users/Jayesh/Desktop/111.pdf",d,"dd","Sun Pharmaceutical","",dd,true,true,"", true , true ,true);
 			
 		/*
 			

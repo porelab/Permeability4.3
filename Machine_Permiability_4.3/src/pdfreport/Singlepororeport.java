@@ -45,6 +45,8 @@ public class Singlepororeport {
 	String companyname;
 	String imgpath,imgpath1;
 	List<String> graphs;
+	Boolean darcy , gurley , frazier;
+
 	DatareadN d;
 
 	List<String> wpressur, wf, df;
@@ -132,6 +134,9 @@ public class Singlepororeport {
 	// Notes
 	Font noteslab = FontFactory.getFont(FontFactory.HELVETICA, 12, Font.BOLD,
 			new BaseColor(81, 81, 83));
+	
+	Font resultlab = FontFactory.getFont(FontFactory.HELVETICA, 14, Font.BOLD,
+			new BaseColor(81, 81, 83));
 
 	// Notes desc
 	Font notesdeslab = FontFactory.getFont(FontFactory.HELVETICA, 11,
@@ -151,7 +156,7 @@ public class Singlepororeport {
 	}
 	/* Main Function Create Report */
 	public void Report(String path, DatareadN d, String notes, String comname,
-			String imgpath, List<String> graphs, Boolean btabledata, Boolean bcoverpage,String imgpath1) {
+			String imgpath, List<String> graphs, Boolean btabledata, Boolean bcoverpage,String imgpath1 , Boolean lbldarcy, Boolean lblgurley , Boolean lblfrazer) {
 
 		this.companyname = comname;
 		this.notes = notes;
@@ -159,6 +164,10 @@ public class Singlepororeport {
 		this.imgpath1 = imgpath1;
 		this.graphs = graphs;
 		this.d = d;
+		
+		this.darcy = lbldarcy;
+		this.gurley = lblgurley;
+		this.frazier = lblfrazer;
 
 		try {
 
@@ -574,7 +583,7 @@ public class Singlepororeport {
 		cell1h.setBackgroundColor(backcellcoltable);
 		cell1h.setPaddingLeft(10);
 		cell1h.setPaddingTop(1);
-		cell1h.setFixedHeight(30f);
+		cell1h.setFixedHeight(28f);
 		cell1h.setColspan(2);
 		cell1h.setHorizontalAlignment(Element.ALIGN_CENTER);
 		cell1h.setVerticalAlignment(Element.ALIGN_MIDDLE);
@@ -586,7 +595,7 @@ public class Singlepororeport {
 		cell1.setPaddingLeft(10);
 		cell1.setPaddingTop(8);
 		// cell1.setBackgroundColor(backcellcoltable1);
-		cell1.setFixedHeight(25f);
+		cell1.setFixedHeight(23f);
 		cell1.setHorizontalAlignment(Element.ALIGN_LEFT);
 		cell1.setVerticalAlignment(Element.ALIGN_MIDDLE);
 
@@ -595,7 +604,7 @@ public class Singlepororeport {
 		cell2.setPaddingLeft(10);
 		cell2.setPaddingTop(8);
 		cell2.setBorder(1);
-		cell2.setFixedHeight(25f);
+		cell2.setFixedHeight(23f);
 		cell2.setBorder(cell2.TOP | cell2.RIGHT);
 		// cell2.setBackgroundColor(backcellcoltable1);
 		cell2.setBorderColor(new BaseColor(130, 130, 130));
@@ -608,7 +617,7 @@ public class Singlepororeport {
 		cell3.setPaddingLeft(10);
 		cell3.setPaddingTop(1);
 		cell3.setBackgroundColor(backcellcoltable1);
-		cell3.setFixedHeight(25f);
+		cell3.setFixedHeight(23f);
 		cell3.setBorderColor(new BaseColor(130, 130, 130));
 		cell3.setHorizontalAlignment(Element.ALIGN_LEFT);
 		cell3.setVerticalAlignment(Element.ALIGN_MIDDLE);
@@ -621,7 +630,7 @@ public class Singlepororeport {
 		cell4.setPaddingLeft(10);
 		cell4.setPaddingTop(1);
 		cell4.setBackgroundColor(backcellcoltable1);
-		cell4.setFixedHeight(25f);
+		cell4.setFixedHeight(23f);
 		cell4.setHorizontalAlignment(Element.ALIGN_LEFT);
 		cell4.setVerticalAlignment(Element.ALIGN_MIDDLE);
 
@@ -630,7 +639,7 @@ public class Singlepororeport {
 		cell5.setPaddingTop(1);
 		cell5.setPaddingLeft(10);
 		cell5.setBorder(1);
-		cell5.setFixedHeight(25f);
+		cell5.setFixedHeight(23f);
 		// cell5.setBackgroundColor(backcellcoltable1);
 		cell5.setBorder(cell5.LEFT | cell5.RIGHT);
 		cell5.setBorderColor(new BaseColor(130, 130, 130));
@@ -645,7 +654,7 @@ public class Singlepororeport {
 		cell51.setPaddingLeft(10);
 		// cell51.setBackgroundColor(backcellcoltable1);
 		cell51.setPaddingTop(1);
-		cell51.setFixedHeight(25f);
+		cell51.setFixedHeight(23f);
 		cell51.setHorizontalAlignment(Element.ALIGN_LEFT);
 		cell51.setVerticalAlignment(Element.ALIGN_MIDDLE);
 
@@ -656,7 +665,7 @@ public class Singlepororeport {
 		c1.setBorder(c1.LEFT | c1.RIGHT);
 		c1.setBackgroundColor(backcellcoltable1);
 		c1.setBorderColor(new BaseColor(130, 130, 130));
-		c1.setFixedHeight(25f);
+		c1.setFixedHeight(23f);
 		c1.setHorizontalAlignment(Element.ALIGN_LEFT);
 		c1.setVerticalAlignment(Element.ALIGN_MIDDLE);
 
@@ -667,7 +676,7 @@ public class Singlepororeport {
 		c2.setBackgroundColor(backcellcoltable1);
 		c2.setPaddingTop(1);
 		c2.setPaddingLeft(10);
-		c2.setFixedHeight(25f);
+		c2.setFixedHeight(23f);
 		c2.setHorizontalAlignment(Element.ALIGN_LEFT);
 		c2.setVerticalAlignment(Element.ALIGN_MIDDLE);
 
@@ -677,7 +686,7 @@ public class Singlepororeport {
 		t1.setPaddingTop(1);
 		t1.setBorder(1);
 		t1.setBorder(t1.LEFT | t1.RIGHT);
-		t1.setFixedHeight(25f);
+		t1.setFixedHeight(23f);
 		t1.setBorderColor(new BaseColor(130, 130, 130));
 		// t1.setBackgroundColor(backcellcoltable1);
 		t1.setHorizontalAlignment(Element.ALIGN_LEFT);
@@ -689,7 +698,7 @@ public class Singlepororeport {
 		t2.setBorder(t2.RIGHT);
 		t2.setBorderColor(new BaseColor(130, 130, 130));
 		t2.setPaddingLeft(10);
-		t2.setFixedHeight(25f);
+		t2.setFixedHeight(23f);
 		// t2.setBackgroundColor(backcellcoltable1);
 		t2.setPaddingTop(1);
 		t2.setHorizontalAlignment(Element.ALIGN_LEFT);
@@ -700,7 +709,7 @@ public class Singlepororeport {
 		t3.setPaddingTop(1);
 		t3.setBorder(1);
 		t3.setBorder(t3.LEFT | t3.RIGHT);
-		t3.setFixedHeight(25f);
+		t3.setFixedHeight(23f);
 		t3.setBorderColor(new BaseColor(130, 130, 130));
 		t3.setBackgroundColor(backcellcoltable1);
 		t3.setHorizontalAlignment(Element.ALIGN_LEFT);
@@ -712,7 +721,7 @@ public class Singlepororeport {
 		t4.setBorder(t4.RIGHT);
 		t4.setBorderColor(new BaseColor(130, 130, 130));
 		t4.setPaddingLeft(10);
-		t4.setFixedHeight(25f);
+		t4.setFixedHeight(23f);
 		t4.setBackgroundColor(backcellcoltable1);
 		t4.setPaddingTop(1);
 		t4.setHorizontalAlignment(Element.ALIGN_LEFT);
@@ -724,7 +733,7 @@ public class Singlepororeport {
 		f1.setPaddingTop(1);
 		f1.setBorder(1);
 		f1.setBorder(f1.LEFT | f1.RIGHT);
-		f1.setFixedHeight(25f);
+		f1.setFixedHeight(23f);
 		// f1.setBackgroundColor(backcellcoltable1);
 		f1.setBorderColor(new BaseColor(130, 130, 130));
 		f1.setHorizontalAlignment(Element.ALIGN_LEFT);
@@ -738,7 +747,7 @@ public class Singlepororeport {
 		f2.setPaddingLeft(10);
 		// f2.setBackgroundColor(backcellcoltable1);
 		f2.setPaddingTop(1);
-		f2.setFixedHeight(25f);
+		f2.setFixedHeight(23f);
 		f2.setHorizontalAlignment(Element.ALIGN_LEFT);
 		f2.setVerticalAlignment(Element.ALIGN_MIDDLE);
 
@@ -748,7 +757,7 @@ public class Singlepororeport {
 		f3.setPaddingTop(1);
 		f3.setBorder(1);
 		f3.setBackgroundColor(backcellcoltable1);
-		f3.setFixedHeight(25f);
+		f3.setFixedHeight(23f);
 		f3.setBorder(f3.LEFT | f3.RIGHT);
 		f3.setBorderColor(new BaseColor(130, 130, 130));
 		f3.setHorizontalAlignment(Element.ALIGN_LEFT);
@@ -762,7 +771,7 @@ public class Singlepororeport {
 		f4.setPaddingLeft(10);
 		f4.setBackgroundColor(backcellcoltable1);
 		f4.setPaddingTop(1);
-		f4.setFixedHeight(25f);
+		f4.setFixedHeight(23f);
 		f4.setHorizontalAlignment(Element.ALIGN_LEFT);
 		f4.setVerticalAlignment(Element.ALIGN_MIDDLE);
 
@@ -771,7 +780,7 @@ public class Singlepororeport {
 		// f11.setBackgroundColor(backcellcoltable1);
 		f11.setPaddingTop(1);
 		f11.setBorder(1);
-		f11.setFixedHeight(25f);
+		f11.setFixedHeight(23f);
 		f11.setBorder(f11.LEFT | f11.RIGHT);
 		f11.setBorderColor(new BaseColor(130, 130, 130));
 		f11.setHorizontalAlignment(Element.ALIGN_LEFT);
@@ -785,7 +794,7 @@ public class Singlepororeport {
 		f22.setPaddingLeft(10);
 		// f22.setBackgroundColor(backcellcoltable1);
 		f22.setPaddingTop(1);
-		f22.setFixedHeight(25f);
+		f22.setFixedHeight(23f);
 		f22.setHorizontalAlignment(Element.ALIGN_LEFT);
 		f22.setVerticalAlignment(Element.ALIGN_MIDDLE);
 
@@ -795,7 +804,7 @@ public class Singlepororeport {
 		f33.setBorder(1);
 		f33.setPaddingBottom(8);
 		f33.setBackgroundColor(backcellcoltable1);
-		f33.setFixedHeight(25f);
+		f33.setFixedHeight(23f);
 		f33.setBorder(f33.RIGHT | f33.LEFT);
 		f33.setBorderColor(new BaseColor(130, 130, 130));
 		f33.setHorizontalAlignment(Element.ALIGN_LEFT);
@@ -808,7 +817,7 @@ public class Singlepororeport {
 		f44.setPaddingLeft(10);
 		f44.setPaddingTop(1);
 		f44.setBackgroundColor(backcellcoltable1);
-		f44.setFixedHeight(25f);
+		f44.setFixedHeight(23f);
 		f44.setPaddingBottom(8);
 		f44.setHorizontalAlignment(Element.ALIGN_LEFT);
 		f44.setVerticalAlignment(Element.ALIGN_MIDDLE);
@@ -822,7 +831,7 @@ public class Singlepororeport {
 		f331.setBorder(1);
 		f331.setPaddingBottom(8);
 		//f331.setBackgroundColor(backcellcoltable1);
-		f331.setFixedHeight(25f);
+		f331.setFixedHeight(23f);
 		f331.setBorder(f331.RIGHT | f331.LEFT);
 		f331.setBorderColor(new BaseColor(130, 130, 130));
 		f331.setHorizontalAlignment(Element.ALIGN_LEFT);
@@ -835,7 +844,7 @@ public class Singlepororeport {
 			f441.setPaddingLeft(10);
 			f441.setPaddingTop(1);
 		//	f441.setBackgroundColor(backcellcoltable1);
-			f441.setFixedHeight(25f);
+			f441.setFixedHeight(23f);
 			f441.setPaddingBottom(8);
 			f441.setHorizontalAlignment(Element.ALIGN_LEFT);
 			f441.setVerticalAlignment(Element.ALIGN_MIDDLE);
@@ -848,7 +857,7 @@ public class Singlepororeport {
 		f332.setBorder(1);
 		f332.setPaddingBottom(8);
 		f332.setBackgroundColor(backcellcoltable1);
-		f332.setFixedHeight(25f);
+		f332.setFixedHeight(23f);
 		f332.setBorder(f332.BOTTOM | f332.RIGHT | f332.LEFT);
 		f332.setBorderColor(new BaseColor(130, 130, 130));
 		f332.setHorizontalAlignment(Element.ALIGN_LEFT);
@@ -861,7 +870,7 @@ public class Singlepororeport {
 		f414.setPaddingLeft(10);
 		f414.setPaddingTop(1);
 		f414.setBackgroundColor(backcellcoltable1);
-		f414.setFixedHeight(25f);
+		f414.setFixedHeight(23f);
 		f414.setPaddingBottom(8);
 		f414.setHorizontalAlignment(Element.ALIGN_LEFT);
 		f414.setVerticalAlignment(Element.ALIGN_MIDDLE);
@@ -902,11 +911,10 @@ public class Singlepororeport {
 			e3.printStackTrace();
 		}
 
-		PdfPTable resulttable = new PdfPTable(3); // 4 columns.
+		PdfPTable resulttable = new PdfPTable(3); // 3 columns.
 		resulttable.setWidthPercentage(100); // Width 100%
 		resulttable.setSpacingBefore(0f); // Space before table
 		resulttable.setSpacingAfter(0f); // Space after
-
 		// Set Column widths
 		try {
 			resulttable.setWidths(new int[] {33,33,33});
@@ -921,6 +929,16 @@ public class Singlepororeport {
 
 		BaseColor resultborder = new BaseColor(255, 255, 255);
 		float border = 3f;
+		
+		PdfPCell titl4 = new PdfPCell(new Paragraph("Results", resultlab));
+		titl4.setBorder(0);
+		titl4.setBorderColor(new BaseColor(130, 130, 130));
+		titl4.setPaddingLeft(10);
+		titl4.setPaddingTop(1);
+		titl4.setFixedHeight(35f);
+		titl4.setColspan(3);
+		titl4.setHorizontalAlignment(Element.ALIGN_CENTER);
+		titl4.setVerticalAlignment(Element.ALIGN_MIDDLE);
 
 		
 		PdfPCell r1h = new PdfPCell(new Paragraph("", sampleinfoqh));
@@ -938,18 +956,27 @@ public class Singlepororeport {
 				sampleinfola));
 		// r1 = new PdfPCell(new Phrase("jj"+d.starttime));
 		r1.setBorder(1);
+		r1.setBackgroundColor(getColor(14));
 		r1.setBorder(r1.RIGHT);
 		r1.setBorderColor(resultborder);
 		r1.setBorderWidth(border);
-		r1.setBackgroundColor(backcellcoltable);
+		//r1.setBackgroundColor(backcellcoltable);
 		r1.setFixedHeight(30f);
 
 		r1.setHorizontalAlignment(Element.ALIGN_CENTER);
 		r1.setVerticalAlignment(Element.ALIGN_MIDDLE);
 
-		PdfPCell r1r = new PdfPCell(new Paragraph(Myapp.getRound(
-				Double.parseDouble("" + d.data.get("darcy avg")), 2),
-				sampleinfoans));
+		PdfPCell r1r;
+		if (darcy== true) {
+			 r1r = new PdfPCell(new Paragraph(Myapp.getRound(
+					Double.parseDouble("" + d.data.get("darcy avg")), 2),
+					sampleinfoans));
+			}
+		else {
+			
+			 r1r = new PdfPCell(new Paragraph("-",sampleinfoans));
+		}
+		
 		r1r.setBorder(1);
 		r1r.setBorder(r1r.RIGHT);
 		r1r.setBorderColor(resultborder);
@@ -960,9 +987,16 @@ public class Singlepororeport {
 		r1r.setVerticalAlignment(Element.ALIGN_MIDDLE);
 
 	
-	
+		PdfPCell u1;
+		if (darcy== true) {
+			 u1 = new PdfPCell(new PdfPCell(new Paragraph("(darcy)", unitlab)));
+			}
+		else {
+			
+			 u1 = new PdfPCell(new Paragraph("",sampleinfoans));
+		}
 
-		PdfPCell u1 = new PdfPCell(new Paragraph("(darcy)", unitlab));
+
 		u1.setBorder(1);
 		u1.setBorder(u1.RIGHT);
 		u1.setBorderColor(resultborder);
@@ -987,17 +1021,26 @@ public class Singlepororeport {
 				sampleinfola));
 		// r1 = new PdfPCell(new Phrase("jj"+d.starttime));
 		r12.setBorder(1);
+		r12.setBackgroundColor(getColor(14));
 		r12.setBorder(r1.RIGHT);
 		r12.setBorderColor(resultborder);
 		r12.setBorderWidth(border);
-		r12.setBackgroundColor(backcellcoltable);
+		//r12.setBackgroundColor(backcellcoltable);
 		r12.setFixedHeight(30f);
 
 		r12.setHorizontalAlignment(Element.ALIGN_CENTER);
 		r12.setVerticalAlignment(Element.ALIGN_MIDDLE);
 
-		PdfPCell r1r2 = new PdfPCell(new Paragraph(""+ DataStore.ConvertGurely("" + d.data.get("gurley")),
-				sampleinfoans));
+		PdfPCell r1r2;
+		if (gurley== true) {
+			r1r2 = new PdfPCell(new Paragraph(""+ DataStore.ConvertGurely("" + d.data.get("gurley")),
+					sampleinfoans));
+			}
+		else {
+			
+			r1r2 = new PdfPCell(new Paragraph("-",sampleinfoans));
+		}
+		
 		r1r2.setBorder(1);
 		r1r2.setBorder(r1r.RIGHT);
 		r1r2.setBorderColor(resultborder);
@@ -1010,7 +1053,16 @@ public class Singlepororeport {
 	
 	
 
-		PdfPCell u12 = new PdfPCell(new Paragraph(""+DataStore.getUnitegurely(), unitlab));
+		PdfPCell u12;
+		if (gurley== true) {
+			u12 = new PdfPCell(new Paragraph(""+DataStore.getUnitegurely(), unitlab));
+			}
+		else {
+			
+			u12 = new PdfPCell(new Paragraph("",sampleinfoans));
+		}
+		
+		
 		u12.setBorder(1);
 		u12.setBorder(u1.RIGHT);
 		u12.setBorderColor(resultborder);
@@ -1035,18 +1087,27 @@ public class Singlepororeport {
 		PdfPCell r13 = new PdfPCell(new Paragraph("Frazier permeability ",
 				sampleinfola));
 		// r1 = new PdfPCell(new Phrase("jj"+d.starttime));
+		r13.setBackgroundColor(getColor(14));
 		r13.setBorder(1);
 		r13.setBorder(r1.RIGHT);
 		r13.setBorderColor(resultborder);
 		r13.setBorderWidth(border);
-		r13.setBackgroundColor(backcellcoltable);
+//		r13.setBackgroundColor(backcellcoltable);
 		r13.setFixedHeight(30f);
 
 		r13.setHorizontalAlignment(Element.ALIGN_CENTER);
 		r13.setVerticalAlignment(Element.ALIGN_MIDDLE);
 
-		PdfPCell r1r3 = new PdfPCell(new Paragraph(""+ DataStore.ConvertFrazier("" + d.data.get("frazier")),
-				sampleinfoans));
+		PdfPCell r1r3;
+		if (frazier== true) {
+			r1r3 = new PdfPCell(new Paragraph(""+ DataStore.ConvertFrazier("" + d.data.get("frazier")),
+					sampleinfoans));
+			}
+		else {
+			
+			r1r3 = new PdfPCell(new Paragraph("-",sampleinfoans));
+		}
+
 		r1r3.setBorder(1);
 		r1r3.setBorder(r1r.RIGHT);
 		r1r3.setBorderColor(resultborder);
@@ -1059,8 +1120,16 @@ public class Singlepororeport {
 	
 	
 
+		PdfPCell u13;
+		if (frazier== true) {
+			u13 = new PdfPCell(new Paragraph(""+DataStore.getUnitefrazier(), unitlab));
+			}
+		else {
+			
+			u13 = new PdfPCell(new Paragraph("",sampleinfoans));
+		}
+
 //		PdfPCell u13 = new PdfPCell(new Paragraph("( Cubic feet / Square foot - min )", unitlab));
-		PdfPCell u13 = new PdfPCell(new Paragraph(""+DataStore.getUnitefrazier(), unitlab));
 		u13.setBorder(1);
 		u13.setBorder(u1.RIGHT);
 		u13.setBorderColor(resultborder);
@@ -1073,6 +1142,9 @@ public class Singlepororeport {
 		resulttable.addCell(r1h);
 	//resulttable.addCell(r1h2);
 	//	resulttable.addCell(r1h3);
+		
+		
+		resulttable.addCell(titl4);
 
 		/* LABEL */
 

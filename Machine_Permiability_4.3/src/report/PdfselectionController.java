@@ -48,7 +48,7 @@ public class PdfselectionController implements Initializable {
 	TextArea txtnotes;
 
 	@FXML
-	CheckBox chkrow, flowvspre, chkcoverpage;
+	CheckBox chkrow, flowvspre, chkcoverpage,chdarcy,chgurley,chfrazier,chsampleinfo;
 
 	@FXML
 	ImageView pic, pic1;
@@ -60,6 +60,8 @@ public class PdfselectionController implements Initializable {
 
 	List<String> graphs;
 	boolean bchkcoverpage, bchkrowdata, bflowvspre;
+	
+	boolean bolchdarcy, bolchgurley, bolchfrazier,bolchsampleinfo;
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -95,6 +97,7 @@ public class PdfselectionController implements Initializable {
 			lblbrowse.setVisible(false);
 			btnbrows.setVisible(false);
 			excelsave.setVisible(false);
+			chsampleinfo.setVisible(true);
 		}
 
 		txtnotes.setText("The following test procedure is based on ASTM D737-96 (Standard Test Method for Air Permeability).");
@@ -193,6 +196,33 @@ public class PdfselectionController implements Initializable {
 		} else {
 			bchkrowdata = false;
 		}
+		
+		if (chdarcy.isSelected()) {
+			bolchdarcy = true;
+		} else {
+			bolchdarcy = false;
+		}
+
+		if (chgurley.isSelected()) {
+			bolchgurley = true;
+		} else {
+			bolchgurley = false;
+		}
+
+		if (chfrazier.isSelected()) {
+			bolchfrazier = true;
+		} else {
+			bolchfrazier = false;
+		}
+		
+		if (chsampleinfo.isSelected()) {
+			bolchsampleinfo = true;
+		} else {
+			bolchsampleinfo = false;
+		}
+		
+		
+
 
 		new Thread(new Runnable() {
 
@@ -206,7 +236,7 @@ public class PdfselectionController implements Initializable {
 					Singlepororeport sp = new Singlepororeport();
 					sp.Report(path, ReportController.list_d.get(0),
 							txtnotes.getText(), txtcomname.getText(), imgpath,
-							graphs, bchkrowdata, bchkcoverpage, imgpath1);
+							graphs, bchkrowdata, bchkcoverpage, imgpath1,bolchdarcy, bolchgurley, bolchfrazier);
 					
 					
 				/*	SinglepororeportKusum sp = new SinglepororeportKusum();
@@ -218,7 +248,7 @@ public class PdfselectionController implements Initializable {
 					Multiplepororeport mp = new Multiplepororeport();
 					mp.Report(path, ReportController.list_d,
 							txtnotes.getText(), txtcomname.getText(), graphs,
-							bchkrowdata, bchkcoverpage, imgpath1);
+							bchkrowdata, bchkcoverpage, imgpath1,bolchdarcy, bolchgurley, bolchfrazier,bolchsampleinfo);
 					/*
 					MultiplepororeportKusum mp = new MultiplepororeportKusum();
 					mp.Report(path, ReportController.list_d,
