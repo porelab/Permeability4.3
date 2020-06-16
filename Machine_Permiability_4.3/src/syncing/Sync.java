@@ -31,7 +31,8 @@ public class Sync {
 	int ind=0;
 	
 	SimpleBooleanProperty bol=null;
-	
+
+	List<DatareadN> drlist;
 	public Sync(SimpleBooleanProperty bol)
 	{
 		this.bol=bol;
@@ -44,6 +45,19 @@ public class Sync {
 		
 	}
 
+	
+	void setUpdate()
+	{
+		if(drlist.size()!=0)
+		{
+			for(int i=0;i<drlist.size();i++)
+			{
+
+				drlist.get(i).updatetoUploadedFile();
+			}
+		}
+	}
+	
 	public   void SyncOnline()
 	{  
 		try{
@@ -51,6 +65,8 @@ public class Sync {
 		{
 				bol.set(true);
 		}
+		
+		drlist=new ArrayList<DatareadN>();
 				//FirebaseConnect.InitApp();
 		File f=new File("TableCsvs/"+Myapp.uid);
 		if(f.isDirectory())
@@ -83,11 +99,14 @@ public class Sync {
 			    			{
 			    				try
 			    				{
-			    					if(dd.data.containsKey("testdate"))
+			    					if(dd.data.containsKey("testdate")&&!dd.data.containsKey("upload"))
 			    					{
+			    						drlist.add(dd);	
+						    			
 			    					 System.out.println("Sample name : "+listOfFiles[i].getName());
 						    		 System.out.println("Test name : "+ff[j].getName().substring(0,ff[j].getName().indexOf('.')));
-						    		
+						    		 dd.data.put("upload", "yes");
+								    	
 						    		 temp.put(ff[j].getName().substring(0,ff[j].getName().indexOf('.')), dd.data);
 			    					}
 			    				}
@@ -227,6 +246,7 @@ public class Sync {
 		
 		if(saname.size()<=ind)
 		{
+			setUpdate();
 			System.out.println("ALL COMPLETED "+saname.size()+" - "+ind);
 		
 			if(bol!=null)
