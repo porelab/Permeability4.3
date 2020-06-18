@@ -798,11 +798,11 @@ public class NLivetestController implements Initializable {
 			dryflist.remove(0);
 			dryplist.remove(0);
 
-			dryflist.remove(1);
-			dryplist.remove(1);
+		//	dryflist.remove(1);
+		//	dryplist.remove(1);
 
-			dryflist.remove(2);
-			dryplist.remove(2);
+		//	dryflist.remove(2);
+		//	dryplist.remove(2);
 
 		//	dryflist.remove(3);
 		//	dryplist.remove(3);
@@ -863,10 +863,17 @@ public class NLivetestController implements Initializable {
 				frazier = getDarcyFrazier(Double.parseDouble(dryplist.get(10)), Double.parseDouble(dryflist.get(10)));
 				frazier10inch = getDarcyFrazier10inch(Double.parseDouble(dryplist.get(10)),
 						Double.parseDouble(dryflist.get(10)));
-			} else {
+			}
+			else if (dryflist.size() >4) {
 				frazier = getDarcyFrazier(Double.parseDouble(dryplist.get(4)), Double.parseDouble(dryflist.get(4)));
 				frazier10inch = getDarcyFrazier10inch(Double.parseDouble(dryplist.get(4)),
 						Double.parseDouble(dryflist.get(4)));
+			}
+			else {
+				int in=dryplist.size()-1;
+				frazier = getDarcyFrazier(Double.parseDouble(dryplist.get(in)), Double.parseDouble(dryflist.get(in)));
+				frazier10inch = getDarcyFrazier10inch(Double.parseDouble(dryplist.get(in)),
+						Double.parseDouble(dryflist.get(in)));
 			}
 
 			cs.newLine("frazier", "" + Myapp.getRound(frazier10inch, 5));
