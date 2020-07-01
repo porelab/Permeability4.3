@@ -281,7 +281,7 @@ public class ChartPlot {
 		// lineChart.setTitle(Title);
 		lineChart.setLegendVisible(false);
 	
-		List<String> clrlist = getColorMultiple();
+		List<String> clrlist = DataStore.getColorMultiple();
 		List<String> leglab = new ArrayList<String>();
 
 		XYChart.Series[] series = new XYChart.Series[d.size() * 2];
@@ -314,7 +314,12 @@ public class ChartPlot {
 						yd = Double.parseDouble(y.get(j));
 					}
 
+					if(yd>=0)
+					{
 					series[ik].getData().add(new XYChart.Data(xd, yd));
+					}
+					
+			
 
 				}
 				lineChart.getData().add(series[ik]);
@@ -365,9 +370,13 @@ public class ChartPlot {
 				
 					temphdpr.add(xd);
 					temphdfl.add(yd);
+					
+					
+					if(yd>=0)
+					{
 					series[ik].getData().add(new XYChart.Data(xd, yd));
-
-			
+					}
+				
 				
 			}
 

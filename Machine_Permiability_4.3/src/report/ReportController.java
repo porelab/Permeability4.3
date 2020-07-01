@@ -718,20 +718,8 @@ public class ReportController implements Initializable {
 
 	public List<String> getColorMultiple() {
 
-		List<String> grpclr = new ArrayList<String>();
-		grpclr.add("#DBBA4F");
-		grpclr.add("#3F76B5");
-		grpclr.add("#D67479");
-		grpclr.add("#12B59F");
-		grpclr.add("#F5903D");
-		grpclr.add("#BC4644");
-		grpclr.add("#AD4F73");
-		grpclr.add("#40A7C1");
-		grpclr.add("#95B64F");
-
-		grpclr.add("#613769");
-		grpclr.add("#234882");
-		grpclr.add("#A1846A");
+		List<String> grpclr = new ArrayList<String>(DataStore.getColorMultiple());
+	
 		return grpclr;
 	}
 

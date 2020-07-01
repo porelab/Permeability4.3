@@ -122,6 +122,7 @@ public class Multiplepororeport {
 	public static final String testtype = "/font/Roboto-Black.ttf";
 	public static final String testnamefont = "/font/BebasNeue Book.ttf";
 
+	List<String> grpclr = new ArrayList<String>();
 	Font unitlabrow = FontFactory.getFont(FontFactory.HELVETICA, 8,
 			Font.NORMAL, new BaseColor(255, 255, 255));
 
@@ -139,7 +140,7 @@ public class Multiplepororeport {
 	public void Report(String path, List<DatareadN> d, String notes, String comname,
 			List<String> graphs, Boolean btabledata, Boolean bcoverpage,String imgpath1 , Boolean lbldarcy, Boolean lblgurley , Boolean lblfrazer,Boolean tablesampleinfo) {
 		allfiles = d;
-
+		getColorMultiple() ;
 		this.companyname = comname;
 		this.notes = notes;
 		this.imgpath1 = imgpath1;
@@ -1431,6 +1432,20 @@ public class Multiplepororeport {
 		
 
 	}
+	
+	public List<String> getColorMultiple() {
+		grpclr.addAll(DataStore.getColorMultiple());
+		return grpclr;
+	}
+	
+	BaseColor getColors(int i)
+	{
+		 String hex = grpclr.get(i).replace("#", "");
+		 return new BaseColor(Integer.valueOf(hex.substring(0, 2), 16),
+         Integer.valueOf(hex.substring(2, 4), 16),
+         Integer.valueOf(hex.substring(4, 6), 16));
+	}
+
 	/* Display Graph */
 	void resultgraph(File f) {
 		try {
@@ -1488,7 +1503,7 @@ public class Multiplepororeport {
 
 					PdfTemplate p = cb.createTemplate(20, 20);
 					// p.setRGBColorFill(0xFF, 0x00, 0x00);
-					p.setColorFill(getColor(i - 1));
+					p.setColorFill(getColors(i - 1));
 					p.circle(10, 10, 5);
 					p.fill();
 
@@ -1528,7 +1543,7 @@ public class Multiplepororeport {
 					PdfContentByte cb = writer.getDirectContent();
 					PdfTemplate p = cb.createTemplate(20, 20);
 					// p.setRGBColorFill(0xFF, 0x00, 0x00);
-					p.setColorFill(getColor(i - 1));
+					p.setColorFill(getColors(i - 1));
 					p.circle(10, 10, 5);
 					p.fill();
 
@@ -1563,7 +1578,7 @@ public class Multiplepororeport {
 
 							PdfTemplate p = cb.createTemplate(20, 20);
 							// p.setRGBColorFill(0xFF, 0x00, 0x00);
-							p.setColorFill(getColor(i - 1));
+							p.setColorFill(getColors(i - 1));
 							p.circle(10, 10, 5);
 							p.fill();
 
@@ -1595,7 +1610,7 @@ public class Multiplepororeport {
 
 							PdfTemplate p = cb.createTemplate(20, 20);
 							// p.setRGBColorFill(0xFF, 0x00, 0x00);
-							p.setColorFill(getColor(i - 1));
+							p.setColorFill(getColors(i - 1));
 							p.circle(10, 10, 5);
 							p.fill();
 
@@ -1629,7 +1644,7 @@ public class Multiplepororeport {
 
 						PdfTemplate p = cb.createTemplate(20, 20);
 						// p.setRGBColorFill(0xFF, 0x00, 0x00);
-						p.setColorFill(getColor(i - 1));
+						p.setColorFill(getColors(i - 1));
 						p.circle(10, 10, 5);
 						p.fill();
 
@@ -1838,9 +1853,10 @@ public class Multiplepororeport {
 			List<List<String>> data = new ArrayList<List<String>>();
 
 			for (int k1 = 0; k1 < dpress.size(); k1++) {
+				try {
 				List<String> temp = new ArrayList<String>();
 
-				String press = ""+DataStore.getconvertToSimpleNumber(DataStore.ConvertPressure(dpress.get(k)));
+				String press = ""+DataStore.getconvertToSimpleNumber(DataStore.ConvertPressure(dpress.get(k1)));
 				//String press = ""+DataStore.ConvertPressure(dpress.get(k1));
 				temp.add(press);
 
@@ -1851,6 +1867,11 @@ public class Multiplepororeport {
 				temp.add(dryflow);
 
 				data.add(temp);
+				}
+				catch(Exception e)
+				{
+					e.printStackTrace();
+				}
 			}
 			
 			BaseColor bordercolor = new BaseColor(130, 130, 130);
