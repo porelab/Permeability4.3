@@ -222,7 +222,7 @@ public class NFirstController implements Initializable {
 		if (DataStore.connect_hardware.get()) {
 
 			DataStore.hardReset();
-			sendStop(1500);
+			//sendStop(1500);
 
 		}
 
