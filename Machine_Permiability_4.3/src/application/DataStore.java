@@ -655,13 +655,13 @@ public class DataStore
 	}
 	
 	public static double toCfm(double sccm) {
-		double ans = sccm / 60;
+		double ans = sccm *  0.000035314666212661;
 		return ans;
 
 	}
 
 	public static double toCfm(String sccm) {
-		double ans = Double.parseDouble(sccm) / 60;
+		double ans = Double.parseDouble(sccm) * 0.000035314666212661;
 		return ans;
 	}
 
