@@ -722,6 +722,10 @@ public class DataStore
 		else if (DataStore.getUniteflow().equals("cfm")) {
 			flow = toCfm(flow);
 		}
+		else
+		{
+			flow=flow*60;
+		}
 
 		return Myapp.getRoundDouble(flow, getRoundOff());
 	}
