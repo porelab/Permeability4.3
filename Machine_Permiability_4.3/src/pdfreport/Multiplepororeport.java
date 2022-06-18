@@ -1106,6 +1106,7 @@ public class Multiplepororeport {
 			String st = "" + dr.filename;
 			 //st = st.substring(0, st.indexOf('.'));
 				
+			
 				String mp = dr.data.get("darcy avg")+"";
 		
 				double d1 =Double.parseDouble("" + dr.data.get("gurley"));

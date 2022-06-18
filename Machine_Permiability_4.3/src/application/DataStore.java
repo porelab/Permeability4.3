@@ -776,6 +776,7 @@ public class DataStore
 	{
 		double frz=num;
 		
+		
 		 if(DataStore.getUnitefrazier().equals("cm3/cm2.sec"))	
 		{
 			frz=frz*0.508;

@@ -561,24 +561,11 @@ public class ReportController implements Initializable {
 			wff = "" +   DataStore.getconvertToSimpleNumber(DataStore.getRoundAuto(list_d.get(i).data.get("darcy avg").toString()));
 			gurff = "" + DataStore.getconvertToSimpleNumber(DataStore.getRoundAuto(list_d.get(i).data.get("gurley").toString()));
 			
-			double frz=Double.parseDouble(DataStore.getconvertToSimpleNumber(DataStore.getRoundAuto(list_d.get(i).data.get("frazier").toString())));
-			
-			 if(DataStore.getUnitefrazier().equals("cm3/cm2.sec"))	
-			{
-				frz=frz*0.508;
-			}
-			else if(DataStore.getUnitefrazier().equals("m3/m2.min"))	
-			{
-				frz=frz*0.3048;
-			}
-			else if(DataStore.getUnitefrazier().equals("l/m2.sec"))	
-			{
-				frz=frz*5.08;
-			}
-				
+	
 			
 			
-			fraff = "" + Myapp.getRound(frz, DataStore.getRoundOff());
+			
+			fraff = "" + DataStore.ConvertFrazier(DataStore.getconvertToSimpleNumber(DataStore.getRoundAuto(list_d.get(i).data.get("frazier").toString())));
 			
 		
 			avgbp = avgbp + Double.parseDouble(wff);
