@@ -544,7 +544,7 @@
                         <Line endX="240.0" layoutX="181.0" layoutY="174.0" startX="-100.0" stroke="#bfb9b9" strokeWidth="2.0" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="380.0" />
                         <Separator layoutX="816.0" layoutY="43.0" orientation="VERTICAL" prefHeight="380.0" prefWidth="0.0" />
                         <Rectangle arcHeight="500.0" arcWidth="42.0" fill="#2197ff00" height="50.0" layoutX="1046.0" layoutY="90.0" opacity="0.61" stroke="#bfb9b9" strokeType="INSIDE" strokeWidth="2.0" width="200.0" />
-                        <Label layoutX="851.0" layoutY="99.0" styleClass="col-gray70" text="Correction fector" textFill="WHITE">
+                        <Label layoutX="851.0" layoutY="99.0" styleClass="col-gray70" text="Correction factor" textFill="WHITE">
                            <font>
                               <Font size="22.0" />
                            </font>
@@ -603,12 +603,12 @@
                               <String fx:value="col-gray70" />
                            </styleClass>
                         </TextField>
-                        <Label layoutX="851.0" layoutY="46.0" text="Correction fector" textFill="#0e3c87">
+                        <Label layoutX="851.0" layoutY="46.0" text="Correction factor" textFill="#0e3c87">
                            <font>
                               <Font size="25.0" />
                            </font>
                         </Label>
-                        <Label layoutX="857.0" layoutY="190.0" text="Plate Size" textFill="#0e3c87">
+                        <Label layoutX="857.0" layoutY="190.0" text="Plate Size (cm)" textFill="#0e3c87">
                            <font>
                               <Font size="25.0" />
                            </font>
