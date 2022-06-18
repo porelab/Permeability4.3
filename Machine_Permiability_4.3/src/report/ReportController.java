@@ -447,6 +447,7 @@ public class ReportController implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
 
+		System.out.println("Unit : "+DataStore.getUnitefrazier());
 		System.out.println("Genrate Result....");
 		list_d = new ArrayList<DatareadN>();
 		listofchart = new ArrayList<Pane>();
@@ -559,7 +560,25 @@ public class ReportController implements Initializable {
 			fff = "" +   list_d.get(i).filename;
 			wff = "" +   DataStore.getconvertToSimpleNumber(DataStore.getRoundAuto(list_d.get(i).data.get("darcy avg").toString()));
 			gurff = "" + DataStore.getconvertToSimpleNumber(DataStore.getRoundAuto(list_d.get(i).data.get("gurley").toString()));
-			fraff = "" + DataStore.getconvertToSimpleNumber(DataStore.getRoundAuto(list_d.get(i).data.get("frazier").toString()));
+			
+			double frz=Double.parseDouble(DataStore.getconvertToSimpleNumber(DataStore.getRoundAuto(list_d.get(i).data.get("frazier").toString())));
+			
+			 if(DataStore.getUnitefrazier().equals("cm3/cm2.sec"))	
+			{
+				frz=frz*0.508;
+			}
+			else if(DataStore.getUnitefrazier().equals("m3/m2.min"))	
+			{
+				frz=frz*0.3048;
+			}
+			else if(DataStore.getUnitefrazier().equals("l/m2.sec"))	
+			{
+				frz=frz*5.08;
+			}
+				
+			
+			
+			fraff = "" + Myapp.getRound(frz, DataStore.getRoundOff());
 			
 		
 			avgbp = avgbp + Double.parseDouble(wff);

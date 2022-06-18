@@ -153,7 +153,7 @@ public class NConfigurePageController implements Initializable {
 		cmbroundoff.getItems().addAll("1", "2", "3","4","5");
 		
 		cmbgurley.getItems().addAll("s");
-		cmbfrazier.getItems().addAll("cubic feet / square foot - min");
+		cmbfrazier.getItems().addAll("cubic feet / square foot - min","cm3/cm2.sec","m3/m2.min","l/m2.sec");
 		
 		/* Set Keyboard mode. Computer or Tablet Mode */
 		setkeyboardmode();

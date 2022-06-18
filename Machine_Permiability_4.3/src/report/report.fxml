@@ -33,7 +33,7 @@
             <Insets />
          </opaqueInsets>
       </Label>
-      <Label alignment="CENTER" layoutX="1254.0" layoutY="118.0" prefHeight="67.0" prefWidth="104.0" text="Frazier" textFill="#646161" wrapText="true" AnchorPane.topAnchor="118.0">
+      <Label alignment="CENTER" layoutX="1254.0" layoutY="118.0" prefHeight="67.0" prefWidth="104.0" text="Permeability" textFill="#646161" wrapText="true" AnchorPane.topAnchor="118.0">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
@@ -139,7 +139,7 @@
             <Font name="System Bold" size="15.0" />
          </font>
       </Label>
-      <Label layoutX="1213.0" layoutY="528.0" text="Frazier Permeability" textFill="WHITE">
+      <Label layoutX="1213.0" layoutY="528.0" text="     Permeability" textFill="WHITE">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>

@@ -753,7 +753,44 @@ public class DataStore
 	}
 
 	
-	
+	public static String ConvertFrazier(String num)
+	{
+		double frz=Double.parseDouble(num);
+		
+		 if(DataStore.getUnitefrazier().equals("cm3/cm2.sec"))	
+		{
+			frz=frz*0.508;
+		}
+		else if(DataStore.getUnitefrazier().equals("m3/m2.min"))	
+		{
+			frz=frz*0.3048;
+		}
+		else if(DataStore.getUnitefrazier().equals("l/m2.sec"))	
+		{
+			frz=frz*5.08;
+		}
+			
+	return "" + Myapp.getRound(frz, DataStore.getRoundOff());
+	}
+	public static String ConvertFrazier(double num)
+	{
+		double frz=num;
+		
+		 if(DataStore.getUnitefrazier().equals("cm3/cm2.sec"))	
+		{
+			frz=frz*0.508;
+		}
+		else if(DataStore.getUnitefrazier().equals("m3/m2.min"))	
+		{
+			frz=frz*0.3048;
+		}
+		else if(DataStore.getUnitefrazier().equals("l/m2.sec"))	
+		{
+			frz=frz*5.08;
+		}
+			
+	return "" + Myapp.getRound(frz, DataStore.getRoundOff());
+	}
 
  public static String getconvertToSimpleNumber(double number) {
     // Check if in scientific notation
@@ -812,20 +849,7 @@ public class DataStore
 		return Myapp.getRoundDouble(gurely, getRoundOff());
 	}
 
-	public static double ConvertFrazier(String frazier) {
-		double ans;
-	
-			ans = Double.parseDouble(frazier);
-		
-		return Myapp.getRoundDouble(ans, getRoundOff());
-	}
 
-	public static double ConvertFrazier(Double frazier) {
-
-		
-		return Myapp.getRoundDouble(frazier, getRoundOff());
-	}
-	
 	public static List<String> ConvertFlow(List<String> flow) {
 
 		List<String> data=new ArrayList<String>();

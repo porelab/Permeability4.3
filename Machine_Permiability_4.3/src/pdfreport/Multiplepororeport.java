@@ -1115,8 +1115,9 @@ public class Multiplepororeport {
 					String gurl=formatter .format(d1);
 			
 					
-					String	fraz = Myapp.getRound(Double.parseDouble("" + dr.data.get("frazier")),2);
+					//String	fraz = Myapp.getRound(Double.parseDouble("" + dr.data.get("frazier")),2);
 				
+					String	fraz = DataStore.ConvertFrazier(dr.data.get("frazier").toString());
 					
 					
 
