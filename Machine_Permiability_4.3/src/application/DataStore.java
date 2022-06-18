@@ -1,5 +1,9 @@
 package application;
 
+import gnu.io.CommPort;
+import gnu.io.SerialPort;
+
+import java.io.File;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.text.DecimalFormat;
@@ -11,10 +15,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
-import application.SerialCommunicator.SerialReader;
-import communicationProtocol.Mycommand;
-import gnu.io.CommPort;
-import gnu.io.SerialPort;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleDoubleProperty;
@@ -27,142 +27,149 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.stage.Stage;
 import toast.Toast;
+import application.SerialCommunicator.SerialReader;
+
+import communicationProtocol.Mycommand;
+
+import data_read_write.DatareadN;
 
 //this class is for data flow and data storing while page changes
-public class DataStore 
-{ 
-	
+public class DataStore {
 
-	public static 	CommPort commPort;
-	public static SimpleBooleanProperty isconfigure=new SimpleBooleanProperty(false);
+	public static CommPort commPort;
+	public static SimpleBooleanProperty isconfigure = new SimpleBooleanProperty(
+			false);
 	public static SerialPort serialPort;
 
-	public static InputStream in=null;
+	public static InputStream in = null;
 	public static SerialReader sr;
-	
-	
-	//for scada
-	public static SimpleBooleanProperty sv1=new SimpleBooleanProperty(false);
-	public static SimpleBooleanProperty sv2=new SimpleBooleanProperty(false);
-	public static SimpleBooleanProperty sv3=new SimpleBooleanProperty(false);
-	public static SimpleBooleanProperty sv4=new SimpleBooleanProperty(false);
-	
-	public static DoubleProperty spr=new SimpleDoubleProperty(0);
-	public static DoubleProperty sfc=new SimpleDoubleProperty(0);
-	public static DoubleProperty sfm1=new SimpleDoubleProperty(0);
-	public static DoubleProperty sfm2=new SimpleDoubleProperty(0);
-	public static DoubleProperty spg1=new SimpleDoubleProperty(0);
-	public static DoubleProperty spg2=new SimpleDoubleProperty(0);
-	
-	public static SimpleStringProperty ssfm1=new SimpleStringProperty("0.0");
-	public static SimpleStringProperty ssfm2=new SimpleStringProperty("0.0");
-	public static SimpleStringProperty sspg1=new SimpleStringProperty("0.0");
-	public static SimpleStringProperty sspg2=new SimpleStringProperty("0.0");
-	
-	
-	
-	
-	public static int leakinterval,leakpress;
-	
-	public static SimpleBooleanProperty porometer_summary=new SimpleBooleanProperty(false);	
-	
-	static double maxflowofmachine=55000;
-	public static SimpleBooleanProperty isDevicefatch=new SimpleBooleanProperty(false);
+
+	// for scada
+	public static SimpleBooleanProperty sv1 = new SimpleBooleanProperty(false);
+	public static SimpleBooleanProperty sv2 = new SimpleBooleanProperty(false);
+	public static SimpleBooleanProperty sv3 = new SimpleBooleanProperty(false);
+	public static SimpleBooleanProperty sv4 = new SimpleBooleanProperty(false);
+
+	public static DoubleProperty spr = new SimpleDoubleProperty(0);
+	public static DoubleProperty sfc = new SimpleDoubleProperty(0);
+	public static DoubleProperty sfm1 = new SimpleDoubleProperty(0);
+	public static DoubleProperty sfm2 = new SimpleDoubleProperty(0);
+	public static DoubleProperty spg1 = new SimpleDoubleProperty(0);
+	public static DoubleProperty spg2 = new SimpleDoubleProperty(0);
+
+	public static SimpleStringProperty ssfm1 = new SimpleStringProperty("0.0");
+	public static SimpleStringProperty ssfm2 = new SimpleStringProperty("0.0");
+	public static SimpleStringProperty sspg1 = new SimpleStringProperty("0.0");
+	public static SimpleStringProperty sspg2 = new SimpleStringProperty("0.0");
+
+	public static int leakinterval, leakpress;
+
+	public static SimpleBooleanProperty porometer_summary = new SimpleBooleanProperty(
+			false);
+
+	static double maxflowofmachine = 55000;
+	public static SimpleBooleanProperty isDevicefatch = new SimpleBooleanProperty(
+			false);
 	public static String software_id;
-	public static String firebase_url="https://pushnotification-305f7.firebaseio.com/";
-	
+	public static String firebase_url = "https://pushnotification-305f7.firebaseio.com/";
+
 	public static Stage gtg;
 
-	public static SimpleBooleanProperty startTest=new SimpleBooleanProperty(false);
-	
+	public static SimpleBooleanProperty startTest = new SimpleBooleanProperty(
+			false);
+
 	// for userinput screen
-	
-	public static SimpleBooleanProperty testComplete=new SimpleBooleanProperty(false);
-	
-	
-	public static SimpleBooleanProperty user_li=new SimpleBooleanProperty(true);
-	public static SimpleBooleanProperty live_li=new SimpleBooleanProperty(false);
-	
 
-	public static SimpleDoubleProperty livepressure=new SimpleDoubleProperty(0);
-	public static SimpleDoubleProperty liveflow=new SimpleDoubleProperty(0);
-	
-	
-	//for online upload
+	public static SimpleBooleanProperty testComplete = new SimpleBooleanProperty(
+			false);
 
-	public static SimpleStringProperty ttime=new SimpleStringProperty("now");
-	public static SimpleStringProperty tper=new SimpleStringProperty("0%");
-	public static SimpleStringProperty tstatus=new SimpleStringProperty("loading");
-	
-	//new string
+	public static SimpleBooleanProperty user_li = new SimpleBooleanProperty(
+			true);
+	public static SimpleBooleanProperty live_li = new SimpleBooleanProperty(
+			false);
 
-	public static ObservableList<String> leakpressure=FXCollections.observableArrayList();
-	public static ObservableList<String> leaktime=FXCollections.observableArrayList();
-	
-	   //for csv generation...
+	public static SimpleDoubleProperty livepressure = new SimpleDoubleProperty(
+			0);
+	public static SimpleDoubleProperty liveflow = new SimpleDoubleProperty(0);
 
-	public static ObservableList<String> flow=FXCollections.observableArrayList();
-	public static ObservableList<String> dpressure=FXCollections.observableArrayList();
-	public static ObservableList<String> dflow=FXCollections.observableArrayList();
+	// for online upload
 
-		
-		
-		// for user input screen...
-	public static String dtempdata="",dtimedata="",dwdata="",sample_id="",id;
-	
+	public static SimpleStringProperty ttime = new SimpleStringProperty("now");
+	public static SimpleStringProperty tper = new SimpleStringProperty("0%");
+	public static SimpleStringProperty tstatus = new SimpleStringProperty(
+			"loading");
+
+	// new string
+
+	public static ObservableList<String> leakpressure = FXCollections
+			.observableArrayList();
+	public static ObservableList<String> leaktime = FXCollections
+			.observableArrayList();
+
+	// for csv generation...
+
+	public static ObservableList<String> flow = FXCollections
+			.observableArrayList();
+	public static ObservableList<String> dpressure = FXCollections
+			.observableArrayList();
+	public static ObservableList<String> dflow = FXCollections
+			.observableArrayList();
+
+	// for user input screen...
+	public static String dtempdata = "", dtimedata = "", dwdata = "",
+			sample_id = "", id;
+
 	public static long starttime;
 	public static String thresoldvalue;
 
-	public static  ObservableList<String> tempdata=FXCollections.observableArrayList();
-	
-	
-	public static String surface,diameter,sampleid,thresold,thikness,starttime1,completetime,operator,customerid,comments,testdur;
-	
+	public static ObservableList<String> tempdata = FXCollections
+			.observableArrayList();
 
-		
-		// for live graph...
-	public static int pressure_min=0,pressure_max=0;
-		
-	    
-		
-	//configure Page 
-	public static String pg,fm,pr,fc,thfirtbp,thmoderat,thcontinous;
-	
-	public static SimpleStringProperty sysinfolab=new SimpleStringProperty("");
-	//for reminder
-	
-	public static List<List<String>> todayeventlist=new ArrayList<List<String>>();
-	
-   //for csv generation...
-	public static ObservableList<String> pressure=FXCollections.observableArrayList();
-	public static ObservableList<String> temp=FXCollections.observableArrayList();
+	public static String surface, diameter, sampleid, thresold, thikness,
+			starttime1, completetime, operator, customerid, comments, testdur;
 
-	
-	// for user input screen...
-	public static String path_csv="";
-	public static SerialCommunicator sc;
-	
-	
 	// for live graph...
-	public static int xdiff=0,flow_min=0;
-	
-	public static int no_sample=0;
-	public static  int xSeriesData = 0;
-	public static ConcurrentLinkedQueue<Number> dataQ = new ConcurrentLinkedQueue<Number>();   
-	
-	
-	
-    // for live graph listenrt
-	public static int refresh=0;
-	
-     //for new test screen
+	public static int pressure_min = 0, pressure_max = 0;
+
+	// configure Page
+	public static String pg, fm, pr, fc, thfirtbp, thmoderat, thcontinous;
+
+	public static SimpleStringProperty sysinfolab = new SimpleStringProperty("");
+	// for reminder
+
+	public static List<List<String>> todayeventlist = new ArrayList<List<String>>();
+
+	// for csv generation...
+	public static ObservableList<String> pressure = FXCollections
+			.observableArrayList();
+	public static ObservableList<String> temp = FXCollections
+			.observableArrayList();
+
+	// for user input screen...
+	public static String path_csv = "";
+	public static SerialCommunicator sc;
+
+	// for live graph...
+	public static int xdiff = 0, flow_min = 0;
+
+	public static int no_sample = 0;
+	public static int xSeriesData = 0;
+	public static ConcurrentLinkedQueue<Number> dataQ = new ConcurrentLinkedQueue<Number>();
+
+	// for live graph listenrt
+	public static int refresh = 0;
+
+	// for new test screen
 	public static TabPane test_tab1;
-	public static Tab user1,liveprocess1,livegraphs1,reports1;
- 	
-    // for connection is redy or not
- 	
-	public static SimpleBooleanProperty connect_hardware=new SimpleBooleanProperty(false);
-	public static SimpleBooleanProperty connect_internet=new SimpleBooleanProperty(false);
+	public static Tab user1, liveprocess1, livegraphs1, reports1;
+
+	// for connection is redy or not
+
+	public static SimpleBooleanProperty connect_hardware = new SimpleBooleanProperty(
+			false);
+	public static SimpleBooleanProperty connect_internet = new SimpleBooleanProperty(
+			false);
+
 	public static List<String> getColorMultiple() {
 
 		List<String> grpclr = new ArrayList<String>();
@@ -176,116 +183,154 @@ public class DataStore
 		grpclr.add("#95B64F");
 		grpclr.add("#be79df");
 		grpclr.add("#ff1e56");
-		
+
 		return grpclr;
-	}	
- 	
-    //for serial commnunicatior
+	}
 
-	public static Set<Character> listOfHeads = new HashSet<Character>();// Contains all Heads eg. to read Pressure P, to read Temperature T  
-	public static List<List<Integer>> allDataRead = new ArrayList<List<Integer>>();// List of all the data read 
- //	static HashMap<String,ObservableList<Integer>> intList = new HashMap<String,ObservableList<Integer>>(); // map for value received for P, T, H,F etc.
-	public static HashMap<String,ObservableList<Double>> intList = new HashMap<String,ObservableList<Double>>(); // map for value received for P, T, H,F etc.
- 	
+	// for serial commnunicatior
+
+	public static Set<Character> listOfHeads = new HashSet<Character>();// Contains
+																		// all
+																		// Heads
+																		// eg.
+																		// to
+																		// read
+																		// Pressure
+																		// P, to
+																		// read
+																		// Temperature
+																		// T
+	public static List<List<Integer>> allDataRead = new ArrayList<List<Integer>>();// List
+																					// of
+																					// all
+																					// the
+																					// data
+																					// read
+	// static HashMap<String,ObservableList<Integer>> intList = new
+	// HashMap<String,ObservableList<Integer>>(); // map for value received for
+	// P, T, H,F etc.
+	public static HashMap<String, ObservableList<Double>> intList = new HashMap<String, ObservableList<Double>>(); // map
+																													// for
+																													// value
+																													// received
+																													// for
+																													// P,
+																													// T,
+																													// H,F
+																													// etc.
+
 	public static OutputStream out;
-   
-    static String type,pg1,pg2,fm1,fm2,chemb;
-    
-    public static boolean isCurveFit=false;
-    public static  void setLoadListener()
-    {
-    	DataStore.isconfigure.addListener(new ChangeListener<Boolean>() {
 
-    		@Override
-    		public void changed(
-    				ObservableValue<? extends Boolean> arg0,
-    				Boolean arg1, Boolean arg2) {
-    		
-    			System.out.println("Chaangedd ------->"+arg2);
-    			if(arg2==true)
-    			{
-    				Main.splashstage.hide();
-    				Main.mainstage.show();
-    				
-    			}
-    			
-    		}
-    	});
-    }
-	public static void Refresh()
-	{
+	static String type, pg1, pg2, fm1, fm2, chemb;
 
-		
+	public static boolean isCurveFit = false;
+
+	public static double psmall = 1;
+	public static double plarge = 7.2;
+	public static double pmedium = 2.3;
+	public static double cfact = 1;
+
+	public static void readSamplePlateSize() {
+		try {
+			DatareadN dr = new DatareadN();
+			dr.fileRead(new File("d.csv"));
+
+			psmall = Double.parseDouble(dr.data.get("psmall").toString());
+			pmedium = Double.parseDouble(dr.data.get("pmedium").toString());
+			plarge = Double.parseDouble(dr.data.get("plarge").toString());
+			cfact = Double.parseDouble(dr.data.get("cfact").toString());
+
+		} catch (Exception e) {
+			System.out.println("d.csv not found or crpt");
+
+		}
+	}
+
+	public static void setLoadListener() {
+		DataStore.isconfigure.addListener(new ChangeListener<Boolean>() {
+
+			@Override
+			public void changed(ObservableValue<? extends Boolean> arg0,
+					Boolean arg1, Boolean arg2) {
+
+				System.out.println("Chaangedd ------->" + arg2);
+				if (arg2 == true) {
+					Main.splashstage.hide();
+					Main.mainstage.show();
+
+				}
+
+			}
+		});
+	}
+
+	public static void Refresh() {
+
 		System.out.println(" Calling refresh start");
-		refresh=1;
-		sc=null;
-		
+		refresh = 1;
+		sc = null;
 
-		listOfHeads = new HashSet<Character>();// Contains all Heads eg. to read Pressure P, to read Temperature T  
-	 	allDataRead = new ArrayList<List<Integer>>();// List of all the data read 
-	    intList = new HashMap<String,ObservableList<Double>>(); 
-		
-		
-		
-		pressure=null;
-		pressure=FXCollections.observableArrayList();
-		
-		temp=null;
-		temp=FXCollections.observableArrayList();
-		
+		listOfHeads = new HashSet<Character>();// Contains all Heads eg. to read
+												// Pressure P, to read
+												// Temperature T
+		allDataRead = new ArrayList<List<Integer>>();// List of all the data
+														// read
+		intList = new HashMap<String, ObservableList<Double>>();
 
-		 xdiff=0;
-		 no_sample=0;
-		 xSeriesData=0;
-		 
+		pressure = null;
+		pressure = FXCollections.observableArrayList();
+
+		temp = null;
+		temp = FXCollections.observableArrayList();
+
+		xdiff = 0;
+		no_sample = 0;
+		xSeriesData = 0;
+
 		// dataQ=null;
 		// dataQ=new ConcurrentLinkedQueue<Number>();
-		 
-		 System.out.println(" Calling refresh end");
-		
+
+		System.out.println(" Calling refresh end");
+
 	}
-	
-	public static void getconfigdata()
-	{
-		Database db=new Database();		
-		List<List<String>> ll=db.getData("select * from configdata");
-		type =(ll.get(0).get(0));
-		pg1 =(ll.get(0).get(1));
-		pg2 =(ll.get(0).get(2));
-		fm1 =(ll.get(0).get(3));
-		fm2 =(ll.get(0).get(4));
-		chemb=(ll.get(0).get(7));
-		pr=(ll.get(0).get(5));
-		fc=(ll.get(0).get(6));
-		
-		String curvefittype =(ll.get(0).get(16));
-		
-		if(curvefittype.equals("on"))
-		{
-			isCurveFit=true;
+
+	public static void getconfigdata() {
+		Database db = new Database();
+		List<List<String>> ll = db.getData("select * from configdata");
+		type = (ll.get(0).get(0));
+		pg1 = (ll.get(0).get(1));
+		pg2 = (ll.get(0).get(2));
+		fm1 = (ll.get(0).get(3));
+		fm2 = (ll.get(0).get(4));
+		chemb = (ll.get(0).get(7));
+		pr = (ll.get(0).get(5));
+		fc = (ll.get(0).get(6));
+
+		String curvefittype = (ll.get(0).get(16));
+
+		if (curvefittype.equals("on")) {
+			isCurveFit = true;
+		} else {
+			isCurveFit = false;
 		}
-		else
-		{
-			isCurveFit=false;
-		}
-		
-		System.out.println("type"+DataStore.getType());
-		System.out.println("pg1"+DataStore.getPg1());
-		System.out.println("pg2"+DataStore.getPg2());
-		System.out.println("fm1"+DataStore.getFm1());
-		System.out.println("fm2"+DataStore.getFm2());
-		System.out.println("Pr : "+DataStore.getPr());
-		System.out.println("fc : "+DataStore.getFc());
-		
-		System.out.println("chemb"+DataStore.getChemb());
-		System.out.println("Curve FIt : "+isCurveFit);
-	
-	
+
+		System.out.println("type" + DataStore.getType());
+		System.out.println("pg1" + DataStore.getPg1());
+		System.out.println("pg2" + DataStore.getPg2());
+		System.out.println("fm1" + DataStore.getFm1());
+		System.out.println("fm2" + DataStore.getFm2());
+		System.out.println("Pr : " + DataStore.getPr());
+		System.out.println("fc : " + DataStore.getFc());
+
+		System.out.println("chemb" + DataStore.getChemb());
+		System.out.println("Curve FIt : " + isCurveFit);
+
 	}
-	public boolean isCurveFit()
-	{
+
+	public boolean isCurveFit() {
 		return isCurveFit;
 	}
+
 	public static String getPr() {
 		return pr;
 	}
@@ -303,28 +348,27 @@ public class DataStore
 	}
 
 	public static String getPg1() {
-	System.out.println();
+		System.out.println();
 		return pg1;
 	}
 
 	public static String getPg2() {
-	
+
 		return pg2;
 	}
 
-	
 	public static String getFm1() {
-	
+
 		return fm1;
 	}
 
 	public static String getFm2() {
-	
+
 		return fm2;
 	}
-	
+
 	public static String getChemb() {
-	
+
 		return chemb;
 	}
 
@@ -332,95 +376,75 @@ public class DataStore
 		return type;
 	}
 
-	public static String getCom()
-	{
-		String cm="";
-		Database db=new Database();		
-		List<List<String>> ll=db.getData("select comport from configdata");
-		cm =(ll.get(0).get(0));
-			
-		
+	public static String getCom() {
+		String cm = "";
+		Database db = new Database();
+		List<List<String>> ll = db.getData("select comport from configdata");
+		cm = (ll.get(0).get(0));
+
 		return cm;
 	}
 
-	public static boolean hardReset()
-	{
-		try{
+	public static boolean hardReset() {
+		try {
 
 			new Thread(new Runnable() {
-				
+
 				@Override
 				public void run() {
 					// TODO Auto-generated method stub
 
-					
 					DataStore.serialPort.setDTR(true);
-					try{Thread.sleep(200);}
-					catch(Exception e)
-					{
+					try {
+						Thread.sleep(200);
+					} catch (Exception e) {
 						e.printStackTrace();
 					}
 					DataStore.serialPort.setDTR(false);
-					
-					List<String> data=getAdmin_screen1();
-					String temp="";
-					for(int i=0;i<14;i++)
-					{
-						
-						if(i<8)
-						{
-						temp=temp+data.get(i);
-						}
-						else
-						{
-							temp=temp+"0";
+
+					List<String> data = getAdmin_screen1();
+					String temp = "";
+					for (int i = 0; i < 14; i++) {
+
+						if (i < 8) {
+							temp = temp + data.get(i);
+						} else {
+							temp = temp + "0";
 						}
 					}
-					
-					
+
 					Mycommand.setLacthing(temp, 500);
-					
-					
-					
-					
-					writeFormat	wrd1 = new writeFormat();
+
+					writeFormat wrd1 = new writeFormat();
 					wrd1.addChar('C');
 					wrd1.addChar('O');
 					wrd1.addChar('P');
 					wrd1.addChar('1');
-				//	wrd1.addChar('1');
+					// wrd1.addChar('1');
 					wrd1.addChar(getPressureCrossover().charAt(0));
 					wrd1.addLast();
-					sendData(wrd1,800);
-					
-					
-					writeFormat	wrd2 = new writeFormat();
+					sendData(wrd1, 800);
+
+					writeFormat wrd2 = new writeFormat();
 					wrd2.addChar('C');
 					wrd2.addChar('O');
 					wrd2.addChar('F');
 					wrd2.addChar('1');
 					wrd2.addChar(getFlowCrossover().charAt(0));
 					wrd2.addLast();
-					sendData(wrd2,1100);
-					
-					
+					sendData(wrd2, 1100);
+
 				}
 			}).start();
-			
-			
+
 			return true;
-		}
-		catch(Exception e)
-		{
+		} catch (Exception e) {
 			return false;
-		
+
 		}
-		
-		
+
 	}
-	
-	
-	
+
 	static void sendData(writeFormat w, int slp) {
 		System.out.println("Sending Data......");
 		w.showData();
@@ -433,26 +457,25 @@ public class DataStore
 		}
 
 	}
-	
-	public static List<String> getAdmin_screen1()
-	{
-	
-		List<String> data=new ArrayList<String>();
-		Database db=new Database();		
-		List<List<String>> ll=db.getData("select * from admin_screen1");
-		
-		String va =(ll.get(0).get(1));
-		String vb =(ll.get(0).get(2));
-		String vc =(ll.get(0).get(3));
-		String vd =(ll.get(0).get(4));
-		String ve =(ll.get(0).get(5));
-		String vf =(ll.get(0).get(6));
-		String vg =(ll.get(0).get(7));
-		String vh =(ll.get(0).get(8));
-		
-		String pc =(ll.get(0).get(9));
-		String fc =(ll.get(0).get(10));
-		
+
+	public static List<String> getAdmin_screen1() {
+
+		List<String> data = new ArrayList<String>();
+		Database db = new Database();
+		List<List<String>> ll = db.getData("select * from admin_screen1");
+
+		String va = (ll.get(0).get(1));
+		String vb = (ll.get(0).get(2));
+		String vc = (ll.get(0).get(3));
+		String vd = (ll.get(0).get(4));
+		String ve = (ll.get(0).get(5));
+		String vf = (ll.get(0).get(6));
+		String vg = (ll.get(0).get(7));
+		String vh = (ll.get(0).get(8));
+
+		String pc = (ll.get(0).get(9));
+		String fc = (ll.get(0).get(10));
+
 		data.add(va);
 		data.add(vb);
 		data.add(vc);
@@ -461,89 +484,84 @@ public class DataStore
 		data.add(vf);
 		data.add(vg);
 		data.add(vh);
-		
+
 		data.add(pc);
 		data.add(fc);
-		
+
 		return data;
 	}
 
-	public static String getchambertype()
-	{
-		String ch="";
-		Database db=new Database();		
-		List<List<String>> ll=db.getData("select chambertype from configdata");
-		ch =(ll.get(0).get(0));
-			
-		
+	public static String getchambertype() {
+		String ch = "";
+		Database db = new Database();
+		List<List<String>> ll = db
+				.getData("select chambertype from configdata");
+		ch = (ll.get(0).get(0));
+
 		return ch;
 	}
-	
-	public static String getthfirstbp()
-	{
-		String bp="";
-		Database db=new Database();		
-		List<List<String>> ll=db.getData("select thfirst from configdata");
-		bp =(ll.get(0).get(0));
+
+	public static String getthfirstbp() {
+		String bp = "";
+		Database db = new Database();
+		List<List<String>> ll = db.getData("select thfirst from configdata");
+		bp = (ll.get(0).get(0));
 
 		return bp;
 	}
-	public static String getthmoderat()
-	{
-		String bp="";
-		Database db=new Database();		
-		List<List<String>> ll=db.getData("select thmoderate from configdata");
-		bp =(ll.get(0).get(0));
+
+	public static String getthmoderat() {
+		String bp = "";
+		Database db = new Database();
+		List<List<String>> ll = db.getData("select thmoderate from configdata");
+		bp = (ll.get(0).get(0));
 
 		return bp;
 	}
-	public static String getthcontinous()
-	{
-		String bp="";
-		Database db=new Database();		
-		List<List<String>> ll=db.getData("select thcontinous from configdata");
-		bp =(ll.get(0).get(0));
+
+	public static String getthcontinous() {
+		String bp = "";
+		Database db = new Database();
+		List<List<String>> ll = db
+				.getData("select thcontinous from configdata");
+		bp = (ll.get(0).get(0));
 
 		return bp;
 	}
-	
-	public static void defaultsetting()
-	{
-		Database db=new Database();
-		
-		String conficupdate = "update configdata set  pg1='5',pg2='100',fm1='10000',fm2='200000',pr='130',chambertype='Manual',curvefittgb='on',fc='30',thfirst='1500',thmoderate='2500',thcontinous='3000'"; 
-		
+
+	public static void defaultsetting() {
+		Database db = new Database();
+
+		String conficupdate = "update configdata set  pg1='5',pg2='100',fm1='10000',fm2='200000',pr='130',chambertype='Manual',curvefittgb='on',fc='30',thfirst='1500',thmoderate='2500',thcontinous='3000'";
+
 		String admindata = "update admin_screen1 set  pc='1',fc='1',va='0',vb='1',vc='0',vd='1',ve='1',vf='0',vg='0',vh='0'";
-		
-		if(db.Insert(conficupdate) && db.Insert(admindata))
-		{
-			 Toast.makeText(Main.mainstage, "Successfully Set Default Setting..", 1000, 200, 200);
 
+		if (db.Insert(conficupdate) && db.Insert(admindata)) {
+			Toast.makeText(Main.mainstage,
+					"Successfully Set Default Setting..", 1000, 200, 200);
+
+		} else {
+			// System.out.println("Configration Data save d Eroorr.....");
 		}
-		else {
-//			System.out.println("Configration Data save d Eroorr.....");
-		}
 	}
-	
-	public static String getPressureCrossover()
-	{
+
+	public static String getPressureCrossover() {
 		int bp;
-		Database db=new Database();		
-		List<List<String>> ll=db.getData("select pc from admin_screen1");
-		bp =Integer.parseInt((ll.get(0).get(0)));
-		return bp+"";
+		Database db = new Database();
+		List<List<String>> ll = db.getData("select pc from admin_screen1");
+		bp = Integer.parseInt((ll.get(0).get(0)));
+		return bp + "";
 	}
-	
-	public static String getFlowCrossover()
-	{
+
+	public static String getFlowCrossover() {
 		int bp;
-		Database db=new Database();		
-		List<List<String>> ll=db.getData("select fc from admin_screen1");
-		bp =Integer.parseInt((ll.get(0).get(0)));
-		
-		return bp+"";
+		Database db = new Database();
+		List<List<String>> ll = db.getData("select fc from admin_screen1");
+		bp = Integer.parseInt((ll.get(0).get(0)));
+
+		return bp + "";
 	}
-	
+
 	public static String getUnitepg1() {
 		String pg1;
 		Database db = new Database();
@@ -559,7 +577,6 @@ public class DataStore
 		pg2 = (ll.get(0).get(0));
 		return pg2 + "";
 	}
-
 
 	public static String getUnitefm1() {
 		String fm1;
@@ -579,7 +596,8 @@ public class DataStore
 
 	public static boolean isabsolutepg1() {
 		Database db = new Database();
-		List<List<String>> ll = db.getData("select p1scaletype from configdata");
+		List<List<String>> ll = db
+				.getData("select p1scaletype from configdata");
 		String pgisabsolute = (ll.get(0).get(0));
 
 		if (pgisabsolute.equals("absolute")) {
@@ -591,7 +609,8 @@ public class DataStore
 
 	public static boolean isabsolutepg2() {
 		Database db = new Database();
-		List<List<String>> ll = db.getData("select p2scaletype from configdata");
+		List<List<String>> ll = db
+				.getData("select p2scaletype from configdata");
 		String prisabsolute = (ll.get(0).get(0));
 
 		if (prisabsolute.equals("absolute")) {
@@ -653,9 +672,9 @@ public class DataStore
 		double ans = Double.parseDouble(sccm) / 60;
 		return ans;
 	}
-	
+
 	public static double toCfm(double sccm) {
-		double ans = sccm *  0.000035314666212661;
+		double ans = sccm * 0.000035314666212661;
 		return ans;
 
 	}
@@ -700,14 +719,12 @@ public class DataStore
 		double ans;
 		if (DataStore.getUniteflow().equals("sccs")) {
 
-			ans = toSccs(flow)*60;
+			ans = toSccs(flow) * 60;
 
-		} 
-		else if (DataStore.getUniteflow().equals("cfm")) {
-			ans = DataStore.toCfm(flow)*60;
-		}
-		else {
-			ans = Double.parseDouble(flow)*60;
+		} else if (DataStore.getUniteflow().equals("cfm")) {
+			ans = DataStore.toCfm(flow) * 60;
+		} else {
+			ans = Double.parseDouble(flow) * 60;
 		}
 		return Myapp.getRoundDouble(ans, getRoundOff());
 	}
@@ -718,13 +735,10 @@ public class DataStore
 
 			flow = toSccs(flow);
 
-		}
-		else if (DataStore.getUniteflow().equals("cfm")) {
+		} else if (DataStore.getUniteflow().equals("cfm")) {
 			flow = toCfm(flow);
-		}
-		else
-		{
-			flow=flow*60;
+		} else {
+			flow = flow * 60;
 		}
 
 		return Myapp.getRoundDouble(flow, getRoundOff());
@@ -752,68 +766,57 @@ public class DataStore
 		return Myapp.getRoundDouble(diameter, getRoundOff());
 	}
 
-	
-	public static String ConvertFrazier(String num)
-	{
-		double frz=Double.parseDouble(num);
-		
-		 if(DataStore.getUnitefrazier().equals("cm3/cm2.sec"))	
-		{
-			frz=frz*0.508;
+	public static String ConvertFrazier(String num) {
+		double frz = Double.parseDouble(num);
+
+		if (DataStore.getUnitefrazier().equals("cm3/cm2.sec")) {
+			frz = frz * 0.508;
+		} else if (DataStore.getUnitefrazier().equals("m3/m2.min")) {
+			frz = frz * 0.3048;
+		} else if (DataStore.getUnitefrazier().equals("l/m2.sec")) {
+			frz = frz * 5.08;
 		}
-		else if(DataStore.getUnitefrazier().equals("m3/m2.min"))	
-		{
-			frz=frz*0.3048;
-		}
-		else if(DataStore.getUnitefrazier().equals("l/m2.sec"))	
-		{
-			frz=frz*5.08;
-		}
-			
-	return "" + Myapp.getRound(frz, DataStore.getRoundOff());
-	}
-	public static String ConvertFrazier(double num)
-	{
-		double frz=num;
-		
-		
-		 if(DataStore.getUnitefrazier().equals("cm3/cm2.sec"))	
-		{
-			frz=frz*0.508;
-		}
-		else if(DataStore.getUnitefrazier().equals("m3/m2.min"))	
-		{
-			frz=frz*0.3048;
-		}
-		else if(DataStore.getUnitefrazier().equals("l/m2.sec"))	
-		{
-			frz=frz*5.08;
-		}
-			
-	return "" + Myapp.getRound(frz, DataStore.getRoundOff());
+		readSamplePlateSize();
+		frz = frz * cfact;
+		return "" + Myapp.getRound(frz, DataStore.getRoundOff());
 	}
 
- public static String getconvertToSimpleNumber(double number) {
-    // Check if in scientific notation
-    if (String.valueOf(number).toLowerCase().contains("e")) {
-             NumberFormat formatter = new DecimalFormat();
-        formatter.setMaximumFractionDigits(25);
-        return formatter.format(number);
-    } else
-        return String.valueOf(number);
-}
- public static String getconvertToSimpleNumber(String num) {
-	    // Check if in scientific notation
-	 double number=Double.parseDouble(num);
-	    if (String.valueOf(number).toLowerCase().contains("e")) {
-	             NumberFormat formatter = new DecimalFormat();
-	        formatter.setMaximumFractionDigits(25);
-	        return formatter.format(number);
-	    } else
-	        return String.valueOf(number);
+	public static String ConvertFrazier(double num) {
+		double frz = num;
+
+		if (DataStore.getUnitefrazier().equals("cm3/cm2.sec")) {
+			frz = frz * 0.508;
+		} else if (DataStore.getUnitefrazier().equals("m3/m2.min")) {
+			frz = frz * 0.3048;
+		} else if (DataStore.getUnitefrazier().equals("l/m2.sec")) {
+			frz = frz * 5.08;
+		}
+		readSamplePlateSize();
+		frz = frz * cfact;
+		return "" + Myapp.getRound(frz, DataStore.getRoundOff());
 	}
-	
-	
+
+	public static String getconvertToSimpleNumber(double number) {
+		// Check if in scientific notation
+		if (String.valueOf(number).toLowerCase().contains("e")) {
+			NumberFormat formatter = new DecimalFormat();
+			formatter.setMaximumFractionDigits(25);
+			return formatter.format(number);
+		} else
+			return String.valueOf(number);
+	}
+
+	public static String getconvertToSimpleNumber(String num) {
+		// Check if in scientific notation
+		double number = Double.parseDouble(num);
+		if (String.valueOf(number).toLowerCase().contains("e")) {
+			NumberFormat formatter = new DecimalFormat();
+			formatter.setMaximumFractionDigits(25);
+			return formatter.format(number);
+		} else
+			return String.valueOf(number);
+	}
+
 	public static double ConvertPressure(String pressure) {
 		double ans;
 		if (DataStore.getUnitepressure().equals("bar")) {
@@ -838,163 +841,139 @@ public class DataStore
 
 	public static double ConvertGurely(String gurely) {
 		double ans;
-		
-			ans = Double.parseDouble(gurely);
-		
+
+		ans = Double.parseDouble(gurely);
+
 		return Myapp.getRoundDouble(ans, getRoundOff());
 	}
 
 	public static double ConvertGurely(Double gurely) {
 
-	
 		return Myapp.getRoundDouble(gurely, getRoundOff());
 	}
 
-
 	public static List<String> ConvertFlow(List<String> flow) {
 
-		List<String> data=new ArrayList<String>();
-		int round=5;//getRoundOff();
-		
+		List<String> data = new ArrayList<String>();
+		int round = 5;// getRoundOff();
+
 		if (DataStore.getUniteflow().equals("sccs")) {
-			for(int i=0;i<flow.size();i++)
-			{
-				data.add(Myapp.getRound(toSccs(flow.get(i))*60, round));
+			for (int i = 0; i < flow.size(); i++) {
+				data.add(Myapp.getRound(toSccs(flow.get(i)) * 60, round));
 			}
-		
+
 		} else if (DataStore.getUnitepressure().equals("cfm")) {
-			for(int i=0;i<flow.size();i++)
-			{
-				data.add(Myapp.getRound(toCfm(flow.get(i))*60, round));
+			for (int i = 0; i < flow.size(); i++) {
+				data.add(Myapp.getRound(toCfm(flow.get(i)) * 60, round));
+			}
+		} else {
+			for (int i = 0; i < flow.size(); i++) {
+				data.add(""
+						+ Myapp.getRound(Double.parseDouble(flow.get(i)) * 60,
+								round));
 			}
 		}
-		else
-		{
-			for(int i=0;i<flow.size();i++)
-			{
-				data.add(""+Myapp.getRound(Double.parseDouble(flow.get(i))*60, round));
-			}
-		}
-		
+
 		return data;
-		
-		
+
 	}
-		
+
 	public static List<String> ConvertDiameter(List<String> diameter) {
 
-		List<String> data=new ArrayList<String>();
-		int round=6;//getRoundOff();
-		
+		List<String> data = new ArrayList<String>();
+		int round = 6;// getRoundOff();
+
 		if (DataStore.getUnitediameter().equals("nm")) {
-			for(int i=0;i<diameter.size();i++)
-			{
-				data.add(Myapp.getRound(Double.parseDouble(diameter.get(i))/1000, round));
+			for (int i = 0; i < diameter.size(); i++) {
+				data.add(Myapp.getRound(
+						Double.parseDouble(diameter.get(i)) / 1000, round));
 			}
-		
-		} 
-		else
-		{
-			for(int i=0;i<diameter.size();i++)
-			{
-				data.add(""+Myapp.getRound(diameter.get(i), round));
+
+		} else {
+			for (int i = 0; i < diameter.size(); i++) {
+				data.add("" + Myapp.getRound(diameter.get(i), round));
 			}
 		}
-		
+
 		return data;
-		
-		
+
 	}
+
 	public static List<Double> ConvertDiameterDouble(List<String> diameter) {
 
-		List<Double> data=new ArrayList<Double>();
-		int round=6;//getRoundOff();
-		
+		List<Double> data = new ArrayList<Double>();
+		int round = 6;// getRoundOff();
+
 		if (DataStore.getUnitediameter().equals("nm")) {
-			for(int i=0;i<diameter.size();i++)
-			{
-				data.add(Myapp.getRound((Double.parseDouble(diameter.get(i))/1000)+"", round));
+			for (int i = 0; i < diameter.size(); i++) {
+				data.add(Myapp.getRound(
+						(Double.parseDouble(diameter.get(i)) / 1000) + "",
+						round));
 			}
-		
-		} 
-		else
-		{
-			for(int i=0;i<diameter.size();i++)
-			{
+
+		} else {
+			for (int i = 0; i < diameter.size(); i++) {
 				data.add(Myapp.getRound(diameter.get(i), round));
 			}
 		}
-		
+
 		return data;
-		
-		
+
 	}
-	
+
 	public static List<String> ConvertPressure(List<String> pressure) {
 
-		List<String> data=new ArrayList<String>();
+		List<String> data = new ArrayList<String>();
 
-		
 		if (DataStore.getUnitepressure().equals("bar")) {
-			for(int i=0;i<pressure.size();i++)
-			{
-				data.add(toBar(pressure.get(i))+"");
+			for (int i = 0; i < pressure.size(); i++) {
+				data.add(toBar(pressure.get(i)) + "");
 			}
-		
+
 		} else if (DataStore.getUnitepressure().equals("torr")) {
-			for(int i=0;i<pressure.size();i++)
-			{
-				data.add(toTorr(pressure.get(i))+"");
+			for (int i = 0; i < pressure.size(); i++) {
+				data.add(toTorr(pressure.get(i)) + "");
 			}
+		} else {
+			data.addAll(pressure);
 		}
-		else
-		{
-		data.addAll(pressure);
-		}
-		
+
 		return data;
-		
-		
+
 	}
-		
-	public static int getRoundOff()
-	{
+
+	public static int getRoundOff() {
 		int roundoff;
 		Database db = new Database();
 		List<List<String>> ll = db.getData("select roundoff from unite");
 		roundoff = Integer.parseInt(ll.get(0).get(0));
 		return roundoff;
-		
-		
+
 	}
-	
-	public static double getRoundAuto(String d)
-	{
+
+	public static double getRoundAuto(String d) {
 		return Myapp.getRound(d, getRoundOff());
 	}
-	
-	public static double getRoundAuto(double d)
-	{
-		return Myapp.getRound(d+"", getRoundOff());
+
+	public static double getRoundAuto(double d) {
+		return Myapp.getRound(d + "", getRoundOff());
 	}
-	
-	public static double barToPsi(double bar)
-	{
+
+	public static double barToPsi(double bar) {
 
 		System.out.println("bar to psi");
-		return bar*14.5038;
+		return bar * 14.5038;
 	}
-	public static double torrToPsi(double torr)
-	{
+
+	public static double torrToPsi(double torr) {
 		System.out.println("torr to psi");
-		return torr*0.0193368;
+		return torr * 0.0193368;
 	}
-	public static double sccsToSccm(double sccs)
-	{
+
+	public static double sccsToSccm(double sccs) {
 		System.out.println("sccs to sccm");
-		return 60*sccs;
-		
+		return 60 * sccs;
+
 	}
-	
-	
+
 }

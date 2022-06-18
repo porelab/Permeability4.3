@@ -38,6 +38,8 @@ import application.Myapp;
 
 import com.jfoenix.controls.JFXToggleButton;
 
+import data_read_write.CsvWriter;
+
 public class NConfigurePageController implements Initializable {
 
 	@FXML
@@ -100,11 +102,24 @@ public class NConfigurePageController implements Initializable {
 	/*Prefrance*/
 	@FXML
 	ComboBox<String> cmbpress, cmbflow, cmblenghth, cmbroundoff,cmbgurley,cmbfrazier;
+	
+	@FXML
+	TextField cfact,psmall,pmedium,plarge;
 
+	
+	void getSamplePlateData(){
+		DataStore.readSamplePlateSize();
+		cfact.setText(DataStore.cfact+"");
+		psmall.setText(DataStore.psmall+"");
+		pmedium.setText(DataStore.pmedium+"");
+		plarge.setText(DataStore.plarge+"");
+	}
+	
+	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
-
+		getSamplePlateData();
 		/* AddShortcut */
 		addShortCut();
 
@@ -416,7 +431,40 @@ public class NConfigurePageController implements Initializable {
 		if (dd.Insert(unites)) {
 			Toast.makeText(Main.mainstage, "Successfully saved selected Unites", 1000, 200, 200);
 
+			
+			try{
+				
+				
+				double ps=Double.parseDouble(psmall.getText());
+				double pm=Double.parseDouble(pmedium.getText());
+				double pl=Double.parseDouble(plarge.getText());
+				double cf=Double.parseDouble(cfact.getText());
+				
+				CsvWriter cs=new CsvWriter();
+				cs.wtirefile("d.csv");
+				cs.firstLine("data");
+				cs.newLine("psmall", ""+ps);
+				cs.newLine("plarge", ""+pl);
+				cs.newLine("pmedium", ""+pm);
+				cs.newLine("cfact", ""+cf);
+				cs.closefile();
+				
+				
+				System.out.println("file saved");
+				
+			}
+			catch(Exception e)
+			{
+				
+			}
+			
+			
 		}
+		
+		
+		
+		
+		
 
 	}
 

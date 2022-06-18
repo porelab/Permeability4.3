@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:id="root" prefHeight="768.0" prefWidth="1368.0" styleClass="bgwhite" stylesheets="@../userinput/Nnew_application.css" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ConfigurationPart.NConfigurePageController">
+<AnchorPane fx:id="root" prefHeight="768.0" prefWidth="1368.0" styleClass="bgwhite" stylesheets="@../userinput/Nnew_application.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ConfigurationPart.NConfigurePageController">
    <children>
       <TabPane layoutX="-4.0" layoutY="112.0" prefHeight="660.0" prefWidth="1376.0" styleClass="tab-pane5" tabClosingPolicy="UNAVAILABLE">
         <tabs>
@@ -542,6 +542,77 @@
                         <Line endX="240.0" layoutX="171.0" layoutY="164.0" startX="-100.0" stroke="#bfb9b9" strokeWidth="2.0" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="303.0" />
                         <Line endX="240.0" layoutX="171.0" layoutY="164.0" startX="-100.0" stroke="#bfb9b9" strokeWidth="2.0" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="450.0" />
                         <Line endX="240.0" layoutX="181.0" layoutY="174.0" startX="-100.0" stroke="#bfb9b9" strokeWidth="2.0" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="380.0" />
+                        <Separator layoutX="816.0" layoutY="43.0" orientation="VERTICAL" prefHeight="380.0" prefWidth="0.0" />
+                        <Rectangle arcHeight="500.0" arcWidth="42.0" fill="#2197ff00" height="50.0" layoutX="1046.0" layoutY="90.0" opacity="0.61" stroke="#bfb9b9" strokeType="INSIDE" strokeWidth="2.0" width="200.0" />
+                        <Label layoutX="851.0" layoutY="99.0" styleClass="col-gray70" text="Correction fector" textFill="WHITE">
+                           <font>
+                              <Font size="22.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="cfact" layoutX="1069.0" layoutY="98.0" maxHeight="35.0" minHeight="20.0" prefHeight="35.0" prefWidth="156.0">
+                           <font>
+                              <Font size="8.0" />
+                           </font>
+                           <styleClass>
+                              <String fx:value="uinputtextbox" />
+                              <String fx:value="col-gray70" />
+                           </styleClass>
+                        </TextField>
+                        <Rectangle arcHeight="500.0" arcWidth="42.0" fill="#2197ff00" height="50.0" layoutX="1050.0" layoutY="246.0" opacity="0.61" stroke="#bfb9b9" strokeType="INSIDE" strokeWidth="2.0" width="200.0" />
+                        <Label layoutX="855.0" layoutY="255.0" styleClass="col-gray70" text="Small" textFill="WHITE">
+                           <font>
+                              <Font size="22.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="psmall" layoutX="1073.0" layoutY="254.0" maxHeight="35.0" minHeight="20.0" prefHeight="35.0" prefWidth="156.0">
+                           <font>
+                              <Font size="8.0" />
+                           </font>
+                           <styleClass>
+                              <String fx:value="uinputtextbox" />
+                              <String fx:value="col-gray70" />
+                           </styleClass>
+                        </TextField>
+                        <Rectangle arcHeight="500.0" arcWidth="42.0" fill="#2197ff00" height="50.0" layoutX="1050.0" layoutY="313.0" opacity="0.61" stroke="#bfb9b9" strokeType="INSIDE" strokeWidth="2.0" width="200.0" />
+                        <Label layoutX="855.0" layoutY="322.0" styleClass="col-gray70" text="Medium" textFill="WHITE">
+                           <font>
+                              <Font size="22.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="pmedium" layoutX="1073.0" layoutY="321.0" maxHeight="35.0" minHeight="20.0" prefHeight="35.0" prefWidth="156.0">
+                           <font>
+                              <Font size="8.0" />
+                           </font>
+                           <styleClass>
+                              <String fx:value="uinputtextbox" />
+                              <String fx:value="col-gray70" />
+                           </styleClass>
+                        </TextField>
+                        <Rectangle arcHeight="500.0" arcWidth="42.0" fill="#2197ff00" height="50.0" layoutX="1052.0" layoutY="377.0" opacity="0.61" stroke="#bfb9b9" strokeType="INSIDE" strokeWidth="2.0" width="200.0" />
+                        <Label layoutX="857.0" layoutY="386.0" styleClass="col-gray70" text="Large" textFill="WHITE">
+                           <font>
+                              <Font size="22.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="plarge" layoutX="1075.0" layoutY="385.0" maxHeight="35.0" minHeight="20.0" prefHeight="35.0" prefWidth="156.0">
+                           <font>
+                              <Font size="8.0" />
+                           </font>
+                           <styleClass>
+                              <String fx:value="uinputtextbox" />
+                              <String fx:value="col-gray70" />
+                           </styleClass>
+                        </TextField>
+                        <Label layoutX="851.0" layoutY="46.0" text="Correction fector" textFill="#0e3c87">
+                           <font>
+                              <Font size="25.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="857.0" layoutY="190.0" text="Plate Size" textFill="#0e3c87">
+                           <font>
+                              <Font size="25.0" />
+                           </font>
+                        </Label>
                      </children></AnchorPane>
                </content>
             </Tab>

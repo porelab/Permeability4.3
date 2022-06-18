@@ -241,14 +241,17 @@ public class NLivetestController implements Initializable {
 	// setting plate value ..
 	void setPlateval() {
 
+		DataStore.readSamplePlateSize();
+		
+		
 		if (Myapp.splate.equals("Small")) {
-			calculationdia = 1;
+			calculationdia = DataStore.psmall;
 		} else if (Myapp.splate.equals("Large")) {
 
-			calculationdia = 7.2;
+			calculationdia = DataStore.plarge;
 		} else {
 
-			calculationdia = 2.3;
+			calculationdia = DataStore.pmedium;
 		}
 
 		//calculationdia = 7.2;
