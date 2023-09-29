@@ -394,7 +394,8 @@ public class NLivetestController implements Initializable {
 
 		setPlateval();
 		lbltesttype.setText("Permiability Test");
-
+		
+	
 		connectHardware();
 		setButtons();
 		setGauges();
@@ -551,13 +552,15 @@ public class NLivetestController implements Initializable {
 
 		ind = 0;
 
+		Mycommand.valveOn(6, 500);
+		
 		tempt1 = System.currentTimeMillis();
 		starttestdry.setDisable(true);
-		Mycommand.sendAdcEnableBits("001001000000000", 0);
-		Mycommand.setDelay(5000, 1000);
+		Mycommand.sendAdcEnableBits("001001000000000", 2500);
+		Mycommand.setDelay(5000, 6000);
 
 		// Mycommand.setDACValue('2',5000,2000);
-		Mycommand.startADC(10000);
+		Mycommand.startADC(13000);
 		setStep(ind);
 
 	}
@@ -629,10 +632,15 @@ public class NLivetestController implements Initializable {
 		yAxis.setLabel("Flow (" + DataStore.getUniteflow() + ")");
 		xAxis.setLabel("Pressure (" + DataStore.getUnitepressure() + ")");
 		
+		
+		
+		Mycommand.valveOn(6, delay);
+		
+		
 		wrd = new writeFormat();
 		wrd.startDryN();
 		wrd.addLast();
-		sendData(wrd, delay);
+		sendData(wrd, 5000);
 		series2.getData().clear();
 	//	Mycommand.setDACValue('2', 10000, 1000);
 		dryplist.add(0, "0.0");
@@ -1924,6 +1932,10 @@ public class NLivetestController implements Initializable {
 		wrD.addLast();
 		sendData(wrD, 500);
 		Mycommand.setDACValue('2', 0, 1200);
+		
+		
+		Mycommand.valveOff(6, 4000);
+		
 
 	}
 
